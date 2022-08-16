@@ -1,0 +1,15 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <li class="nav-item">
+        @User.Identity.Name</li>
+    <li class="nav-item">
+        @User.Identity.AuthenticationType</li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Account/Logout">登出</a> </li>
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Account/Login">登入</a>
+    </li>
+}

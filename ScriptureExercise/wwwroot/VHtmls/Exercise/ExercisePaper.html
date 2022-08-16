@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BsVueTemplate</title>
+
+    <link rel="stylesheet" href="../../lib/cssReset.css">
+
+    <!-- Load required Bootstrap and BootstrapVue CSS -->
+    <link type="text/css" rel="stylesheet" href="../../lib/BSVue2_22_0/bootstrap4_6_1.min.css" />
+    <link type="text/css" rel="stylesheet" href="../../lib/BSVue2_22_0/bootstrap-vue2_22_0.min.css" />
+
+    
+    <!-- Load polyfills to support older browsers -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script>
+
+    <!-- Load Vue followed by BootstrapVue -->
+    <script src="../../lib/BSVue2_22_0/vue2_6_12.min.js"></script>
+    <script src="../../lib/BSVue2_22_0/bootstrap-vue2_22_0.min.js"></script>
+
+    <!-- Load the following for BootstrapVueIcons support -->
+    <script src="../../lib/BSVue2_22_0/bootstrap-vue-icons2_22_0.min.js"></script>
+
+    <link rel="stylesheet" href="../../css/Excercise/ExercisePaper.css">
+
+</head>
+<body>
+    <div id="vue_paper">
+        <header class="py-4">
+            <div class="container mb-5">
+                <h1>{{paper.scripture}} {{paper.page}} </h1>
+                <span>{{paper.range_remark}} </span>    
+                
+                
+            </div>
+        </header>
+        
+        <main>
+            <div class="container">
+                <p> 
+                    <button>tooltip 或提示</button>
+                    
+                    默寫題(輸入完整字句不含標點，全對才給分，沒有部分給分)
+                </p>
+
+                <ol>
+                    <li v-for="(question,i) in paper.questions">
+                        
+                        <div v-if="question.choices != undefined"
+                            class="mb-5"
+                        >
+                            <p>
+                                <span>{{question.order}}.</span>
+                                {{question.stem}}
+                            </p>
+                            <div class="pl-3">
+                                <div v-for="(choice,j) in question.choices">
+                                    <label>
+                                        <input type="radio" 
+                                        :name="i" 
+                                        :value="j" 
+                                        v-model="question.chooesd">
+                                        {{choice.text}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div v-else-if="typeof(question.stem)=='string'" >
+                            <p>
+                                <span>{{question.order}}.</span>
+                                {{question.stem}}
+                            </p>
+                            <div class="pl-3">
+                                <input type="text" placeholder="輸入您的答案" 
+                                v-model="question.reply">
+                            </div>
+
+                        </div>
+        
+                        <div v-else>
+                            ...
+                        </div>
+                    </li>
+                </ol>
+                <button class="btn submit">提交</button>
+            </div>
+        </main>
+        <footer>
+            <div class="container"></div>
+        </footer>
+
+    </div>
+
+    <script>
+        let vue_paper = new Vue({
+            el:'#vue_paper',
+            data:{
+                paper:{
+                    scripture:'佛規諭錄',
+                    page:1,
+                    range_remark:'(1-3)',
+                    questions:[
+                        {
+                            order:1,
+                            stem:'佛規諭錄是「」搖鸞垂訓逐條詳加述說成書',
+                            choices:[
+                                {order:1 , text:'活佛師尊' },
+                                {order:2 , text:'彌勒組師' },
+                                {order:3 , text:'南海古佛' },
+                            ],
+                            chooesd:null,
+                        },
+                        {
+                            order:2,
+                            stem:'濟公活佛俗家名”修元”是哪位高僧取的',
+                            choices:[
+                                {order:1 , text:'性空長老' },
+                                {order:2 , text:'道清長老' },
+                                {order:3 , text:'遠瞎堂長老' },
+                            ],
+                            chooesd:null,
+                        },
+                        {
+                            order:3,
+                            stem:'子曰：恭而無禮則勞,慎而無禮則葸,勇而無禮則亂,直而無禮…，………偷。',
+                            reply:'',
+                        }
+                        //填充?
+                    ]
+                }
+            },
+            mounted:{},
+            computed:{},
+            methods:{},
+            watch:{},
+        })
+    </script>
+</body>
+</html>

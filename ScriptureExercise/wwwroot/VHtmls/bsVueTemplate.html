@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BsVueTemplate</title>
+
+
+    <link rel="stylesheet" href="../../lib/cssReset.css">
+
+
+    <!-- Load required Bootstrap and BootstrapVue CSS -->
+    <link type="text/css" rel="stylesheet" href="../lib/BSVue2_22_0/bootstrap4_6_1.min.css" />
+    <link type="text/css" rel="stylesheet" href="../lib/BSVue2_22_0/bootstrap-vue2_22_0.min.css" />
+
+    
+    <!-- Load polyfills to support older browsers -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script>
+
+    <!-- Load Vue followed by BootstrapVue -->
+    <script src="../lib/BSVue2_22_0/vue2_6_12.min.js"></script>
+    <script src="../lib/BSVue2_22_0/bootstrap-vue2_22_0.min.js"></script>
+
+    <!-- Load the following for BootstrapVueIcons support -->
+    <script src="../lib/BSVue2_22_0/bootstrap-vue-icons2_22_0.min.js"></script>
+
+    <link rel="stylesheet" href="/x.css">
+    <style>
+        /* md */
+        @media screen and (min-width:768px){} 
+        /* lg */
+        @media screen and (min-width:992px){}
+        /* xl */
+        @media screen and (min-width:1200px){}
+    </style>
+</head>
+<body >
+<div id="vue_">
+    <header >
+        <div class="container"></div>
+    </header>
+
+    <select name="" id="s">
+        <option value="q">qqq</option>
+        <option value="w">www</option>
+
+    </select>
+    <main>
+        <div class="container">
+
+            
+            {{a}}
+        </div>
+    </main>
+
+    <footer>
+        <div class="container"></div>
+    </footer>
+</div>
+
+    <script src="../../x.js"></script>
+    <script>
+        let vue_ = new Vue({
+            el:'#vue_',
+            data:{
+                a:'qwe'
+            },
+            mounted(){},
+            methods:{},
+            watch:{},
+            computed:{},
+            components:{},
+        })
+    </script>
+</body>
+</html>

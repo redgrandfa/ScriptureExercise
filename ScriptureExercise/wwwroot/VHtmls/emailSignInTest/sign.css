@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body {
+  background-color: #000;
+  font-family: "Noto Sans TC", sans-serif;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+
+.box .inputArea button, .box .inputArea input {
+  border: none;
+  width: 100%;
+  line-height: 36px;
+  border-radius: 18px;
+  padding: 0 18px;
+}
+
+.box {
+  background-color: #fff;
+  width: 255px;
+  color: #fff;
+  margin: auto;
+}
+.box .banner {
+  background-color: #c22;
+  padding: 0 12px;
+}
+.box .banner .title {
+  font-size: 30px;
+  line-height: 60px;
+}
+.box .signSelect {
+  display: flex;
+}
+.box .signSelect div {
+  text-align: center;
+  line-height: 30px;
+  width: 50%;
+  background-color: #474747;
+  padding: 10px;
+  border: 1px solid #000;
+}
+.box .inputArea {
+  font-size: 12px;
+  padding: 40px;
+  background-color: #474747;
+}
+.box .inputArea input {
+  margin-bottom: 20px;
+}
+.box .inputArea button {
+  background-color: #CF54FB;
+  display: block;
+  color: #fff;
+}
+
+::-webkit-input-placeholder {
+  color: #aaa;
+}/*# sourceMappingURL=sign.css.map */

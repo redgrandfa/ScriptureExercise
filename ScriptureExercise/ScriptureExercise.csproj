@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="5.0.18" />
+    <PackageReference Include="AspNet.Security.OAuth.Instagram" Version="5.0.18" />
+    <PackageReference Include="AspNet.Security.OAuth.Line" Version="5.0.18" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="5.0.17" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="5.0.17" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="5.0.17" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="5.0.1" />
+    <PackageReference Include="toastr" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\HomeVM\" />
+    <Folder Include="wwwroot\js\Excercise\A生晨\" />
+    <Folder Include="wwwroot\VHtmls\Home\" />
+    <Folder Include="Views\Home\" />
+    <Folder Include="wwwroot\css\Account\" />
+    <Folder Include="wwwroot\css\Excercise\" />
+    <Folder Include="wwwroot\css\Home\" />
+    <Folder Include="wwwroot\css\Member\" />
+    <Folder Include="wwwroot\js\Account\" />
+    <Folder Include="wwwroot\js\Home\" />
+    <Folder Include="wwwroot\js\Member\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\VHtmls\Account\newAccount.html" />
+    <None Include="wwwroot\VHtmls\bsVueTemplate.html" />
+    <None Include="wwwroot\VHtmls\emailSignInTest\bg.jpg" />
+    <None Include="wwwroot\VHtmls\emailSignInTest\sign.css" />
+    <None Include="wwwroot\VHtmls\emailSignInTest\sign.css.map" />
+    <None Include="wwwroot\VHtmls\emailSignInTest\sign.html" />
+    <None Include="wwwroot\VHtmls\emailSignInTest\sign.scss" />
+    <None Include="wwwroot\VHtmls\Exercise\ExerciseList.html" />
+    <None Include="wwwroot\VHtmls\Exercise\ExerciseList.js" />
+    <None Include="wwwroot\VHtmls\Exercise\ExercisePaper.html" />
+    <None Include="wwwroot\VHtmls\Member\MemberSettings.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,26 @@
+﻿@using ScriptureExercise.Models.AccountVM
+
+@{
+    List<LoginOptionVM> loginOptions = new List<LoginOptionVM>
+    {
+        new LoginOptionVM("Google登入", Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme),
+        new LoginOptionVM("微軟登入", Microsoft.AspNetCore.Authentication.MicrosoftAccount.MicrosoftAccountDefaults.AuthenticationScheme),
+        new LoginOptionVM("臉書登入", Microsoft.AspNetCore.Authentication.Facebook.FacebookDefaults.AuthenticationScheme),
+        
+        new LoginOptionVM("Line登入", "Line"),
+        new LoginOptionVM("GitHub登入", "GitHub"),
+        new LoginOptionVM("IG登入", "Instagram"),
+    };    
+}
+
+一個會員 有多種登入管道，
+透過會員密鑰綁定至同一個會員身分
+<ul>
+@foreach(var loginOption in loginOptions)
+{
+    <li>
+        <a href="/Account/LoginOption/@(loginOption.Scheme)" class="btn btn-primary">
+            @loginOption.DisplayName</a>
+    </li>
+}
+</ul>
