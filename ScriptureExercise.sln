@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32516.85
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptureExercise", "ScriptureExercise\ScriptureExercise.csproj", "{79EC09FC-7649-44EF-8538-3F89944477A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{091EEE9B-B57F-4953-A64E-4D0F254787DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79EC09FC-7649-44EF-8538-3F89944477A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79EC09FC-7649-44EF-8538-3F89944477A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79EC09FC-7649-44EF-8538-3F89944477A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79EC09FC-7649-44EF-8538-3F89944477A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{091EEE9B-B57F-4953-A64E-4D0F254787DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{091EEE9B-B57F-4953-A64E-4D0F254787DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{091EEE9B-B57F-4953-A64E-4D0F254787DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{091EEE9B-B57F-4953-A64E-4D0F254787DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F09A1638-02A2-4523-99DA-C42861349096}
+	EndGlobalSection
+EndGlobal

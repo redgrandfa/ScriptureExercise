@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>BsVueTemplate</title>
+
+        <!-- Load required Bootstrap and BootstrapVue CSS -->
+        <link
+            type="text/css"
+            rel="stylesheet"
+            href="../../lib/BSVue2_22_0/bootstrap4_6_1.min.css"
+        />
+        <link
+            type="text/css"
+            rel="stylesheet"
+            href="../../lib/BSVue2_22_0/bootstrap-vue2_22_0.min.css"
+        />
+
+        <link rel="stylesheet" href="../../css/common.css" />
+        <link rel="stylesheet" href="../../css/Member/settings.css" />
+
+        <!-- Load polyfills to support older browsers -->
+        <script
+            src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver"
+            crossorigin="anonymous"
+        ></script>
+
+        <!-- Load Vue followed by BootstrapVue -->
+        <script src="../../lib/BSVue2_22_0/vue2_6_12.min.js"></script>
+        <script src="../../lib/BSVue2_22_0/bootstrap-vue2_22_0.min.js"></script>
+
+        <!-- Load the following for BootstrapVueIcons support -->
+        <script src="../../lib/BSVue2_22_0/bootstrap-vue-icons2_22_0.min.js"></script>
+
+        <script
+            src="https://kit.fontawesome.com/62756de202.js"
+            crossorigin="anonymous"
+        ></script>
+    </head>
+    <body>
+        <main>
+            <div id="vue_member_settings" class="container">
+                <!-- 登入中的管道 Icon @Model-->
+                <i class="fa-brands fa-facebook"></i>
+
+                <label class="form-control">
+                    名稱：
+                    <input v-model="name" type="text" />
+                </label>
+
+                <div>
+                    批改完 自動下載：
+                    <input
+                        class="toggleInput"
+                        type="checkbox"
+                        v-model="autoDownload"
+                        id="x"
+                    />
+                    <label for="x">
+                        <span
+                            class="switch-txt"
+                            turnOn="是"
+                            turnOff="否"
+                        ></span>
+                    </label>
+                </div>
+
+                <hr />
+                考科顯示
+                <!-- / 排序考科 JS sort -->
+                <label v-for="(s,i) in scriptures">
+                    <input type="checkbox" v-model="s.show"/>
+                    {{s.title}}
+                </label>
+
+                <hr />
+                <label>
+                    改會員密鑰：
+                    <!-- <span class="text-danger small">{{errMsgs[key]}}</p> -->
+                    <input
+                        v-model="bindKey"
+                        :type="bindKey_visible ? 'text' : 'password'"
+                        class="form-control"
+                    />
+                    <!-- :class="errMsgs[key]==''?'is-valid':'is-invalid'" -->
+                    <b-icon
+                        :icon="bindKey_visible?'eye' : 'eye-slash'"
+                        v-on:click="changeVisible()"
+                    ></b-icon>
+                </label>
+
+                <button v-on:click="submit()">送出修改</button>
+
+                <p>總答題數：@NumberOfQuestionDone</p>
+                <p>答對題數：@NumberOfQuestionCorrect</p>
+            </div>
+        </main>
+
+        <script src="../../lib/DB/scriptures.js"></script>
+        <script>
+            let data = {
+                name: "偉軒",
+                bindKey: "qwe",
+                bindKey_visible: false,
+                autoDownload: true, //@Model
+                scriptures:[//@Model
+                    {
+                        title:"佛規",
+                        show:true,
+                    },
+                    {
+                        title:"論語",
+                        show:true,
+                    }
+                ],
+            };
+        </script>
+        <script src="../../js/Member/settings.js"></script>
+    </body>
+</html>

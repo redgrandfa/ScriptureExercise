@@ -1,0 +1,49 @@
+﻿@using ScriptureExercise.Models.AccountVM
+@model UnTrackedAccountVM
+
+
+<p>您第一次使用此帳號登入</p>
+
+使用xxx管道登入的 xxx您好，
+
+<p>此帳號尚未綁定至本服務的會員身分下</p>
+
+<p>您已經是本服務的會員了嗎</p>
+
+
+    model船資料過來
+  前期預設否  toggle button 是
+
+至少x碼  
+必須由 英文/數字 組成 
+
+<hr>
+@*<form action="/Account/createMember" >
+    否=>請首次設定 會員密鑰 ，未來其他帳號可透過密鑰綁定至同一會員身分
+    <label>
+        會員密鑰：
+        <input type="password" name="bindKey" value="@Model?.CreateMemberForm?.BindKey"/>
+    </label>
+    <br />
+    <label>
+        再重複輸入一次以確認：
+        <input type="password" name="bindKeyCheck" value="@Model?.CreateMemberForm?.BindKeyCheck"/>
+    </label>
+    <button>送出</button>
+</form>
+
+
+<hr>
+<form action="/Account/BindMember" >
+是=> 請輸入您的會員密鑰以將此帳號綁定至同一會員身分下 => 可能不合規 => 回此處，並且toggle button保持、swal出訊息
+    <label>
+        會員密鑰：
+        <input type="password" name="bindKey" value="@Model?.BindMemberForm?.BindKey"/>
+    </label>
+    <button>送出</button>
+</form>*@
+
+跳轉用表單?
+<script>
+
+</script>
