@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\js\Excercise\A生晨\**" />
+    <Content Remove="wwwroot\js\Excercise\A生晨\**" />
+    <EmbeddedResource Remove="wwwroot\js\Excercise\A生晨\**" />
+    <None Remove="wwwroot\js\Excercise\A生晨\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="5.0.18" />
     <PackageReference Include="AspNet.Security.OAuth.Instagram" Version="5.0.18" />
     <PackageReference Include="AspNet.Security.OAuth.Line" Version="5.0.18" />
@@ -12,12 +19,12 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="5.0.17" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="5.0.17" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="5.0.1" />
-    <PackageReference Include="toastr" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Models\HomeVM\" />
-    <Folder Include="wwwroot\js\Excercise\A生晨\" />
+    <Folder Include="Views\Shared\Library\" />
+    <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\VHtmls\Home\" />
     <Folder Include="Views\Home\" />
     <Folder Include="wwwroot\css\Account\" />

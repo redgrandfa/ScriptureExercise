@@ -1,15 +1,35 @@
 ﻿@if (User.Identity.IsAuthenticated)
 {
-    <li class="nav-item">
-        @User.Identity.Name</li>
-    <li class="nav-item">
-        @User.Identity.AuthenticationType</li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" href="/Account/Logout">登出</a> </li>
+    <b-nav-item href="/Exercise/List">
+        <b-icon 
+        icon="play-fill" 
+        variant="light"
+        animation="cylon"
+        ></b-icon>做題
+    </b-nav-item>
+    <b-nav-item href="/Member/Settings">
+        <b-icon 
+        variant="light"
+        icon="gear-fill" 
+        animation="spin"
+        shift-v="1"
+        ></b-icon> 設定
+    </b-nav-item>
+
+    <b-nav-item href="/Account/Logout">
+        <b-icon 
+        icon="door-open-fill" 
+        variant="light"
+        ></b-icon>登出
+    </b-nav-item>
 }
 else
 {
-    <li class="nav-item">
-        <a class="nav-link text-dark" href="/Account/Login">登入</a>
-    </li>
+    <b-nav-item href="/Account/Login">
+        <b-icon 
+        icon="person-fill" 
+        variant="light"
+        animation="cylon"
+        ></b-icon>登入
+    </b-nav-item>
 }

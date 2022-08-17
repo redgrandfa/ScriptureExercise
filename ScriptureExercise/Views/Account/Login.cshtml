@@ -3,24 +3,50 @@
 @{
     List<LoginOptionVM> loginOptions = new List<LoginOptionVM>
     {
-        new LoginOptionVM("Google登入", Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme),
-        new LoginOptionVM("微軟登入", Microsoft.AspNetCore.Authentication.MicrosoftAccount.MicrosoftAccountDefaults.AuthenticationScheme),
-        new LoginOptionVM("臉書登入", Microsoft.AspNetCore.Authentication.Facebook.FacebookDefaults.AuthenticationScheme),
+        new LoginOptionVM("Line登入", "bg-success","fa-brands fa-line","Line"),
+        new LoginOptionVM("Google登入", "bg-info","fa-brands fa-google",Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme),
+        new LoginOptionVM("IG登入", "bg-primary","fa-brands fa-instagram","Instagram"),
+        new LoginOptionVM("臉書登入", "bg-danger","fa-brands fa-facebook",Microsoft.AspNetCore.Authentication.Facebook.FacebookDefaults.AuthenticationScheme),
         
-        new LoginOptionVM("Line登入", "Line"),
-        new LoginOptionVM("GitHub登入", "GitHub"),
-        new LoginOptionVM("IG登入", "Instagram"),
+        //new LoginOptionVM("GitHub登入", "GitHub"),
+        //new LoginOptionVM("微軟登入", Microsoft.AspNetCore.Authentication.MicrosoftAccount.MicrosoftAccountDefaults.AuthenticationScheme),
     };    
 }
+@*id="vue_login"*@
+    <div >
+        <div class="login-info text-center my-5">
+            <p>每位會員，可有多種第三方登入管道</p>
+            <p>這些帳號將透過會員密鑰，綁定至同一會員</p>
+        </div>
 
-一個會員 有多種登入管道，
-透過會員密鑰綁定至同一個會員身分
-<ul>
-@foreach(var loginOption in loginOptions)
-{
-    <li>
-        <a href="/Account/LoginOption/@(loginOption.Scheme)" class="btn btn-primary">
-            @loginOption.DisplayName</a>
-    </li>
+        <div class=" row row-cols-1 row-cols-md-2">
+            <!-- <a v-for="(loginOption ,i) in loginOptions"
+            :href="'/Account/LoginOption/'+loginOption.scheme"
+            :style="{'background-color': loginOption.color}"
+            class="col btn btn-primary" 
+            >
+            google
+                <i :class="loginOption.icon">O</i>
+                {{loginOption.text}}
+            </a> -->
+            @foreach(var loginOption in loginOptions)
+            {
+                <div class="col">
+                    <a href="/Account/LoginOption/@(loginOption.Scheme)"
+                    class="w-100 mb-4 btn @loginOption.Color text-white" 
+                    >
+                        <i class="@loginOption.Icon"></i>
+                        @loginOption.DisplayName
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+
+
+@section TopCSS{
+    <link rel="stylesheet" href="~/css/Account/login.css">
 }
-</ul>
+@section Scripts{
+    <script src="~/js/Account/login.js"></script>
+}
