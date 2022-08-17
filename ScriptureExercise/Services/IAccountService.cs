@@ -62,7 +62,6 @@ namespace ScriptureExercise.Services
             }
 
             //有查到 => 一定有 會員身分
-
             //Member member = new Member
             //{
             //    PK = accountValueFound.FK_Member,
@@ -74,8 +73,6 @@ namespace ScriptureExercise.Services
             return result;
         }
 
-
-
         public CreateAccount_Output CreateAccount(CreateAccount_Input input)
         {
             var result = new CreateAccount_Output();
@@ -83,7 +80,6 @@ namespace ScriptureExercise.Services
             var idClaim = _httpContextAccessor.HttpContext.User.Claims
                 .FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
 
-            //不會有Account已存在之錯誤...除非攻擊，... 複製 登入方法內語法 來檢查?
 
             //創Account資料、member下的一對多+一筆
             try

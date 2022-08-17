@@ -18,14 +18,14 @@ namespace ScriptureExercise.Controllers
     public class AccountController : Controller
     {
         private readonly IAccountService accountService;
-        private readonly IMemberService memberService;
+        //private readonly IMemberService memberService;
         public AccountController(
-            IAccountService accountService,
-            IMemberService memberService
+            IAccountService accountService
+            //,IMemberService memberService
             )
         {
             this.accountService = accountService;
-            this.memberService = memberService;
+            //this.memberService = memberService;
         }
 
         [AllowAnonymous]
@@ -100,93 +100,9 @@ namespace ScriptureExercise.Controllers
 
         public IActionResult UnTrackedAccount() 
         { 
-            return View(new UnTrackedAccountVM 
-            {
-                //CreateMemberForm = new CreateMemberFormModel( ),
-                //BindMemberForm = new BindMemberFormModel(),
-            }); 
+            return View(new CreateMemberFormModel() ); 
         }
 
-        /// <summary>
-        /// 還沒有會員
-        /// </summary>
-        public async Task<IActionResult> CreateMemberAsync(UnTrackedAccountVM request)//CreateMemberFormModel
-        {
-            if (!ModelState.IsValid)
-            {
-                return View("UnTrackedAccount", request
-                //new UnTrackedAccountVM { 
-                //    CreateMemberForm = request 
-                //}
-                );
-            }
-
-            var createMemberInput = new CreateMember_Input
-            {
-                BindKey = request.BindKey,
-            };
-
-            var createMemberOutput = memberService.CreateMember(createMemberInput);
-            if ( !createMemberOutput.OperationResult ) {
-                return Content("創member失敗。" + createMemberOutput.ErrMsg);
-            }
-
-            
-            //繼續創建 account > 綁起來 
-            return await CreateAccountAsync(createMemberOutput.MemberCreated.PK );
-        }
-
-        /// <summary>
-        /// 已有會員身分 => 創新帳號綁 既有會員。   
-        /// </summary>
-        /// <remarks>
-        /// 對用戶而言：我的帳號，綁到會員身分上
-        /// 對後端而言：創一筆Acoount資料
-        /// </remarks>
-        public async Task<IActionResult> BindMemberAsync(UnTrackedAccountVM request) //BindMemberFormModel
-        {
-            if (!ModelState.IsValid)
-            {
-                return View("UnTrackedAccount" , request
-                    //new UnTrackedAccountVM { 
-                    //    BindMemberForm = request
-                    //}
-                );
-            }
-
-            Member.PK_T memberPK = memberService.GetMemberPK_ByBindKey(request.BindKey);
-            if(memberPK == null)
-            {
-                return Content("你輸入的密鑰對應不上任何會員。請檢查是否打錯，或考慮創建新的會員密鑰");
-            }
-
-            return await CreateAccountAsync( memberPK );
-        }
-
-        [NonAction]
-        public async Task<IActionResult> CreateAccountAsync (Member.PK_T memberPK)
-        {
-            var output = accountService.CreateAccount(
-                new CreateAccount_Input
-                {
-                    MemberPK = memberPK,
-                }
-            );
-
-            if (!output.OperationResult)
-            {
-                return Content("綁member失敗。" + output.ErrMsg);
-            }
-
-            var issueClaimsInput = new IssueClaimsInput
-            {
-                Account = output.AccountCreated,
-            };
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            await accountService.IssueClaims(issueClaimsInput);
-
-            return Redirect("/");
-        }
 
         /// <summary>
         /// 可登出 本網會員/第三方帳號

@@ -28,13 +28,16 @@ namespace ScriptureExercise
         public void ConfigureServices(IServiceCollection services)
         {
 			services.AddControllersWithViews();
+			services.AddHttpContextAccessor();
+			//swagger 自己好像不需要...
 			services.AddStackExchangeRedisCache(options =>
 				options.Configuration = Configuration["RedisConfig:reid11"]
 			);
 
 			services.AddTransient<IMemoryCacheRepository, MemoryCacheRepository>();
-			services.AddHttpContextAccessor();
 
+			services.AddTransient<IAccountService, AccountService>();
+			services.AddTransient<IMemberService, MemberService>();
 
 			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 			.AddCookie(options =>
@@ -52,33 +55,25 @@ namespace ScriptureExercise
 				//options.AccessDeniedPath = new PathString("/Account/AccessDenied");
 			})
 			//加各家OAuth
-			.AddGoogle(options => {
+			.AddGoogle(options =>
+			{
 				var provider = "Google";
 				options.ClientId = Configuration[$"Authentication:{provider}:ClientId"];
 				options.ClientSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
-
 				//options.CallbackPath = "/signin-google";
-			})
-			.AddMicrosoftAccount(options => {
-				var provider = "Microsoft";
-				options.ClientId = Configuration[$"Authentication:{provider}:ClientId"];
-				options.ClientSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
-
-				//options.CallbackPath = "/signin-microsoft";
 			})
 			.AddFacebook(options =>
 			{
 				var provider = "Facebook";
 				options.AppId = Configuration[$"Authentication:{provider}:ClientId"];
 				options.AppSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
-
 				//options.CallbackPath = "/signin-facebook";
 			})
-			.AddInstagram(options => {
+			.AddInstagram(options =>
+			{
 				var provider = "Instagram";
 				options.ClientId = Configuration[$"Authentication:{provider}:ClientId"];
 				options.ClientSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
-
 				//options.CallbackPath = "/signin-github";
 			})
 			.AddLine(options =>
@@ -86,38 +81,11 @@ namespace ScriptureExercise
 				var provider = "Line";
 				options.ClientId = Configuration[$"Authentication:{provider}:ClientId"];
 				options.ClientSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
-
 				//options.CallbackPath = "/signin-line";
 			})
-			.AddGitHub(options => {
-				var provider = "GitHub";
-				options.ClientId = Configuration[$"Authentication:{provider}:ClientId"];
-				options.ClientSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
-
-				//options.CallbackPath = "/signin-github";
-				//OAuth請求的【redirect_uri參數】，套件預設值
-				//使用者授權給個資之後，要回呼的網址。官方要註冊APP，允許這個回呼網址
+			;
 
 
-				//預設：
-				//  會請求的scope：
-				//  回傳的claim： 
-
-				//額外：(從官方文件看，請求更多的可用scope )
-				//options.Scope.Add("");
-				//  回傳的claim：
-			});
-
-
-			//swagger 自己好像不需要...
-			//vue bsVue
-
-
-
-
-
-			services.AddTransient<IAccountService, AccountService>();
-			services.AddTransient<IMemberService, MemberService>();
 
 		}
 

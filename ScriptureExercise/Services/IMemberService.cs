@@ -14,14 +14,21 @@ namespace ScriptureExercise.Services
         CreateMember_Output CreateMember(CreateMember_Input input);
         Member.PK_T GetMemberPK_ByBindKey(string bindKey);
     }
-    public class MemberService : BaseService , IMemberService
+    public class MemberService : BaseService, IMemberService
     {
-        protected MemberService(
-            IHttpContextAccessor httpContextAccessor, 
-            IMemoryCacheRepository cacheRepo) 
+        public MemberService(
+            IHttpContextAccessor httpContextAccessor,
+            IMemoryCacheRepository cacheRepo)
             : base(httpContextAccessor, cacheRepo)
-        {
-        }
+        {}
+        //private readonly IHttpContextAccessor _httpContextAccessor;
+        //private readonly IMemoryCacheRepository _cacheRepo;
+        //public MemberService(IHttpContextAccessor httpContextAccessor, IMemoryCacheRepository cacheRepo)
+        //{
+        //    _httpContextAccessor = httpContextAccessor;
+        //    _cacheRepo = cacheRepo;
+        //}
+
 
         public CreateMember_Output CreateMember(CreateMember_Input input)
         {

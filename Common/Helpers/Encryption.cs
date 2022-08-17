@@ -33,24 +33,24 @@ namespace Common.Helpers
             return ciphertext.ToUpper(); //看要不要全大寫
         }
 
-        public static string ToMD5(this string strSource)
-        {
-            //using var cryptoMD5 = MD5.Create();
-            using (var cryptoMD5 = MD5.Create())
-            {
-                //將字串編碼成 UTF8 位元組陣列
-                var bytes = Encoding.UTF8.GetBytes(strSource);
+        //public static string ToMD5(this string strSource)
+        //{
+        //    //using var cryptoMD5 = MD5.Create();
+        //    using (var cryptoMD5 = MD5.Create())
+        //    {
+        //        //將字串編碼成 UTF8 位元組陣列
+        //        var bytes = Encoding.UTF8.GetBytes(strSource);
 
-                //取得雜湊值位元組陣列
-                var hash = cryptoMD5.ComputeHash(bytes);
+        //        //取得雜湊值位元組陣列
+        //        var hash = cryptoMD5.ComputeHash(bytes);
 
-                //取得 MD5
-                var md5 = BitConverter.ToString(hash)
-                    .Replace("-", string.Empty)
-                    .ToUpper();
+        //        //取得 MD5
+        //        var md5 = BitConverter.ToString(hash)
+        //            .Replace("-", string.Empty)
+        //            .ToUpper();
 
-                return md5;
-            }
-        }
+        //        return md5;
+        //    }
+        //}
     }
 }
