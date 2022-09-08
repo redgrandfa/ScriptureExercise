@@ -3,8 +3,8 @@ let vue_untracked = new Vue({
     data:data,
     mounted(){},
     methods:{
-        changeVisible() {
-            let t = this.feilds.bindKey
+        changeBinkeyVisible() {
+            let t = this.fields.bindKey
             t.visible = !t.visible
         },
         submit(){
@@ -14,14 +14,13 @@ let vue_untracked = new Vue({
                     'content-type':'application/json'
                 },
                 body:JSON.stringify({
-                    bindKey:this.fields.bindKey.value
+                    bindKey:this.fields.bindKey.value,
                 }),
             }).then(resp=>{
                 Promise.resolve(resp.text())
                 .then(text=>{
                     if(resp.ok){
-                        // location.href="/Member/Settings"
-                        location.href="/Exercise/Choices"
+                        location.href="/Member/Settings"
                     }else{
                         swal.fire(text)
                     }

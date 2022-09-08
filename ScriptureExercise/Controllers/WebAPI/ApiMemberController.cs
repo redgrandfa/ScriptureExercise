@@ -12,6 +12,8 @@ using ScriptureExercise.Models.AccountVM;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Common.Repositories;
+using System;
 
 namespace ScriptureExercise.Controllers.WebAPI
 {
@@ -21,45 +23,65 @@ namespace ScriptureExercise.Controllers.WebAPI
     public class ApiMemberController : ControllerBase
     {
         //private readonly IAccountService accountService;
-        //private readonly IMemberService memberService;
-        //public ApiMemberController(
-        //    IAccountService accountService ,
-        //    IMemberService memberService
-        //    )
-        //{
-        //    this.accountService = accountService;
-        //    this.memberService = memberService;
-        //}
-
-        [HttpPost]
-        public IActionResult Update(MemberUpdateRequestModel request)
+        private readonly IMemberService memberService;
+        public ApiMemberController(
+            //IAccountService accountService,
+            IMemberService memberService
+            )
         {
-            //姓名
-            //密鑰
-            //偏好
-            //顯示在經典選單 中的一部分 => filter
-
-            //var input = new
-            //var output = memberService.Update(input);
-            //if (output) {
-            //
-            //}
-
-            return Ok("修改完成");
+            //this.accountService = accountService;
+            this.memberService = memberService;
         }
 
+        [HttpPost]
+        public IActionResult UpdateName(MemberEditVM request)
+        {
+            Action<Member> action = member =>
+            {
+                member.Value.Name = request.Name;
+            };
+            return UpdateByCondition(action, "修改名稱成功");
+        }
 
+        [HttpPost]
+        public IActionResult UpdateAccount(CreateMemberPostModel request)
+        {
+            var output = memberService.UpdateAccount(request.Account);
+            if (!output.OperationResult)
+            {
+                return BadRequest(output.ErrMsg);
+            }
+            return Ok("修改帳號成功");
+        }
+        [HttpPost]
+        public IActionResult UpdatePassword(CreateMemberPostModel request)
+        {
+            Action<Member> action = member =>
+            {
+                member.Value.Password = request.Password;
+            };
+            return UpdateByCondition(action, "修改密碼成功");
+        }
 
-        //[HttpPost]
-        //public IActionResult PostPaper()
-        //{
-        //    var memberId = int.Parse(User.Identity.Name);
+        [HttpPost]
+        public IActionResult UpdateScripture(MemberEditVM request)
+        {
+            Action<Member > action = (member)=>
+            {
+                member.Value.ScriptureShowList = request.ScriptureShowList;
+            };
+            return UpdateByCondition(action, "修改經典顯示成功");
+        }
 
-        //    //PDF? html 只看錯誤題 篩選
-        //    // 每一題盼對錯 才能計分
-        //    //資料化
-
-        //    return Redirect("");
-        //}
+        [NonAction]
+        public IActionResult UpdateByCondition(Action<Member>  action,  string successMsg)
+        {
+            var output = memberService.UpdateMember(action);
+            if (!output.OperationResult)
+            {
+                return BadRequest(output.ErrMsg);
+            }
+            return Ok(successMsg);
+        }
     }
 }

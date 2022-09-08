@@ -1,6 +1,7 @@
 ﻿using Common.DBModels;
 using Common.DTOModels.AccountDTOs;
 using Common.DTOModels.MemberDTOs;
+using Common.Helpers;
 using Common.Repositories;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -22,7 +23,7 @@ namespace ScriptureExercise.Services
         /// </summary>
         /// <param name="input">Member主鍵、。</param>
         /// <returns>建好的Account</returns>
-        CreateAccount_Output CreateAccount(CreateAccount_Input input);
+        CreateAccount_Output Create3rdAccount(CreateAccount_Input input);
         Task IssueClaims(IssueClaimsInput input);
     }
 
@@ -73,7 +74,7 @@ namespace ScriptureExercise.Services
             return result;
         }
 
-        public CreateAccount_Output CreateAccount(CreateAccount_Input input)
+        public CreateAccount_Output Create3rdAccount(CreateAccount_Input input)
         {
             var result = new CreateAccount_Output();
 
@@ -134,7 +135,7 @@ namespace ScriptureExercise.Services
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, input.Account.Value.FK_Member.MemberId.ToString() ),
-                new Claim("LoginThrough", input.Account.PK.Provider ),
+                new Claim(Define.LOGIN_THROUGH_CLAIM_TYPE, input.Account.PK.Provider ),
 
                 new Claim(ClaimTypes.Role , "Member"), //區分第三方登入
             };

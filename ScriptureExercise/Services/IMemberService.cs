@@ -12,7 +12,17 @@ namespace ScriptureExercise.Services
     public interface IMemberService
     {
         CreateMember_Output CreateMember(CreateMember_Input input);
-        Member.PK_T GetMemberPK_ByBindKey(string bindKey);
+        UpdateMember_Output UpdateMember(Action<Member> action);
+        //DeleteMember_Output DeleteMember(Member.PK_T memberPK);
+
+        UpdateAccount_Output UpdateAccount(string account);
+
+
+        Member GetMember_ByInput(CreateMember_Input input);
+
+        Member GetCurrentMember();
+        Member GetMember_ById(int memberId);
+        int GetCurrentMemberId();
     }
     public class MemberService : BaseService, IMemberService
     {
@@ -21,36 +31,45 @@ namespace ScriptureExercise.Services
             IMemoryCacheRepository cacheRepo)
             : base(httpContextAccessor, cacheRepo)
         {}
-        //private readonly IHttpContextAccessor _httpContextAccessor;
-        //private readonly IMemoryCacheRepository _cacheRepo;
-        //public MemberService(IHttpContextAccessor httpContextAccessor, IMemoryCacheRepository cacheRepo)
-        //{
-        //    _httpContextAccessor = httpContextAccessor;
-        //    _cacheRepo = cacheRepo;
-        //}
-
 
         public CreateMember_Output CreateMember(CreateMember_Input input)
         {
             var result = new CreateMember_Output();
 
-
-            var memberPK_Found = GetMemberPK_ByBindKey(input.BindKey);
+            var memberPK_Found = GetMember_ByInput(input);
             //檢查 已存在衝突
             if (memberPK_Found != null)
             {
-                result.ErrMsg = "此會員密鑰已被其他人佔用，請換一個";
+                result.ErrMsg = "此會員帳號已被其他人佔用，請換一個";
                 return result;
             }
 
             //創建會員
-
             var name = _httpContextAccessor.HttpContext.User.Claims
-                .FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+                    .FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value; ;
+            if (name == null )
+            {
+                name = "";
+            }
+                    
             var counter = _cacheRepo.Get<EntityCounter>(nameof(EntityCounter));
 
             try
             {
+                var account = new Account
+                {
+                    PK = new Account.PK_T
+                    {
+                        Provider = "Cookie",
+                        AccountId_FromProvider = input.Account,
+                    },
+                    Value = new Account.Value_T
+                    {
+                        CreateTime = DateTime.UtcNow,
+                        UpdateTime = DateTime.UtcNow,
+                    }
+                };
+
                 var member = new Member
                 {
                     PK = new Member.PK_T
@@ -66,66 +85,161 @@ namespace ScriptureExercise.Services
                     //CreateMemberId = memberId,
                     //UpdateMemberId = memberId,
 
+                    Password = input.Password,
+
+                    AccountPK_List = new List<Account.PK_T>
+                    {
+                        account.PK,
+                    },
+                    ScriptureShowList = new List<int> { 1, }, //至少要一個
+                    ExerciseRecordCreateTimeId_List = new List<string>(),
+
                     //從第三方取得的資料預填
                     Name = name,
-
-                    FK_BindKey = new BindKey2Member.PK_T
-                    {
-                        BindKey = input.BindKey,
-                    },
-                    AccountPK_List = new List<Account.PK_T>(),
-                    //{
-                    //    new Account.PK_T
-                    //    {
-                    //        Provider = idClaim.Issuer,
-                    //        AccountId_FromProvider = idClaim.Value,
-                    //    },
-                    //}
                 };
                 _cacheRepo.Set(member.GetRedisKeyString(), member.Value);
 
                 counter.MemberCount++;
                 _cacheRepo.Set(nameof(EntityCounter), counter);
 
-                BindKey2Member bindKey2Member = new BindKey2Member
-                {
-                    PK = member.Value.FK_BindKey,
-                    Value = new BindKey2Member.Value_T
-                    {
-                        FK_Member = member.PK,
-                    },
-                };
-                _cacheRepo.Set(bindKey2Member.GetRedisKeyString(), bindKey2Member.Value);
+                account.Value.FK_Member = member.PK;
+                _cacheRepo.Set(account.GetRedisKeyString(), account.Value);
 
 
-
-                result.OperationResult = true;
-                result.MemberCreated = member;
+                result.OperationResult = account;
             }
             catch (Exception ex)
             {
-                result.ErrMsg = ex.Message;
+                result.ErrMsg = ex.Message;//.ToString
             }
 
             return result;
         }
-
-
-        public Member.PK_T GetMemberPK_ByBindKey(string bindKey)
+        public UpdateMember_Output UpdateMember(Action<Member> action)
         {
-            var bindKey2Member = new BindKey2Member
+            var result = new UpdateMember_Output();
+            try
             {
-                PK = new BindKey2Member.PK_T
+                var member = GetCurrentMember();
+                action(member);
+                _cacheRepo.Set(member.GetRedisKeyString() , member.Value);
+                result.OperationResult = true;
+            }
+            catch(Exception ex)
+            {
+                result.ErrMsg = "更新會員資料失敗："+ex.Message;
+            }
+            return result;
+        }
+
+        public UpdateAccount_Output UpdateAccount(string account)
+        {
+            var result = new UpdateAccount_Output();
+            try
+            {
+                var newEntity = new Account
                 {
-                    BindKey = bindKey,
+                    PK = new Account.PK_T
+                    {
+                        Provider = "Cookie",
+                        AccountId_FromProvider = account,
+                    },
+                };
+                //試著查
+                newEntity.Value = _cacheRepo.Get<Account.Value_T>(newEntity.GetRedisKeyString());
+                if (newEntity.Value != null)
+                {
+                    result.ErrMsg = "此帳號已有人使用";
+                    return result;
+                }
+
+                //確定 可修改後
+                var member = GetCurrentMember();
+
+                newEntity.Value = new Account.Value_T
+                {
+                    FK_Member = new Member.PK_T
+                    {
+                        MemberId = member.PK.MemberId,
+                    }
+                };
+
+                //除舊 佈新
+                var oldEntity = new Account
+                {
+                    PK = member.Value.AccountPK_List[0],
+                };
+                _cacheRepo.Remove(oldEntity.GetRedisKeyString());
+                _cacheRepo.Set(newEntity.GetRedisKeyString(), newEntity.Value);
+
+                member.Value.AccountPK_List[0] = newEntity.PK;
+                _cacheRepo.Set(member.GetRedisKeyString(), member.Value);
+
+
+
+
+                result.OperationResult = true;
+            }
+            catch (Exception ex)
+            {
+                result.ErrMsg = "更新會員資料失敗：" + ex.Message;
+            }
+            return result;
+        }
+
+
+        public Member GetMember_ByInput(CreateMember_Input input)
+        {
+            var account = new Account
+            {
+                PK = new Account.PK_T
+                {
+                    Provider = "Cookie",
+                    AccountId_FromProvider = input.Account,
+                }
+            };
+
+            account.Value = _cacheRepo.Get<Account.Value_T>(account.GetRedisKeyString());
+
+            if (account.Value == null)
+                return null;
+
+            var member = new Member
+            {
+                PK = account.Value.FK_Member,
+            };
+
+            member.Value = _cacheRepo.Get<Member.Value_T>(member.GetRedisKeyString());
+
+            if (member.Value.Password != input.Password)
+                return null;
+
+            return member;
+        }
+
+        public Member GetCurrentMember()
+        {
+            return GetMember_ById( GetCurrentMemberId() );
+        }
+        public Member GetMember_ById(int memberId)
+        {
+            var member = new Member
+            {
+                PK = new Member.PK_T
+                {
+                    MemberId = memberId,
                 },
             };
 
-            bindKey2Member.Value = _cacheRepo.Get<BindKey2Member.Value_T>(bindKey2Member.GetRedisKeyString());
-
-            //查不到就null
-            return bindKey2Member.Value?.FK_Member;
+            member.Value = _cacheRepo.Get<Member.Value_T>(member.GetRedisKeyString());
+            
+            return member; //Value可能會null
         }
+        public int GetCurrentMemberId()
+        {
+            return int.Parse(_httpContextAccessor.HttpContext.User.Identity.Name);
+        }
+
 
     }
 }

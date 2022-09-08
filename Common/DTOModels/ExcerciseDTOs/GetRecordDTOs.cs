@@ -1,0 +1,16 @@
+﻿using Common.DBModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Common.DTOModels.ExcerciseDTOs
+{
+    public class GetRecordOutput :BaseOutput<ExerciseRecord.Value_T>
+    {
+    }
+
+    //public class  { 
+    //}
+}

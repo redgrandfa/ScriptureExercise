@@ -1,5 +1,5 @@
 ﻿@using ScriptureExercise.Models.AccountVM
-@model CreateMemberFormModel
+@model CreateMemberPostModel
 
 <div id="vue_untracked">
     <div class="untracked py-5 d-flex flex-column align-items-center">
@@ -21,25 +21,30 @@
             請首次設定<b>會員密鑰</b>以建立新會員，未來其他帳號可透過密鑰綁定至同一會員下
         </p>
 
+
         <b-form-group
-            id="xxx"
             :label="fields.bindKey.text"
-            :label-for="fields.bindKey.id"
-            valid-feedback="謝謝!"
+            label-for="fields_bindKey"
+            valid-feedback="OK"
             :invalid-feedback="errMsgs.bindKey"
-            :state="errMsgs.bindKey==''"
+            @* :state="errMsgs.bindKey==''" *@
         >
+            <b-icon
+                :icon="fields.bindKey.visible?'eye':'eye-slash'"
+                v-on:click="changeBinkeyVisible()"
+            ></b-icon>
+
             <b-form-input 
-                name="fields.bindKey.name"
-                :id="fields.bindKey.id" 
+                @* name="fields.bindKey.name" *@
+                id="fields_bindKey" 
                 v-model="fields.bindKey.value" 
-                :type="fields.bindKey.visible?'text':'password'"
                 :state="errMsgs.bindKey==''"
+                :type="fields.bindKey.visible?'text':'password'"
             >
             </b-form-input>
         </b-form-group> 
-
         <button class="btn btn-info mt-5" :disabled="disabled" v-on:click="submit()">送出</button>
+
     </div>
 </div>
 
@@ -53,10 +58,9 @@
             fields:{
                 bindKey:{
                     text:'密鑰',
-                    name:'bindKey',
-                    id:"input_bindKey",
-                    value:'@Model?.BindKey',
-                    visible:true,
+                    @* name:'bindKey', *@
+                    value:'',
+                    visible:false,
                 },
             },
             errMsgs:{

@@ -1,0 +1,12 @@
+
+//要改
+.exercise-banner{
+    @extend %bg-theme;
+
+    // padding-top: 33px;
+    // padding-bottom: 111px;
+}
+
+.question-order{
+    width: 2 rem;
+}

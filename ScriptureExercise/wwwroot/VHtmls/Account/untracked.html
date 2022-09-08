@@ -24,9 +24,9 @@
     <script src="../../lib/BSVue2_22_0/bootstrap-vue-icons2_22_0.min.js"></script>
 </head>
 <body>
-    <div id="vue_untracked">
-        <main>
-            <div class="container">
+    <main>
+        <div class="container">
+            <div id="vue_untracked">
                 <div class="untracked py-5 d-flex flex-column align-items-center">
                     <p>使用@User.Identity.AuthenticationType帳號登入的 @User.Identity.Name您好：</p>
                     <p>此帳號尚未綁定至本服務的任一會員下</p>
@@ -53,21 +53,21 @@
                     </p>
 
                     
-                    <div v-for="(x, key) in fields">
-                        <!-- <b-form-group
-                            id="fieldset-1"
-                            description="說明"
-                            :label="x.text"
-                            :label-for="key"
-                            valid-feedback="謝謝!"
-                            :invalid-feedback="invalidFeedback"
-                            :state="state"
-                        >
-                            <b-form-input :id="key" v-model="name" 
-                            :state="state">
-                            </b-form-input>
-                        </b-form-group> -->
+                    <!-- <b-form-group
+                        id="fieldset-1"
+                        description="說明"
+                        :label="x.text"
+                        :label-for="key"
+                        valid-feedback="謝謝!"
+                        :invalid-feedback="invalidFeedback"
+                        :state="state"
+                    >
+                        <b-form-input :id="key" v-model="name" 
+                        :state="state">
+                        </b-form-input>
+                    </b-form-group> -->
 
+                    <div v-for="(x, key) in fields">
                         <label >{{x.text}}：<span class="text-danger small">{{errMsgs[key]}}</p>
                             <!-- type="password" -->
                             <input v-model="x.value"
@@ -80,16 +80,12 @@
                     <button class="btn btn-info mt-5" :disabled="disabled">送出</button>
                 </form>
             </div>
-        </main>
-    </div>
+        </div>
+    </main>
     
     <script>
         let data = {
             isMember:false,
-
-            // model傳資料過來
-            //'@Model?.CreateMemberForm?.BindKey',
-
             fields:{
                 bindKey:{
                     text:'密鑰',
@@ -108,8 +104,54 @@
             // 至少x碼  
             // 必須由 英文/數字 組成 
         }
-    </script>
-    <script src="../../js/Account/untracked.js"></script>
+        let vue_untracked = new Vue({
+    el:'#vue_untracked',
+    data:data,
+    mounted(){},
+    methods:{
+        changeVisible(){
+            this.bindKey_visible = !this.bindKey_visible
+        },
+    },
+    watch:{
+        'fields.bindKey.value':{
+            immediate:true,
+            handler:function(){
+                if(!/^\w+$/.test(this.fields.bindKey.value)
+                ){
+                    this.errMsgs.bindKey = "須為英文、數字的組合";
+                }
+                else if(this.fields.bindKey.value.length<6 ||
+                    this.fields.bindKey.value.length>12){
+                    this.errMsgs.bindKey = "長度須為6~12碼";
+                }
+                else{
+                    this.errMsgs.bindKey = "";
+                }
+            }
+        },
+        errMsgs:{
+            deep:true,
+            immediate:true,
+            handler:function(){
+                let b = Object.values(this.errMsgs)
+                    .some( errMsg => errMsg != "" )
+                
+                //有一個沒過 就沒過
+                this.disabled = b;
+            }
+        }
 
+
+    },
+    computed:{
+        formAction(){
+            let prefix = "/Account/"
+            let postfix = this.isMember?'BindMember':'CreateMember'
+            return prefix+postfix
+        }
+    },
+})
+    </script>
 </body>
 </html>

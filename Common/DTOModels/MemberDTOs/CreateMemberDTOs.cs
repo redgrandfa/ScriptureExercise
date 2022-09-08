@@ -4,11 +4,11 @@ namespace Common.DTOModels.MemberDTOs
 {
     public class CreateMember_Input
     {
-        public string BindKey { get; set; }
+        public string Account { get; set; }
+        public string Password { get; set; }
     }
-    public class CreateMember_Output : BaseOutput<bool>
+    public class CreateMember_Output : BaseOutput<Account> //若成功就回傳創好的Member
     {
-        public Member MemberCreated { get; set; }
     }
 
 

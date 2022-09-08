@@ -13,6 +13,4 @@ namespace ScriptureExercise.Services
             _cacheRepo = cacheRepo;
         }
     }
-
-    // 快取 repo?
 }

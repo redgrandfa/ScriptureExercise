@@ -1,0 +1,93 @@
+﻿@using ScriptureExercise.Models.ExcerciseVM
+@model ExcerciseListVM
+
+@{
+    Dictionary<string, string> trans2ID = new Dictionary<string, string>()
+    {
+        {"生晨","A" },
+        {"佛規諭錄","B" },
+        {"性理題釋","C" },
+        {"皇母訓子十誡","D" },
+        {"學庸","E" },
+        {"論語","F"},
+        {"孟子","G" },
+        {"道清","H" },
+        {"金心","I" },
+        {"六祖壇經","J" },
+    };
+
+    var ScriptureCode = trans2ID[Model.ScriptureName];
+    //var dataSource = $"/lib/DB/{ScriptureCode}/{ScriptureCode}{Model.SubjectId}_{Model.PageId}.js";
+}
+
+<div id="vue_paper">
+    <div class="exercise-banner row">
+        <div class="col-12 col-md-8">
+            <h2>@Model.ScriptureName  @Model.SubjectId   卷別 @Model.PageId </h2>
+            <span>{{paper.range_remark}} </span>
+        </div>
+        <div class="col-12 col-md-4">
+            <p>總題數<span class="numberOfQuestions">{{paper.questions.length}}</span></p>
+        </div>
+    </div>
+        
+    <div class="">
+        @* <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="選擇題單選；默寫題輸入完整字句不含標點，全對才給分，沒有部分給分">         </button>*@
+        <ul>
+            提示
+            <li>選擇題1分</li>
+            <li>填充題每格1分</li>
+            <li>默寫題10分(回答完整字句不含標點，全對才給分，沒有部分給分)</li>  
+        </ul>
+            
+
+        <ol>
+            <li v-for="(q,i) in paper.questions"
+                class="d-flex"
+            >
+                <div class="question-order">{{q.order}}.</div>
+                <div v-if="q.type==1" class="mb-5">
+                    <p>{{q.stem}}</p>
+                    <div class="pl-3">
+                        <div v-for="(choice,j) in q.choices">
+                            <label>
+                                <input type="radio" 
+                                :name="i" 
+                                :value="j" 
+                                v-model="q.chooesd">
+                                {{choice}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-else-if="q.type==2" >
+                    <p>{{q.stem}}</p>
+                    <div class="pl-3">
+                        <input type="text" placeholder="輸入您的答案" 
+                        v-model="q.reply">
+                    </div>
+                </div>
+        
+                <div v-else-if="q.type==3">
+                    <span v-for="(fraction , index) in q.stems">
+                        {{fraction}}<input disabled v-model="q.replies[index]" >
+                        @* 如果有答案 *@
+                    </span>
+                </div>
+            </li>
+        </ol>
+        <button class="btn submit" v-on:click="postPaper()">提交</button>
+    </div>
+</div>
+
+@section TopCSS{
+    <link rel="stylesheet" href="~/css/Excercise/paper.css">
+}
+
+@section Scripts{
+    <script>
+        let jsonFileName = '@($"{ScriptureCode}/{ScriptureCode}{Model.SubjectId}_{Model.PageId}")'
+    </script>
+    <script src = "~/js/Excercise/paper.js"></script>
+} 

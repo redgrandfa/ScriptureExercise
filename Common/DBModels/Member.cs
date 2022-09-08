@@ -20,12 +20,19 @@ namespace Common.DBModels
         public class Value_T : CommonFields
         {
             public string Name { get; set; }
-            public int NumberOfQuestionDone { get; set; }
-            public int NumberOfQuestionCorrect { get; set; }
+            public string Password { get; set; }
 
-            public BindKey2Member.PK_T FK_BindKey { get; set; }
+            public int ChoicesQuestion_Correct { get; set; }
+            public int EssayQuestion_Correct { get; set; }
+            public int BlankFillQuestion_Correct { get; set; }
+            public int ChoicesQuestion_Done { get; set; }
+            public int EssayQuestion_Done { get; set; }
+            public int BlankFillQuestion_Done { get; set; }
+
+            public List<int> ScriptureShowList { get; set; }
+
             public List<Account.PK_T> AccountPK_List { get; set; }
-
+            public List<string> ExerciseRecordCreateTimeId_List { get; set; }
         }
 
         public override string GetRedisKeyString()
@@ -34,23 +41,6 @@ namespace Common.DBModels
         }
     }
 
-
-
-    public class BindKey2Member : RedisEntity<BindKey2Member.PK_T, BindKey2Member.Value_T>
-    {
-        public class PK_T
-        {
-            public string BindKey { get; set; }
-        }
-        public class Value_T
-        {
-            public Member.PK_T FK_Member { get; set; }
-        }
-        public override string GetRedisKeyString()
-        {
-            return $"{nameof(BindKey2Member)}.{PK.BindKey}";
-        }
-    }
     public class Account : RedisEntity<  Account.PK_T, Account.Value_T  >
     {
         public class PK_T

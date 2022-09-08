@@ -4,27 +4,31 @@ using System.Collections.Generic;
 
 namespace ScriptureExercise.Models.MemberVM
 {
-    public class MemberEditViewMdel
+    public class MemberCenterVM
     {
         //不可改資訊
         public string LoginThroughIcon { get; set; }
-        public int NumberOfQuestionsDone { get; set; }
-        public int NumberOfQuestionsCorrect { get; set; }
-
+        public int ChoicesQuestion_Correct { get; set; }
+        public int EssayQuestion_Correct { get; set; }
+        public int BlankFillQuestion_Correct { get; set; }
+        public int ChoicesQuestion_Done { get; set; }
+        public int EssayQuestion_Done { get; set; }
+        public int BlankFillQuestion_Done { get; set; }
 
         /// <summary>
         /// 可自行更改的
         /// </summary>
-        public MemberUpdateRequestModel Editable { get; set; }
+        public MemberEditVM Editable { get; set; }
     }
 
-    public class MemberUpdateRequestModel
+    public class MemberEditVM
     {
         public string Name { get; set; }
-        public bool AutoDownload { get; set; }
-        public List<int> ScriptueShowList { get; set; }
+        public string Account { get; set; }
+        //public string Password { get; set; }
 
-        public CreateMemberFormModel BindMember  {get;set;}  //創建時就有的欄位，共用模型檢核...
+
         //偏好= 經典的隱藏、排序
+        public List<int> ScriptureShowList { get; set; }
     }
 }
