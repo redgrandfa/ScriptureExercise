@@ -1,0 +1,14 @@
+@import "../Excercise/exerciseBase";
+
+$theme_color : #03787c;
+%bg-theme{
+    background-color: $theme_color;
+    color: #fff;
+}
+
+
+main{
+    button.submit{
+        @extend %bg-theme;
+    }
+}

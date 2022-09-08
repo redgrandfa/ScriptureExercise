@@ -30,36 +30,93 @@ namespace ScriptureExercise.Controllers.WebAPI
             this.memberService = memberService;
         }
 
+        //潛規則：本網帳號一定在第一個accountList中
+
         [HttpPost]
         [AllowAnonymous]
-        /// <summary>
-        /// 還沒有會員
-        /// </summary>
-        public async Task<IActionResult> CreateMemberAsync(CreateMemberFormModel request)
+        public async Task<IActionResult> RegisterAsync(CreateMemberPostModel request)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return View("UnTrackedAccount", request);
-            //}
-
             var createMemberInput = new CreateMember_Input
             {
-                BindKey = request.BindKey,
+                Account = request.Account,
+                Password = request.Password,
             };
 
             var createMemberOutput = memberService.CreateMember(createMemberInput);
-            if (!createMemberOutput.OperationResult)
+            if (createMemberOutput.OperationResult == null)
             {
                 return BadRequest("創建會員失敗：" + createMemberOutput.ErrMsg);
             }
 
+            //註冊完自動登入
+            var issueClaimsInput = new IssueClaimsInput
+            {
+                Account = createMemberOutput.OperationResult,
+            };
+            await accountService.IssueClaims(issueClaimsInput);
 
-            //繼續創建 account > 綁起來 
-            return await CreateAccountAsync(createMemberOutput.MemberCreated.PK);
+            return Ok("註冊成功，並登入完成");
         }
 
         [HttpPost]
         [AllowAnonymous]
+        public async Task<IActionResult> LoginAsync(CreateMemberPostModel request)
+        {
+            var input = new CreateMember_Input
+            {
+                Account = request.Account,
+                Password = request.Password,
+            };
+            var memberFound = memberService.GetMember_ByInput(input);
+            
+            if (memberFound == null)
+            {
+                return BadRequest("登入會員失敗：" + "找不到此組帳密");
+            }
+
+            var issueClaimsInput = new IssueClaimsInput
+            {
+                Account = new Account
+                {
+                    PK = memberFound.Value.AccountPK_List[0],
+                    Value = new Account.Value_T
+                    {
+                        FK_Member = memberFound.PK,
+                    },
+                },
+            };
+            await accountService.IssueClaims(issueClaimsInput);
+            return Ok("登入成功");
+        }
+
+
+
+
+        //[HttpPost]
+        //[AllowAnonymous]
+        /// <summary>
+        /// 還沒有會員 => 先創會員再綁第三方帳號
+        /// </summary>
+        //public async Task<IActionResult> CreateMemberAsync(CreateMemberPostModel request)
+        //{
+        //    var createMemberInput = new CreateMember_Input
+        //    {
+        //        Account = request.Account,
+        //        Password = request.Password,
+        //    };
+
+        //    var createMemberOutput = memberService.CreateMember(createMemberInput);
+        //    if (!createMemberOutput.OperationResult)
+        //    {
+        //        return BadRequest("創建會員失敗：" + createMemberOutput.ErrMsg);
+        //    }
+
+        //    //繼續創建 account > 綁起來 
+        //    return await CreateAccountAsync(createMemberOutput.MemberCreated.PK);
+        //}
+
+        //[HttpPost]
+        //[AllowAnonymous]
         /// <summary>
         /// 已有會員身分 => 創新帳號綁 既有會員。   
         /// </summary>
@@ -67,44 +124,39 @@ namespace ScriptureExercise.Controllers.WebAPI
         /// 對用戶而言：我的帳號，綁到會員身分上
         /// 對後端而言：創一筆Acoount資料
         /// </remarks>
-        public async Task<IActionResult> BindMemberAsync(CreateMemberFormModel request)
-        {
-            //if (!ModelState.IsValid)
-            //{
-            //    return View("UnTrackedAccount", request);
-            //}
+        //public async Task<IActionResult> BindMemberAsync(CreateMemberPostModel request)
+        //{
+        //    Member.PK_T memberPK = memberService.GetMemberPK_ByBindKey(request.BindKey);
+        //    if (memberPK == null)
+        //    {
+        //        return BadRequest("您輸入的密鑰對應不上任何會員。請檢查是否打錯，或考慮創建新的會員密鑰");
+        //    }
 
-            Member.PK_T memberPK = memberService.GetMemberPK_ByBindKey(request.BindKey);
-            if (memberPK == null)
-            {
-                return BadRequest("您輸入的密鑰對應不上任何會員。請檢查是否打錯，或考慮創建新的會員密鑰");
-            }
+        //    return await CreateAccountAsync(memberPK);
+        //}
 
-            return await CreateAccountAsync(memberPK);
-        }
+        //[NonAction]
+        //public async Task<IActionResult> CreateAccountAsync(Member.PK_T memberPK)
+        //{
 
-        [NonAction]
-        public async Task<IActionResult> CreateAccountAsync(Member.PK_T memberPK)
-        {
+        //    var input = new CreateAccount_Input
+        //    {
+        //        MemberPK = memberPK,
+        //    };
+        //    var output = accountService.CreateAccount(input);
+        //    if (!output.OperationResult)
+        //    {
+        //        return BadRequest("綁定會員失敗：" + output.ErrMsg);
+        //    }
 
-            var input = new CreateAccount_Input
-            {
-                MemberPK = memberPK,
-            };
-            var output = accountService.CreateAccount(input);
-            if (!output.OperationResult)
-            {
-                return BadRequest("綁定會員失敗：" + output.ErrMsg);
-            }
+        //    await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        //    var issueClaimsInput = new IssueClaimsInput
+        //    {
+        //        Account = output.AccountCreated,
+        //    };
+        //    await accountService.IssueClaims(issueClaimsInput);
 
-            var issueClaimsInput = new IssueClaimsInput
-            {
-                Account = output.AccountCreated,
-            };
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            await accountService.IssueClaims(issueClaimsInput);
-
-            return Ok("成功");
-        }
+        //    return Ok("成功");
+        //}
     }
 }

@@ -56,12 +56,12 @@
                         <b-button
                             block
                             variant="info"
-                            v-b-toggle="'x'+subject.order"
-						>{{scriptureChoosed.title}} {{ number_To_Chinese(subject.order)}}
+                            v-b-toggle="'x'+subject.id"
+						>{{scriptureChoosed.title}} {{ number_To_Chinese(subject.id)}}
                         </b-button>
                     </b-card-header>
                     <b-collapse
-                        :id="'x'+subject.order"
+                        :id="'x'+subject.id"
                         accordion="my-accordion"
                         role="tabpanel"
                         visible
@@ -69,7 +69,7 @@
                         <b-card-body>
                             <div>
 								<b-table striped 
-								:items="subject.pages" 
+								:items="subject.papers" 
 								:fields="fields">
 								</b-table>
 							</div>

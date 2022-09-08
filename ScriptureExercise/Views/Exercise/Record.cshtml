@@ -1,0 +1,94 @@
+﻿@model string
+
+<div id="vue_record">
+    <div class="exercise-banner row">
+        <div class="col-12 col-md-8">
+            <h2>{{paper.title}} </h2>
+            <span>{{paper.range_remark}} </span>
+        </div>
+        <div class="col-12 col-md-4">
+            <p>總題數<span class="numberOfQuestions">{{paper.questions.length}}</span></p>
+            <p v-if="score!=undefined" >得分數<span class="score">{{score}}</span>題</p>
+            <p v-if="percentScore!=undefined">得分率<span class="percentScore">{{percentScore}}</span>%</p>
+        </div>
+    </div>
+
+    <hr>
+    <div>
+        <b-form-checkbox v-model="filters.onlyWrong_Checked" switch>
+            只顯示錯題
+        </b-form-checkbox>
+        <b-form-checkbox v-model="filters.onlyDone_Checked" switch>
+            只顯示有回答的題目
+        </b-form-checkbox>
+    </div>
+    <hr>
+
+    <div class="">
+        @* <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="選擇題單選；默寫題輸入完整字句不含標點，全對才給分，沒有部分給分">         </button>*@
+        <ul>
+            提示
+            <li>選擇題1分</li>
+            <li>填充題每格1分</li>
+            <li>默寫題10分(回答完整字句不含標點，全對才給分，沒有部分給分)</li>  
+        </ul>
+            
+@* 希望長一樣，差異只有：showQuestions 、加 disabled、顯示正解 *@
+        <ol>
+            <li v-for="(q,i) in showQuestions"
+                class="d-flex"
+            >
+                <div class="question-order">{{q.order}}.</div>
+                <div v-if="q.type==1" class="mb-5">
+                    <p>{{q.stem}}</p>
+                    <div class="pl-3">
+                        <div v-for="(choice,j) in q.choices">
+                            <label>
+                                <input type="radio" 
+                                disabled
+                                :name="i" 
+                                :value="j" 
+                                v-model="q.chooesd"
+                                >
+                                {{choice}}
+                                <span v-if="j==q.answer"><i class="fa-solid fa-check"></i></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-else-if="q.type==2" >
+                    <p>{{q.stem}}</p>
+                    <div class="pl-3">
+                        <input 
+                        disabled
+                        type="text" 
+                        v-model="q.reply">
+                        <div>正確答案：<span>{{q.answer}}</span>
+                        </div>
+                    </div>
+                </div>
+        
+                @* <div v-else-if="q.type==3">
+                    <span v-for="(fraction , index) in q.stems">
+                        {{fraction}}<input disabled v-model="q.replies[index]" >
+                        如果有答案 
+                    </span>
+                </div> *@
+            </li>
+        </ol>
+    </div>
+</div>
+
+@section TopCSS{
+    <link rel="stylesheet" href="~/css/Excercise/Record.css">
+}
+
+@section Scripts{
+    <script>
+        let createTimeId = '@Model'
+    </script>
+    <script src = "~/js/Excercise/Record.js"></script>
+} 
+
+

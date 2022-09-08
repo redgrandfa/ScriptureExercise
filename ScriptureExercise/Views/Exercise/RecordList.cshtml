@@ -1,0 +1,33 @@
+﻿<div id="vue_recordList">
+    最多保留15筆記錄，超過將自動從最舊的紀錄刪除。
+    <b-table striped hover 
+        :fields="fields" 
+        :items="records" 
+        @* :per-page="perPage" 
+        :current-page="currentPage" 
+        :filter="filter"*@
+    >
+        <template #cell(link)="row">
+            <a :href="row.item.link">查看</a>
+        </template>
+
+        <template #cell(Delete)="row">
+            <b-button 
+                @* size="sm"  *@
+                v-on:click="deleteRecord(row.item.createTime)">
+                刪除
+            </b-button>
+        </template>
+    </b-table>
+</div>
+
+@section TopCSS{
+    @* <link rel="stylesheet" href="~/css/Excercise/RecordList.css"> *@
+}
+
+@section Scripts{
+    <script src="~/js/Excercise/RecordList.js"></script>
+
+    @* <script>
+    </script> *@
+}

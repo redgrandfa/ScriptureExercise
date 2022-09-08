@@ -1,12 +1,20 @@
 ﻿@if (User.Identity.IsAuthenticated)
 {
-    <b-nav-item href="/Exercise/List">
+    <b-nav-item href="/Exercise/Choices">
         <b-icon 
         icon="play-fill" 
         variant="light"
         animation="cylon"
         ></b-icon>做題
     </b-nav-item>
+    <b-nav-item href="/Exercise/RecordList">
+        <b-icon 
+        icon="book" 
+        variant="light"
+        animation="cylon-vertical"
+        ></b-icon>練習紀錄
+    </b-nav-item>
+
     <b-nav-item href="/Member/Settings">
         <b-icon 
         variant="light"

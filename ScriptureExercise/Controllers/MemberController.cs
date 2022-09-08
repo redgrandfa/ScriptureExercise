@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Common.DBModels;
+using Common.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ScriptureExercise.Models.MemberVM;
 using ScriptureExercise.Services;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 
 namespace ScriptureExercise.Controllers
 {
@@ -19,28 +23,35 @@ namespace ScriptureExercise.Controllers
 
         public IActionResult Settings()
         {
-
-            var vm = new MemberEditViewMdel
+            var memberId = int.Parse(User.Identity.Name);
+            Member.Value_T memberValue = memberService.GetMember_ById(memberId).Value;
+            if(memberValue == null)
             {
-                LoginThroughIcon = "fa-brands fa-facebook",
-                NumberOfQuestionsCorrect = 11,
-                NumberOfQuestionsDone = 22,
-                Editable = new MemberUpdateRequestModel
+                return BadRequest("查無此會員");
+            }
+
+            var vm = new MemberCenterVM
+            {
+                //LoginThroughIcon = IconHelper.LoginIconDict[
+                //    User.Claims.FirstOrDefault(c => c.Type == Define.LOGIN_THROUGH_CLAIM_TYPE)?.Value
+                //],
+                ChoicesQuestion_Correct = memberValue.ChoicesQuestion_Correct ,
+                EssayQuestion_Correct = memberValue.EssayQuestion_Correct ,
+                BlankFillQuestion_Correct = memberValue.BlankFillQuestion_Correct ,
+                ChoicesQuestion_Done = memberValue.ChoicesQuestion_Done ,
+                EssayQuestion_Done = memberValue.EssayQuestion_Done ,
+                BlankFillQuestion_Done = memberValue.BlankFillQuestion_Done,
+
+                Editable = new MemberEditVM
                 {
-                    Name = "瑋軒",
-                    AutoDownload = true,
-                    ScriptueShowList = new List<int>
-                    {1,
-                    },
+                    Name = memberValue.Name,
+                    Account = memberValue.AccountPK_List[0].AccountId_FromProvider,
+
+                    ScriptureShowList = memberValue.ScriptureShowList,
                 }
             };
 
             return View(vm);
-        }
-
-        public IActionResult ExerciseHistory()
-        {
-            return View();
         }
     }
 }
