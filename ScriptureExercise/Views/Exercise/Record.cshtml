@@ -1,5 +1,9 @@
 ﻿@model string
 
+@{
+    ViewData["Title"] = "練習紀錄";
+}
+
 <div id="vue_record">
     <div class="exercise-banner row">
         <div class="col-12 col-md-8">
@@ -9,7 +13,13 @@
         <div class="col-12 col-md-4">
             <p>總題數<span class="numberOfQuestions">{{paper.questions.length}}</span></p>
             <p v-if="score!=undefined" >得分數<span class="score">{{score}}</span>題</p>
-            <p v-if="percentScore!=undefined">得分率<span class="percentScore">{{percentScore}}</span>%</p>
+            <p v-if="percentScore!=undefined">得分率
+                <span class="percentScore">{{percentScore}}</span>%
+                <span v-if="percentScore>90">強如鬼神</span>
+                <span v-if="percentScore>80">若是真的筆試就好了...</span>
+                <span v-else-if="percentScore>60">再加油</span>
+                <span v-else>咪咪茂茂</span>
+            </p>
         </div>
     </div>
 

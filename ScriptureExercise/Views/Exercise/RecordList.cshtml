@@ -1,4 +1,8 @@
-﻿<div id="vue_recordList">
+﻿@{
+    ViewData["Title"] = "練習記錄列表";
+}
+
+<div id="vue_recordList">
     最多保留15筆記錄，超過將自動從最舊的紀錄刪除。
     <b-table striped hover 
         :fields="fields" 
@@ -19,6 +23,8 @@
             </b-button>
         </template>
     </b-table>
+
+    <p v-if="records.length==0" class="text-center">目前無任何練習紀錄</p>
 </div>
 
 @section TopCSS{

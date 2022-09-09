@@ -1,5 +1,9 @@
 ﻿@model List<int>
 
+@{
+    ViewData["Title"] = "習題卷挑選";
+}
+
 <div id="vue_exercise_list">
     <b-dropdown size="lg" text="選擇經典" class="m-2">
         <b-dropdown-item-button
@@ -9,6 +13,7 @@
         </b-dropdown-item-button>
     </b-dropdown>
 
+    (共有10部經典，導覽列的【設定】功能中可以調整想顯示的經典)
     <div class="accordion" role="tablist">
         <!-- 迭代 此經典的下轄考科 手風琴-->
         <b-card
@@ -21,14 +26,17 @@
                     block
                     variant="info"
                     v-b-toggle="'x'+subject.id"
-				>{{scriptureChoosed.title}} {{ number_To_Chinese(subject.id)}}
+				>{{scriptureChoosed.title}}
+                    <span v-if="scriptureChoosed.subjects.length>1">
+                        {{ number_To_Chinese(subject.id)}}</span>
+                    
                 </b-button>
             </b-card-header>
             <b-collapse
                 :id="'x'+subject.id"
                 accordion="my-accordion"
                 role="tabpanel"
-                visible
+                :visible="i==0"
             >
                 <b-card-body>
                     <div>
@@ -36,7 +44,9 @@
 						:items="subject.papers" 
 						:fields="fields">
                             <template #cell(link)="row">
-                                <a :href="'/Exercise/'+row.value">開始練習</a>
+                                @* <a :href="'/Exercise/'+row.value">開始練習</a> *@
+                                <a :href="scriptureChoosed.title+'_'+subject.id+'/卷別'+row.item.id">
+                                開始練習</a>
                             </template>
 						</b-table>
 					</div>

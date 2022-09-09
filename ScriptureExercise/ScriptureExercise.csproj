@@ -25,6 +25,7 @@
     <Folder Include="Models\HomeVM\" />
     <Folder Include="Views\Shared\Library\" />
     <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\lib\DB\A\" />
     <Folder Include="wwwroot\VHtmls\Home\" />
     <Folder Include="Views\Home\" />
     <Folder Include="wwwroot\css\Account\" />

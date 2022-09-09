@@ -1,5 +1,10 @@
-﻿@using ScriptureExercise.Models.MemberVM
+﻿@using ScriptureExercise.Models.MemberVM;
 @model MemberCenterVM;
+
+@{
+    ViewData["Title"] = "會員偏好設定";
+}
+
 
 <h1 class="text-center mb-3">會員中心</h1>
 <div id="vue_member_settings" class="container">
@@ -116,11 +121,11 @@
                     value:initData.Name,
                 },
                 account:{
-                    text:'設定新的帳號',
+                    text:'改帳號',
                     value: initData.Account,
                 },
                 password:{
-                    text:'設定新的密碼',
+                    text:'改密碼',
                     value: "",
                     visible: false,
                 },
