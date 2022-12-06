@@ -1,12 +1,51 @@
-// header{
-//     .container{
+.white-sun {
+    // margin-left: 0px;
+    // margin-right: 0px;
+    // margin-bottom: -115px; //557-442
+    margin: 0 auto;
+    left: -111px;
+    right: -111px;
+    top: 102px;
 
-//     }
-// }
+}
 
-// /* md */
-// @media screen and (min-width:768px){} 
-// /* lg */
-// @media screen and (min-width:992px){}
-// /* xl */
-// @media screen and (min-width:1200px){}
+.sun {
+    box-sizing: border-box;
+    width: 50px;
+    height: 50px;
+    border: 3px solid #D8FF69;
+    border-radius: 50%;
+
+    background: #FFFFFF;
+
+
+    position: absolute;
+    left: calc(50% - 25px);
+    top: calc(50% - 25px);
+}
+
+
+
+.slogan-title {
+    font-family: 'Helvetica';
+    //font-style: normal;
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 64px;
+
+    margin-left: 28px;
+    margin-top: 442px;
+    margin-bottom: 19px;
+}
+
+.slogan-text {
+    font-family: 'GenSekiGothic JP';
+    //font-style: normal;
+    // font-weight: 500;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 32px;
+
+    margin-left: 33px;
+}
+

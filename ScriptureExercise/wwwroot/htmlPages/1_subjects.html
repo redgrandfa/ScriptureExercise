@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>BsVueTemplate</title>
+
+	<link rel="stylesheet" href="../lib/cssReset.css" />
+
+	<!-- Load required Bootstrap and BootstrapVue CSS -->
+	<link type="text/css" rel="stylesheet" href="../lib/bs-vue2_22_0/bootstrap4_6_1.min.css" />
+	<link type="text/css" rel="stylesheet" href="../lib/bs-vue2_22_0/bootstrap-vue2_22_0.min.css" />
+
+
+	<link rel="stylesheet" href="../css/site.css">
+	<link rel="stylesheet" href="../css/Excercise/subjects.css">
+
+
+	<!-- Load polyfills to support older browsers -->
+	<!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script> -->
+
+	<!-- Load Vue followed by BootstrapVue -->
+	<script src="../lib/bs-vue2_22_0/vue2_6_12.min.js"></script>
+	<script src="../lib/bs-vue2_22_0/bootstrap-vue2_22_0.min.js"></script>
+
+	<!-- Load the following for BootstrapVueIcons support -->
+	<script src="../lib/bs-vue2_22_0/bootstrap-vue-icons2_22_0.min.js"></script>
+
+	<script src="https://kit.fontawesome.com/62756de202.js" crossorigin="anonymous"></script>
+	<!-- <script src="../lib/fontawesome.js" crossorigin="anonymous"></script> -->
+</head>
+
+<body class="bg-secondary">
+	<div class="view-container">
+		<header class="d-flex justify-content-between align-items-center">
+			<div class="hamburger d-flex flex-column justify-content-between">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<div class="app-title">CLASSICS</div>
+			<div class="book-btn">
+				<i class="fa-solid fa-book"></i>
+			</div>
+		</header>
+		
+		<nav class="menu">
+			<h2 class="text-center">
+				<span class="">CLASSICS</span><br>
+				<span class="">經典練習</span>
+			</h2>
+			<ul>
+				<li><a href="#">首頁</a></li>
+				<li><a href="#">選擇考題</a></li>
+				<li><a href="#">我的書單</a></li>
+				<li><a href="#">會員中心</a></li>
+				<li><a href="#">關於網站</a></li>
+			</ul>
+		</nav>
+
+		<div class="white-sun">
+			<div class="halo"></div>
+		</div>
+		
+		<section class="subject-filters">
+			<div class="subject-search">
+				<i class="fa-solid fa-magnifying-glass"></i>
+				<input type="text" placeholder="Search..."
+					class="mx-auto w-100">
+			</div>
+
+			<ul class="subject-categories mb-0 d-flex justify-content-between">
+				<li class="category-btn">白陽</li>
+				<li class="category-btn active">儒家</li>
+				<li class="category-btn">釋家</li>
+				<li class="category-btn">道家</li>
+			</ul>
+		</section>
+
+		<!-- 分成主捲動區、置頂區 -->
+
+		<main>
+
+			<section class="subjects-container">
+				<ul class="subjects mb-0 ">
+					<li class="subject-card">
+						<div class="head d-flex justify-content-between">
+							<div class="parent">儒家</div>
+							<div class="collect">
+								<i class="fa-solid fa-heart"></i>
+								<!-- <i class="fa-regular fa-heart"></i> -->
+							</div>
+						</div>
+						<h3 class="title">論語(一)</h3>
+
+						<div class="foot">
+							<div>共分為12個練習章節</div>
+							<div>
+								<i class="fa-solid fa-star star-valid"></i>
+								<i class="fa-solid fa-star star-valid"></i>
+								<i class="fa-solid fa-star star-valid"></i>
+								<i class="fa-solid fa-star star-valid"></i>
+								<i class="fa-solid fa-star"></i>
+								<!-- <i class="star-empty fa-regular fa-star"></i> -->
+							</div>
+						</div>
+					</li>
+					<li class="subject-card"></li>
+					<li class="subject-card"></li>
+					<li class="subject-card"></li>
+				</ul>
+			</section>
+
+		</main>
+	
+		<footer>
+		</footer>
+	</div>
+
+	<!-- <script src="../../x.js"></script> -->
+	<script>
+		let vue_ = new Vue({
+			el: "#vue_",
+			data: {
+				a: "qwe",
+			},
+			mounted() { },
+			methods: {},
+			watch: {},
+			computed: {},
+			components: {},
+		});
+	</script>
+</body>
+
+</html>

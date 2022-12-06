@@ -1,0 +1,210 @@
+:root{
+    //顏色 尺寸
+    --theme-color-dark:#313B5D;
+    // font-size: 15px;
+}
+
+.view-container {
+    margin: auto;
+    overflow: hidden;
+
+    width: 100%;
+    min-width: 320px;
+    max-width: 450px;
+
+    //手機 19:9
+    min-height: 100vh; 
+    // height: 100vh;
+    // max-height: 2.5vw;
+
+    padding-top: 100px;
+
+    position: relative;
+
+    background-color: #fff;
+    outline: 1px red solid;
+
+    z-index: 1;
+    &::after{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #00000088;
+
+        display: none;
+    }
+}
+
+header {
+    width: 100%;
+    // min-width: 320px;
+    max-width: 444px;
+    
+    position: fixed;
+    top: 0;
+    
+    padding: 35px 21px;//2rem
+    font-size: 21px;
+}
+
+
+
+.hamburger {
+    width: 22px;
+    height: 16px;
+
+    >span {
+        background-color: var(--theme-color-dark);
+        display: block;
+        //min-height: 2px;
+        // height: 10%;
+        height: 2px;
+        border-radius: 1px;
+    }
+
+    >span:nth-of-type(1) {
+        width: 50%;
+        align-self: flex-end;
+    }
+
+    >span:nth-of-type(2) {
+        width: 100%;
+    }
+
+    >span:nth-of-type(3) {
+        width: 50%;
+        align-self: flex-start;
+    }
+}
+
+.app-title {
+    font-size: 21px;
+    //font-family: 'Open Sans';
+    //font-style: normal;
+    font-weight: 700;
+
+    color: var(--theme-color-dark);
+
+    margin: 0;
+}
+
+.menu {
+    background-color: #fff;
+    width: 296px;
+    max-width: calc(100vw - 30px);
+
+    height: 100vh;
+
+    position: absolute;
+    z-index: 32;
+    top: 0;
+    left: -100%;
+
+    transition: all 0.6s;
+
+    &.active{
+        left: 0;
+    }
+
+    .menu-header{
+        background-color: var(--theme-color-dark);
+        height: 205px;
+        box-sizing: border-box;
+        padding-top: 73px;
+        // padding-bottom: 74px;
+        h2 {
+            color: #fff;
+            margin-bottom: 0;
+            div:nth-of-type(1) {
+                //font-family: 'Open Sans';
+                // font-style: normal;
+                font-weight: 700;
+                font-size: 28px;
+                // line-height: 28px;
+                margin-bottom: -13px;
+
+            }
+    
+            div:nth-of-type(2) {
+                display: inline-block;
+                width: fit-content;
+                // font-family: 'GenSekiGothic JP';
+                // font-style: normal;
+                font-weight: 900;
+                font-size: 16px;
+                
+                // border-bottom: 2px var(--theme-color-dark) solid;
+            }
+            // span:nth-of-type(3) {
+            //     background-color: ;
+            //     width: 88px;
+            //     height: 2px;
+            // }
+        }
+    }
+
+    ul {
+        margin: 0;
+        padding: 50px 67px 49px;
+        box-sizing: border-box;
+
+        min-height: 200px;
+        height: 567px;
+        max-height: calc(100vh - 245px);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    li {
+        // max-height: 78px;
+        // padding: 26px 0;
+        a{
+            font-family: 'GenSekiGothic JP';
+            font-style: normal;
+            font-weight: 900;
+            font-size: 26px;
+            line-height: 26px;
+            color: #000;
+        }
+    }
+
+    .menu-footer{
+        background-color: var(--theme-color-dark);
+        height: 40px;
+    }
+}
+
+
+
+//
+.white-sun {
+    height: 557px;
+    aspect-ratio: 1/1;
+
+    position: absolute;
+    z-index: -1;
+}    
+
+.halo {
+    width: 100%;
+    height: 100%;
+    // width: 557px;
+    // height: 557px;
+    margin: auto;
+
+    background: radial-gradient(50% 50% at 50% 50%, #F2FFA5 0%, rgba(250, 255, 218, 0) 100%);
+    //原本67.41%
+}
+
+
+// /* md */
+// @media screen and (min-width:768px){} 
+// /* lg */
+// @media screen and (min-width:992px){}
+// /* xl */
+// @media screen and (min-width:1200px){}
