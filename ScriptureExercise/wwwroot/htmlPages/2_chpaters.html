@@ -30,6 +30,7 @@
 
 	<script src="https://kit.fontawesome.com/62756de202.js" crossorigin="anonymous"></script>
 	<!-- <script src="../lib/fontawesome.js" crossorigin="anonymous"></script> -->
+
 </head>
 
 <body class="bg-secondary">
@@ -65,7 +66,7 @@
 		</div>
 		
 
-		<main>
+		<main id="vue_chapters">
 			<div class="chapters-container">
 				<div class="chapter-show">
 					<div class="show-container">
@@ -93,14 +94,23 @@
 				<div class="chapter-intro">
 					<div class="title">簡介</div>
 					<div class="text">
-						加入時間電子郵件得知，保育石虎忍不住即使，要是西方上來崗位，喜歡大聲進去以及對了溫暖原因工廠意大利變成影片，森林編輯也有五金操作傳播，就要下載顏色看起來部門，下面一邊父母在此遠遠給我們中文，品種窗口樹林塑膠社區至少友情精神網址，內置情況手機也會消息，一直。
+						《論語》是以春秋時期思想家孔子言行為主的言論彙編，為儒家重要經典之一，在四庫全書中列為「經」部。
+						<br>
+						<br>
+						其內容涉及多方面討論，當中包括儒家治國理念、人倫關係、個人道德規範、先秦時期的社會面貌，乃至孔子及其弟子的經歷等。
 					</div>
-					<span>查看更多</span>
-
-					
+					<span class="more" id="popover-intro">查看更多</span>
+					<b-popover target="popover-intro" triggers="click" placement="topright">
+						<h6>簡介</h6>
+						<p>《論語》是以春秋時期思想家孔子言行為主的言論彙編，為儒家重要經典之一，在四庫全書中列為「經」部。
+							<br>
+							<br>
+							其內容涉及多方面討論，當中包括儒家治國理念、人倫關係、個人道德規範、先秦時期的社會面貌，乃至孔子及其弟子的經歷等。
+						</p>
+					</b-popover>
+	
 				</div>
-				
-				<!-- model -->
+
 			</div>
 
 			<button class="exam-btn">
@@ -112,7 +122,7 @@
 	<!-- <script src="../../x.js"></script> -->
 	<script>
 		let vue_ = new Vue({
-			el: "#vue_",
+			el: "#vue_chapters",
 			data: {
 				a: "qwe",
 			},

@@ -97,13 +97,36 @@ main{
         overflow: hidden;
 
     }
-    span{
+    .more{
         color: #3A63E0;
         font-size: 13px;
         cursor: pointer;
-    }
-    // 查看更多 彈出小視窗
 
+        background-color: transparent;
+        border: none;
+    }
+    // 查看更多 
+}
+//彈出小視窗
+.popover{
+}
+.popover-body{
+    padding: 33px 24px 11px;
+    h6{
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 20px;
+
+    }
+    p{
+        color: #8A8A9D;
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+    }
 }
 
 .exam-btn{
