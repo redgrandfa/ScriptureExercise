@@ -35,12 +35,16 @@ main{
 }
 
 .chapter-btns{
-    margin: 29px -26px;
-    height: 50px;
-    width: fit-content;
+    margin: 7px -26px;
+    padding: 22px 0;
+    display: flex;
     overflow-x: scroll;
-
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    
     li{
+        flex-shrink: 0;
         display: inline-block;
         margin: 0 9px;
         
