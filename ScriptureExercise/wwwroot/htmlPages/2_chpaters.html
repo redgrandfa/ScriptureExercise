@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>BsVueTemplate</title>
+
+	<link rel="stylesheet" href="../lib/cssReset.css" />
+
+	<!-- Load required Bootstrap and BootstrapVue CSS -->
+	<link type="text/css" rel="stylesheet" href="../lib/bs-vue2_22_0/bootstrap4_6_1.min.css" />
+	<link type="text/css" rel="stylesheet" href="../lib/bs-vue2_22_0/bootstrap-vue2_22_0.min.css" />
+
+
+	<link rel="stylesheet" href="../css/site.css">
+	<link rel="stylesheet" href="../css/Excercise/chapters.css">
+
+
+	<!-- Load polyfills to support older browsers -->
+	<!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script> -->
+
+	<!-- Load Vue followed by BootstrapVue -->
+	<script src="../lib/bs-vue2_22_0/vue2_6_12.min.js"></script>
+	<script src="../lib/bs-vue2_22_0/bootstrap-vue2_22_0.min.js"></script>
+
+	<!-- Load the following for BootstrapVueIcons support -->
+	<script src="../lib/bs-vue2_22_0/bootstrap-vue-icons2_22_0.min.js"></script>
+
+	<script src="https://kit.fontawesome.com/62756de202.js" crossorigin="anonymous"></script>
+	<!-- <script src="../lib/fontawesome.js" crossorigin="anonymous"></script> -->
+</head>
+
+<body class="bg-secondary">
+	<div class="view-container">
+		<header class="d-flex justify-content-between align-items-center">
+			<div class="hamburger d-flex flex-column justify-content-between">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<div class="app-title">CLASSICS</div>
+			<div class="book-btn">
+				<i class="fa-solid fa-book"></i>
+			</div>
+		</header>
+		
+		<nav class="menu">
+			<h2 class="text-center">
+				<span class="">CLASSICS</span><br>
+				<span class="">經典練習</span>
+			</h2>
+			<ul>
+				<li><a href="#">首頁</a></li>
+				<li><a href="#">選擇考題</a></li>
+				<li><a href="#">我的書單</a></li>
+				<li><a href="#">會員中心</a></li>
+				<li><a href="#">關於網站</a></li>
+			</ul>
+		</nav>
+
+		<div class="white-sun">
+			<div class="halo"></div>
+		</div>
+		
+
+		<main>
+			<div class="chapters-container">
+				<div class="chapter-show">
+					<div class="show-container">
+						<div class="parent">論語(一)</div>
+						<div class="title">述而</div>
+					</div>
+				</div>
+				<ul class="chapter-btns">
+					<li class="">1</li>
+					<li class="">2</li>
+					<li class="active">3</li>
+					<li class="">4</li>
+					<li class="">5</li>
+					<li class="">6</li>
+					<li class="">7</li>
+					<li class="">8</li>
+					<li class="">9</li>
+					<li class="">10</li>
+					<li class="">11</li>
+					<li class="">12</li>
+				</ul>
+
+				<p class="chapters-count">共分為{{12}}個練習章節</p>
+
+				<div class="chapter-intro">
+					<div class="title">簡介</div>
+					<div class="text">
+						加入時間電子郵件得知，保育石虎忍不住即使，要是西方上來崗位，喜歡大聲進去以及對了溫暖原因工廠意大利變成影片，森林編輯也有五金操作傳播，就要下載顏色看起來部門，下面一邊父母在此遠遠給我們中文，品種窗口樹林塑膠社區至少友情精神網址，內置情況手機也會消息，一直。
+					</div>
+					<span>查看更多</span>
+
+					
+				</div>
+				
+				<!-- model -->
+			</div>
+
+			<button class="exam-btn">
+				TEST 開始測驗
+			</button>
+		</main>
+	</div>
+
+	<!-- <script src="../../x.js"></script> -->
+	<script>
+		let vue_ = new Vue({
+			el: "#vue_",
+			data: {
+				a: "qwe",
+			},
+			mounted() { },
+			methods: {},
+			watch: {},
+			computed: {},
+			components: {},
+		});
+	</script>
+</body>
+
+</html>
