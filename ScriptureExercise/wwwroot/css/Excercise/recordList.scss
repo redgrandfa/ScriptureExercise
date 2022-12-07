@@ -1,0 +1,70 @@
+main{}
+.title{
+    font-family: 'GenSekiGothic JP';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+}
+
+.hint{
+    font-family: 'GenSekiGothic JP';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 12px;
+    
+    color: #787878;
+}
+
+.records-container{
+    margin-top: 22px;
+    background-color: #fff;
+    
+    min-height: 111px;
+    max-height: calc(100vh - 177px);
+    overflow-y: scroll;
+
+}
+
+.thead-tr-class{
+    text-align: center;
+    
+    th>div{
+        font-family: 'GenSekiGothic JP';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 14px;
+        // line-height: 30px;
+        
+        color: #313B5D;
+    }
+}
+
+
+.table{
+    th, td {
+        text-align: center;
+        vertical-align: middle;
+    }
+}
+
+.td-createTime{
+    font-family: 'GenSekiGothic JP';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 15px;
+    color: #787878;
+
+    span{
+        display: block;
+    }
+}
+
+.td-percentScore{
+    font-family: 'GenSekiGothic JP';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+
+    color: #787878;
+}

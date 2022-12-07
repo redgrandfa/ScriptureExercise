@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>BsVueTemplate</title>
+
+	<link rel="stylesheet" href="../lib/cssReset.css" />
+
+	<!-- Load required Bootstrap and BootstrapVue CSS -->
+	<link type="text/css" rel="stylesheet" href="../lib/bs-vue2_22_0/bootstrap4_6_1.min.css" />
+	<link type="text/css" rel="stylesheet" href="../lib/bs-vue2_22_0/bootstrap-vue2_22_0.min.css" />
+
+
+	<link rel="stylesheet" href="../css/site.css">
+	<link rel="stylesheet" href="../css/Excercise/recordList.css">
+
+
+	<!-- Load polyfills to support older browsers -->
+	<!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script> -->
+
+	<!-- Load Vue followed by BootstrapVue -->
+	<script src="../lib/bs-vue2_22_0/vue2_6_12.min.js"></script>
+	<script src="../lib/bs-vue2_22_0/bootstrap-vue2_22_0.min.js"></script>
+
+	<!-- Load the following for BootstrapVueIcons support -->
+	<script src="../lib/bs-vue2_22_0/bootstrap-vue-icons2_22_0.min.js"></script>
+
+	<script src="https://kit.fontawesome.com/62756de202.js" crossorigin="anonymous"></script>
+	<!-- <script src="../lib/fontawesome.js" crossorigin="anonymous"></script> -->
+
+</head>
+
+<body class="bg-secondary">
+	<div class="view-container">
+		<header class="d-flex justify-content-between align-items-center">
+			<div class="hamburger d-flex flex-column justify-content-between">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<div class="app-title">CLASSICS</div>
+			<div class="book-btn">
+				<i class="fa-solid fa-book"></i>
+			</div>
+		</header>
+		
+		<nav class="menu">
+			<h2 class="text-center">
+				<span class="">CLASSICS</span><br>
+				<span class="">經典練習</span>
+			</h2>
+			<ul>
+				<li><a href="#">首頁</a></li>
+				<li><a href="#">選擇考題</a></li>
+				<li><a href="#">我的書單</a></li>
+				<li><a href="#">會員中心</a></li>
+				<li><a href="#">關於網站</a></li>
+			</ul>
+		</nav>
+
+		<div class="white-sun">
+			<div class="halo"></div>
+		</div>
+		
+
+		<main>
+            <div class="text-center">
+                <h2 class="title">練習紀錄</h2>
+                <p class="hint">最多保留15筆記錄，超過時將自動從最舊的紀錄刪除。</p>
+            </div>
+			<div class="records-container">
+                <div id="vue_recordList">
+                    <!-- sticky-header -->
+                    <b-table 
+                        :fields="fields" 
+                        :items="records" 
+                        thead-tr-class="thead-tr-class"
+                    >
+                        <template #cell(createTime)="row">
+                            <span>{{row.value[0]}}</span>
+                            <span>{{row.value[1]}}</span>
+                        </template>
+
+                        <template #cell(percentScore)="row">
+                            <span>{{row.value}} </span>
+                        </template>
+
+                        <template #cell(link)="row">
+                            <a :href="row.value" style="font-size: 11px;">查看</a>
+                        </template>
+                
+                        <template #cell(Delete)="row">
+                            <b-button 
+                                variant="outline-primary"
+                                size="sm"
+                                v-on:click="deleteRecord(row.item.createTime)">
+                                刪除
+                            </b-button>
+                        </template>
+                    </b-table>
+                
+                    <p v-if="records.length==0" class="text-center">目前無任何練習紀錄</p>
+                </div>
+			</div>
+
+            
+			<!-- <button class="xxbtn">
+				GO PRACTICE 練習其他經典
+			</button> -->
+		</main>
+	</div>
+
+	<!-- <script src="../../x.js"></script> -->
+	<script>
+let vue_recordList = new Vue({
+    el: '#vue_recordList',
+    data: {
+        fields: [
+            { key: 'createTime', label: '時間', sortable: true 
+                ,formatter:value=>{ 
+                    console.log(value) //%100 /100?
+                    let str = `${value}`
+                    let min = str.substring(10,12)
+                    let hr = str.substring(8,10)
+                    let date = str.substring(6,8)
+                    let month = str.substring(4,6)
+                    return [ `${month}.${date}`, `${hr}:${min}`]
+                },
+                tdClass:'td-createTime'
+            }, //同時也是連結?
+            { key: 'paperName', label: '卷名', sortable: true 
+                ,tdClass:'td-createTime' //沿用
+                
+            },
+            { key: 'percentScore', label: '得分比', sortable: true 
+            ,tdClass:'td-percentScore' 
+            },
+            { key: 'link', label: '連結', sortable: false
+                ,tdClass:'td-action'
+            }, //ID  => action
+            { key: 'Delete', label: '', sortable: false 
+                ,tdClass:'td-action'
+            }, //ID  => action
+        ],
+        records: [
+            {
+                createTime: 202201012359,
+                paperName: "Z1_1",
+                percentScore: 11,
+                link:'q'
+            },
+            {
+                createTime: 202201012300,
+                paperName: "Z1_2",
+                percentScore: 22,
+                link:'w'
+            },
+            {
+                createTime: 202201012300,
+                paperName: "Z1_2",
+                percentScore: 22,
+                link:'w'
+            },
+            {
+                createTime: 202201012300,
+                paperName: "Z1_2",
+                percentScore: 22,
+                link:'w'
+            },
+        ],
+    },
+    mounted() { 
+        fetch('/ApiExercise/GetRecordList')
+        .then(resp=>{
+            if(resp.ok){
+                Promise.resolve(resp.json())
+                .then(recordList => {
+                    this.records = recordList.map( r => {
+                        let result = {
+                            createTime: r.createTime ,
+                            percentScore: r.percentScore ,
+                            // link: paperJsonFileName_To_DataSource(r.exerciseJsonFileName),
+                            link: `/Exercise/Record/${r.createTime}`,
+                        }
+
+                        let scripture = r.exerciseJsonFileName[0]
+                        result.paperName = r.exerciseJsonFileName.substring(2) // F/F2_1
+                        //result.paperName
+                            .replace(scripture, scripture_Code_To_Chinese(scripture) )
+                        //result.paperName
+                            .replace('_', ' 卷別' )
+
+                        return result
+                    })
+                })
+            }else{
+                Promise.resolve(resp.text())
+                .then(text => {
+                    swal.fire(text)
+                })
+            }
+        })
+    },
+    methods: {
+        deleteRecord(createTimeId){
+            fetch(`/ApiExercise/DeleteRecord/${createTimeId}`,{
+                method:'post',
+                // headers:{
+                //     'content-type'://'text/plain'
+                //         'application/json',
+                // },
+                // body://createTimeId
+                //     JSON.stringify({
+                //         createTimeId:createTimeId
+                //     }),
+            })
+            .then(resp=>{
+                Promise.resolve(resp.text() )
+                .then(text => {
+                    swal.fire(text)
+                    if(resp.ok){
+                        let idx = this.records.findIndex(r=>r.createTimeId==createTimeId)
+                        this.records.splice(idx,1)
+                    }
+                })
+            })
+        }
+    },
+    computed: {},
+    watch: {},
+})
+
+	</script>
+</body>
+
+</html>
