@@ -201,7 +201,20 @@ header {
     //原本67.41%
 }
 
+.custom-xl-green-btn{
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
 
+    height: 98px;
+    width: 100%;
+
+    border: none;
+    background: linear-gradient(90deg, #E3FFE8 0%, #B4FFC0 100%);
+    border-radius: 30px;
+
+}
 // /* md */
 // @media screen and (min-width:768px){} 
 // /* lg */
