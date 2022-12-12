@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>BsVueTemplate</title>
+
+	<link rel="stylesheet" href="../lib/cssReset.css" />
+
+	<!-- Load required Bootstrap and BootstrapVue CSS -->
+	<link type="text/css" rel="stylesheet" href="../lib/bs-vue2_22_0/bootstrap4_6_1.min.css" />
+	<link type="text/css" rel="stylesheet" href="../lib/bs-vue2_22_0/bootstrap-vue2_22_0.min.css" />
+
+
+	<link rel="stylesheet" href="../css/site.css">
+	<link rel="stylesheet" href="../css/Excercise/record2.css">
+
+
+	<!-- Load polyfills to support older browsers -->
+	<!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script> -->
+
+	<!-- Load Vue followed by BootstrapVue -->
+	<script src="../lib/bs-vue2_22_0/vue2_6_12.min.js"></script>
+	<script src="../lib/bs-vue2_22_0/bootstrap-vue2_22_0.min.js"></script>
+
+	<!-- Load the following for BootstrapVueIcons support -->
+	<script src="../lib/bs-vue2_22_0/bootstrap-vue-icons2_22_0.min.js"></script>
+
+	<script src="https://kit.fontawesome.com/62756de202.js" crossorigin="anonymous"></script>
+	<!-- <script src="../lib/fontawesome.js" crossorigin="anonymous"></script> -->
+
+</head>
+
+<body class="bg-secondary">
+	<div class="view-container">
+		<header class="d-flex justify-content-between align-items-center">
+			<div class="hamburger d-flex flex-column justify-content-between">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<div class="app-title">CLASSICS</div>
+			<div class="book-btn">
+				<i class="fa-solid fa-book"></i>
+			</div>
+		</header>
+		
+		<nav class="menu">
+			<h2 class="text-center">
+				<span class="">CLASSICS</span><br>
+				<span class="">經典練習</span>
+			</h2>
+			<ul>
+				<li><a href="#">首頁</a></li>
+				<li><a href="#">選擇考題</a></li>
+				<li><a href="#">我的書單</a></li>
+				<li><a href="#">會員中心</a></li>
+				<li><a href="#">關於網站</a></li>
+			</ul>
+		</nav>
+
+		<!-- <div class="white-sun">
+			<div class="halo"></div>
+		</div> -->
+		
+
+		<main id="vue_record">
+			<div class="exercise-banner">
+				<!-- <h2>@Model.ScriptureName  @Model.SubjectId   卷別 @Model.PageId </h2> -->
+				<h2 class="h">論語(一)</h2>
+				<h3 class="h">卷6-述而</h3>
+				<!-- <span>{{paper.range_remark}} </span> -->
+			</div>
+
+			<div class="result">
+				<div class="score red green">
+					<div class="comment">再加把勁</div>
+					<!-- <div>繼續保持</div> -->
+					<span class="main-text">82%</span>
+					<div class="sm-text-container">
+						<span class="sm-text">得分數：14</span>
+						<span class="sm-text">總題數：17</span>
+					</div>
+				</div>
+				<div class="filters">
+					<!-- v-model="filters.onlyWrong_Checked" -->
+					<!-- v-model="filters.onlyDone_Checked"  -->
+					<b-form-checkbox switch class="filter">
+						只顯示錯題
+					</b-form-checkbox>
+					<b-form-checkbox switch class="filter">
+						只顯示有回答的題目
+					</b-form-checkbox>
+			
+					<!-- <div class="filter">只顯示錯題</div>
+					<div class="filter">只顯示有回答的題目</div> -->
+				</div>
+			</div>
+
+			<div class="question-container"></div>
+			<button class="custom-btn green-btn">
+				TRY AGAIN 再練習一次
+			</button>
+			<button class="custom-btn gray-btn">
+				BACK TO CHAPTER 回到練習章節
+			</button>
+		</main>
+	</div>
+
+	<!-- <script src="../../x.js"></script> -->
+	<script>
+		let vue_ = new Vue({
+			el: "#vue_record",
+			data: {
+				a: "qwe",
+			},
+			mounted() { },
+			methods: {},
+			watch: {},
+			computed: {},
+			components: {},
+		});
+	</script>
+</body>
+
+</html>
