@@ -5,9 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Shared\Library\**" />
     <Compile Remove="wwwroot\js\Excercise\A生晨\**" />
+    <Content Remove="Views\Shared\Library\**" />
     <Content Remove="wwwroot\js\Excercise\A生晨\**" />
+    <EmbeddedResource Remove="Views\Shared\Library\**" />
     <EmbeddedResource Remove="wwwroot\js\Excercise\A生晨\**" />
+    <None Remove="Views\Shared\Library\**" />
     <None Remove="wwwroot\js\Excercise\A生晨\**" />
   </ItemGroup>
 
@@ -23,7 +27,6 @@
 
   <ItemGroup>
     <Folder Include="Models\HomeVM\" />
-    <Folder Include="Views\Shared\Library\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\lib\DB\A\" />
     <Folder Include="wwwroot\VHtmls\Home\" />

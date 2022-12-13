@@ -56,38 +56,35 @@ namespace ScriptureExercise
 				//options.AccessDeniedPath = new PathString("/Account/AccessDenied");
 			})
 			//¥[¦U®aOAuth
-			.AddGoogle(options =>
-			{
-				var provider = "Google";
-				options.ClientId = Configuration[$"Authentication:{provider}:ClientId"];
-				options.ClientSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
-				//options.CallbackPath = "/signin-google";
-			})
-			.AddFacebook(options =>
-			{
-				var provider = "Facebook";
-				options.AppId = Configuration[$"Authentication:{provider}:ClientId"];
-				options.AppSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
-				//options.CallbackPath = "/signin-facebook";
-			})
-			.AddInstagram(options =>
-			{
-				var provider = "Instagram";
-				options.ClientId = Configuration[$"Authentication:{provider}:ClientId"];
-				options.ClientSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
-				//options.CallbackPath = "/signin-github";
-			})
-			.AddLine(options =>
-			{
-				var provider = "Line";
-				options.ClientId = Configuration[$"Authentication:{provider}:ClientId"];
-				options.ClientSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
-				//options.CallbackPath = "/signin-line";
-			})
+			//.AddGoogle(options =>
+			//{
+			//	var provider = "Google";
+			//	options.ClientId = Configuration[$"Authentication:{provider}:ClientId"];
+			//	options.ClientSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
+			//	//options.CallbackPath = "/signin-google";
+			//})
+			//.AddFacebook(options =>
+			//{
+			//	var provider = "Facebook";
+			//	options.AppId = Configuration[$"Authentication:{provider}:ClientId"];
+			//	options.AppSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
+			//	//options.CallbackPath = "/signin-facebook";
+			//})
+			//.AddInstagram(options =>
+			//{
+			//	var provider = "Instagram";
+			//	options.ClientId = Configuration[$"Authentication:{provider}:ClientId"];
+			//	options.ClientSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
+			//	//options.CallbackPath = "/signin-github";
+			//})
+			//.AddLine(options =>
+			//{
+			//	var provider = "Line";
+			//	options.ClientId = Configuration[$"Authentication:{provider}:ClientId"];
+			//	options.ClientSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
+			//	//options.CallbackPath = "/signin-line";
+			//})
 			;
-
-
-
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

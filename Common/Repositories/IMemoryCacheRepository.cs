@@ -25,6 +25,8 @@ namespace Common.Repositories
     public class MemoryCacheRepository : IMemoryCacheRepository
     {
         private readonly IDistributedCache _cache;
+        //private readonly IDistributedCache _cache2;  分member 和 record
+        //private readonly IDistributedCache _cache2;  錯誤紀錄
         public MemoryCacheRepository(IDistributedCache cache)
         {
             _cache = cache;
@@ -33,7 +35,7 @@ namespace Common.Repositories
         public void Set<T>(string key, T value) where T : class
         {
             _cache.Set(key, ObjectToByteArray(value),
-                new DistributedCacheEntryOptions { }
+                new DistributedCacheEntryOptions {}
             );
         }
 

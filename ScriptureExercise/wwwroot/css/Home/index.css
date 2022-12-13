@@ -1,1 +1,36 @@
-/*# sourceMappingURL=index.css.map */
+.white-sun {
+  margin: 0 auto;
+  left: -111px;
+  right: -111px;
+  top: 102px;
+}
+
+.sun {
+  box-sizing: border-box;
+  width: 50px;
+  height: 50px;
+  border: 3px solid #D8FF69;
+  border-radius: 50%;
+  background: #FFFFFF;
+  position: absolute;
+  left: calc(50% - 25px);
+  top: calc(50% - 25px);
+}
+
+.slogan-title {
+  font-family: "Helvetica";
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 64px;
+  margin-left: 28px;
+  margin-top: 442px;
+  margin-bottom: 19px;
+}
+
+.slogan-text {
+  font-family: "GenSekiGothic JP";
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 32px;
+  margin-left: 33px;
+}/*# sourceMappingURL=index.css.map */

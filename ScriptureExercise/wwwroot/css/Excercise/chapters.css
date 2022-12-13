@@ -1,0 +1,109 @@
+main {
+  padding: 0 26px;
+}
+
+.show-container {
+  height: 237px;
+  background: #FFF;
+  border-radius: 20px;
+  box-shadow: 0px 3px 20px -5px rgba(15, 15, 21, 0.3);
+  padding: 30px 20px;
+}
+.show-container .parent {
+  color: #C2C2C2;
+  font-family: "GenSekiGothic JP";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+}
+.show-container .title {
+  font-family: "GenSekiGothic JP";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+}
+
+.chapter-btns {
+  margin: 7px -26px;
+  padding: 22px 0;
+  display: flex;
+  overflow-x: scroll;
+}
+.chapter-btns::-webkit-scrollbar {
+  display: none;
+}
+.chapter-btns li {
+  flex-shrink: 0;
+  display: inline-block;
+  margin: 0 9px;
+  box-sizing: border-box;
+  width: 50px;
+  height: 50px;
+  border: #F0EFF2 2px solid;
+  border-radius: 50%;
+  font-size: 15px;
+  line-height: 48px;
+  text-align: center;
+  color: #313B5D;
+}
+.chapter-btns li.active {
+  border: #3A63E0 2px solid;
+  color: #3A63E0;
+}
+
+.chapters-count {
+  color: #8A8A9D;
+  font-size: 17px;
+}
+
+.chapter-intro .title {
+  color: #313B5D;
+  font-family: "GenSekiGothic JP";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-bottom: #3A63E0 3px solid;
+  margin-bottom: 19px;
+}
+.chapter-intro .text {
+  color: #8A8A9D;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  height: 44px;
+  overflow: hidden;
+}
+.chapter-intro .more {
+  color: #3A63E0;
+  font-size: 13px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.popover-body {
+  padding: 33px 24px 11px;
+}
+.popover-body h6 {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 20px;
+}
+.popover-body p {
+  color: #8A8A9D;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.custom-xl-green-btn {
+  margin-top: 58px;
+}/*# sourceMappingURL=chapters.css.map */
