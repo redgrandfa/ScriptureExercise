@@ -52,7 +52,7 @@ let vue_login = new Vue({
                 .then(text=>{
                     if(resp.ok){
                         swal.fire(text)
-                        location.href="/Exercise/Choices"
+                        location.href=returnUrl
                     }else{
                         swal.fire('錯誤'+text)
                     }

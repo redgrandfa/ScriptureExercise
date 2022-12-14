@@ -12,6 +12,7 @@
     "bg-primary",Microsoft.AspNetCore.Authentication.Facebook.FacebookDefaults.AuthenticationScheme),
     };
 } *@
+@model string
 @{
     ViewData["Title"] = "登入入口";
 }
@@ -92,5 +93,8 @@
     <link rel="stylesheet" href="~/css/Account/login.css">
 }
 @section Scripts{
+    <script>
+        let returnUrl = '@Model'
+    </script>
     <script src="~/js/Account/login.js"></script>
 }

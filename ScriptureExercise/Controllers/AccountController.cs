@@ -33,9 +33,9 @@ namespace ScriptureExercise.Controllers
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl = null)
         {
-            return View();
+            return View(model:returnUrl);
         }
 
 
