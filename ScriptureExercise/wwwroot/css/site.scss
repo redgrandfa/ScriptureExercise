@@ -91,7 +91,22 @@ header {
     margin: 0;
 }
 
-.menu {
+#menu_bg{
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000055;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 31;
+
+    display: none;
+    &.active{
+        display: block;
+    }
+}
+
+#menu {
     background-color: #fff;
     width: 296px;
     max-width: calc(100vw - 30px);
@@ -179,11 +194,13 @@ header {
 }
 
 
+
 .white-sun {
     height: 557px;
     aspect-ratio: 1/1;
 
-    position: absolute;
+    // position: absolute;
+    position: fixed;
     z-index: -1;
 
     left: -245px;

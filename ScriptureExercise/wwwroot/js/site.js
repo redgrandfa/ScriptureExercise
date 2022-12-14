@@ -1,4 +1,13 @@
-﻿function number_To_Chinese(num) {
+﻿function hideMenu(){
+    menu.classList.remove('active')
+    menu_bg.classList.remove('active')
+}
+function showMenu(){
+    menu.classList.add('active')
+    menu_bg.classList.add('active')
+}
+
+function number_To_Chinese(num) {
     let trans = [
         '零', '一', '二', '三', '四', '五',
         '六', '七', '八', '九', '十',
