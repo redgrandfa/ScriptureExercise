@@ -3,36 +3,59 @@
 }
 
 <div id="vue_recordList">
-    最多保留15筆記錄，超過將自動從最舊的紀錄刪除。
-    <b-table striped hover 
-        :fields="fields" 
-        :items="records" 
-        @* :per-page="perPage" 
-        :current-page="currentPage" 
-        :filter="filter"*@
-    >
-        <template #cell(link)="row">
-            <a :href="row.item.link">查看</a>
-        </template>
+    <div class="text-center">
+        <h2 class="title">練習紀錄</h2>
+        <p class="hint">最多保留15筆記錄，超過時將自動從最舊的紀錄刪除。</p>
+    </div>
+    <div class="records-container">
+        <div id="vue_recordList">
+            <!-- sticky-header -->
+            <b-table 
+                :fields="fields" 
+                :items="records" 
+                thead-tr-class="thead-tr-class"
+            >
+                <template #cell(createTime)="row">
+                    <span>{{row.value[0]}}</span>
+                    <span>{{row.value[1]}}</span>
+                </template>
 
-        <template #cell(Delete)="row">
-            <b-button 
-                @* size="sm"  *@
-                v-on:click="deleteRecord(row.item.createTime)">
-                刪除
-            </b-button>
-        </template>
-    </b-table>
+                <template #cell(percentScore)="row">
+                    <span>{{row.value}} </span>
+                </template>
+
+                <template #cell(link)="row">
+                    <a :href="row.value" style="font-size: 11px;">查看</a>
+                </template>
+        
+                <template #cell(Delete)="row">
+                    <b-button 
+                        variant="outline-primary"
+                        size="sm"
+                        v-on:click="deleteRecord(row.item.createTime)">
+                        刪除
+                    </b-button>
+                </template>
+            </b-table>
+        
+            <p v-if="records.length==0" class="text-center">目前無任何練習紀錄</p>
+        </div>
+    </div>
+
+    
+    <!-- <button class="xxbtn">
+        GO PRACTICE 練習其他經典
+    </button> -->
 
     <p v-if="records.length==0" class="text-center">目前無任何練習紀錄</p>
 </div>
 
 @section TopCSS{
-    @* <link rel="stylesheet" href="~/css/Excercise/RecordList.css"> *@
+    <link rel="stylesheet" href="~/css/Excercise/recordList.css">
 }
 
 @section Scripts{
-    <script src="~/js/Excercise/RecordList.js"></script>
+    <script src="~/js/Excercise/recordList.js"></script>
 
     @* <script>
     </script> *@

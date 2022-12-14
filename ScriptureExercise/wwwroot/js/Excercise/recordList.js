@@ -2,18 +2,57 @@ let vue_recordList = new Vue({
     el: '#vue_recordList',
     data: {
         fields: [
-            { key: 'createTime', label: '時間', sortable: true }, //同時也是連結?
-            { key: 'paperName', label: '卷名', sortable: true },
-            { key: 'percentScore', label: '得分比', sortable: true },
-            { key: 'link', label: '連結', sortable: false }, //ID  => action
-            { key: 'Delete', label: '刪除', sortable: false }, //ID  => action
+            { key: 'createTime', label: '時間', sortable: true 
+                ,formatter:value=>{ 
+                    console.log(value) //%100 /100?
+                    let str = `${value}`
+                    let min = str.substring(10,12)
+                    let hr = str.substring(8,10)
+                    let date = str.substring(6,8)
+                    let month = str.substring(4,6)
+                    return [ `${month}.${date}`, `${hr}:${min}`]
+                },
+                tdClass:'td-createTime'
+            }, //同時也是連結?
+            { key: 'paperName', label: '卷名', sortable: true 
+                ,tdClass:'td-createTime' //沿用
+                
+            },
+            { key: 'percentScore', label: '得分比', sortable: true 
+            ,tdClass:'td-percentScore' 
+            },
+            { key: 'link', label: '連結', sortable: false
+                ,tdClass:'td-action'
+            }, //ID  => action
+            { key: 'Delete', label: '', sortable: false 
+                ,tdClass:'td-action'
+            }, //ID  => action
         ],
         records: [
-            // {
-            //     createTime: 202201012359,
-            //     paperName: "Z1_1",
-            //     percentScore: 11,
-            // },
+            {
+                createTime: 202201012359,
+                paperName: "Z1_1",
+                percentScore: 11,
+                link:'q'
+            },
+            {
+                createTime: 202201012300,
+                paperName: "Z1_2",
+                percentScore: 22,
+                link:'w'
+            },
+            {
+                createTime: 202201012300,
+                paperName: "Z1_2",
+                percentScore: 22,
+                link:'w'
+            },
+            {
+                createTime: 202201012300,
+                paperName: "Z1_2",
+                percentScore: 22,
+                link:'w'
+            },
         ],
     },
     mounted() { 
