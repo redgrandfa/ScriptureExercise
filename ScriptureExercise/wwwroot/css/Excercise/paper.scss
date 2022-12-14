@@ -1,14 +1,17 @@
 @import "../Excercise/exerciseBase";
 
-$theme_color : #03787c;
-%bg-theme{
-    background-color: $theme_color;
-    color: #fff;
-}
+.hint{
+    margin: auto;
+    width: 236px;
+    background: #EFEFEF;
+    
+    padding: 9px 0;
 
-
-main{
-    button.submit{
-        @extend %bg-theme;
+    p{
+        margin: 0;
+        text-align: center;
+        font-size: 11px;
+        line-height: 16px;
+        color: #787878;
     }
 }

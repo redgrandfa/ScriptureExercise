@@ -155,28 +155,6 @@ header {
   background: radial-gradient(50% 50% at 50% 50%, #F2FFA5 0%, rgba(250, 255, 218, 0) 100%);
 }
 
-.exercise-banner {
-  text-align: center;
-  margin-bottom: 18px;
-}
-.exercise-banner > .h {
-  font-family: "GenSekiGothic JP";
-  font-style: normal;
-  font-weight: 900;
-  line-height: 30px;
-  margin: 0;
-}
-.exercise-banner h2 {
-  font-size: 24px;
-}
-.exercise-banner h3 {
-  font-size: 18px;
-}
-
-.question-container {
-  margin: 27px 0 44px;
-}
-
 .custom-btn {
   width: 100%;
   height: 38px;

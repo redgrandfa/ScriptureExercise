@@ -1,8 +1,56 @@
+.halo {
+  display: none;
+}
+
+header {
+  position: absolute;
+}
+
+main {
+  padding: 0 44px 44px;
+  background-color: #fff;
+}
+
+.exercise-banner {
+  text-align: center;
+  margin-bottom: 18px;
+}
+.exercise-banner > .h {
+  font-family: "GenSekiGothic JP";
+  font-style: normal;
+  font-weight: 900;
+  line-height: 30px;
+  margin: 0;
+}
+.exercise-banner h2 {
+  font-size: 24px;
+}
+.exercise-banner h3 {
+  font-size: 18px;
+}
+
+.question-container {
+  margin: 27px 0 44px;
+}
+
+.question {
+  margin-top: 27px;
+}
+
 .question-order {
   width: 2 rem;
 }
 
-main button.submit, .exercise-banner {
-  background-color: #03787c;
-  color: #fff;
+.hint {
+  margin: auto;
+  width: 236px;
+  background: #EFEFEF;
+  padding: 9px 0;
+}
+.hint p {
+  margin: 0;
+  text-align: center;
+  font-size: 11px;
+  line-height: 16px;
+  color: #787878;
 }/*# sourceMappingURL=paper.css.map */

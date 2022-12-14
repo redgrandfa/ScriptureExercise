@@ -5,51 +5,54 @@
 }
 
 <div id="vue_record">
-    <div class="exercise-banner row">
-        <div class="col-12 col-md-8">
-            <h2>{{paper.title}} </h2>
-            <span>{{paper.range_remark}} </span>
+    <div class="exercise-banner">
+        @* <h2 class="h">論語(一)</h2>
+        <h3 class="h">卷6-述而</h3> *@
+@*        <h2 class="h">@Model.ScriptureName  @Model.SubjectId</h2>
+        <h3 class="h">卷 @Model.PageId-{{paper.range_remark}}</h3>*@
+        <h2>{{paper.title}} </h2>
+        <h3>{{paper.range_remark}} </h3>
+    </div>
+
+    <div class="result">
+        @* <div class="score red green"> *@
+        @* <div id="score" :class="computeColor"></div> *@
+
+        <div v-if="percentScore<80" class="score red">
+            <div class="comment">再加把勁</div>
+            <span class="main-text">{{percentScore}}%</span>
+            <div class="sm-text-container">
+                <span class="sm-text">得分數：{{score}}</span>
+                <span class="sm-text">總題數：{{paper.questions.length}}</span>
+            </div>
         </div>
-        <div class="col-12 col-md-4">
-            <p>總題數<span class="numberOfQuestions">{{paper.questions.length}}</span></p>
-            <p v-if="score!=undefined" >得分數<span class="score">{{score}}</span>題</p>
-            <p v-if="percentScore!=undefined">得分率
-                <span class="percentScore">{{percentScore}}</span>%
-                <span v-if="percentScore>90">強如鬼神</span>
-                <span v-if="percentScore>80">若是真的筆試就好了...</span>
-                <span v-else-if="percentScore>60">再加油</span>
-                <span v-else>咪咪茂茂</span>
-            </p>
+        <div v-else class="score green">
+            <div class="comment">繼續保持</div>
+            <span class="main-text">{{percentScore}}%</span>
+            <div class="sm-text-container">
+                <span class="sm-text">得分數：{{score}}</span>
+                <span class="sm-text">總題數：{{paper.questions.length}}</span>
+            </div>
+        </div>
+
+        <div class="filters">
+            <b-form-checkbox v-model="filters.onlyWrong_Checked" switch class="filter">
+                只顯示錯題
+            </b-form-checkbox>
+            <b-form-checkbox v-model="filters.onlyDone_Checked" switch class="filter">
+                只顯示有回答的題目
+            </b-form-checkbox>
         </div>
     </div>
 
-    <hr>
-    <div>
-        <b-form-checkbox v-model="filters.onlyWrong_Checked" switch>
-            只顯示錯題
-        </b-form-checkbox>
-        <b-form-checkbox v-model="filters.onlyDone_Checked" switch>
-            只顯示有回答的題目
-        </b-form-checkbox>
-    </div>
-    <hr>
-
-    <div class="">
-        @* <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="選擇題單選；默寫題輸入完整字句不含標點，全對才給分，沒有部分給分">         </button>*@
-        <ul>
-            提示
-            <li>選擇題1分</li>
-            <li>填充題每格1分</li>
-            <li>默寫題10分(回答完整字句不含標點，全對才給分，沒有部分給分)</li>  
-        </ul>
-            
+    <div class="question-container">            
 @* 希望長一樣，差異只有：showQuestions 、加 disabled、顯示正解 *@
         <ol>
             <li v-for="(q,i) in showQuestions"
-                class="d-flex"
+                class="question d-flex"
             >
                 <div class="question-order">{{q.order}}.</div>
-                <div v-if="q.type==1" class="mb-5">
+                <div v-if="q.type==1">
                     <p>{{q.stem}}</p>
                     <div class="pl-3">
                         <div v-for="(choice,j) in q.choices">
@@ -88,6 +91,13 @@
             </li>
         </ol>
     </div>
+    <div class="question-container"></div>
+    <button class="custom-btn green-btn">
+        TRY AGAIN 再練習一次
+    </button>
+    <button class="custom-btn gray-btn">
+        BACK TO CHAPTER 回到練習章節
+    </button>
 </div>
 
 @section TopCSS{

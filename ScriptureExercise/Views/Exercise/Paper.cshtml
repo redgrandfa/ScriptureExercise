@@ -24,32 +24,28 @@
 }
 
 <div id="vue_paper">
-    <div class="exercise-banner row">
-        <div class="col-12 col-md-8">
-            <h2>@Model.ScriptureName  @Model.SubjectId   卷別 @Model.PageId </h2>
-            <span>{{paper.range_remark}} </span>
-        </div>
-        <div class="col-12 col-md-4">
-            <p>總題數<span class="numberOfQuestions">{{paper.questions.length}}</span></p>
-        </div>
+    <div class="exercise-banner">
+        @* <h2 class="h">論語(一)</h2>
+        <h3 class="h">卷6-述而</h3> *@
+        <h2 class="h">@Model.ScriptureName  @Model.SubjectId</h2>
+        <h3 class="h">卷 @Model.PageId-{{paper.range_remark}}</h3>
+        @* <p>總題數<span class="numberOfQuestions">{{paper.questions.length}}</span></p> *@
     </div>
-        
-    <div class="">
-        @* <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="選擇題單選；默寫題輸入完整字句不含標點，全對才給分，沒有部分給分">         </button>*@
-        <ul>
-            提示
-            <li>選擇題1分</li>
-            <li>填充題每格1分</li>
-            <li>默寫題10分(回答完整字句不含標點，全對才給分，沒有部分給分)</li>  
-        </ul>
-            
 
+    <div class="hint">
+
+        <p>選擇題1分、填充題每格1分</p>
+        <p>默寫題10分(不含標點，全對才給分)</p>  
+        <!-- <li>默寫題10分(回答完整字句不含標點，全對才給分，沒有部分給分)</li>   -->
+    </div>
+
+    <div class="question-container">
         <ol>
             <li v-for="(q,i) in paper.questions"
-                class="d-flex"
+                class="question d-flex"
             >
                 <div class="question-order">{{q.order}}.</div>
-                <div v-if="q.type==1" class="mb-5">
+                <div v-if="q.type==1">
                     <p>{{q.stem}}</p>
                     <div class="pl-3">
                         <div v-for="(choice,j) in q.choices">
@@ -80,8 +76,10 @@
                 </div>
             </li>
         </ol>
-        <button class="btn submit" v-on:click="postPaper()">提交</button>
     </div>
+    <button class="custom-btn xl-green-btn" v-on:click="postPaper()">
+        SUBMIT 提交 <i class="fa-solid fa-arrow-right-long"></i>
+    </button>
 </div>
 
 @section TopCSS{

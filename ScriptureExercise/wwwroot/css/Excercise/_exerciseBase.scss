@@ -1,12 +1,66 @@
-
-//要改
-.exercise-banner{
-    @extend %bg-theme;
-
-    // padding-top: 33px;
-    // padding-bottom: 111px;
+.halo{
+    display: none;
 }
 
+//要使得header不再置頂?
+header{
+    position: absolute;
+}
+
+main{
+    padding: 0 44px 44px;
+    background-color: #fff;
+
+
+    //要使得header不再置頂?
+    // height: calc(100vh - 100px);
+    // overflow-y: auto;
+}
+
+
+// $theme_color : #03787c;
+// %bg-theme{
+//     background-color: $theme_color;
+//     color: #fff;
+// }
+
+
+// //要改
+// .exercise-banner{
+//     @extend %bg-theme;
+
+//     // padding-top: 33px;
+//     // padding-bottom: 111px;
+// }
+
+//---------
+.exercise-banner{
+    text-align: center;
+    margin-bottom: 18px;
+    &>.h{
+        font-family: 'GenSekiGothic JP';
+        font-style: normal;
+        font-weight: 900;
+        line-height: 30px;
+        margin: 0;
+
+    }
+    h2{
+        font-size: 24px;
+    }
+    h3{
+        font-size: 18px;
+    }
+}
+.question-container{
+    margin: 27px 0 44px;
+}
+
+.question{
+    margin-top: 27px;
+}
+
+//old
 .question-order{
     width: 2 rem;
 }
