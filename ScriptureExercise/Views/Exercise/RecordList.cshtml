@@ -9,12 +9,20 @@
     </div>
     <div class="records-container">
         <div id="vue_recordList">
-            <!-- sticky-header -->
             <b-table 
                 :fields="fields" 
                 :items="records" 
+                :busy="tableBusy"
                 thead-tr-class="thead-tr-class"
             >
+            <!-- sticky-header -->
+                <template #table-busy>
+                    <div class="text-center text-danger my-2">
+                    <b-spinner class="align-middle"></b-spinner>
+                    <strong>載入中...</strong>
+                    </div>
+                </template>
+
                 <template #cell(createTime)="row">
                     <span>{{row.value[0]}}</span>
                     <span>{{row.value[1]}}</span>

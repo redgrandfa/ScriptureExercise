@@ -1,10 +1,11 @@
 let vue_recordList = new Vue({
     el: '#vue_recordList',
     data: {
+        tableBusy:true,
         fields: [
             { key: 'createTime', label: '時間', sortable: true 
                 ,formatter:value=>{ 
-                    console.log(value) //%100 /100?
+                    // console.log(value) //%100 /100?
                     let str = `${value}`
                     let min = str.substring(10,12)
                     let hr = str.substring(8,10)
@@ -85,6 +86,7 @@ let vue_recordList = new Vue({
                     swal.fire(text)
                 })
             }
+            this.tableBusy = false
         })
     },
     methods: {
