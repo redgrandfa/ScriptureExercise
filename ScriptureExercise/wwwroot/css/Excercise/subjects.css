@@ -1,3 +1,8 @@
+.white-sun {
+  left: auto;
+  margin-left: -245px;
+}
+
 .subject-filters {
   position: fixed;
   width: 100%;
@@ -43,16 +48,14 @@
 .subject-categories {
   padding: 17px 41px 17px 33px;
 }
-.subject-categories li {
+.subject-categories label {
   font-size: 20px;
-  padding: 10px;
-  color: #E5E5E5;
   font-weight: 900;
+  padding: 10px;
   cursor: pointer;
 }
-.subject-categories li.active {
-  color: #000;
-  cursor: default;
+.subject-categories input:not(:checked) + label {
+  color: #E5E5E5;
 }
 
 .subjects {
@@ -61,7 +64,7 @@
   padding-left: 34px;
   padding-right: 34px;
   max-height: calc(100vh - 238px);
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .subject-card {
@@ -79,6 +82,10 @@
   background-color: #DDD;
 }
 
+.subject-card-body {
+  flex-grow: 1;
+  margin: 0 30px;
+}
 .subject-card-body .title {
   font-family: "GenSekiGothic JP";
   font-style: normal;
@@ -96,4 +103,5 @@
 
 .subject-card-footer .collect {
   color: #8A8A9D;
+  cursor: pointer;
 }/*# sourceMappingURL=subjects.css.map */

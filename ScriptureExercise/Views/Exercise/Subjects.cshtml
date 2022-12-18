@@ -1,0 +1,72 @@
+﻿@model List<int>
+
+@{
+    ViewData["Title"] = "挑選考科";//習題卷
+}
+
+<div id="vue_subjects">
+    <section class="subject-filters">
+        <div class="subject-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" class="mx-auto w-100" v-model="searchFor" placeholder="Search...">
+        </div> 
+        @* 類別單選 不常改變=>靜態。流程 = 按標籤 >input改變 > js選中 改變 > 標籤樣式改變*@
+        <ul class="subject-categories mb-0 d-flex justify-content-between">
+            <li class="category-item">
+                <input type="checkbox" class="d-none" id="Bai" v-model="categoryChecked.Bai">
+                <label for="Bai">白陽</label>
+            </li>
+            
+            <li class="category-item">
+                <input type="checkbox" class="d-none" id="Ru" v-model="categoryChecked.Ru">
+                <label for="Ru">儒家</label>
+            </li>
+            
+            <li class="category-item">
+                <input type="checkbox" class="d-none" id="Si" v-model="categoryChecked.Si">
+                <label for="Si">釋家</label>
+            </li>
+
+            <li class="category-item">
+                <input type="checkbox" class="d-none" id="Dao" v-model="categoryChecked.Dao">
+                <label for="Dao">道家</label>
+            </li>
+        </ul>
+    </section>
+
+    @* 也可以用b-table *@
+    @* filter變資料 > 列表顯示 > 篩選資料影響列表顯示 > 收藏 > 連結 *@
+    <section class="subjects-container">
+        <ul class="subjects">
+            <li v-for="(subject) in subjectsShow" class="subject-card">
+                <div class="subject-card-header" v-on:click="navToSubject(subject)">
+                    <div class="cover"></div>
+                    @* <a :href="subject.link"> *@
+                    @* </a> *@
+                </div>
+                <div class="subject-card-body">
+                    <h3 class="title">{{subject.title}}</h3>
+                    <div class="author">{{subject.author}}</div>
+                </div>
+                <div class="subject-card-footer">
+                    <div class="collect" v-on:click="toggleCollect(subject)">
+                        <i :class="subject.isCollected ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+</div>
+
+@section TopCSS{
+    <link rel="stylesheet" href="~/css/Excercise/subjects.css">
+}
+@section Scripts{
+    <script src="~/lib/DB/scriptures.js"></script>
+    <script>
+        //let initData = 
+        let ScriptueShowList = @Html.Raw(JsonSerializer.Serialize( Model) );
+        @* let SubjectCollectList *@
+    </script>
+    <script src="~/js/Excercise/subjects.js"></script>
+} 

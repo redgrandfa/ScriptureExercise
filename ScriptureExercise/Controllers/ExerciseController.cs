@@ -23,15 +23,51 @@ namespace ScriptureExercise.Controllers
             //this.exerciseService = exerciseService;
         }
 
+        [HttpGet("Subjects")]
+        public IActionResult Subjects()
+        {
+            //var member = memberService.GetCurrentMember();
+            //member.Value.ScriptureShowList;
+
+            return View(); //改成收藏List=> 最後我得手改每個會員的收藏?...
+        }
+
+        //[HttpGet("{subject}/Chapters")] //此考科的 章節
+        //public IActionResult Chapters(string subject) { 
+        //    var scripture = subject;
+        //    var paper = 1;
+        //        if (subject.Contains("("))
+        //        {
+        //            var temp = subject.Split("(");
+        //    scripture = temp[0];
+        //            paper = temp[1][0];
+        //        }
+
+        //        return View(model:subject);
+        //}
+
+        [HttpGet("{scripture}_{subjectId}/Papers")] //此考科的 卷別
+        [AllowAnonymous]
+        public IActionResult Papers(string scripture, int subjectId = 1)
+        {
+            var a = new
+            {
+                Scripture = scripture,
+                SubjectId = subjectId,
+            };
+            return View(model: a);
+        }
+
+
         [HttpGet("Choices")]
         public IActionResult List()
-        {        
+        {
             var member = memberService.GetCurrentMember();
             return View(member.Value.ScriptureShowList);
         }
 
-        [HttpGet("{Scripture}_{subjectId}/卷別{PaperId}")]
-        public IActionResult Paper(string Scripture, int subjectId, int PaperId)
+        [HttpGet("{scripture}_{subjectId}/卷別{PaperId}")]
+        public IActionResult Paper(string scripture, int subjectId, int PaperId)
         {
             var vm = new ExcerciseListVM();
 
@@ -42,7 +78,7 @@ namespace ScriptureExercise.Controllers
             //{
             //    return Content("錯誤的經典名稱。"+ ex.Message );
             //};
-            vm.ScriptureName = Scripture;
+            vm.ScriptureName = scripture;
             vm.SubjectId = subjectId;
             vm.PageId = PaperId;
 
@@ -52,7 +88,7 @@ namespace ScriptureExercise.Controllers
             //這裡用列舉?? 百位 十位 個位數 ...10+26 = 36進位?? xy_zz 時間? 0~60
             return View(vm);
         }
-
+        
         [HttpGet("RecordList")]
         public IActionResult RecordList()
         {

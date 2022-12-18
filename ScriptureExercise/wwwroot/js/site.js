@@ -70,6 +70,15 @@ function scripture_Chinese_To_Code(chinese) {
     return t.code
 }
 
+
+
+function subjectTrans(num){
+    let dict = ['' , '(一)', '(二)', '(三)', '(四)', '(五)',
+    '(六)', '(七)', '(八)',]
+    return dict[num]
+}
+
+//??
 function paperJsonFileName_To_DataSource(jsonFileName) {
     return `/lib/DB/${jsonFileName}.json`
 }

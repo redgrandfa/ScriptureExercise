@@ -1,7 +1,10 @@
+//注意，各卷資料內也有 標題和 範圍
 let scriptures_inDB = [
     {
-        id:1,
+        code:'A',
         title: "生晨",
+        author:"...著",
+        belongTo:'Bai',
         subjects: [
             {
                 id: 1,
@@ -18,25 +21,15 @@ let scriptures_inDB = [
                     { id: 10, range_remark: "(P.5-P.195)", },
                     { id: 11, range_remark: "(P.196-P.384)", },
                     { id: 12, range_remark: "(P.5-P.384)", },
-                    // { id: 1, range_remark: "(P.5-P.68)", link: "生晨_1/卷別1" },
-                    // { id: 2, range_remark: "(P.69-P.132)", link: "生晨_1/卷別2" },
-                    // { id: 3, range_remark: "(P.133-P.195)", link: "生晨_1/卷別3" },
-                    // { id: 4, range_remark: "(P.196-P.258)", link: "生晨_1/卷別4" },
-                    // { id: 5, range_remark: "(P.322-P.384)", link: "生晨_1/卷別5" },
-                    // { id: 6, range_remark: "(P.322-P.384)", link: "生晨_1/卷別6" },
-                    // { id: 7, range_remark: "(P.5-P.132)", link: "生晨_1/卷別7" },
-                    // { id: 8, range_remark: "(P.133-P.258)", link: "生晨_1/卷別8" },
-                    // { id: 9, range_remark: "(P.259-P.384)", link: "生晨_1/卷別9" },
-                    // { id: 10, range_remark: "(P.5-P.195)", link: "生晨_1/卷別10" },
-                    // { id: 11, range_remark: "(P.196-P.384)", link: "生晨_1/卷別11" },
-                    // { id: 12, range_remark: "(P.5-384)", link: "生晨_1/卷別12" },
                 ],
             },
         ],
     },
     {
-        id:2,
+        code:'B',
         title: "佛規諭錄",
+        author:"...著",
+        belongTo:'Bai',
         subjects: [
             {
                 id: 1,
@@ -60,8 +53,10 @@ let scriptures_inDB = [
         ],
     },
     {
-        id:3,
+        code:'C',
         title: "性理題釋",
+        author:"...著",
+        belongTo:'Bai',
         subjects: [
             {
                 id: 1,
@@ -83,8 +78,10 @@ let scriptures_inDB = [
         ],
     },
     {
-        id:4,
+        code:'D',
         title: "皇母訓子十誡",
+        author:"...著",
+        belongTo:'Bai',
         subjects: [
             {
                 id: 1,
@@ -107,8 +104,10 @@ let scriptures_inDB = [
         ],
     },
     {
-        id:5,
+        code:'E',
         title: "學庸",
+        author:"...著",
+        belongTo:'Ru',
         subjects: [
             {
                 id: 1,
@@ -132,8 +131,10 @@ let scriptures_inDB = [
         ],
     },
     {
-        id:6,
+        code:'F',
         title: "論語",
+        author:"孔子聖人及其弟子著",
+        belongTo:'Ru',
         subjects: [
             {
                 id: 1,
@@ -200,8 +201,10 @@ let scriptures_inDB = [
         ],
     },
     {
-        id:7,
+        code:'G',
         title: "孟子",
+        author:"...著",
+        belongTo:'Ru',
         subjects: [
             {
                 id: 1,
@@ -305,8 +308,10 @@ let scriptures_inDB = [
         ],
     },
     {
-        id:8,
+        code:'H',
         title: "道清",
+        author:"...著",
+        belongTo:'Dao',
         subjects: [
             {
                 id: 1,
@@ -329,8 +334,10 @@ let scriptures_inDB = [
         ],
     },
     {
-        id:9,
+        code:'I',
         title: "金心",
+        author:"...著",
+        belongTo:'Si',
         subjects: [
             {
                 id: 1,
@@ -353,8 +360,10 @@ let scriptures_inDB = [
         ],
     },
     {
-        id:10,
+        code:'J',
         title: "六祖壇經",
+        author:"...著",
+        belongTo:'Si',
         subjects: [
             {
                 id: 1,
@@ -411,5 +420,4 @@ let scriptures_inDB = [
             },
         ],
     },
-
 ]
