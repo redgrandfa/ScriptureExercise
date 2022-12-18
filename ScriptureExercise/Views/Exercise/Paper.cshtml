@@ -1,27 +1,25 @@
 ﻿@using ScriptureExercise.Models.ExcerciseVM
+@using Common.Helpers
 @model ExcerciseListVM
-
 
 @{
     ViewData["Title"] = "習題卷";
 
-    Dictionary<string, string> trans2ID = new Dictionary<string, string>()
-    {
-        {"生晨","A" },
-        {"佛規諭錄","B" },
-        {"性理題釋","C" },
-        {"皇母訓子十誡","D" },
-        {"學庸","E" },
-        {"論語","F"},
-        {"孟子","G" },
-        {"道清","H" },
-        {"金心","I" },
-        {"六祖壇經","J" },
-    };
-
-    var ScriptureCode = trans2ID[Model.ScriptureName];
-    //var dataSource = $"/lib/DB/{ScriptureCode}/{ScriptureCode}{Model.SubjectId}_{Model.PageId}.js";
+    var ScriptureCode = ScriptureHelper.scriptureTrans[Model.ScriptureName];
+    var dataSource = $"/lib/DB/{ScriptureCode}/{ScriptureCode}{Model.SubjectId}_{Model.PageId}.js";
 }
+
+@section TopCSS{
+    <link rel="stylesheet" href="~/css/Exercise/paper.css">
+}
+
+@section Scripts{
+    <script>
+        let jsonFileName = '@($"{ScriptureCode}/{ScriptureCode}{Model.SubjectId}_{Model.PageId}")'
+    </script>
+    <script src = "~/js/Exercise/paper.js"></script>
+} 
+
 
 <div id="vue_paper">
     <div class="exercise-banner">
@@ -82,13 +80,3 @@
     </button>
 </div>
 
-@section TopCSS{
-    <link rel="stylesheet" href="~/css/Excercise/paper.css">
-}
-
-@section Scripts{
-    <script>
-        let jsonFileName = '@($"{ScriptureCode}/{ScriptureCode}{Model.SubjectId}_{Model.PageId}")'
-    </script>
-    <script src = "~/js/Excercise/paper.js"></script>
-} 

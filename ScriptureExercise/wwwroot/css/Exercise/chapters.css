@@ -27,7 +27,7 @@ main {
   margin: 7px -26px;
   padding: 22px 0;
   display: flex;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 .chapter-btns::-webkit-scrollbar {
   display: none;
@@ -36,19 +36,24 @@ main {
   flex-shrink: 0;
   display: inline-block;
   margin: 0 9px;
+}
+.chapter-btns label {
   box-sizing: border-box;
   width: 50px;
   height: 50px;
+  margin: 0;
   border: #F0EFF2 2px solid;
   border-radius: 50%;
   font-size: 15px;
   line-height: 48px;
   text-align: center;
   color: #313B5D;
+  cursor: pointer;
 }
-.chapter-btns li.active {
+.chapter-btns input:checked + label {
   border: #3A63E0 2px solid;
   color: #3A63E0;
+  cursor: default;
 }
 
 .chapters-count {
@@ -104,6 +109,6 @@ main {
   line-height: 22px;
 }
 
-.custom-xl-green-btn {
+.custom-btn.xl-green-btn {
   margin-top: 58px;
 }/*# sourceMappingURL=chapters.css.map */

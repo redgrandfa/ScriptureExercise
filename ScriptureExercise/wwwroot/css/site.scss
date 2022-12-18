@@ -203,9 +203,12 @@ header {
     position: fixed;
     z-index: -1;
 
-    left: -245px;
+    // left: -245px;
+    // left: auto;
+    margin-left: -245px;
     top: -230px;
-}    
+}   
+
 
 .halo {
     width: 100%;

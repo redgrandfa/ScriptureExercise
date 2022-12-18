@@ -143,7 +143,7 @@ header {
   aspect-ratio: 1/1;
   position: fixed;
   z-index: -1;
-  left: -245px;
+  margin-left: -245px;
   top: -230px;
 }
 

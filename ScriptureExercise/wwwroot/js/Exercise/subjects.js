@@ -23,8 +23,10 @@ let vue_subjects = new Vue({
             scripture.subjects.forEach(subject=>{
                 let subjectToAdd = {
                     scripture: scripture.code, 
+                    //網址要中文嗎
+                    scriptureTitle: scripture.title,
                     id:subject.id,
-                    // scripture: scripture.title,//到底要不要管網址...
+                    //網址要中文嗎
                     // subjectChinesePostFix: getSubjectChinesePostFix(subject.id),
                     
                     title:`${scripture.title}${getSubjectChinesePostFix(subject.id)}`,
@@ -53,10 +55,8 @@ let vue_subjects = new Vue({
 
             this.subjectsShow = result
         },
-        navToSubject(subject){ //導到
-            // let scripture = subject.scripture
-
-            location.href=`/Exercise/${subject.scripture}_${subject.id}/Papers`
+        navToSubject(subject){
+            location.href=`/Exercise/${subject.scriptureTitle}_${subject.id}`
         }
         ,toggleCollect(subject){ //從show來的  、API互動
             subject.isCollected = !subject.isCollected

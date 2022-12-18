@@ -1,0 +1,51 @@
+﻿@* @model List<int> *@
+
+@{
+    ViewData["Title"] = "選練習章節";
+}
+
+<div id="vue_chapters">
+    <div class="chapters-container">
+        <div class="chapter-show">
+            <div class="show-container">
+                <div class="parent">{{subjectTitle}}</div>
+                <div class="title">{{chapterChoosed.range_remark}}</div>
+            </div>
+        </div>
+
+        <ul class="chapter-btns">
+            <li v-for="(ch,i) in chapters">
+                <input type="radio" class="d-none" name="cha" :value="ch.id" :id="'cha'+ch.id" v-model="chapterIdChoosed">
+                <label :for="'cha'+ch.id">{{ch.id}}</label>
+            </li>
+        </ul>
+
+        <p class="chapters-count pb-3">共分為{{chapters.length}}個練習章節</p>
+
+        <div class="chapter-intro">
+            <div class="title">簡介</div>
+            <div class="text" v-html="sciptureIntro"></div>
+            <span class="more" id="popover-intro">查看更多</span>
+            <b-popover target="popover-intro" triggers="click" placement="topright">
+                <h6>簡介</h6>
+                <p class="text" v-html="sciptureIntro"></p>
+            </b-popover>
+        </div>
+    </div>
+
+    <button class="custom-btn xl-green-btn" v-on:click="navToPaper()">
+        TEST 開始測驗 <i class="fa-solid fa-arrow-right-long"></i>
+    </button>
+</div>
+
+@section TopCSS{
+    <link rel="stylesheet" href="~/css/Exercise/chapters.css">
+}
+@section Scripts{
+    <script src="~/lib/DB/scriptures.js"></script>
+    <script>
+        let scriptureTitle = '@Html.Raw(ViewData["ScriptureTitle"])'
+        let subjectId = @ViewData["SubjectId"]
+    </script>
+    <script src="~/js/Exercise/chapters.js"></script>
+}

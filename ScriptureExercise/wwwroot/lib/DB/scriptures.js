@@ -1,5 +1,5 @@
-//注意，各卷資料內也有 標題和 範圍
-let scriptures_inDB = [
+//各卷資料內也有 標題和 範圍 => 是否算浪費空間??
+let scriptures_inDB = [ // bai 4 ...Ru 1+3+7 ... Si5 ... Dao 1 ... 21部
     {
         code:'A',
         title: "生晨",

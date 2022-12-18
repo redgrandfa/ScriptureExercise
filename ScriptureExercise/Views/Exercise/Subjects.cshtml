@@ -1,7 +1,7 @@
 ﻿@model List<int>
 
 @{
-    ViewData["Title"] = "挑選考科";//習題卷
+    ViewData["Title"] = "選考科";
 }
 
 <div id="vue_subjects">
@@ -59,7 +59,7 @@
 </div>
 
 @section TopCSS{
-    <link rel="stylesheet" href="~/css/Excercise/subjects.css">
+    <link rel="stylesheet" href="~/css/Exercise/subjects.css">
 }
 @section Scripts{
     <script src="~/lib/DB/scriptures.js"></script>
@@ -68,5 +68,5 @@
         let ScriptueShowList = @Html.Raw(JsonSerializer.Serialize( Model) );
         @* let SubjectCollectList *@
     </script>
-    <script src="~/js/Excercise/subjects.js"></script>
+    <script src="~/js/Exercise/subjects.js"></script>
 } 
