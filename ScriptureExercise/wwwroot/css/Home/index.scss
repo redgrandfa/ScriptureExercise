@@ -34,7 +34,7 @@
     line-height: 64px;
 
     margin-left: 28px;
-    margin-top: 442px;
+    margin-top: 388px;
     margin-bottom: 19px;
 }
 
@@ -49,3 +49,50 @@
     margin-left: 33px;
 }
 
+.nav-login{
+    display: block;
+    margin-top: 32px;
+    margin-left: 33px;
+
+    font-family: 'GenSekiGothic JP';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+
+    color: #000!important;
+    text-decoration: none!important;
+    // &:hover{
+
+    // }
+}
+.login-image-btn{
+    display: inline-block;
+    box-sizing: border-box;
+    width: 133px;
+    height: 42px;
+
+    margin-bottom: -4px;
+    margin-left: 22px;
+    
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+    border-bottom-right-radius: 5px;
+
+    
+    &::after{
+        content: '';
+        display: block;
+        box-sizing: border-box;
+        border-bottom: 1px solid #000;
+
+        // transform: rotate(-45deg);
+        // width: 20px;
+        // margin-top: 7px; //自己的5/3
+        // margin-left: calc(100% - 17px);//- 自己的 0.5 + 4/5
+
+        transform: rotate(-50deg);
+        width: 17px;
+        margin-top: 6px;
+        margin-left: calc(100% - 13px);
+    }
+}

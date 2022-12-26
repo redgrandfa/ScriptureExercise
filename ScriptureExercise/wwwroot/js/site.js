@@ -17,8 +17,6 @@ function number_To_Chinese(num) {
 }
 
 // scriptureCode <--> scriptureTitle  //scriptures_inDB 或另外做字典
-// subjectId <--> subjectChinesePostFix //用number_To_Chinese 不須另外寫?
-
 function scriptureTrans(){
     return [
         {
@@ -73,14 +71,9 @@ function scripture_Chinese_To_Code(chinese) {
     return t.code
 }
 
-//沒有0
-// function subjectTrans(num){
-//     let dict = ['' , '(一)', '(二)', '(三)', '(四)', '(五)',
-//     '(六)', '(七)', '(八)',]
-//     return dict[num]
-// }
+// subjectId <--> subjectChinesePostFix //用number_To_Chinese 不須另外寫?
 
-// function getSubjectChinesePostFix( scripture , subjectId ){} //需要判斷長度、當前id
+// function getSubjectChinesePostFix( scripture , subjectId ){} //仍需要判斷長度、當前id
 function getSubjectTitle( scripture , subjectId){
     let subjectChinesePostFix = ''
     if (scripture.subjects.length > 1){
@@ -90,7 +83,7 @@ function getSubjectTitle( scripture , subjectId){
     return `${scripture.title}${subjectChinesePostFix}`
 }
 
-//??
+//paper頁 網址參數 > JsonFileName > DB FilePath
 function paperJsonFileName_To_DataSource(jsonFileName) {
     return `/lib/DB/${jsonFileName}.json`
 }
