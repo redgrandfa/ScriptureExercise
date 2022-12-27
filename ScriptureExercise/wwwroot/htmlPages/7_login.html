@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>BsVueTemplate</title>
+
+	<link rel="stylesheet" href="../lib/cssReset.css" />
+
+	<!-- Load required Bootstrap and BootstrapVue CSS -->
+	<link type="text/css" rel="stylesheet" href="../lib/bs-vue2_22_0/bootstrap4_6_1.min.css" />
+	<link type="text/css" rel="stylesheet" href="../lib/bs-vue2_22_0/bootstrap-vue2_22_0.min.css" />
+
+
+	<link rel="stylesheet" href="../css/site.css">
+	<link rel="stylesheet" href="../css/Account/login.css">
+
+
+	<!-- Load polyfills to support older browsers -->
+	<!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script> -->
+
+	<!-- Load Vue followed by BootstrapVue -->
+	<script src="../lib/bs-vue2_22_0/vue2_6_12.min.js"></script>
+	<script src="../lib/bs-vue2_22_0/bootstrap-vue2_22_0.min.js"></script>
+
+	<!-- Load the following for BootstrapVueIcons support -->
+	<script src="../lib/bs-vue2_22_0/bootstrap-vue-icons2_22_0.min.js"></script>
+
+	<script src="../lib/fontawesome.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-secondary">
+	<div></div>
+	<div class="view-container">
+		<main>
+            <div id="vue_login">
+                <div class="banner">
+                    <span class="">HELLO</span>
+                    <span class="">歡迎踏上經典學習之路</span>
+                    <span class="">登入帳號以使用更多功能</span>
+                </div>
+                <div class="form">
+                    <b-form-group
+                        :label="fields.account.text" 
+                        label-for="fields-account"
+                        valid-feedback="OK"
+                        :invalid-feedback="errMsgs.account"
+                    >
+                        <b-form-input 
+                            id="fields-account" 
+                            v-model="fields.account.value" 
+                            :state="errMsgs.account==''" 
+                        ></b-form-input>
+                    </b-form-group>
+
+                    <!-- :label="fields.password.text"  -->
+                    <b-form-group
+                        label-for="fields-password"
+                        valid-feedback="OK"
+                        :invalid-feedback="errMsgs.password" 
+                    >
+                        <template #label>
+                            {{fields.password.text}}
+                            <b-icon
+                            :icon="fields.password.visible?'eye':'eye-slash'"
+                            v-on:click="changeVisible('password')"
+                            ></b-icon>
+                        </template>
+
+                        <b-form-input 
+                            id="fields-password" 
+                            v-model="fields.password.value" 
+                            :state="errMsgs.password==''" 
+                            :type="fieldPasswordType"
+                        ></b-form-input>
+                    </b-form-group>
+                </div>
+                <div class="mb-3 d-flex justify-content-between px-3">
+                    <!-- :disabled="disabled" -->
+                    <button class="" 
+                    v-on:click="post('Register')">註冊</button>
+                    <button class="" :disabled="disabled"  v-on:click="post('Login')">登入</button>
+                </div> 
+            </div> 
+		</main>
+        <footer></footer>
+	</div>
+
+    <script src="../js/Account/login2.js"></script>
+	<script>
+		// let vue_ = new Vue({
+		// 	el: "#vue_",
+		// 	data: {
+		// 		a: "qwe",
+		// 	},
+		// 	mounted() { },
+		// 	methods: {},
+		// 	watch: {},
+		// 	computed: {},
+		// 	components: {},
+		// });
+	</script>
+</body>
+
+</html>

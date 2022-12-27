@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 222px;
+        }
+        .menu{
+            background-color: #fcc;
+            width: 33%;
+            height: 100%;
+
+            position: fixed; 
+            /* fixed時，高度百分比基準是viewport高 */
+            top: 111px;
+
+            z-index: 1;
+
+        }
+        .menu.l{ left: 11px;}
+        .menu.r{ right: 11px;}
+
+        .target{ 
+            background-color: #cfc;
+            width: 100%;
+            height: 100%;
+            border: 1px solid #000;
+
+            /* display: flex; */
+            /* position: relative; */
+            transform: rotate(11deg);
+        }
+    </style>
+</head>
+<body>
+    stacking context   stack level
+    測試：flex、position、transform、opacity
+
+    <div class="menu l">菜單左</div>
+    <div class="target">Q</div>
+    <div class="menu r">菜單右</div>
+</body>
+</html>

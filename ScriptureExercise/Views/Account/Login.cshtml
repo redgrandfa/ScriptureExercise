@@ -19,13 +19,17 @@
 
 
 <div id="vue_login">
-    <div>
+    <div class="banner">
+        <span class="">HELLO</span>
+        <span class="">歡迎踏上經典學習之路</span>
+        <span class="">登入帳號以使用更多功能</span>
+    </div>
+    <div class="form">
         <b-form-group
             :label="fields.account.text" 
             label-for="fields-account"
             valid-feedback="OK"
-            :invalid-feedback="errMsgs.account" 
-            @* :state="errMsgs.account==''" *@
+            :invalid-feedback="errMsgs.account"
         >
             <b-form-input 
                 id="fields-account" 
@@ -34,18 +38,19 @@
             ></b-form-input>
         </b-form-group>
 
+        <!-- :label="fields.password.text"  -->
         <b-form-group
-            :label="fields.password.text" 
             label-for="fields-password"
             valid-feedback="OK"
             :invalid-feedback="errMsgs.password" 
-            @* :state="errMsgs.password==''" *@
         >
-
-            <b-icon
+            <template #label>
+                {{fields.password.text}}
+                <b-icon
                 :icon="fields.password.visible?'eye':'eye-slash'"
                 v-on:click="changeVisible('password')"
-            ></b-icon>
+                ></b-icon>
+            </template>
 
             <b-form-input 
                 id="fields-password" 
@@ -54,13 +59,13 @@
                 :type="fieldPasswordType"
             ></b-form-input>
         </b-form-group>
-
-        <div class="d-flex justify-content-around">
-            <b-button :disabled="disabled" v-on:click="post('Register')" variant="success">註冊</b-button>
-            <b-button :disabled="disabled"  v-on:click="post('Login')" variant="primary">登入</b-button>
-        </div> 
+    </div>
+    <div class="mb-3 d-flex justify-content-between px-3">
+        <!-- :disabled="disabled" -->
+        <button class="" 
+        v-on:click="post('Register')">註冊</button>
+        <button class="" :disabled="disabled"  v-on:click="post('Login')">登入</button>
     </div> 
-
 @* <div class="login-info text-center my-5">
         <p>每位會員，可有多種第三方登入管道</p>
         <p>這些帳號將透過會員密鑰，綁定至同一會員</p>

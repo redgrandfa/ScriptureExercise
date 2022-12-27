@@ -1,3 +1,69 @@
-.login-info {
-  font-size: 26px;
+#vue_login {
+  padding: 0 52px;
+}
+
+.banner {
+  text-align: center;
+}
+.banner span {
+  display: block;
+  font-family: "GenSekiGothic JP";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+}
+.banner span:first-child {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 11px;
+}
+
+.form-group {
+  margin-top: 35px;
+  display: flex;
+  font-size: 18px;
+}
+.form-group label {
+  width: 72px;
+  line-height: 44px;
+  font-weight: 900;
+}
+.form-group label + div {
+  flex-grow: 1;
+}
+.form-group input {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+button {
+  font-size: 44px;
+  border: none;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  background-color: transparent;
+  padding: 0;
+}
+button::after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-left-width: 1px;
+  border-left-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  margin-top: 15px;
+  margin-bottom: -3px;
+}
+button:disabled::after {
+  border-color: -internal-light-dark(rgba(118, 118, 118, 0.3), rgba(195, 195, 195, 0.3));
+}
+button:first-child::after {
+  transform: rotate(45deg);
+}
+button:last-child::after {
+  margin-left: auto;
+  margin-right: 0px;
+  transform: rotate(225deg);
 }/*# sourceMappingURL=login.css.map */
