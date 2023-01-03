@@ -9,6 +9,8 @@ namespace Common.Repositories
 {
     public interface IMemoryCacheRepository
     {
+        bool Create<T>(string key, T value) where T : class;
+        bool Update<T>(string key, T value) where T : class;
         void Set<T> (string key , T value ) where T:class;
 
         /// <summary>

@@ -8,6 +8,17 @@ const swalError = Swal.mixin({
     title: '失敗',
 })
 
+// function fetchBase( url, bodyObject ){
+//     let promise 
+//     if( bodyObject == null){
+//         promise = fetch(url)
+//     }else{
+//         promise = fetchPost(url , bodyObject)
+//     }
+
+//     return promise
+// }
+
 function fetchPost( url, bodyObject ){
     return fetch(url , {
         method:'post',
@@ -18,57 +29,63 @@ function fetchPost( url, bodyObject ){
     })
 }
 
-Promise.prototype.afterFetch = function(afterSuccess , afterFail){
+
+
+Promise.prototype.afterFetch = function( okToDO ){
     this.then( resp => {
         if(resp.ok){
-            resp.json()// Promise.resolve(resp.json())
-            .then( result => {
-                // console.log(result.status) 
-                if(result.status > 0){
-                    swalError.fire({
-                        text:result.message
-                    }) 
-                    afterFail()
-                }
-                else{
-                    swalSuccess.fire({
-                        text:result.message
-                    })
-                    afterSuccess()
-                }
-            })
+            okToDO(resp)
         }else{
             swalError.fire({
                 title: '異常',
+                text:'如方便，請回報管理者'
             }) 
         }
     })
     .catch( err => { // 需搭配 throw new Error('qwe')
         console.log(err)
         swalError.fire({
-            title: '前端錯誤',
+            title: '錯誤',
             text:'如方便，請回報管理者'
         }) 
     })
 }
 
-
+Promise.prototype.afterAPI = function (afterSuccess, afterFail) {
+    this.afterFetch(
+        (resp) => {
+            resp.json()// let result = Promise.resolve(resp.json()) 或?? Promise.resolve(resp.json()).then()
+                .then(result => {
+                    // console.log(result.status) 
+                    if (result.status > 0) { //API不一定要顯示訊息?
+                        swalError.fire({
+                            text: result.message
+                        })
+                        afterFail(result)
+                    }
+                    else {
+                        swalSuccess.fire({
+                            text: result.message
+                        })
+                        afterSuccess(result)
+                    }
+                    // return result
+                })
+        }
+    )
+}
 function testGet(){
     fetch('/ApiTest/TestGet')
-        .afterFetch( 
+        .afterAPI( 
             ()=>{},
             ()=> {console.log('失敗後') },
         )
 }
 function testPost(){
     fetchPost('/ApiTest/TestPost', {account:'qwe' , password:'qwe'})
-        .afterFetch(
+        .afterAPI(
             ()=> {console.log('成功後') },
             ()=> {console.log('失敗後') },
         )
 
-    // 考慮寫法
-    // if (result != null){
-    //     // 表示需要再檢查status做 分支流程，不只是顯示訊息
-    // }
 }
