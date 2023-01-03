@@ -38,26 +38,22 @@ let vue_login = new Vue({
             }
         },
         post(urlPostfix){
-            fetch('/ApiAccount/'+urlPostfix , {
-                method:'post',
-                headers:{
-                    'content-type':'application/json'
-                },
-                body:JSON.stringify({
-                    account:this.fields.account.value,
-                    password:this.fields.password.value,
-                }),
-            }).then(resp=>{
-                Promise.resolve(resp.text())
-                .then(text=>{
-                    if(resp.ok){
-                        swal.fire(text)
-                        location.href=returnUrl
-                    }else{
-                        swal.fire('錯誤'+text)
-                    }
-                })
+            fetchPost('/ApiAccount/'+urlPostfix , {
+                account:this.fields.account.value,
+                password:this.fields.password.value,
             })
+            .afterFetch(
+                ()=>{
+                    if(returnUrl == ''
+                    ){
+                        location.href='/'
+                    }
+                    else{
+                        location.href=returnUrl
+                    }
+                },
+                ()=>{}
+            )
         },
     },
     computed: {

@@ -12,6 +12,7 @@ using ScriptureExercise.Models.AccountVM;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using ScriptureExercise.Models;
 
 namespace ScriptureExercise.Controllers.WebAPI
 {
@@ -62,18 +63,22 @@ namespace ScriptureExercise.Controllers.WebAPI
         [AllowAnonymous]
         public async Task<IActionResult> LoginAsync(CreateMemberPostModel request)
         {
+            var result = new ApiResult();
+
             var input = new CreateMember_Input
             {
                 Account = request.Account,
                 Password = request.Password,
             };
-            var memberFound = memberService.GetMember_ByInput(input);
-            
-            if (memberFound == null)
+            var output_WithPayload = memberService.GetMember_ByInput(input);
+            if (output_WithPayload.IsFail)
             {
-                return BadRequest("登入會員失敗：" + "找不到此組帳密");
+                result.Status = Status.DataNotFound;
+                result.Message = output_WithPayload.FailMessage;
+                return Ok(result);
             }
 
+            var memberFound = output_WithPayload.Payload;
             var issueClaimsInput = new IssueClaimsInput
             {
                 Account = new Account
@@ -86,7 +91,10 @@ namespace ScriptureExercise.Controllers.WebAPI
                 },
             };
             await accountService.IssueClaims(issueClaimsInput);
-            return Ok("登入成功");
+
+            result.Status = Status.Success;
+            result.Message = "登入成功";
+            return Ok(result);
         }
 
 

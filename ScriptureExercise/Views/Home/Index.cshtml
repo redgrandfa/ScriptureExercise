@@ -13,10 +13,20 @@
 	留下文字讓我們盡情探索
 </p>
 
-<a href="/Account/Login" class="nav-login">
-	登入 LOGIN 
-	<div class="login-image-btn"></div>
-</a>	
+@if (User.Identity.IsAuthenticated)
+{
+	<a href="/Account/Logout" class="nav-login">
+		登出 LOGOUT
+		<div class="login-image-btn"></div>
+	</a>	
+}
+else
+{
+	<a href="/Account/Login" class="nav-login">
+		登入 LOGIN 
+		<div class="login-image-btn"></div>
+	</a>	
+}
 
 @section TopCSS{
     <link rel="stylesheet" href="~/css/Home/index.css">

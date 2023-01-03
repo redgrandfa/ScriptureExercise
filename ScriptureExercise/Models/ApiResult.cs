@@ -30,6 +30,7 @@ namespace ScriptureExercise.Models
     {
         Success = 0,
 
+        Fail = 1,
         //失敗 = 某正整數
 
         //UnAuthorized = 1,

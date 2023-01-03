@@ -22,5 +22,17 @@ namespace ScriptureExercise.Controllers.WebAPI
             };
             return Ok(result);
         }
+
+        //public IActionResult RemoveTest()
+        //{
+        //    repo.Remove("xx"); //什麼事都沒發生
+        //    return Ok();
+        //}
+
+        //public IActionResult ExceptionTest()
+        //{
+        //    throw new Exception("QQ"); //狀態碼500
+        //    return Ok();
+        //}
     }
 }

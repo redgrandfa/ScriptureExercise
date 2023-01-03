@@ -1,4 +1,5 @@
 ﻿using Common.DBModels;
+using Common.DTOModels;
 using Common.DTOModels.MemberDTOs;
 using Common.Repositories;
 using Microsoft.AspNetCore.Http;
@@ -18,18 +19,17 @@ namespace ScriptureExercise.Services
         UpdateAccount_Output UpdateAccount(string account);
 
 
-        Member GetMember_ByInput(CreateMember_Input input);
+        BaseOutput_withPayload<Member> GetMember_ByInput(CreateMember_Input input);
 
         Member GetCurrentMember();
         Member GetMember_ById(int memberId);
-        int GetCurrentMemberId();
     }
     public class MemberService : BaseService, IMemberService
     {
         public MemberService(
             IHttpContextAccessor httpContextAccessor,
-            IMemoryCacheRepository cacheRepo)
-            : base(httpContextAccessor, cacheRepo)
+            IMemoryCacheRepository cacheRepo
+        ): base(httpContextAccessor, cacheRepo)
         {}
 
         public CreateMember_Output CreateMember(CreateMember_Input input)
@@ -40,7 +40,7 @@ namespace ScriptureExercise.Services
             //檢查 已存在衝突
             if (memberPK_Found != null)
             {
-                result.ErrMsg = "此會員帳號已被其他人佔用，請換一個";
+                result.FailMessage = "此會員帳號已被其他人佔用，請換一個";
                 return result;
             }
 
@@ -91,7 +91,8 @@ namespace ScriptureExercise.Services
                     {
                         account.PK,
                     },
-                    ScriptureShowList = new List<int> { 1,2,3,4, }, //至少要一個
+                    //ScriptureShowList = new List<int> { 1,2,3,4, }, //至少要一個
+                    SubjectCollectedList = new List<int> { 1, 2, 3, 4, },
                     ExerciseRecordCreateTimeId_List = new List<string>(),
 
                     //從第三方取得的資料預填
@@ -106,11 +107,11 @@ namespace ScriptureExercise.Services
                 _cacheRepo.Set(account.GetRedisKeyString(), account.Value);
 
 
-                result.OperationResult = account;
+                result.Payload = account;
             }
             catch (Exception ex)
             {
-                result.ErrMsg = ex.Message;//.ToString
+                result.FailMessage = ex.Message;//.ToString
             }
 
             return result;
@@ -123,11 +124,10 @@ namespace ScriptureExercise.Services
                 var member = GetCurrentMember();
                 action(member);
                 _cacheRepo.Set(member.GetRedisKeyString() , member.Value);
-                result.OperationResult = true;
             }
             catch(Exception ex)
             {
-                result.ErrMsg = "更新會員資料失敗："+ex.Message;
+                result.FailMessage = "更新會員資料失敗："+ex.Message;
             }
             return result;
         }
@@ -149,7 +149,7 @@ namespace ScriptureExercise.Services
                 newEntity.Value = _cacheRepo.Get<Account.Value_T>(newEntity.GetRedisKeyString());
                 if (newEntity.Value != null)
                 {
-                    result.ErrMsg = "此帳號已有人使用";
+                    result.FailMessage = "此帳號已有人使用";
                     return result;
                 }
 
@@ -174,22 +174,19 @@ namespace ScriptureExercise.Services
 
                 member.Value.AccountPK_List[0] = newEntity.PK;
                 _cacheRepo.Set(member.GetRedisKeyString(), member.Value);
-
-
-
-
-                result.OperationResult = true;
             }
             catch (Exception ex)
             {
-                result.ErrMsg = "更新會員資料失敗：" + ex.Message;
+                result.FailMessage = "更新會員資料失敗：" + ex.Message;
             }
             return result;
         }
 
 
-        public Member GetMember_ByInput(CreateMember_Input input)
+        public BaseOutput_withPayload<Member> GetMember_ByInput(CreateMember_Input input)
         {
+            var output = new BaseOutput_withPayload<Member>();
+
             var account = new Account
             {
                 PK = new Account.PK_T
@@ -202,7 +199,10 @@ namespace ScriptureExercise.Services
             account.Value = _cacheRepo.Get<Account.Value_T>(account.GetRedisKeyString());
 
             if (account.Value == null)
-                return null;
+            {
+                output.FailMessage = "輸入的帳號不存在";
+                return output;
+            }
 
             var member = new Member
             {
@@ -212,14 +212,20 @@ namespace ScriptureExercise.Services
             member.Value = _cacheRepo.Get<Member.Value_T>(member.GetRedisKeyString());
 
             if (member.Value.Password != input.Password)
-                return null;
+            {
+                output.FailMessage = "密碼錯誤";
+                return output;
+            }
 
-            return member;
+
+            //output.FailMessage = "";
+            output.Payload = member;
+            return output;
         }
 
         public Member GetCurrentMember()
         {
-            return GetMember_ById( GetCurrentMemberId() );
+            return GetMember_ById( base.GetCurrentMemberId() );
         }
         public Member GetMember_ById(int memberId)
         {
@@ -235,11 +241,5 @@ namespace ScriptureExercise.Services
             
             return member; //Value可能會null
         }
-        public int GetCurrentMemberId()
-        {
-            return int.Parse(_httpContextAccessor.HttpContext.User.Identity.Name);
-        }
-
-
     }
 }

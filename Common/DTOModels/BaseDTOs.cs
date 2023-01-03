@@ -22,7 +22,7 @@ namespace Common.DTOModels
     public class BaseOutput
     {
         public string FailMessage { get; set; }
-        public bool IsFail => FailMessage != "";  //where T : Enum 或bool //考慮利用 attribute 製造 enum各項的資訊?
+        public bool IsFail => FailMessage != null;  //where T : Enum 或bool //考慮利用 attribute 製造 enum各項的資訊?
     }
 
     public class BaseOutput_withPayload<T>: BaseOutput
