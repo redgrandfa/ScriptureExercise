@@ -62,6 +62,7 @@ let vue_subjects = new Vue({
             subject.isCollected = !subject.isCollected
             // APi
 
+            //TODO：取得收藏
             // fetch('',{data:subject.isCollected})
             // .then(resp => {
             //     if(resp.ok){

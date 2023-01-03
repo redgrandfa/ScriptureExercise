@@ -39,10 +39,11 @@
     <section class="subjects-container">
         <ul class="subjects">
             <li v-for="(subject) in subjectsShow" class="subject-card">
-                <div class="subject-card-header" v-on:click="navToSubject(subject)">
+                <div class="subject-card-header" >
+                    @* v-on:click="navToSubject(subject)" *@
+                    <a :href="'/Exercise/' + subject.scriptureTitle + '_' + subject.id">
                     <div class="cover"></div>
-                    @* <a :href="subject.link"> *@
-                    @* </a> *@
+                    </a>
                 </div>
                 <div class="subject-card-body">
                     <h3 class="title">{{subject.title}}</h3>
