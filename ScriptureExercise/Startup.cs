@@ -38,7 +38,7 @@ namespace ScriptureExercise
 
 			services.AddTransient<IAccountService, AccountService>();
 			services.AddTransient<IMemberService, MemberService>();
-			services.AddTransient<IExerciseService, ExamService>();
+			services.AddTransient<IExerciseService, ExerciseService>();
 
 			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 			.AddCookie(options =>

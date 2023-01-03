@@ -61,10 +61,8 @@
         </b-form-group>
     </div>
     <div class="mb-3 d-flex justify-content-between px-3">
-        <!-- :disabled="disabled" -->
-        <button class="" 
-        v-on:click="post('Register')">註冊</button>
-        <button class="" :disabled="disabled"  v-on:click="post('Login')">登入</button>
+        <button class="login-button" :disabled="disabled" v-on:click="post('Register')">註冊</button>
+        <button class="login-button" :disabled="disabled" v-on:click="post('Login')">登入</button>
     </div> 
 @* <div class="login-info text-center my-5">
         <p>每位會員，可有多種第三方登入管道</p>

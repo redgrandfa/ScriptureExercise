@@ -24,6 +24,7 @@ namespace ScriptureExercise.Controllers
         }
 
         [HttpGet("Subjects")]
+        [AllowAnonymous]
         public IActionResult Subjects()
         {
             //var member = memberService.GetCurrentMember();
@@ -46,27 +47,17 @@ namespace ScriptureExercise.Controllers
         //        return View(model:subject);
         //}
 
-        [HttpGet("{scripture}_{subjectId}/Papers")] //此考科的 卷別
+        [HttpGet("{scriptureTitle}_{subjectId}")] //此考科的 卷別
         [AllowAnonymous]
-        public IActionResult Papers(string scripture, int subjectId = 1)
+        public IActionResult Chapters(string scriptureTitle, int subjectId = 1)
         {
-            var a = new
-            {
-                Scripture = scripture,
-                SubjectId = subjectId,
-            };
-            return View(model: a);
+            ViewData["ScriptureTitle"] = scriptureTitle;
+            ViewData["SubjectId"] = subjectId;
+
+            return View();
         }
 
-
-        [HttpGet("Choices")]
-        public IActionResult List()
-        {
-            var member = memberService.GetCurrentMember();
-            return View(member.Value.ScriptureShowList);
-        }
-
-        [HttpGet("{scripture}_{subjectId}/卷別{PaperId}")]
+        [HttpGet("{scripture}_{subjectId}/卷{PaperId}")]
         public IActionResult Paper(string scripture, int subjectId, int PaperId)
         {
             var vm = new ExcerciseListVM();
@@ -94,6 +85,7 @@ namespace ScriptureExercise.Controllers
         {
             return View();
         }
+
         [HttpGet("Record/{CreateTimeId}")]
         public IActionResult Record( string CreateTimeId )
         {

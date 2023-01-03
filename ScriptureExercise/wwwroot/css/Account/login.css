@@ -36,7 +36,7 @@
   font-weight: 700;
 }
 
-button {
+.login-button {
   font-size: 44px;
   border: none;
   border-bottom-width: 1px;
@@ -44,7 +44,7 @@ button {
   background-color: transparent;
   padding: 0;
 }
-button::after {
+.login-button::after {
   content: "";
   display: block;
   width: 5px;
@@ -56,13 +56,13 @@ button::after {
   margin-top: 15px;
   margin-bottom: -3px;
 }
-button:disabled::after {
+.login-button:disabled::after {
   border-color: -internal-light-dark(rgba(118, 118, 118, 0.3), rgba(195, 195, 195, 0.3));
 }
-button:first-child::after {
+.login-button:first-child::after {
   transform: rotate(45deg);
 }
-button:last-child::after {
+.login-button:last-child::after {
   margin-left: auto;
   margin-right: 0px;
   transform: rotate(225deg);

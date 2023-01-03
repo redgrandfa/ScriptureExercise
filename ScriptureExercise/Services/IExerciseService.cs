@@ -19,13 +19,10 @@ namespace ScriptureExercise.Services
         GetRecordOutput GetExerciseRecord(string createTimeId);
         DeleteRecordOutput DeleteExerciseRecord(string createTimeId);
     }
-    public class ExamService: BaseService , IExerciseService
+    public class ExerciseService: BaseService , IExerciseService
     {
-        private readonly IHttpContextAccessor httpContextAccessor;
-        private readonly IMemoryCacheRepository cacheRepo;
         private readonly IMemberService memberService;
-
-        public ExamService(
+        public ExerciseService(
             IHttpContextAccessor httpContextAccessor
             , IMemoryCacheRepository cacheRepo
             , IMemberService memberService
@@ -37,7 +34,7 @@ namespace ScriptureExercise.Services
         public CreateExerciseRecordOutput CreateExerciseRecord(CreateExerciseRecordInput input)
         {
             var result = new CreateExerciseRecordOutput();
-            var memberId = int.Parse(_httpContextAccessor.HttpContext.User.Identity.Name);
+            var memberId = base.GetCurrentMemberId();
 
             try
             {
@@ -62,11 +59,11 @@ namespace ScriptureExercise.Services
                 };
                 _cacheRepo.Set(exerciseRecord.GetRedisKeyString() , exerciseRecord.Value );
 
-                result.OperationResult = exerciseRecord.PK.CreateTimeId;
+                result.Payload = exerciseRecord.PK.CreateTimeId;
             }
-            catch(Exception ex)
+            catch(ApplicationException ex)
             {
-                result.ErrMsg = $"紀錄練習結果失敗。{ex}";
+                result.FailMessage = $"紀錄練習結果失敗。{ex}";
             }
 
             return result;
@@ -77,7 +74,7 @@ namespace ScriptureExercise.Services
             var result = new GetRecordListOutput();
 
             var member = memberService.GetCurrentMember();
-            result.OperationResult =
+            result.Payload =
                 member.Value.ExerciseRecordCreateTimeId_List.Select(RecordCreateTime =>
                 {
                     var exerciseRecord = new ExerciseRecord
@@ -116,7 +113,7 @@ namespace ScriptureExercise.Services
                 exerciseRecord.GetRedisKeyString());
 
 
-            result.OperationResult = exerciseRecord.Value;
+            result.Payload = exerciseRecord.Value;
 
             return result;
         }
@@ -137,7 +134,7 @@ namespace ScriptureExercise.Services
 
                 if (exerciseRecord.Value == null)
                 {
-                    result.ErrMsg = $"編號：【{createTimeId}】這筆紀錄不存在";
+                    result.FailMessage = $"編號：【{createTimeId}】這筆紀錄不存在";
                     return result;
                 }
 
@@ -148,14 +145,10 @@ namespace ScriptureExercise.Services
                     member.Value.ExerciseRecordCreateTimeId_List.Remove(createTimeId);
                 };
                 memberService.UpdateMember(action);
-
-
-
-                result.OperationResult = true;
             }
             catch(Exception ex)
             {
-                result.ErrMsg = ex.Message;
+                result.FailMessage = ex.Message;
             }
 
             return result;
@@ -163,7 +156,7 @@ namespace ScriptureExercise.Services
 
         private ExerciseRecord.PK_T GetRecordPK_ById(string createTimeId)
         {
-            var memberId = int.Parse(_httpContextAccessor.HttpContext.User.Identity.Name);
+            var memberId = base.GetCurrentMemberId();
             var exerciseRecordPK = new ExerciseRecord.PK_T
             {
                 CreateTimeId = createTimeId,

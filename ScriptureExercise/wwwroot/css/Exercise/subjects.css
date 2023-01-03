@@ -51,8 +51,8 @@
 .subject-categories label {
   font-size: 20px;
   font-weight: 900;
-  padding: 10px;
   cursor: pointer;
+  padding: 10px;
 }
 .subject-categories input:not(:checked) + label {
   color: #E5E5E5;
