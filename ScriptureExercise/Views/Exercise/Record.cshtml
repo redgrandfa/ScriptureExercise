@@ -6,12 +6,8 @@
 
 <div id="vue_record">
     <div class="exercise-banner">
-        @* <h2 class="h">論語(一)</h2>
-        <h3 class="h">卷6-述而</h3> *@
-@*        <h2 class="h">@Model.ScriptureName  @Model.SubjectId</h2>
-        <h3 class="h">卷 @Model.PageId-{{paper.range_remark}}</h3>*@
-        <h2>{{paper.title}} </h2>
-        <h3>{{paper.range_remark}} </h3>
+        <h2>{{paper.paperScheme.scriptureTitle}} {{paper.paperScheme.subjectId}} </h2>
+        <h3>卷{{paper.paperScheme.paperId}} -{{paper.range_remark}} </h3>
     </div>
 
     <div class="result">
@@ -92,10 +88,10 @@
         </ol>
     </div>
     <div class="question-container"></div>
-    <button class="custom-btn green-btn">
+    <button class="custom-btn green-btn" v-on:click="exerciseAgain">
         TRY AGAIN 再練習一次
     </button>
-    <button class="custom-btn gray-btn">
+    <button class="custom-btn gray-btn mt-2" v-on:click="navToChapter">
         BACK TO CHAPTER 回到練習章節
     </button>
 </div>

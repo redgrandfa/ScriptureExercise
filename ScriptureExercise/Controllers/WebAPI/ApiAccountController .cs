@@ -92,7 +92,7 @@ namespace ScriptureExercise.Controllers.WebAPI
             };
             await accountService.IssueClaims(issueClaimsInput);
 
-            result.Status = Status.Success;
+            //result.Status = Status.Success;
             result.Message = "登入成功";
             return Ok(result);
         }

@@ -9,7 +9,11 @@ let vue_record = new Vue({
         },
         showQuestions: [],
         paper:{
-            "title": "論語2 卷別1",
+            paperScheme:{
+                scriptureTitle:'論語',
+                subjectId:2,
+                paperId:1,
+            },
             "range_remark": "(1-3)",
             "questions": [
                 {
@@ -75,16 +79,32 @@ let vue_record = new Vue({
     },
     mounted() { 
         fetch(`/ApiExercise/GetRecord/${createTimeId}`)
-            .then(resp => resp.json())
-            .then(record => {
-                //題庫
-                fetch(paperJsonFileName_To_DataSource(record.fK_JsonFileName) )
-                .then(resp => resp.json())
+            .afterFetch( resp => {
+                resp.json()
+                .then(result => {
+                    if(result.status > 0){ //API不一定要顯示訊息?
+                        swalError.fire({
+                            text:result.message
+                        }) 
+                        return 
+                    }
+    
+                    //題庫
+                    let record = result.payload
+                    this.getPapaerDetailByRecord(record)
+                })
+            })
+    },
+    methods: {
+        getPapaerDetailByRecord(record){
+            fetch(paperJsonFileName_To_DataSource(record.fK_JsonFileName) )
+            .afterFetch( resp => {
+                resp.json()
                 .then(paper => {
                     this.score = record.score
                     this.percentScore = record.percentScore
 
-                    this.paper.title = paper.title
+                    this.paper.paperScheme= paperJsonFileName_To_paperScheme(record.fK_JsonFileName)
                     this.paper.range_remark = paper.range_remark
                     this.paper.questions = []
                     
@@ -109,7 +129,6 @@ let vue_record = new Vue({
                 })
             })
         },
-    methods: {
         show(){
             let result = this.paper.questions
             if(this.filters.onlyWrong_Checked){
@@ -127,7 +146,17 @@ let vue_record = new Vue({
             }
 
             this.showQuestions = result
-        }
+        },
+        exerciseAgain(){
+            let url = `/Exercise/${this.paper.paperScheme.scriptureTitle}_${this.paper.paperScheme.subjectId}/卷${this.paper.paperScheme.paperId}`
+
+            location.href = url
+        },
+        navToChapter(){
+            let url = `/Exercise/${this.paper.paperScheme.scriptureTitle}_${this.paper.paperScheme.subjectId}`
+
+            location.href = url
+        },
     },
     watch: {
         "filters":{

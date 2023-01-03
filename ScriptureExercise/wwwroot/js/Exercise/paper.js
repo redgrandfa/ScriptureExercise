@@ -36,12 +36,14 @@ let vue_paper = new Vue({
     },
     mounted() {
         fetch( paperJsonFileName_To_DataSource(jsonFileName) )
-            .then(resp => resp.json())
+        .afterFetch(resp => {
+            resp.json()
             .then(JSobj => {
                 this.paper = JSobj
                 //this.paper.questions.map(x=> x.choosed = null)
                 // reply replies... replies需要先有陣列 才能叫索引
             })
+        })
     },
     computed:{},
     methods:{
@@ -89,39 +91,31 @@ let vue_paper = new Vue({
 
 
             //呼叫API 儲存 答題記錄 更新會員成就統計
-            fetch('/ApiExercise/PostPaper',{
-                method:'post',
-                headers:{
-                    'content-type':'application/json;utf-8',
+            fetchPost('/ApiExercise/PostPaper',{
+                recordCreate: {
+                    exerciseJsonFileName: jsonFileName,
+                    //paperName: this.paper.title,
+                    ReplyJSON: JSON.stringify(replies),
+                    score: this.paper.score,
+                    percentScore: this.paper.percentScore,
                 },
-                body: JSON.stringify({
-                    memberUpdate: {
-                        choicesQuestion_Correct: type1_Correct,
-                        essayQuestion_Correct: type2_Correct,
-                        blankFillQuestion_Correct: type3_Correct,
-                        choicesQuestion_Done: this.paper.questions.filter(q=>q.type==1).length,
-                        essayQuestion_Done: this.paper.questions.filter(q=>q.type==2).length,
-                        blankFillQuestion_Done: this.paper.questions.filter(q=>q.type==3).length,
-                    },
-                    recordCreate: {
-                        exerciseJsonFileName: jsonFileName,
-                        //paperName: this.paper.title,
-                        ReplyJSON: JSON.stringify(replies),
-                        score: this.paper.score,
-                        percentScore: this.paper.percentScore,
-                    },
-                }),
-            })
-                .then(resp => {
-                    Promise.resolve(resp.text())
-                    .then(text => {
-                        if (resp.ok)
-                            window.location.href = `/Exercise/Record/${text}`;
-                        else {
-                            swal.fire(text)
-                        }
+                memberUpdate: {
+                    choicesQuestion_Correct: type1_Correct,
+                    essayQuestion_Correct: type2_Correct,
+                    blankFillQuestion_Correct: type3_Correct,
+                    choicesQuestion_Done: this.paper.questions.filter(q=>q.type==1).length,
+                    essayQuestion_Done: this.paper.questions.filter(q=>q.type==2).length,
+                    blankFillQuestion_Done: this.paper.questions.filter(q=>q.type==3).length,
+                },
+            }).afterAPI(
+                (result)=> {
+                    swalSuccess.fire({
+                        text:'將跳轉至批改結果'
                     })
-                })
+                    window.location.href = `/Exercise/Record/${result.payload}`;
+                },
+                (result)=> {},
+            )
         }
     },
     watch:{},

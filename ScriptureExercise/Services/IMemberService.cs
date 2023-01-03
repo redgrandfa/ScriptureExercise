@@ -119,16 +119,17 @@ namespace ScriptureExercise.Services
         public UpdateMember_Output UpdateMember(Action<Member> action)
         {
             var result = new UpdateMember_Output();
-            try
+            
+            var member = GetCurrentMember();
+            action(member);
+            bool isSuccess = _cacheRepo.Update(member.GetRedisKeyString() , member.Value);
+
+            if (!isSuccess)
             {
-                var member = GetCurrentMember();
-                action(member);
-                _cacheRepo.Set(member.GetRedisKeyString() , member.Value);
+                result.FailMessage = "異常：查不到此會員";
+                return result;
             }
-            catch(Exception ex)
-            {
-                result.FailMessage = "更新會員資料失敗："+ex.Message;
-            }
+
             return result;
         }
 

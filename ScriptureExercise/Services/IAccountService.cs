@@ -31,8 +31,8 @@ namespace ScriptureExercise.Services
     {
         public AccountService(
             IHttpContextAccessor httpContextAccessor, 
-            IMemoryCacheRepository cacheRepo) 
-            :base(httpContextAccessor, cacheRepo)
+            IMemoryCacheRepository cacheRepo
+        ):base(httpContextAccessor, cacheRepo)
         {}
 
         public GetAccountOutput GetAccount(GetAccountInput input)
@@ -70,7 +70,7 @@ namespace ScriptureExercise.Services
             //string memberKey = member.GetRedisKeyString();
             //var memberValueFound = _cacheRepo.Get<Member.Value_T>(memberKey);
 
-            result.OperationResult = account;
+            result.Payload = account;
             return result;
         }
 
@@ -117,12 +117,11 @@ namespace ScriptureExercise.Services
                 _cacheRepo.Set( memberKey, member.Value);
 
 
-                result.AccountCreated = account;
-                result.OperationResult = true;
+                result.Payload = account;
             }
             catch (Exception ex)
             {
-                result.ErrMsg = ex.Message;
+                result.FailMessage = ex.Message;
                 return result;
             }
 

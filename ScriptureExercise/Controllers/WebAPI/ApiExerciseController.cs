@@ -35,14 +35,13 @@ namespace ScriptureExercise.Controllers.WebAPI
 
             var input = request.RecordCreate;
             input.CreateTime = now;
-            var output = exerciseService.CreateExerciseRecord(input);
+            var output_withCreateTimeId = exerciseService.CreateExerciseRecord(input);
 
-            if (output.IsFail)
+            if (output_withCreateTimeId.IsFail)
             {
-                //result.Status = Status.Exception
-                //result.Payload
-                //result.Message = output.Message;
-                return BadRequest(output.FailMessage);
+                result.Status = Status.DataRequireUnique;
+                result.Message = output_withCreateTimeId.FailMessage;
+                return Ok(result);
             }
 
 
@@ -66,13 +65,17 @@ namespace ScriptureExercise.Controllers.WebAPI
                     member.Value.ExerciseRecordCreateTimeId_List.RemoveAt(0);
                 }
             };
-            var updateMemberOutput = memberService.UpdateMember(action);
-            if (updateMemberOutput.IsFail)
+            var output = memberService.UpdateMember(action);
+            if (output.IsFail)
             {
-                return BadRequest(updateMemberOutput.FailMessage);
+                result.Status = Status.DataNotFound;
+                result.Message = output.FailMessage;
+                return Ok(result);
             }
 
-            return Ok(output.Payload);
+            result.Message = "已交卷";
+            result.Payload = output_withCreateTimeId.Payload;
+            return Ok(result);
         }
 
         public IActionResult GetRecordList()
@@ -88,12 +91,20 @@ namespace ScriptureExercise.Controllers.WebAPI
         [HttpGet("{createTimeId}")]
         public IActionResult GetRecord(string createTimeId)
         {
+            var result = new ApiResult();
+
             var output = exerciseService.GetExerciseRecord(createTimeId);
+
             if (output.IsFail)
             {
-                return BadRequest("取紀錄失敗" + output.FailMessage);
+                result.Status = Status.DataNotFound;
+                result.Message = output.FailMessage;
+                return Ok(result);
             }
-            return Ok(output.Payload);
+
+            result.Payload = output.Payload;
+            //result.Message = "";
+            return Ok(result);
         }
 
         [HttpPost("{createTimeId}")]

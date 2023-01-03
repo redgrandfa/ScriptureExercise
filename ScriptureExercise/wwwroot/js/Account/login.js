@@ -42,7 +42,7 @@ let vue_login = new Vue({
                 account:this.fields.account.value,
                 password:this.fields.password.value,
             })
-            .afterFetch(
+            .afterAPI(
                 ()=>{
                     if(returnUrl == ''
                     ){

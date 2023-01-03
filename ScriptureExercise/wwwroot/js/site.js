@@ -87,3 +87,12 @@ function getSubjectTitle( scripture , subjectId){
 function paperJsonFileName_To_DataSource(jsonFileName) {
     return `/lib/DB/${jsonFileName}.json`
 }
+
+function paperJsonFileName_To_paperScheme(jsonFileName) {
+    // jsonFileName = 'F/F2_1'
+    return {
+        scriptureTitle:scripture_Code_To_Chinese(jsonFileName[2]),
+        subjectId:jsonFileName[3],
+        paperId:jsonFileName[5],
+    }
+}

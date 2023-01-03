@@ -36,36 +36,34 @@ namespace ScriptureExercise.Services
             var result = new CreateExerciseRecordOutput();
             var memberId = base.GetCurrentMemberId();
 
-            try
+            var exerciseRecord = new ExerciseRecord
             {
-                var exerciseRecord = new ExerciseRecord
+                PK = new ExerciseRecord.PK_T
                 {
-                    PK = new ExerciseRecord.PK_T
+                    FK_Member = new Member.PK_T
                     {
-                        FK_Member = new Member.PK_T
-                        {
-                            MemberId = memberId,
-                        },
-                        CreateTimeId = input.CreateTime.ToString("yyMMddHHmmss"),
+                        MemberId = memberId,
                     },
-                    Value = new ExerciseRecord.Value_T
-                    {
-                        FK_JsonFileName = input.ExerciseJsonFileName,
-                        //PaperName = input.PaperName,
-                        ReplyJSON = input.ReplyJSON,
-                        Score = input.Score,
-                        PercentScore = input.PercentScore
-                    },
-                };
-                _cacheRepo.Set(exerciseRecord.GetRedisKeyString() , exerciseRecord.Value );
+                    CreateTimeId = input.CreateTime.ToString("yyMMddHHmmss"),
+                },
+                Value = new ExerciseRecord.Value_T
+                {
+                    FK_JsonFileName = input.ExerciseJsonFileName,
+                    //PaperName = input.PaperName,
+                    ReplyJSON = input.ReplyJSON,
+                    Score = input.Score,
+                    PercentScore = input.PercentScore
+                },
+            };
 
-                result.Payload = exerciseRecord.PK.CreateTimeId;
-            }
-            catch(ApplicationException ex)
+            bool isSuccess = _cacheRepo.Create(exerciseRecord.GetRedisKeyString() , exerciseRecord.Value );
+            if (!isSuccess)
             {
-                result.FailMessage = $"紀錄練習結果失敗。{ex}";
+                result.FailMessage = "記錄批改結果失敗";
+                return result;
             }
 
+            result.Payload = exerciseRecord.PK.CreateTimeId;
             return result;
         }
 
@@ -102,7 +100,7 @@ namespace ScriptureExercise.Services
 
         public GetRecordOutput GetExerciseRecord(string createTimeId)
         {
-            var result = new GetRecordOutput();
+            var output = new GetRecordOutput();
 
             var exerciseRecord = new ExerciseRecord
             {
@@ -112,10 +110,14 @@ namespace ScriptureExercise.Services
             exerciseRecord.Value = _cacheRepo.Get<ExerciseRecord.Value_T>(
                 exerciseRecord.GetRedisKeyString());
 
+            if(exerciseRecord.Value == null)
+            {
+                output.FailMessage = "紀錄不存在";
+                return output;
+            }
 
-            result.Payload = exerciseRecord.Value;
-
-            return result;
+            output.Payload = exerciseRecord.Value;
+            return output;
         }
 
         public DeleteRecordOutput DeleteExerciseRecord(string createTimeId)
