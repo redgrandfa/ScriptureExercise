@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Common.DTOModels.ExcerciseDTOs
 {
-    public class GetRecordOutput :BaseOutput<ExerciseRecord.Value_T>
+    public class GetRecordOutput : BaseOutput_withPayload<ExerciseRecord.Value_T>
     {
     }
 

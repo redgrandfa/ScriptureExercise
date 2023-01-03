@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Common.DTOModels.MemberDTOs
 {
-    public class UpdateMember_Output:BaseOutput<bool>
+    public class UpdateMember_Output:BaseOutput
     {
         
     }
 
-    public class UpdateAccount_Output : BaseOutput<bool>
+    public class UpdateAccount_Output : BaseOutput
     {
 
     }

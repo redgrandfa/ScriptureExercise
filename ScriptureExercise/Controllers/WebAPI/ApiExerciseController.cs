@@ -3,16 +3,15 @@ using Common.DTOModels.ExcerciseDTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ScriptureExercise.Models;
 using ScriptureExercise.Models.ExcerciseVM;
 using ScriptureExercise.Services;
 using System;
 
 namespace ScriptureExercise.Controllers.WebAPI
 {
-    [Route("[controller]/[action]")]
-    [ApiController]
     [Authorize(Roles = "Member")]
-    public class ApiExerciseController : ControllerBase
+    public class ApiExerciseController : AppApiControllerBase
     {
         private readonly IExerciseService exerciseService;
         private readonly IMemberService memberService;
@@ -25,20 +24,25 @@ namespace ScriptureExercise.Controllers.WebAPI
             this.memberService = memberService;
         }
 
-        [HttpPost]
         //紀錄答題狀況
+        [HttpPost]
         public IActionResult PostPaper(PostPaperRequestModel request)
         {
-            //var memberId = int.Parse(User.Identity.Name);
+            var result = new ApiResult();
+
             //var now = DateTime.UtcNow;
             var now = DateTime.Now;
 
             var input = request.RecordCreate;
             input.CreateTime = now;
             var output = exerciseService.CreateExerciseRecord(input);
-            if (output.OperationResult == null)
+
+            if (output.IsFail)
             {
-                return BadRequest(output.ErrMsg);
+                //result.Status = Status.Exception
+                //result.Payload
+                //result.Message = output.Message;
+                return BadRequest(output.FailMessage);
             }
 
 
@@ -63,33 +67,33 @@ namespace ScriptureExercise.Controllers.WebAPI
                 }
             };
             var updateMemberOutput = memberService.UpdateMember(action);
-            if (!updateMemberOutput.OperationResult)
+            if (updateMemberOutput.IsFail)
             {
-                return BadRequest(updateMemberOutput.ErrMsg);
+                return BadRequest(updateMemberOutput.FailMessage);
             }
 
-            return Ok(output.OperationResult);
+            return Ok(output.Payload);
         }
 
         public IActionResult GetRecordList()
         {
             var output = exerciseService.GetExerciseRecordList();
-            if (output.OperationResult == null)
+            if (output.IsFail)
             {
-                return BadRequest("取紀錄列表失敗" + output.ErrMsg);
+                return BadRequest("取紀錄列表失敗" + output.FailMessage);
             }
-            return Ok(output.OperationResult);
+            return Ok(output.Payload);
         }
 
         [HttpGet("{createTimeId}")]
         public IActionResult GetRecord(string createTimeId)
         {
             var output = exerciseService.GetExerciseRecord(createTimeId);
-            if (output.OperationResult == null)
+            if (output.IsFail)
             {
-                return BadRequest("取紀錄失敗" + output.ErrMsg);
+                return BadRequest("取紀錄失敗" + output.FailMessage);
             }
-            return Ok(output.OperationResult);
+            return Ok(output.Payload);
         }
 
         [HttpPost("{createTimeId}")]
@@ -101,9 +105,9 @@ namespace ScriptureExercise.Controllers.WebAPI
             }
 
             var output = exerciseService.DeleteExerciseRecord(createTimeId);
-            if (!output.OperationResult)
+            if (output.IsFail)
             {
-                return UnprocessableEntity("刪除紀錄失敗" + output.ErrMsg);
+                return UnprocessableEntity("刪除紀錄失敗" + output.FailMessage);
             }
             return Ok("刪除紀錄成功");
         }

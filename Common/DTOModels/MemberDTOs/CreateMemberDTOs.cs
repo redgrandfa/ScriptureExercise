@@ -7,7 +7,7 @@ namespace Common.DTOModels.MemberDTOs
         public string Account { get; set; }
         public string Password { get; set; }
     }
-    public class CreateMember_Output : BaseOutput<Account> //若成功就回傳創好的Member
+    public class CreateMember_Output : BaseOutput_withPayload<Account> //若成功就回傳創好的Member
     {
     }
 

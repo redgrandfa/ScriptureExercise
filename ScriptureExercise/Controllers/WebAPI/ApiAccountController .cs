@@ -43,15 +43,15 @@ namespace ScriptureExercise.Controllers.WebAPI
             };
 
             var createMemberOutput = memberService.CreateMember(createMemberInput);
-            if (createMemberOutput.OperationResult == null)
+            if (createMemberOutput.IsFail)
             {
-                return BadRequest("創建會員失敗：" + createMemberOutput.ErrMsg);
+                return BadRequest("創建會員失敗：" + createMemberOutput.FailMessage);
             }
 
             //註冊完自動登入
             var issueClaimsInput = new IssueClaimsInput
             {
-                Account = createMemberOutput.OperationResult,
+                Account = createMemberOutput.Payload,
             };
             await accountService.IssueClaims(issueClaimsInput);
 

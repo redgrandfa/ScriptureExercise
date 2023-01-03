@@ -47,9 +47,9 @@ namespace ScriptureExercise.Controllers.WebAPI
         public IActionResult UpdateAccount(CreateMemberPostModel request)
         {
             var output = memberService.UpdateAccount(request.Account);
-            if (!output.OperationResult)
+            if (output.IsFail)
             {
-                return BadRequest(output.ErrMsg);
+                return BadRequest(output.FailMessage);
             }
             return Ok("修改帳號成功");
         }
@@ -73,13 +73,32 @@ namespace ScriptureExercise.Controllers.WebAPI
             return UpdateByCondition(action, "修改經典顯示成功");
         }
 
+        [HttpPost]
+        public IActionResult ToggleSubjectCollect(MemberEditVM request)
+        {
+            Action<Member> action = (member) =>
+            {
+                var list = member.Value.SubjectCollectedList;
+                var target = 1;
+                if (list.Contains(target))
+                {
+                    list.Remove(target);
+                }
+                else
+                {
+                    list.Add(target);
+                }
+            };
+            return UpdateByCondition(action, "修改經典顯示成功");
+        }
+
         [NonAction]
         public IActionResult UpdateByCondition(Action<Member>  action,  string successMsg)
         {
             var output = memberService.UpdateMember(action);
-            if (!output.OperationResult)
+            if (output.IsFail)
             {
-                return BadRequest(output.ErrMsg);
+                return BadRequest(output.FailMessage);
             }
             return Ok(successMsg);
         }

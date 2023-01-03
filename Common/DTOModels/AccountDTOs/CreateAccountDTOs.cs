@@ -8,8 +8,7 @@ namespace Common.DTOModels.AccountDTOs
         //public string Id { get; set; }
         public Member.PK_T MemberPK { get; set; }
     }
-    public class CreateAccount_Output : BaseOutput<bool>
+    public class CreateAccount_Output : BaseOutput_withPayload<Account>
     {
-        public Account AccountCreated { get; set; }
     }
 }

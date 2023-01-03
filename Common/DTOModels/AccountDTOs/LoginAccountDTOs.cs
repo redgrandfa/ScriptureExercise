@@ -8,7 +8,7 @@ namespace Common.DTOModels.AccountDTOs
         //public string Id { get; set; }
         //public string Name { get; set; }
     }
-    public class GetAccountOutput : BaseOutput<Account>
+    public class GetAccountOutput : BaseOutput_withPayload<Account>
     {
     }
 

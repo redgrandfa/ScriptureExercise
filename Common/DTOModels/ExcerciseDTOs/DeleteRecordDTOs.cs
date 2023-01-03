@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.DTOModels.ExcerciseDTOs
 {
-    public class DeleteRecordOutput:BaseOutput<bool>
+    public class DeleteRecordOutput:BaseOutput
     {
 
     }

@@ -17,7 +17,7 @@ namespace Common.DTOModels.ExcerciseDTOs
         public int Score { get; set; }
     }
 
-    public class CreateExerciseRecordOutput: BaseOutput<string>
+    public class CreateExerciseRecordOutput: BaseOutput_withPayload<string>
     {
 
     }
