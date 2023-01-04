@@ -12,11 +12,6 @@ namespace ScriptureExercise.Services
             _httpContextAccessor = httpContextAccessor;
             _cacheRepo = cacheRepo;
         }
-
-        public int GetCurrentMemberId()
-        {
-            return int.Parse(_httpContextAccessor.HttpContext.User.Identity.Name);
-        }
     }
 
     //public class BaseService_withMember { }

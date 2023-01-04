@@ -34,7 +34,7 @@ namespace ScriptureExercise.Services
         public CreateExerciseRecordOutput CreateExerciseRecord(CreateExerciseRecordInput input)
         {
             var result = new CreateExerciseRecordOutput();
-            var memberId = base.GetCurrentMemberId();
+            var memberId = memberService.GetCurrentMemberId();
 
             var exerciseRecord = new ExerciseRecord
             {
@@ -69,10 +69,15 @@ namespace ScriptureExercise.Services
 
         public GetRecordListOutput GetExerciseRecordList()
         {
-            var result = new GetRecordListOutput();
+            var output = new GetRecordListOutput();
 
             var member = memberService.GetCurrentMember();
-            result.Payload =
+            //if(member == null) {
+            //    output.FailMessage = "...";
+            //    return output;
+            //}
+
+            output.Payload =
                 member.Value.ExerciseRecordCreateTimeId_List.Select(RecordCreateTime =>
                 {
                     var exerciseRecord = new ExerciseRecord
@@ -95,7 +100,7 @@ namespace ScriptureExercise.Services
                     };
                 }).ToList();
 
-            return result;
+            return output;
         }
 
         public GetRecordOutput GetExerciseRecord(string createTimeId)
@@ -158,7 +163,7 @@ namespace ScriptureExercise.Services
 
         private ExerciseRecord.PK_T GetRecordPK_ById(string createTimeId)
         {
-            var memberId = base.GetCurrentMemberId();
+            var memberId = memberService.GetCurrentMemberId();
             var exerciseRecordPK = new ExerciseRecord.PK_T
             {
                 CreateTimeId = createTimeId,

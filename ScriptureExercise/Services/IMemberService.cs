@@ -20,7 +20,7 @@ namespace ScriptureExercise.Services
 
 
         BaseOutput_withPayload<Member> GetMember_ByInput(CreateMember_Input input);
-
+        int GetCurrentMemberId();
         Member GetCurrentMember();
         Member GetMember_ById(int memberId);
     }
@@ -224,9 +224,14 @@ namespace ScriptureExercise.Services
             return output;
         }
 
+        public int GetCurrentMemberId()
+        {
+            return int.Parse(_httpContextAccessor.HttpContext.User.Identity.Name);
+        }
+
         public Member GetCurrentMember()
         {
-            return GetMember_ById( base.GetCurrentMemberId() );
+            return GetMember_ById( GetCurrentMemberId() );
         }
         public Member GetMember_ById(int memberId)
         {
