@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Enums;
+using System;
 
 namespace ScriptureExercise.Models
 {
@@ -14,41 +15,17 @@ namespace ScriptureExercise.Models
     /// API內部的操作結果(網路斷線 找不到等等溝通失敗因素...成功與API溝通後就統一回httpCode200)
     /// </summary>
 
-    public class ApiResult //: ResultBase
+    public class ApiResponseBody //: ResultBase
     {
-        public Status Status { get; set; } //可能需要用這個 在前端做條件判斷
+        public ApiOperationStatus Status { get; set; } //可能需要用這個 在前端做條件判斷
         public string StatusMeaning => Status.ToString();
-        //public int StatusCode => (int)Status; 
-        //public string Code => Convert.ToInt32(Response).ToString().PadLeft(3, '0'); //好像沒必要補0
+        //public int StatusCode => (int)ApiOperationStatus; 
+        //public string Code => Convert.ToInt32(Status).ToString().PadLeft(3, '0'); //好像沒必要補0
 
         //一個API Action內部，希望要保有【型別彈性】，因為前端才不管型別。也可善用【匿名類型】組裝
         public object Payload { get; set; } //考慮名稱：Body 
         public string Message { get; set; } //訊息：失敗直接拿service的失敗訊息、成功另寫?在action/js設定? => action設定的畫，前端可便於封裝
     }
 
-    public enum Status
-    {
-        Success = 0,
-
-        Fail = 1,
-        //失敗 = 某正整數
-
-        //UnAuthorized = 1,
-
-        LoginFail = 101,
-
-        //NewPasswordIsNotMatch = 102,
-
-        //OldPasswordIsNotMatch = 103,
-
-        //MemberIsNotEnable = 104,
-
-        DataNotFound = 401, //R U D
-
-        DataRequireUnique = 402, //C
-
-        MissingRequiredInformation = 403, //C U
-
-        Exception = 999,
-    }
+    
 }

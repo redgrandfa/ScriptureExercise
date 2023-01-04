@@ -186,7 +186,7 @@ namespace ScriptureExercise.Services
 
         public BaseOutput_withPayload<Member> GetMember_ByInput(CreateMember_Input input)
         {
-            var output = new BaseOutput_withPayload<Member>();
+            var result = new BaseOutput_withPayload<Member>();
 
             var account = new Account
             {
@@ -201,8 +201,8 @@ namespace ScriptureExercise.Services
 
             if (account.Value == null)
             {
-                output.FailMessage = "輸入的帳號不存在";
-                return output;
+                result.FailMessage = "輸入的帳號不存在";
+                return result;
             }
 
             var member = new Member
@@ -214,14 +214,12 @@ namespace ScriptureExercise.Services
 
             if (member.Value.Password != input.Password)
             {
-                output.FailMessage = "密碼錯誤";
-                return output;
+                result.FailMessage = "密碼錯誤";
+                return result;
             }
 
-
-            //output.FailMessage = "";
-            output.Payload = member;
-            return output;
+            result.Payload = member;
+            return result;
         }
 
         public int GetCurrentMemberId()

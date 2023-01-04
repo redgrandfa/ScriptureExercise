@@ -1,5 +1,6 @@
 ﻿using Common.DBModels;
 using Common.DTOModels.ExcerciseDTOs;
+using Common.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +29,7 @@ namespace ScriptureExercise.Controllers.WebAPI
         [HttpPost]
         public IActionResult PostPaper(PostPaperRequestModel request)
         {
-            var result = new ApiResult();
+            var result = new ApiResponseBody();
 
             //var now = DateTime.UtcNow;
             var now = DateTime.Now;
@@ -39,7 +40,7 @@ namespace ScriptureExercise.Controllers.WebAPI
 
             if (output_withCreateTimeId.IsFail)
             {
-                result.Status = Status.DataRequireUnique;
+                result.Status = ApiOperationStatus.DataRequireUnique;
                 result.Message = output_withCreateTimeId.FailMessage;
                 return Ok(result);
             }
@@ -68,7 +69,7 @@ namespace ScriptureExercise.Controllers.WebAPI
             var output = memberService.UpdateMember(action);
             if (output.IsFail)
             {
-                result.Status = Status.DataNotFound;
+                result.Status = ApiOperationStatus.DataNotFound;
                 result.Message = output.FailMessage;
                 return Ok(result);
             }
@@ -80,24 +81,30 @@ namespace ScriptureExercise.Controllers.WebAPI
 
         public IActionResult GetRecordList()
         {
+            var result = new ApiResponseBody();
+
             var output = exerciseService.GetExerciseRecordList();
             if (output.IsFail)
             {
-                return BadRequest("取紀錄列表失敗" + output.FailMessage);
+                result.Status= ApiOperationStatus.DataNotFound;
+                result.Message = output.FailMessage;
+                return Ok(result);
             }
-            return Ok(output.Payload);
+
+            result.Payload = output.Payload;
+            return Ok(result);
         }
 
         [HttpGet("{createTimeId}")]
         public IActionResult GetRecord(string createTimeId)
         {
-            var result = new ApiResult();
+            var result = new ApiResponseBody();
 
             var output = exerciseService.GetExerciseRecord(createTimeId);
 
             if (output.IsFail)
             {
-                result.Status = Status.DataNotFound;
+                result.Status = ApiOperationStatus.DataNotFound;
                 result.Message = output.FailMessage;
                 return Ok(result);
             }
@@ -112,7 +119,7 @@ namespace ScriptureExercise.Controllers.WebAPI
         {
             if (createTimeId == null)
             {
-                return BadRequest("紀錄編號不可為空");
+                return Ok("紀錄編號不可為空");
             }
 
             var output = exerciseService.DeleteExerciseRecord(createTimeId);

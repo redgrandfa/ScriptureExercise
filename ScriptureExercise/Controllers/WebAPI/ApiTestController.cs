@@ -14,7 +14,7 @@ namespace ScriptureExercise.Controllers.WebAPI
         [HttpPost]
         public IActionResult TestPost(string prop1 )
         {
-            var result = new ApiResult()
+            var result = new ApiResponseBody()
             {
                 Status = Status.Success,
                 Message = "qwe",

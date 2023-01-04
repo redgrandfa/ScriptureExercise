@@ -13,6 +13,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ScriptureExercise.Models;
+using Common.Enums;
 
 namespace ScriptureExercise.Controllers.WebAPI
 {
@@ -46,7 +47,7 @@ namespace ScriptureExercise.Controllers.WebAPI
             var createMemberOutput = memberService.CreateMember(createMemberInput);
             if (createMemberOutput.IsFail)
             {
-                return BadRequest("創建會員失敗：" + createMemberOutput.FailMessage);
+                return Ok("創建會員失敗：" + createMemberOutput.FailMessage);
             }
 
             //註冊完自動登入
@@ -63,7 +64,7 @@ namespace ScriptureExercise.Controllers.WebAPI
         [AllowAnonymous]
         public async Task<IActionResult> LoginAsync(CreateMemberPostModel request)
         {
-            var result = new ApiResult();
+            var result = new ApiResponseBody();
 
             var input = new CreateMember_Input
             {
@@ -73,7 +74,7 @@ namespace ScriptureExercise.Controllers.WebAPI
             var output_WithPayload = memberService.GetMember_ByInput(input);
             if (output_WithPayload.IsFail)
             {
-                result.Status = Status.DataNotFound;
+                result.Status = ApiOperationStatus.DataNotFound;
                 result.Message = output_WithPayload.FailMessage;
                 return Ok(result);
             }
@@ -116,7 +117,7 @@ namespace ScriptureExercise.Controllers.WebAPI
         //    var createMemberOutput = memberService.CreateMember(createMemberInput);
         //    if (!createMemberOutput.OperationResult)
         //    {
-        //        return BadRequest("創建會員失敗：" + createMemberOutput.ErrMsg);
+        //        return Ok("創建會員失敗：" + createMemberOutput.ErrMsg);
         //    }
 
         //    //繼續創建 account > 綁起來 
@@ -137,7 +138,7 @@ namespace ScriptureExercise.Controllers.WebAPI
         //    Member.PK_T memberPK = memberService.GetMemberPK_ByBindKey(request.BindKey);
         //    if (memberPK == null)
         //    {
-        //        return BadRequest("您輸入的密鑰對應不上任何會員。請檢查是否打錯，或考慮創建新的會員密鑰");
+        //        return Ok("您輸入的密鑰對應不上任何會員。請檢查是否打錯，或考慮創建新的會員密鑰");
         //    }
 
         //    return await CreateAccountAsync(memberPK);
@@ -154,7 +155,7 @@ namespace ScriptureExercise.Controllers.WebAPI
         //    var output = accountService.CreateAccount(input);
         //    if (!output.OperationResult)
         //    {
-        //        return BadRequest("綁定會員失敗：" + output.ErrMsg);
+        //        return Ok("綁定會員失敗：" + output.ErrMsg);
         //    }
 
         //    await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

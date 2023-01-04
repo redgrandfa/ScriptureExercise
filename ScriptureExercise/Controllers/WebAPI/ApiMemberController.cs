@@ -49,7 +49,7 @@ namespace ScriptureExercise.Controllers.WebAPI
             var output = memberService.UpdateAccount(request.Account);
             if (output.IsFail)
             {
-                return BadRequest(output.FailMessage);
+                return Ok(output.FailMessage);
             }
             return Ok("修改帳號成功");
         }
@@ -98,7 +98,7 @@ namespace ScriptureExercise.Controllers.WebAPI
             var output = memberService.UpdateMember(action);
             if (output.IsFail)
             {
-                return BadRequest(output.FailMessage);
+                return Ok(output.FailMessage);
             }
             return Ok(successMsg);
         }

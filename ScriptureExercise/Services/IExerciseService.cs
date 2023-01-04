@@ -69,16 +69,18 @@ namespace ScriptureExercise.Services
 
         public GetRecordListOutput GetExerciseRecordList()
         {
-            var output = new GetRecordListOutput();
+            var result = new GetRecordListOutput();
 
             var member = memberService.GetCurrentMember();
-            //if(member == null) {
-            //    output.FailMessage = "...";
-            //    return output;
-            //}
+            if (member == null)
+            {
+                result.FailMessage = "取紀錄列表失敗";
+                return result;
+            }
 
-            output.Payload =
-                member.Value.ExerciseRecordCreateTimeId_List.Select(RecordCreateTime =>
+            result.Payload = 
+                member.Value.ExerciseRecordCreateTimeId_List
+                .Select(RecordCreateTime =>
                 {
                     var exerciseRecord = new ExerciseRecord
                     {
@@ -100,12 +102,12 @@ namespace ScriptureExercise.Services
                     };
                 }).ToList();
 
-            return output;
+            return result;
         }
 
         public GetRecordOutput GetExerciseRecord(string createTimeId)
         {
-            var output = new GetRecordOutput();
+            var result = new GetRecordOutput();
 
             var exerciseRecord = new ExerciseRecord
             {
@@ -117,12 +119,12 @@ namespace ScriptureExercise.Services
 
             if(exerciseRecord.Value == null)
             {
-                output.FailMessage = "紀錄不存在";
-                return output;
+                result.FailMessage = "紀錄不存在";
+                return result;
             }
 
-            output.Payload = exerciseRecord.Value;
-            return output;
+            result.Payload = exerciseRecord.Value;
+            return result;
         }
 
         public DeleteRecordOutput DeleteExerciseRecord(string createTimeId)
@@ -134,28 +136,26 @@ namespace ScriptureExercise.Services
                 PK = GetRecordPK_ById(createTimeId),
             };
 
-            try
+            var key = exerciseRecord.GetRedisKeyString();
+            exerciseRecord.Value = _cacheRepo.Get<ExerciseRecord.Value_T>(key);
+
+            if (exerciseRecord.Value == null)
             {
-                var key = exerciseRecord.GetRedisKeyString();
-                exerciseRecord.Value = _cacheRepo.Get<ExerciseRecord.Value_T>(key);
-
-                if (exerciseRecord.Value == null)
-                {
-                    result.FailMessage = $"編號：【{createTimeId}】這筆紀錄不存在";
-                    return result;
-                }
-
-                _cacheRepo.Remove(key);
-
-                Action<Member> action = member =>
-                {
-                    member.Value.ExerciseRecordCreateTimeId_List.Remove(createTimeId);
-                };
-                memberService.UpdateMember(action);
+                result.FailMessage = "異常：此筆記錄不存在";//$"編號：【{createTimeId}】這筆紀錄不存在";
+                return result;
             }
-            catch(Exception ex)
+
+            _cacheRepo.Remove(key);
+
+            Action<Member> action = member =>
             {
-                result.FailMessage = ex.Message;
+                member.Value.ExerciseRecordCreateTimeId_List.Remove(createTimeId);
+            };
+            var updateMemberOutput =  memberService.UpdateMember(action);
+            if (updateMemberOutput.IsFail)//理論上應該要拋例外...?
+            {
+                result.FailMessage = updateMemberOutput.FailMessage;
+                return result;
             }
 
             return result;
