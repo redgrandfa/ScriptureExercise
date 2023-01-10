@@ -59,12 +59,7 @@ namespace ScriptureExercise.Controllers.WebAPI
                 member.Value.BlankFillQuestion_Done += t.BlankFillQuestion_Done;
                 member.Value.BlankFillQuestion_Correct += t.BlankFillQuestion_Correct;
 
-                //確保member的紀錄數量
                 member.Value.ExerciseRecordCreateTimeId_List.Add(now.ToString("yyMMddHHmmss"));
-                if (member.Value.ExerciseRecordCreateTimeId_List.Count > 15)
-                {
-                    member.Value.ExerciseRecordCreateTimeId_List.RemoveAt(0);
-                }
             };
             var output = memberService.UpdateMember(action);
             if (output.IsFail)
@@ -72,6 +67,14 @@ namespace ScriptureExercise.Controllers.WebAPI
                 result.Status = ApiOperationStatus.DataNotFound;
                 result.Message = output.FailMessage;
                 return Ok(result);
+            }
+
+            //確保member的紀錄數量
+            var member = memberService.GetCurrentMember();
+            if (member.Value.ExerciseRecordCreateTimeId_List.Count > 15)
+            {
+                var createId = member.Value.ExerciseRecordCreateTimeId_List[0];
+                exerciseService.DeleteExerciseRecord(createId);
             }
 
             result.Message = "批改完畢";

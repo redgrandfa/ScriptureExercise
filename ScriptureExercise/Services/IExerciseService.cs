@@ -141,7 +141,7 @@ namespace ScriptureExercise.Services
 
             if (exerciseRecord.Value == null)
             {
-                result.FailMessage = "異常：此筆記錄不存在";//$"編號：【{createTimeId}】這筆紀錄不存在";
+                result.FailMessage = "異常：練習記錄不存在";//$"編號：【{createTimeId}】這筆紀錄不存在";
                 return result;
             }
 
