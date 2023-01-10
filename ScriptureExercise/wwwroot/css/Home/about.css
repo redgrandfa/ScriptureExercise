@@ -1,0 +1,41 @@
+.about {
+  margin: auto;
+  max-width: 272px;
+}
+
+.about_announcement {
+  margin-top: 82.5px;
+  margin-bottom: 0px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 30px;
+}
+
+.about_hint {
+  margin-top: 29px;
+  margin-bottom: 0px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #787878;
+}
+
+.about_contacts {
+  margin-top: 23px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.about_contact_icon {
+  font-size: 22px;
+  color: #787878;
+}
+
+i {
+  cursor: pointer;
+}
+
+.about_footer {
+  margin-top: 40px;
+  margin-bottom: 0px;
+  color: #787878;
+}/*# sourceMappingURL=about.css.map */

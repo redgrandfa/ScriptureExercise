@@ -36,15 +36,19 @@ namespace ScriptureExercise.Services
         {
             var result = new CreateMember_Output();
 
-            var memberPK_Found = GetMember_ByInput(input);
+
+            var getMember_output = GetMember_ByInput(input);
+
             //檢查 已存在衝突
-            if (memberPK_Found != null)
+            if (getMember_output.IsSuccess)
             {
                 result.FailMessage = "此會員帳號已被其他人佔用，請換一個";
                 return result;
             }
 
+
             //創建會員
+            //名字 可能從第三方取現成的
             var name = _httpContextAccessor.HttpContext.User.Claims
                     .FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value; ;
             if (name == null )
@@ -107,11 +111,16 @@ namespace ScriptureExercise.Services
                 _cacheRepo.Set(account.GetRedisKeyString(), account.Value);
 
 
-                result.Payload = account;
+                result.Payload = new AccountAndMember
+                {
+                    Account = account,
+                    Member = member,
+                };
             }
             catch (Exception ex)
             {
-                result.FailMessage = ex.Message;//.ToString
+                throw ex;
+                //result.FailMessage = ex.Message;//.ToString
             }
 
             return result;

@@ -57,11 +57,12 @@ namespace ScriptureExercise.Controllers.WebAPI
             //註冊完自動登入
             var issueClaimsInput = new IssueClaimsInput
             {
-                Account = createMemberOutput.Payload,
+                Account = createMemberOutput.Payload.Account,
+                Member = createMemberOutput.Payload.Member,
             };
             await accountService.IssueClaims(issueClaimsInput);
 
-            result.Message = "註冊成功，並已將您登入";
+            result.Message = "註冊成功，並已將您登入，3秒後自動轉址";
             return Ok(result);
         }
 
@@ -95,6 +96,7 @@ namespace ScriptureExercise.Controllers.WebAPI
                         FK_Member = memberFound.PK,
                     },
                 },
+                Member = memberFound,
             };
             await accountService.IssueClaims(issueClaimsInput);
 

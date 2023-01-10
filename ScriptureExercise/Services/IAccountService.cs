@@ -131,12 +131,21 @@ namespace ScriptureExercise.Services
 
         public async Task IssueClaims( IssueClaimsInput input)
         {
+            var showName = input.Member.Value.Name;
+            if(showName == "")
+            {
+                showName = input.Account.PK.AccountId_FromProvider;
+            }
+
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, input.Account.Value.FK_Member.MemberId.ToString() ),
-                new Claim(Define.LOGIN_THROUGH_CLAIM_TYPE, input.Account.PK.Provider ),
+                //會員
+                new Claim(ClaimTypes.Role , "Member"), 
+                new Claim(ClaimTypes.Name, input.Member.PK.MemberId.ToString() ),
+                new Claim(Define.CLAIMTYPE_SHOWNAME , showName), 
 
-                new Claim(ClaimTypes.Role , "Member"), //區分第三方登入
+                //登入方式 //區分第三方登入
+                new Claim(Define.LOGIN_THROUGH_CLAIM_TYPE, input.Account.PK.Provider ),
             };
 
 

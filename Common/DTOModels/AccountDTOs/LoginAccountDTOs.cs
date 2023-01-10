@@ -1,4 +1,5 @@
 ﻿using Common.DBModels;
+using Common.DTOModels.MemberDTOs;
 
 namespace Common.DTOModels.AccountDTOs
 {
@@ -22,9 +23,9 @@ namespace Common.DTOModels.AccountDTOs
     /// <summary>
     /// 無法在會員中心編修的資訊 = 固定 = 記錄在claim
     /// </summary>
-    public class IssueClaimsInput
+    public class IssueClaimsInput:AccountAndMember
     {
-        public Account Account { get; set; }
+        //public Account Account { get; set; }
         //public Member Member { get; set; }
     }
 }

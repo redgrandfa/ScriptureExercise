@@ -47,7 +47,18 @@ let vue_login = new Vue({
             })
             .afterAPI(
                 (result)=>{
-                    dom.dispatchEvent(apiDoneEvent)
+                    setTimeout(
+                        ()=>{
+                            if(returnUrl == ''
+                            ){
+                                location.href='/'
+                            }
+                            else{
+                                location.href=returnUrl
+                            }
+                        }
+                    ,3000)
+                    // dom.dispatchEvent(apiDoneEvent)
                 },
                 (result)=>{
                     dom.dispatchEvent(apiDoneEvent)

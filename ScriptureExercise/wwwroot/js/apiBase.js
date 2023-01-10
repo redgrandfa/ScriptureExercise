@@ -8,6 +8,20 @@ const swalError = Swal.mixin({
     title: '失敗',
 })
 
+const swalToast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+})
+
+
+
 // function fetchBase( url, bodyObject ){
 //     let promise 
 //     if( bodyObject == null){
@@ -59,7 +73,11 @@ Promise.prototype.afterAPI = function (afterSuccess, afterFail) {
             .then(result => {
                 // console.log(result.status) 
                 if (result.status == 0) {  //API不一定要顯示訊息?
-                    swalSuccess.fire({
+                    // swalSuccess.fire({
+                    //     text: result.message
+                    // })
+                    swalToast.fire({
+                        title:'成功',
                         text: result.message
                     })
                     afterSuccess(result)

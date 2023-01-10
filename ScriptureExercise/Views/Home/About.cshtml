@@ -1,10 +1,59 @@
 ﻿@{
     ViewData["Title"] = "關於/聯繫管理者";
 }
-<h1>@ViewData["Title"]</h1>
-<hr>
+@section TopCSS{
+    <link rel="stylesheet" href="~/css/Home/about.css">
+}
+@section Scripts{
+    <script src = "~/js/Home/about.js"></script>
+} 
 
-<ul class="row row-cols-1 row-cols-md-2">
+<div id="vue_about">
+    <div class="about">
+        <img class="about_banner" src="../images/about.svg" alt="">
+        <!-- .png -->
+        <p class="about_announcement">
+            這是一個專為筆試打造的練習資源
+            在充分讀過經典後，歡迎上來小試伸手
+            祝大家都能從經典中挖掘到珍貴的智慧
+        </p>
+
+        <p class="about_hint">
+            如網站出問題，可聯繫 [網站管理者] 回報。
+            可以文字訊息/截圖/通話/視訊
+        </p>
+
+        <div class="about_contacts">
+            <span class="about_contact_icon" id="popover-mobilePhone">
+                <i class="fa-solid fa-square-phone"></i>
+            </span>
+            <span class="about_contact_icon" id="popover-line">
+                <i class="fa-brands fa-line"></i>
+            </span>
+            <span class="about_contact_icon" id="popover-email">
+                <i class="fa-solid fa-square-envelope"></i>
+            </span>
+        </div>
+
+        <b-popover target="popover-mobilePhone" triggers="click" placement="topright">
+            手機：<a href="tel:+886-907204075">0907-204075</a>
+            <!-- <i class="fa-regular fa-copy" aria-copy-word="0907204075"></i> -->
+            <i class="fa-regular fa-copy" onclick="copy('0907204075')"></i>
+        </b-popover>
+        <b-popover target="popover-line" triggers="click" placement="top">
+            lineID： redgrandfa
+            <i class="fa-regular fa-copy" onclick="copy('redgrandfa')"></i>
+        </b-popover>
+        <b-popover target="popover-email" triggers="click" placement="topleft">
+            電子信箱： redgrandfa@gmail.com
+            <i class="fa-regular fa-copy" onclick="copy('redgrandfa@gmail.com')"></i>
+        </b-popover>
+        <p class="about_footer">Design by 洪偉軒</p>
+    </div>
+</ㄎ>
+
+
+@* <ul class="row row-cols-1 row-cols-md-2">
     <li class="col">
         <h4>網站開發者：</h4>
         <p>洪偉軒</p>
@@ -19,8 +68,8 @@
         <p>蔡維宸</p>
         <p>【設計中...】</p>
     </li>
-</ul>
+</ul> *@
 
-<hr>
-<h4>其他供道親使用的網站服務資源：</h4>
-暫無，預計下一個推出 代理投資服務...
+@* <hr> *@
+@* <h4>其他供道親使用的網站服務資源：</h4>
+暫無，預計下一個推出 代理投資服務... *@

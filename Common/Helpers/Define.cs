@@ -9,5 +9,7 @@ namespace Common.Helpers
     public struct Define
     {
         public const string LOGIN_THROUGH_CLAIM_TYPE = "LoginThrough";
+
+        public const string CLAIMTYPE_SHOWNAME = "ShowName";
     }
 }

@@ -7,12 +7,16 @@
   <ItemGroup>
     <Compile Remove="Views\Shared\Library\**" />
     <Compile Remove="wwwroot\js\Excercise\A生晨\**" />
+    <Compile Remove="wwwroot\VHtmls\**" />
     <Content Remove="Views\Shared\Library\**" />
     <Content Remove="wwwroot\js\Excercise\A生晨\**" />
+    <Content Remove="wwwroot\VHtmls\**" />
     <EmbeddedResource Remove="Views\Shared\Library\**" />
     <EmbeddedResource Remove="wwwroot\js\Excercise\A生晨\**" />
+    <EmbeddedResource Remove="wwwroot\VHtmls\**" />
     <None Remove="Views\Shared\Library\**" />
     <None Remove="wwwroot\js\Excercise\A生晨\**" />
+    <None Remove="wwwroot\VHtmls\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,7 +33,6 @@
     <Folder Include="Models\HomeVM\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\lib\DB\A\" />
-    <Folder Include="wwwroot\VHtmls\Home\" />
     <Folder Include="Views\Home\" />
     <Folder Include="wwwroot\css\Account\" />
     <Folder Include="wwwroot\css\Excercise\" />
@@ -38,20 +41,6 @@
     <Folder Include="wwwroot\js\Account\" />
     <Folder Include="wwwroot\js\Home\" />
     <Folder Include="wwwroot\js\Member\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\VHtmls\Account\newAccount.html" />
-    <None Include="wwwroot\VHtmls\bsVueTemplate.html" />
-    <None Include="wwwroot\VHtmls\emailSignInTest\bg.jpg" />
-    <None Include="wwwroot\VHtmls\emailSignInTest\sign.css" />
-    <None Include="wwwroot\VHtmls\emailSignInTest\sign.css.map" />
-    <None Include="wwwroot\VHtmls\emailSignInTest\sign.html" />
-    <None Include="wwwroot\VHtmls\emailSignInTest\sign.scss" />
-    <None Include="wwwroot\VHtmls\Exercise\ExerciseList.html" />
-    <None Include="wwwroot\VHtmls\Exercise\ExerciseList.js" />
-    <None Include="wwwroot\VHtmls\Exercise\ExercisePaper.html" />
-    <None Include="wwwroot\VHtmls\Member\MemberSettings.html" />
   </ItemGroup>
 
   <ItemGroup>

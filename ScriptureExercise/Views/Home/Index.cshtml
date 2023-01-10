@@ -14,7 +14,11 @@
 </p>
 
 @if (User.Identity.IsAuthenticated)
-{
+{    var showName = User.Claims
+        .FirstOrDefault(c=> c.Type== Common.Helpers.Define.CLAIMTYPE_SHOWNAME)
+        ?.Value;
+
+	<p>歡迎回來，<b>@showName</b></p>
 	<a href="/Account/Logout" class="nav-login">
 		登出 LOGOUT
 		<div class="login-image-btn"></div>
