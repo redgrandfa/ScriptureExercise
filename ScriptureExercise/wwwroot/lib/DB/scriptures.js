@@ -3,7 +3,9 @@ let scriptures_inDB = [ // bai 4 ...Ru 1+3+7 ... Si5 ... Dao 1 ... 21部
     {
         code:'A',
         title: "生晨",
-        author:"...著",
+        coverImgPath:"",
+        author:"著",
+        introHtml:"q",
         belongTo:'Bai',
         subjects: [
             {
@@ -28,7 +30,9 @@ let scriptures_inDB = [ // bai 4 ...Ru 1+3+7 ... Si5 ... Dao 1 ... 21部
     {
         code:'B',
         title: "佛規諭錄",
-        author:"...著",
+        coverImgPath:"",
+        author:"著",
+        introHtml:"",
         belongTo:'Bai',
         subjects: [
             {
@@ -55,7 +59,9 @@ let scriptures_inDB = [ // bai 4 ...Ru 1+3+7 ... Si5 ... Dao 1 ... 21部
     {
         code:'C',
         title: "性理題釋",
-        author:"...著",
+        coverImgPath:"",
+        author:"著",
+        introHtml:"",
         belongTo:'Bai',
         subjects: [
             {
@@ -80,7 +86,9 @@ let scriptures_inDB = [ // bai 4 ...Ru 1+3+7 ... Si5 ... Dao 1 ... 21部
     {
         code:'D',
         title: "皇母訓子十誡",
-        author:"...著",
+        coverImgPath:"",
+        author:"著",
+        introHtml:"",
         belongTo:'Bai',
         subjects: [
             {
@@ -106,7 +114,9 @@ let scriptures_inDB = [ // bai 4 ...Ru 1+3+7 ... Si5 ... Dao 1 ... 21部
     {
         code:'E',
         title: "學庸",
-        author:"...著",
+        coverImgPath:"",
+        author:"著",
+        introHtml:"",
         belongTo:'Ru',
         subjects: [
             {
@@ -133,7 +143,9 @@ let scriptures_inDB = [ // bai 4 ...Ru 1+3+7 ... Si5 ... Dao 1 ... 21部
     {
         code:'F',
         title: "論語",
+        coverImgPath:"",
         author:"孔子聖人及其弟子著",
+        introHtml:"《論語》是以春秋時期思想家孔子言行為主的言論彙編，為儒家重要經典之一，在四庫全書中列為「經」部。<br><br>其內容涉及多方面討論，當中包括儒家治國理念、人倫關係、個人道德規範、先秦時期的社會面貌，乃至孔子及其弟子的經歷等。",
         belongTo:'Ru',
         subjects: [
             {
@@ -203,7 +215,9 @@ let scriptures_inDB = [ // bai 4 ...Ru 1+3+7 ... Si5 ... Dao 1 ... 21部
     {
         code:'G',
         title: "孟子",
-        author:"...著",
+        coverImgPath:"",
+        author:"孟子弟子與再傳弟子著",
+        introHtml:"《孟子》是一本記述孟子思想與言行的儒家經書，完成於戰國時代中後期，屬於《十三經》之一。該書詳實地記載了孟子的思想、言論和事跡。注本主要有東漢趙岐《孟子章句》、南宋朱熹《孟子集注》、清焦循《孟子正義》等。在四庫全書中為經部",
         belongTo:'Ru',
         subjects: [
             {
@@ -310,7 +324,9 @@ let scriptures_inDB = [ // bai 4 ...Ru 1+3+7 ... Si5 ... Dao 1 ... 21部
     {
         code:'H',
         title: "道清",
-        author:"...著",
+        coverImgPath:"",
+        author:"著",
+        introHtml:"《老子》，又名《道德經》，是先秦時期的古籍，相傳為春秋末期思想家老子所著[1]。《老子》為春秋戰國時期道家學派的代表性經典，亦是道教尊奉的經典。至唐代，唐太宗命人將《道德經》譯為梵語；唐玄宗時，尊此經為《道德眞經》",
         belongTo:'Dao',
         subjects: [
             {
@@ -336,7 +352,9 @@ let scriptures_inDB = [ // bai 4 ...Ru 1+3+7 ... Si5 ... Dao 1 ... 21部
     {
         code:'I',
         title: "金心",
-        author:"...著",
+        coverImgPath:"",
+        author:"著",
+        introHtml:"",
         belongTo:'Si',
         subjects: [
             {
@@ -362,7 +380,9 @@ let scriptures_inDB = [ // bai 4 ...Ru 1+3+7 ... Si5 ... Dao 1 ... 21部
     {
         code:'J',
         title: "六祖壇經",
-        author:"...著",
+        coverImgPath:"",
+        author:"著",
+        introHtml:"",
         belongTo:'Si',
         subjects: [
             {
