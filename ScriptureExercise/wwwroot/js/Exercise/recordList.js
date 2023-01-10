@@ -5,13 +5,15 @@ let vue_recordList = new Vue({
         fields: [
             { key: 'createTime', label: '時間/連結', sortable: true 
                 ,formatter:value=>{ 
-                    // console.log(value) //%100 /100?
-                    let str = `${value}`
-                    let min = str.substring(10,12)
-                    let hr = str.substring(8,10)
-                    let date = str.substring(6,8)
-                    let month = str.substring(4,6)
-                    return [ `${month}.${date}`, `${hr}:${min}`]
+                    // 23 01 10 20 31 54
+                    // let value = `${value}`
+                    let year = value.substring(0,2)
+                    let month = value.substring(2,4)
+                    let date = value.substring(4,6)
+                    let hr = value.substring(6,8)
+                    let min = value.substring(8,10)
+
+                    return [ `20${year}/${month}/${date}`, `${hr}:${min}`]
                 }
                 ,tdClass:'td-createTime'
             },
@@ -40,26 +42,16 @@ let vue_recordList = new Vue({
             }, //ID  => action
         ],
         records: [
-            {
-                createTime: 202201012359,
-                paperName: "Z1_1",
-                percentScore: 11,
-            },
-            {
-                createTime: 202201012300,
-                paperName: "Z1_2",
-                percentScore: 22,
-            },
-            {
-                createTime: 202201012300,
-                paperName: "Z1_2",
-                percentScore: 22,
-            },
-            {
-                createTime: 202201012300,
-                paperName: "Z1_2",
-                percentScore: 22,
-            },
+            // {
+            //     createTime: '202201012359',
+            //     paperName: "F2_1",
+            //     percentScore: 11,
+            // },
+            // {
+            //     createTime: '202201012300',
+            //     paperName: "A_2",
+            //     percentScore: 22,
+            // },
         ],
     },
     mounted() { 
@@ -87,18 +79,22 @@ let vue_recordList = new Vue({
         })
     },
     methods: {
-        deleteRecord(createTimeId){
+        deleteRecord(createTimeId , e){
+            let dom = e.target
+            processingAPI(dom)
+
             fetchPost(`/ApiExercise/DeleteRecord/${createTimeId}`,{})
-            .afterFetch( resp=>{
-                Promise.resolve(resp.text() )
-                .then(text => {
-                    swal.fire(text)
-                    if(resp.ok){
-                        let idx = this.records.findIndex(r=>r.createTimeId==createTimeId)
-                        this.records.splice(idx,1)
-                    }
-                })
-            })
+            .afterAPI(
+                (result)=> {
+                    let idx = this.records.findIndex(r=>r.createTimeId==createTimeId)
+                    this.records.splice(idx, 1)
+                    //dom.dispatchEvent(apiDoneEvent)
+
+            },
+                (result)=> {
+                    dom.dispatchEvent(apiDoneEvent)
+                },
+            )
         }
     },
     computed: {},

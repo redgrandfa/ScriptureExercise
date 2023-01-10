@@ -74,7 +74,7 @@ namespace ScriptureExercise.Controllers.WebAPI
                 return Ok(result);
             }
 
-            result.Message = "已交卷";
+            result.Message = "批改完畢";
             result.Payload = output_withCreateTimeId.Payload;
             return Ok(result);
         }
@@ -110,24 +110,29 @@ namespace ScriptureExercise.Controllers.WebAPI
             }
 
             result.Payload = output.Payload;
-            //result.Message = "";
+            result.Message = "紀錄取得成功";
             return Ok(result);
         }
 
         [HttpPost("{createTimeId}")]
         public IActionResult DeleteRecord(string createTimeId)
         {
-            if (createTimeId == null)
-            {
-                return Ok("紀錄編號不可為空");
-            }
+            var result = new ApiResponseBody();
+            //if (createTimeId == null)
+            //{
+            //    return Ok("紀錄編號不可為空");
+            //}
 
             var output = exerciseService.DeleteExerciseRecord(createTimeId);
             if (output.IsFail)
             {
-                return UnprocessableEntity("刪除紀錄失敗" + output.FailMessage);
+                result.Status = ApiOperationStatus.DataNotFound;
+                result.Message = output.FailMessage; //"刪除紀錄失敗" + output.FailMessage
+                return Ok(result);
             }
-            return Ok("刪除紀錄成功");
+
+            result.Message = "刪除紀錄成功";
+            return Ok(result);
         }
     }
 }

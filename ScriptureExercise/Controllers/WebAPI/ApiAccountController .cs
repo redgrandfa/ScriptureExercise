@@ -38,6 +38,8 @@ namespace ScriptureExercise.Controllers.WebAPI
         [AllowAnonymous]
         public async Task<IActionResult> RegisterAsync(CreateMemberPostModel request)
         {
+            var result = new ApiResponseBody();
+
             var createMemberInput = new CreateMember_Input
             {
                 Account = request.Account,
@@ -47,7 +49,9 @@ namespace ScriptureExercise.Controllers.WebAPI
             var createMemberOutput = memberService.CreateMember(createMemberInput);
             if (createMemberOutput.IsFail)
             {
-                return Ok("創建會員失敗：" + createMemberOutput.FailMessage);
+                result.Status = ApiOperationStatus.DataRequireUnique;
+                result.Message = createMemberOutput.FailMessage;
+                return Ok(result);
             }
 
             //註冊完自動登入
@@ -57,7 +61,8 @@ namespace ScriptureExercise.Controllers.WebAPI
             };
             await accountService.IssueClaims(issueClaimsInput);
 
-            return Ok("註冊成功，並登入完成");
+            result.Message = "註冊成功，並已將您登入";
+            return Ok(result);
         }
 
         [HttpPost]

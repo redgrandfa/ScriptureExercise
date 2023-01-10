@@ -47,7 +47,10 @@ let vue_paper = new Vue({
     },
     computed:{},
     methods:{
-        postPaper(){
+        postPaper(e){
+            let dom = e.target
+            processingAPI(dom)
+
             let type1_Correct = 0,
                 type2_Correct = 0,
                 type3_Correct = 0,
@@ -109,12 +112,12 @@ let vue_paper = new Vue({
                 },
             }).afterAPI(
                 (result)=> {
-                    swalSuccess.fire({
-                        text:'將跳轉至批改結果'
-                    })
                     window.location.href = `/Exercise/Record/${result.payload}`;
+                    // dom.dispatchEvent(apiDoneEvent)
                 },
-                (result)=> {},
+                (result)=> {
+                    dom.dispatchEvent(apiDoneEvent)
+                },
             )
         }
     },

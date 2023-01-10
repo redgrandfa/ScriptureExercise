@@ -37,8 +37,28 @@ let vue_login = new Vue({
                 this.errMsgs[fieldkey] = "";
             }
         },
-        post(urlPostfix){
-            fetchPost('/ApiAccount/'+urlPostfix , {
+        register(e){
+            let dom = e.target
+            processingAPI(dom)
+
+            fetchPost('/ApiAccount/Register' , {
+                account:this.fields.account.value,
+                password:this.fields.password.value,
+            })
+            .afterAPI(
+                (result)=>{
+                    dom.dispatchEvent(apiDoneEvent)
+                },
+                (result)=>{
+                    dom.dispatchEvent(apiDoneEvent)
+                }
+            )
+        },
+        login(e){
+            let dom = e.target
+            processingAPI(dom)
+
+            fetchPost('/ApiAccount/Login' , {
                 account:this.fields.account.value,
                 password:this.fields.password.value,
             })
@@ -51,8 +71,11 @@ let vue_login = new Vue({
                     else{
                         location.href=returnUrl
                     }
+                    //dom.dispatchEvent(apiDoneEvent)
                 },
-                ()=>{}
+                ()=>{
+                    dom.dispatchEvent(apiDoneEvent)
+                }
             )
         },
     },

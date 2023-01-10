@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Common.Enums;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ScriptureExercise.Models;
 
@@ -16,7 +17,7 @@ namespace ScriptureExercise.Controllers.WebAPI
         {
             var result = new ApiResponseBody()
             {
-                Status = Status.Success,
+                Status = ApiOperationStatus.Success,
                 Message = "qwe",
                 Payload = new { prop1 }
             };
