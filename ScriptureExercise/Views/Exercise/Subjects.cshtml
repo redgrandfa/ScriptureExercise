@@ -50,9 +50,9 @@
                     <div class="author">{{subject.author}}</div>
                 </div>
                 <div class="subject-card-footer">
-                    <div class="collect" v-on:click="toggleCollect(subject)">
+                    <button class="without-button-style collect" v-on:click="toggleCollect(subject)">
                         <i :class="subject.isCollected ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
-                    </div>
+                    </button>
                 </div>
             </li>
         </ul>

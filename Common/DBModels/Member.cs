@@ -31,6 +31,11 @@ namespace Common.DBModels
 
             public List<int> ScriptureShowList { get; set; }
 
+            /// <summary>
+            /// 每個成員是 SubjectCode ex. A1 、F2
+            /// </summary>
+            public List<string> SubjectCollectedList { get; set; }
+
             public List<Account.PK_T> AccountPK_List { get; set; }
             public List<string> ExerciseRecordCreateTimeId_List { get; set; }
         }

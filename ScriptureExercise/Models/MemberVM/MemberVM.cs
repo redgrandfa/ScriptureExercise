@@ -31,4 +31,10 @@ namespace ScriptureExercise.Models.MemberVM
         //偏好= 經典的隱藏、排序
         public List<int> ScriptureShowList { get; set; }
     }
+
+    public class ToggleSubjectCollectRequest 
+    {
+        public string SubjectCode { get; set; }
+        public bool CollectStatus { get; set; }
+    }
 }

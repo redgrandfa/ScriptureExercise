@@ -12,8 +12,6 @@ let vue_subjects = new Vue({
         subjectsShow:[],
     },
     beforeMount(){
-        //會員對其收藏狀況(controller來?也已有)
-        let collectList = []
         //先載入 所有經典資料(已有) 要把科目攤平?深拷貝?
         scriptures_inDB.forEach( scripture => {
             let getSubjectChinesePostFix = ()=>''
@@ -32,7 +30,7 @@ let vue_subjects = new Vue({
                     title:`${scripture.title}${getSubjectChinesePostFix(subject.id)}`,
                     author: scripture.author,
                     belongTo: scripture.belongTo,
-                    isCollected: false //collectList.contains
+                    isCollected: false 
                 }
                 // subjectToAdd.title=subjectToAdd.scripture + subjectToAdd.subjectChinesePostFix
 
@@ -40,6 +38,30 @@ let vue_subjects = new Vue({
             })
         })
         this.subjectsShow = this.subjects
+
+        //TODO：取得收藏
+        //會員對其收藏狀況(controller來?也已有)
+        fetch('/ApiMember/GetSubjectCollectList')
+        .afterFetch( (resp)=>{
+            resp.json()
+            .then( respBody =>  {
+                let collectList = respBody.payload
+
+                // console.log(collectList)
+                collectList.forEach( subjectCode => {
+                    let scripture = subjectCode[0]
+                    let id = subjectCode[1]
+                    // if( id== undefined) id = 1
+
+                    let subject = this.subjects.find(subject => 
+                        subject.scripture == scripture  
+                        && subject.id == id
+                    )
+                    subject.isCollected = true
+                })
+            })
+        })
+
     },
     methods: {
         filtSubject(){
@@ -57,21 +79,23 @@ let vue_subjects = new Vue({
         },
         navToSubject(subject){
             location.href=`/Exercise/${subject.scriptureTitle}_${subject.id}`
-        }
-        ,toggleCollect(subject){ //從show來的  、API互動
-            subject.isCollected = !subject.isCollected
-            // APi
-
-            //TODO：取得收藏
-            // fetch('',{data:subject.isCollected})
-            // .then(resp => {
-            //     if(resp.ok){
-
-            //     }else{
-            //         // 異常
-            //     }
-            // })
         },
+        toggleCollect(subject){
+            let collectStatus = subject.isCollected
+            fetchPost('/ApiMember/ToggleSubjectCollect',{
+                subjectCode:`${subject.scripture}${subject.id}`,
+                collectStatus:collectStatus,
+            })
+            .afterAPI(
+                (result)=>{
+                    subject.isCollected = !collectStatus
+                    // dom.dispatchEvent(apiDoneEvent)
+                },
+                (result)=>{
+                    // dom.dispatchEvent(apiDoneEvent)
+                },
+            )
+        }
     },
     watch: {
         'searchFor':{

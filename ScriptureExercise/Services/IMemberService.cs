@@ -96,7 +96,7 @@ namespace ScriptureExercise.Services
                         account.PK,
                     },
                     //ScriptureShowList = new List<int> { 1,2,3,4, }, //至少要一個
-                    SubjectCollectedList = new List<int> { 1, 2, 3, 4, },
+                    SubjectCollectedList = new List<string> {},
                     ExerciseRecordCreateTimeId_List = new List<string>(),
 
                     //從第三方取得的資料預填

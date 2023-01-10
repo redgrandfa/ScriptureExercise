@@ -14,6 +14,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Common.Repositories;
 using System;
+using ScriptureExercise.Models;
+using Common.Enums;
 
 namespace ScriptureExercise.Controllers.WebAPI
 {
@@ -63,7 +65,53 @@ namespace ScriptureExercise.Controllers.WebAPI
             return UpdateByCondition(action, "修改密碼成功");
         }
 
+
+        [HttpGet]
+        public IActionResult GetSubjectCollectList() //背景API
+        {
+            var result = new ApiResponseBody();
+
+            var member = memberService.GetCurrentMember();
+            result.Payload = member.Value.SubjectCollectedList;
+            result.Message = "成功取得考科收藏資料";
+            return Ok(result);
+        }
+
         [HttpPost]
+        public IActionResult ToggleSubjectCollect(ToggleSubjectCollectRequest request)
+        {
+            var subjectCode = request.SubjectCode;
+
+            Action<Member> action;
+            string successMsg;
+
+            if (request.CollectStatus)
+            {
+                action = (member) =>
+                {
+                    var list = member.Value.SubjectCollectedList;
+                    list.Remove(subjectCode);
+                };
+                successMsg = "已取消收藏";
+            }
+            else
+            {
+                action = (member) =>
+                {
+                    var list = member.Value.SubjectCollectedList;
+                    list.Add(subjectCode);
+                };
+                successMsg = "收藏成功";
+            }
+
+            //不能在Action裡條件判斷...實質型別 會訂死 順序無法影響? 實質/參考型別...
+
+            return UpdateByCondition(action, successMsg);
+        }
+
+
+        [HttpPost]
+        [Obsolete("原本是收藏經典，且以int表示")]
         public IActionResult UpdateScripture(MemberEditVM request)
         {
             Action<Member > action = (member)=>
@@ -73,34 +121,21 @@ namespace ScriptureExercise.Controllers.WebAPI
             return UpdateByCondition(action, "修改經典顯示成功");
         }
 
-        [HttpPost]
-        public IActionResult ToggleSubjectCollect(MemberEditVM request)
-        {
-            Action<Member> action = (member) =>
-            {
-                var list = member.Value.SubjectCollectedList;
-                var target = 1;
-                if (list.Contains(target))
-                {
-                    list.Remove(target);
-                }
-                else
-                {
-                    list.Add(target);
-                }
-            };
-            return UpdateByCondition(action, "修改經典顯示成功");
-        }
-
         [NonAction]
         public IActionResult UpdateByCondition(Action<Member>  action,  string successMsg)
         {
+            var result = new ApiResponseBody();
+
             var output = memberService.UpdateMember(action);
             if (output.IsFail)
             {
-                return Ok(output.FailMessage);
+                result.Status = ApiOperationStatus.DataNotFound;
+                result.Message = output.FailMessage;
+                return Ok(result);
             }
-            return Ok(successMsg);
+
+            result.Message = successMsg;
+            return Ok(result);
         }
     }
 }
