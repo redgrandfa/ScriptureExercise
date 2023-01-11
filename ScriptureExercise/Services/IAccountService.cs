@@ -132,7 +132,7 @@ namespace ScriptureExercise.Services
         public async Task IssueClaims( IssueClaimsInput input)
         {
             var showName = input.Member.Value.Name;
-            if(showName == "")
+            if(showName == null || showName == "") //應該永遠不會空字串?
             {
                 showName = input.Account.PK.AccountId_FromProvider;
             }

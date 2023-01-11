@@ -1,6 +1,7 @@
 ﻿using Common.DBModels;
 using Common.DTOModels;
 using Common.DTOModels.MemberDTOs;
+using Common.Helpers;
 using Common.Repositories;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -49,79 +50,76 @@ namespace ScriptureExercise.Services
 
             //創建會員
             //名字 可能從第三方取現成的
-            var name = _httpContextAccessor.HttpContext.User.Claims
-                    .FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value; ;
-            if (name == null )
-            {
-                name = "";
-            }
+            //string name = "";
+            //if (_httpContextAccessor.HttpContext.User.Claims
+            //        .FirstOrDefault(c => c.Type == Define.LOGIN_THROUGH_CLAIM_TYPE)?.Value != "Cookie")
+            //{
+            //    name = _httpContextAccessor.HttpContext.User.Claims
+            //            .FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value; 
+            //    if (name == null )
+            //    {
+            //        name = "";
+            //    }
+            //}
                     
             var counter = _cacheRepo.Get<EntityCounter>(nameof(EntityCounter));
 
-            try
+            var account = new Account
             {
-                var account = new Account
+                PK = new Account.PK_T
                 {
-                    PK = new Account.PK_T
-                    {
-                        Provider = "Cookie",
-                        AccountId_FromProvider = input.Account,
-                    },
-                    Value = new Account.Value_T
-                    {
-                        CreateTime = DateTime.UtcNow,
-                        UpdateTime = DateTime.UtcNow,
-                    }
-                };
-
-                var member = new Member
-                {
-                    PK = new Member.PK_T
-                    {
-                        MemberId = counter.MemberCount + 1,
-                    },
-                };
-
-                member.Value = new Member.Value_T
+                    Provider = "Cookie",
+                    AccountId_FromProvider = input.Account,
+                },
+                Value = new Account.Value_T
                 {
                     CreateTime = DateTime.UtcNow,
                     UpdateTime = DateTime.UtcNow,
-                    //CreateMemberId = memberId,
-                    //UpdateMemberId = memberId,
+                }
+            };
 
-                    Password = input.Password,
-
-                    AccountPK_List = new List<Account.PK_T>
-                    {
-                        account.PK,
-                    },
-                    //ScriptureShowList = new List<int> { 1,2,3,4, }, //至少要一個
-                    SubjectCollectedList = new List<string> {},
-                    ExerciseRecordCreateTimeId_List = new List<string>(),
-
-                    //從第三方取得的資料預填
-                    Name = name,
-                };
-                _cacheRepo.Set(member.GetRedisKeyString(), member.Value);
-
-                counter.MemberCount++;
-                _cacheRepo.Set(nameof(EntityCounter), counter);
-
-                account.Value.FK_Member = member.PK;
-                _cacheRepo.Set(account.GetRedisKeyString(), account.Value);
-
-
-                result.Payload = new AccountAndMember
-                {
-                    Account = account,
-                    Member = member,
-                };
-            }
-            catch (Exception ex)
+            var member = new Member
             {
-                throw ex;
-                //result.FailMessage = ex.Message;//.ToString
-            }
+                PK = new Member.PK_T
+                {
+                    MemberId = counter.MemberCount + 1,
+                },
+            };
+
+            member.Value = new Member.Value_T
+            {
+                CreateTime = DateTime.UtcNow,
+                UpdateTime = DateTime.UtcNow,
+                //CreateMemberId = memberId,
+                //UpdateMemberId = memberId,
+
+                Password = input.Password,
+
+                AccountPK_List = new List<Account.PK_T>
+                {
+                    account.PK,
+                },
+                //ScriptureShowList = new List<int> { 1,2,3,4, }, //至少要一個
+                SubjectCollectedList = new List<string> {},
+                ExerciseRecordCreateTimeId_List = new List<string>(),
+
+                //從第三方取得的資料預填
+                //Name = name,
+            };
+            _cacheRepo.Set(member.GetRedisKeyString(), member.Value);
+
+            counter.MemberCount++;
+            _cacheRepo.Set(nameof(EntityCounter), counter);
+
+            account.Value.FK_Member = member.PK;
+            _cacheRepo.Set(account.GetRedisKeyString(), account.Value);
+
+
+            result.Payload = new AccountAndMember
+            {
+                Account = account,
+                Member = member,
+            };
 
             return result;
         }
