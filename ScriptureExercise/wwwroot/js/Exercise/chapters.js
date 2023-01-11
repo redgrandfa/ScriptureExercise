@@ -27,10 +27,6 @@ let vue_chapters = new Vue({
     mounted(){
     },
     methods: {
-        navToPaper(){
-            location.href=`/Exercise/${scriptureTitle}_${subjectId}/卷${this.chapterChoosed.id}`
-            //網址結尾可能有多餘符號故不行 location.href+=`卷${this.chapterChoosed.id}`
-        },
     },
     watch: {
         'chapterIdChoosed':{
@@ -40,6 +36,10 @@ let vue_chapters = new Vue({
             }
         },
     },
-    computed: {},
+    computed: {
+        link(){
+            return `/Exercise/${scriptureTitle}.${subjectId}/卷${this.chapterChoosed.id}`
+        }
+    },
     components: {},
 });

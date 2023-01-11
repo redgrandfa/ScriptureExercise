@@ -3,53 +3,74 @@ let vue_recordList = new Vue({
     data: {
         tableBusy:true,
         fields: [
-            { key: 'createTime', label: '時間/連結', sortable: true 
-                ,formatter:value=>{ 
+            { key: 'createTimeId', label: '時間', sortable: true 
+                ,formatter:(value, key, item)=>{
+                    // console.log(value) // key有對到資料才有值 / null
+                    // console.log(key) //同key
+                    // console.log(item) // 陣列元素
+
+                    let createTimeId = value//item.createTimeId
                     // 23 01 10 20 31 54
-                    // let value = `${value}`
-                    let year = value.substring(0,2)
-                    let month = value.substring(2,4)
-                    let date = value.substring(4,6)
-                    let hr = value.substring(6,8)
-                    let min = value.substring(8,10)
+                    let year = createTimeId.substring(0,2)
+                    let month = createTimeId.substring(2,4)
+                    let date = createTimeId.substring(4,6)
+                    let hr = createTimeId.substring(6,8)
+                    let min = createTimeId.substring(8,10)
 
                     return [ `20${year}/${month}/${date}`, `${hr}:${min}`]
                 }
                 ,tdClass:'td-createTime'
             },
-            { key: 'paperName', label: '卷名', sortable: true 
-                ,formatter:value=>{ 
-                    let scriptureCode = value.substring(0,1)
-                    let subjectId = value.substring(1,2)
-                    let paperId = value.substring(3,4)
+            { key: 'paperCode', label: '卷別', sortable: true 
+                ,formatter:(value, key, item)=>{ 
+                    let paperCode = value//item.paperCode
 
-                    //範圍註記
+                    //拆出三級資訊
+                    let scriptureCode = paperCode.substring(0,1)
+                    let subjectId = paperCode.substring(1,2)
+                    let paperId = paperCode.substring(3,4)
+                    
+                    //找到對應三級資料
+                    let scripture = scriptures_inDB.find(scripture => scripture.code == scriptureCode)
+                    let subject =  scripture.subjects.find( subject => subject.id == subjectId)
+                    let paper = subject.papers.find( paper => paper.id == paperId)
+
+                    
+                    //
+                    let subjectChinesePostfix = ''
+                    if( scripture.subjects.length > 1 ){
+                        subjectChinesePostfix = `(${number_To_Chinese(subjectId)})`
+                    }
+                    let range_remark = paper.range_remark
 
                     return [scripture_Code_To_Chinese(scriptureCode), 
-                        `(${number_To_Chinese(subjectId)})`, 
-                        paperId ]
+                        subjectChinesePostfix, 
+                        paperId ,
+                        range_remark
+                    ]
                 }
                 ,tdClass:'td-createTime' //沿用
             },
             { key: 'percentScore', label: '得分比', sortable: true 
                 ,tdClass:'td-percentScore' 
             },
-            // { key: 'link', label: '連結', sortable: false
-            //     ,tdClass:'td-action'
-            // }, //ID  => action
+            //CreateID  => User動作
+            { key: 'link', label: '連結', sortable: false
+                ,tdClass:'td-action'
+            }, 
             { key: 'Delete', label: '刪除', sortable: false 
                 ,tdClass:'td-action'
-            }, //ID  => action
+            },
         ],
         records: [
             // {
-            //     createTime: '202201012359',
-            //     paperName: "F2_1",
+            //     createTimeId: '202201012359',
+            //     paperCode: "F2_1",
             //     percentScore: 11,
             // },
             // {
-            //     createTime: '202201012300',
-            //     paperName: "A_2",
+            //     createTimeId: '202201012300',
+            //     paperCode: "A_2",
             //     percentScore: 22,
             // },
         ],
@@ -63,13 +84,12 @@ let vue_recordList = new Vue({
 
                 this.records = recordList.map( r => {
                     let result = {
-                        createTime: r.createTime ,
+                        createTimeId: r.createTime ,
                         percentScore: r.percentScore ,
-                        // link: `/Exercise/Record/${r.createTime}`,
                     }
 
                     let scripture = r.exerciseJsonFileName[0]
-                    result.paperName = r.exerciseJsonFileName // F/F2_1
+                    result.paperCode = r.exerciseJsonFileName // F/F2_1
                         .substring(2) // F2_1
 
                     return result
@@ -86,10 +106,10 @@ let vue_recordList = new Vue({
             fetchPost(`/ApiExercise/DeleteRecord/${createTimeId}`,{})
             .afterAPI(
                 (result)=> {
+                    dom.dispatchEvent(apiDoneEvent)
                     let idx = this.records.findIndex(r=>r.createTimeId==createTimeId)
+                    console.log(idx)
                     this.records.splice(idx, 1)
-                    //dom.dispatchEvent(apiDoneEvent)
-
             },
                 (result)=> {
                     dom.dispatchEvent(apiDoneEvent)

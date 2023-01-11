@@ -88,12 +88,17 @@
         </ol>
     </div>
     <div class="question-container"></div>
-    <button class="custom-btn green-btn" v-on:click="exerciseAgain">
-        TRY AGAIN 再練習一次
-    </button>
-    <button class="custom-btn gray-btn mt-2" v-on:click="navToChapter">
-        BACK TO CHAPTER 回到練習章節
-    </button>
+
+    <a :href="Link_exerciseAgain" class="without-hyperLink-style d-block">
+        <button class="custom-btn green-btn">
+            TRY AGAIN 再練習一次
+        </button>
+    </a>
+    <a :href="Link_Chapters" class="without-hyperLink-style d-block mt-2">
+        <button class="custom-btn gray-btn">
+            BACK TO CHAPTER 回到練習章節
+        </button>
+    </a>
 </div>
 
 @section TopCSS{

@@ -7,6 +7,11 @@
   background-color: rgba(0, 0, 0, 0);
 }
 
+.without-hyperLink-style:focus, .without-hyperLink-style:hover, .without-hyperLink-style:active, .without-hyperLink-style {
+  color: #000;
+  text-decoration: none;
+}
+
 .view-container {
   margin: auto;
   overflow: hidden;
@@ -106,12 +111,15 @@ header {
   color: #fff;
   margin-bottom: 0;
 }
-#menu .menu-header h2 div:nth-of-type(1) {
+#menu .menu-header h2 span {
+  display: block;
+}
+#menu .menu-header h2 span:nth-of-type(1) {
   font-weight: 700;
   font-size: 28px;
   margin-bottom: -13px;
 }
-#menu .menu-header h2 div:nth-of-type(2) {
+#menu .menu-header h2 span:nth-of-type(2) {
   display: inline-block;
   width: -webkit-fit-content;
   width: -moz-fit-content;

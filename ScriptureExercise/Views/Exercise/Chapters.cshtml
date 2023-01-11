@@ -33,9 +33,11 @@
         </div>
     </div>
 
-    <button class="custom-btn xl-green-btn" v-on:click="navToPaper()">
-        TEST 開始測驗 <i class="fa-solid fa-arrow-right-long"></i>
-    </button>
+    <a :href="link" class="without-hyperLink-style">
+        <button class="custom-btn xl-green-btn">
+            TEST 開始測驗 <i class="fa-solid fa-arrow-right-long"></i>
+        </button>
+    </a>
 </div>
 
 @section TopCSS{

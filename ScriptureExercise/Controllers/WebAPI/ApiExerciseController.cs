@@ -123,7 +123,9 @@ namespace ScriptureExercise.Controllers.WebAPI
             var result = new ApiResponseBody();
             //if (createTimeId == null)
             //{
-            //    return Ok("紀錄編號不可為空");
+            //    result.Status = ApiOperationStatus.DataNotFound;
+            //    result.Message = "紀錄編號不可為空";
+            //    return Ok(result);
             //}
 
             var output = exerciseService.DeleteExerciseRecord(createTimeId);

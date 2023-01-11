@@ -27,38 +27,34 @@ namespace ScriptureExercise.Controllers
         [AllowAnonymous]
         public IActionResult Subjects()
         {
-            //var member = memberService.GetCurrentMember();
-            //member.Value.ScriptureShowList;
-
-            return View(); //改成收藏List=> 最後我得手改每個會員的收藏?...
+            return View();
         }
 
-        //[HttpGet("{subject}/Chapters")] //此考科的 章節
-        //public IActionResult Chapters(string subject) { 
-        //    var scripture = subject;
-        //    var paper = 1;
-        //        if (subject.Contains("("))
-        //        {
-        //            var temp = subject.Split("(");
-        //    scripture = temp[0];
-        //            paper = temp[1][0];
-        //        }
-
-        //        return View(model:subject);
-        //}
-
-        [HttpGet("{scriptureTitle}_{subjectId}")] //此考科的 卷別
+        //[HttpGet("{subject}")] //考慮： 論語(二)
+        //public IActionResult Chapters(string subject)
+        [HttpGet("{scriptureTitle}.{subjectId?}")] //此考科的 卷別們
         [AllowAnonymous]
         public IActionResult Chapters(string scriptureTitle, int subjectId = 1)
         {
             ViewData["ScriptureTitle"] = scriptureTitle;
             ViewData["SubjectId"] = subjectId;
-
             return View();
+
+            //    string scripture = "";
+            //    int subjectId = 1;
+            //    if (subject.Contains("("))
+            //    {
+            //        var temp = subject.Split("(") ;
+
+            //        scripture = temp[0];
+            //        subjectIdChinese = temp[1][0].ToInt();
+            //    }
+
+            //    return View(model:subject);
         }
 
-        [HttpGet("{scripture}_{subjectId}/卷{PaperId}")]
-        public IActionResult Paper(string scripture, int subjectId, int PaperId)
+        [HttpGet("{scripture}.{subjectId?}/卷{PaperId}")]
+        public IActionResult Paper(string scripture,  int PaperId , int subjectId = 1)
         {
             var vm = new ExcerciseListVM();
 

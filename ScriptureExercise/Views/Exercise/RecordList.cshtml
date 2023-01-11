@@ -15,7 +15,7 @@
                 :busy="tableBusy"
                 thead-tr-class="thead-tr-class"
             >
-            <!-- sticky-header -->
+            <!-- sticky-header  當部分欄位能排序，部分欄位不能排序時 會壞掉... --> 
                 <template #table-busy>
                     <div class="text-center text-danger my-2">
                     <b-spinner class="align-middle"></b-spinner>
@@ -23,16 +23,14 @@
                     </div>
                 </template>
 
-                <template #cell(createTime)="row">
-                    <a :href="`/Exercise/Record/${row.unformatted}`" style="font-size: 11px;">
-                        <span>{{row.value[0]}}</span>
-                        <span>{{row.value[1]}}</span>
-                    </a>
+                <template #cell(createTimeId)="row">
+                    <span>{{row.value[0]}}</span>
+                    <span>{{row.value[1]}}</span>
                 </template>
 
-                <template #cell(paperName)="row">
+                <template #cell(paperCode)="row">
                     <span>{{row.value[0]}}{{row.value[1]}}</span>
-                    <span>卷{{row.value[2]}}</span>
+                    <span>卷{{row.value[2]}}-{{row.value[3]}}</span>
                 </template>
 
                 <template #cell(percentScore)="row">
@@ -40,23 +38,23 @@
                 </template>
 
                 <template #cell(link)="row">
-                    <a :href="row.value" style="font-size: 11px;">查看</a>
+                    <a :href="`/Exercise/Record/${row.item.createTimeId}`" 
+                        style="font-size: 11px;">查看</a>
                 </template>
- 
+
                 <template #cell(Delete)="row">
                     <b-button 
                         variant="outline-primary"
                         size="sm"
-                        v-on:click="deleteRecord(row.item.createTime , $event)">
+                        v-on:click="deleteRecord(row.item.createTimeId , $event)">
                         刪除
                     </b-button>
                 </template>
             </b-table>
         
-            <p v-if="records.length==0" class="text-center">目前無任何練習紀錄</p>
+            <p v-if="records.length==0" class="text-center">您目前無任何練習紀錄</p>
         </div>
     </div>
-
     
     <!-- <button class="xxbtn">
         GO PRACTICE 練習其他經典
@@ -68,5 +66,6 @@
 }
 
 @section Scripts{
+    <script src="~/lib/DB/scriptures.js"></script>
     <script src="~/js/Exercise/recordList.js"></script>
 }

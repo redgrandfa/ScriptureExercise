@@ -92,7 +92,7 @@ namespace ScriptureExercise.Controllers.WebAPI
                     var list = member.Value.SubjectCollectedList;
                     list.Remove(subjectCode);
                 };
-                successMsg = "已取消收藏";
+                successMsg = "已自書單移除";
             }
             else
             {
@@ -101,7 +101,7 @@ namespace ScriptureExercise.Controllers.WebAPI
                     var list = member.Value.SubjectCollectedList;
                     list.Add(subjectCode);
                 };
-                successMsg = "收藏成功";
+                successMsg = "已加入書單";
             }
 
             //不能在Action裡條件判斷...實質型別 會訂死 順序無法影響? 實質/參考型別...

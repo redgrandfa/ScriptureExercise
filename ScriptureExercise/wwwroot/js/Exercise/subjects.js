@@ -77,9 +77,6 @@ let vue_subjects = new Vue({
 
             this.subjectsShow = result
         },
-        navToSubject(subject){
-            location.href=`/Exercise/${subject.scriptureTitle}_${subject.id}`
-        },
         toggleCollect(subject){
             let collectStatus = subject.isCollected
             fetchPost('/ApiMember/ToggleSubjectCollect',{

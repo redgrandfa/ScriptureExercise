@@ -40,8 +40,7 @@
         <ul class="subjects">
             <li v-for="(subject) in subjectsShow" class="subject-card">
                 <div class="subject-card-header" >
-                    @* v-on:click="navToSubject(subject)" *@
-                    <a :href="'/Exercise/' + subject.scriptureTitle + '_' + subject.id">
+                    <a :href="'/Exercise/' + subject.scriptureTitle + '.' + subject.id">
                     <div class="cover"></div>
                     </a>
                 </div>

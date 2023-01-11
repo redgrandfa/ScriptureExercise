@@ -147,16 +147,6 @@ let vue_record = new Vue({
 
             this.showQuestions = result
         },
-        exerciseAgain(){
-            let url = `/Exercise/${this.paper.paperScheme.scriptureTitle}_${this.paper.paperScheme.subjectId}/卷${this.paper.paperScheme.paperId}`
-
-            location.href = url
-        },
-        navToChapter(){
-            let url = `/Exercise/${this.paper.paperScheme.scriptureTitle}_${this.paper.paperScheme.subjectId}`
-
-            location.href = url
-        },
     },
     watch: {
         "filters":{
@@ -167,6 +157,19 @@ let vue_record = new Vue({
             },
         }
     },
-    computed: {},
+    computed: {
+        Link_exerciseAgain(){
+            let url = `/Exercise/${this.paper.paperScheme.scriptureTitle}.${this.paper.paperScheme.subjectId}/卷${this.paper.paperScheme.paperId}`
+
+            return url
+        },
+        Link_Chapters(){
+            let url = `/Exercise/${this.paper.paperScheme.scriptureTitle}.${this.paper.paperScheme.subjectId}`
+
+            return url
+        },
+
+
+    },
     components: {},
 })

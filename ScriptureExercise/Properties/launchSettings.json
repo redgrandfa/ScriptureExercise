@@ -17,18 +17,21 @@
     },
     "ScriptureExercise": {
       "commandName": "Project",
-      "dotnetRunMessages": "true",
+      "dotnetRunMessages": true,
       "launchBrowser": true,
       //"launchUrl": "Account/Login",
       //"launchUrl": "Member/Settings",
 
-      "launchUrl": "Exercise/Subjects",
-      //"launchUrl": "Exercise/論語_2",
-      //"launchUrl": "Exercise/生晨_",
-      //"launchUrl": "Exercise/論語_2/卷1",
+      //"launchUrl": "Exercise/Subjects",
+
+      //"launchUrl": "Exercise/生晨",
+      //"launchUrl": "Exercise/生晨.1",
+      //"launchUrl": "Exercise/論語.2",
+
+      //"launchUrl": "Exercise/論語/卷1",
+      //"launchUrl": "Exercise/論語.2/卷1",
 
       //"launchUrl": "Exercise/RecordList",
-      //"launchUrl": "Exercise/Record/220908130220",
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
