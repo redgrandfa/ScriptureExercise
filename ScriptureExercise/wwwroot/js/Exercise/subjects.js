@@ -1,6 +1,7 @@
 let vue_subjects = new Vue({
     el: "#vue_subjects",
     data: {
+        isAuthenticated: isAuthenticated,
         searchFor:'',
         categoryChecked: {
             'Bai':false,
@@ -39,29 +40,29 @@ let vue_subjects = new Vue({
         })
         this.subjectsShow = this.subjects
 
-        //TODO：取得收藏
-        //會員對其收藏狀況(controller來?也已有)
-        fetch('/ApiMember/GetSubjectCollectList')
-        .afterFetch( (resp)=>{
-            resp.json()
-            .then( respBody =>  {
-                let collectList = respBody.payload
-
-                // console.log(collectList)
-                collectList.forEach( subjectCode => {
-                    let scripture = subjectCode[0]
-                    let id = subjectCode[1]
-                    // if( id== undefined) id = 1
-
-                    let subject = this.subjects.find(subject => 
-                        subject.scripture == scripture  
-                        && subject.id == id
-                    )
-                    subject.isCollected = true
+        //有登入 -> 取書單狀況
+        if(this.isAuthenticated){
+            fetch('/ApiMember/GetSubjectCollectList')
+            .afterFetch( (resp)=>{
+                resp.json()
+                .then( respBody =>  {
+                    let collectList = respBody.payload
+    
+                    // console.log(collectList)
+                    collectList.forEach( subjectCode => {
+                        let scripture = subjectCode[0]
+                        let id = subjectCode[1]
+                        // if( id== undefined) id = 1
+    
+                        let subject = this.subjects.find(subject => 
+                            subject.scripture == scripture  
+                            && subject.id == id
+                        )
+                        subject.isCollected = true
+                    })
                 })
             })
-        })
-
+        }
     },
     methods: {
         filtSubject(){

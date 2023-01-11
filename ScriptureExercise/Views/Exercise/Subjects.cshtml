@@ -1,4 +1,4 @@
-﻿@model List<int>
+﻿@*@model List<int>*@
 
 @{
     ViewData["Title"] = "選考科";
@@ -49,7 +49,7 @@
                     <div class="author">{{subject.author}}</div>
                 </div>
                 <div class="subject-card-footer">
-                    <button class="without-button-style collect" v-on:click="toggleCollect(subject)">
+                    <button v-if="isAuthenticated" class="without-button-style collect" v-on:click="toggleCollect(subject)">
                         <i :class="subject.isCollected ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
                     </button>
                 </div>
@@ -63,10 +63,8 @@
 }
 @section Scripts{
     <script src="~/lib/DB/scriptures.js"></script>
-    <script>
-        //let initData = 
+@*    <script>
         let ScriptueShowList = @Html.Raw(JsonSerializer.Serialize( Model) );
-        @* let SubjectCollectList *@
     </script>
-    <script src="~/js/Exercise/subjects.js"></script>
+*@    <script src="~/js/Exercise/subjects.js"></script>
 } 
