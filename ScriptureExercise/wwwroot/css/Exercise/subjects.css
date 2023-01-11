@@ -3,11 +3,13 @@
   margin-left: -245px;
 }
 
+main {
+  overflow: visible;
+}
+
 .subject-filters {
-  position: fixed;
   width: 100%;
   max-width: 444px;
-  top: 100px;
 }
 
 .subject-search {
@@ -59,10 +61,8 @@
 }
 
 .subjects {
-  margin-top: 135px;
   margin-bottom: 0;
-  padding-left: 34px;
-  padding-right: 34px;
+  padding: 0 34px 7px;
   max-height: calc(100vh - 238px);
   overflow-y: auto;
 }

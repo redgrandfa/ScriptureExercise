@@ -1,4 +1,4 @@
-@import "../Excercise/exerciseBase";
+@import "../Exercise/exerciseBase";
 
 
 .result{
@@ -75,6 +75,7 @@
     }
 }
 
-
-
-
+.question-container{
+    height: calc(100vh - 333px);
+    overflow-y: auto;
+}

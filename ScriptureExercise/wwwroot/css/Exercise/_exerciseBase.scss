@@ -2,36 +2,9 @@
     display: none;
 }
 
-//要使得header不再置頂?
-header{
-    position: absolute;
-}
-
 main{
-    padding: 0 44px 44px;
-    background-color: #fff;
-
-
-    //要使得header不再置頂?
-    // height: calc(100vh - 100px);
-    // overflow-y: auto;
+    padding-bottom: 44px;
 }
-
-
-// $theme_color : #03787c;
-// %bg-theme{
-//     background-color: $theme_color;
-//     color: #fff;
-// }
-
-
-// //要改
-// .exercise-banner{
-//     @extend %bg-theme;
-
-//     // padding-top: 33px;
-//     // padding-bottom: 111px;
-// }
 
 //---------
 .exercise-banner{
@@ -54,6 +27,8 @@ main{
 }
 .question-container{
     margin: 27px 0 44px;
+    padding: 0px 44px;
+    // background-color: #fff;
 }
 
 .question{
@@ -63,4 +38,8 @@ main{
 //old
 .question-order{
     width: 2 rem;
+}
+
+.actions{
+    padding: 0 44px;
 }

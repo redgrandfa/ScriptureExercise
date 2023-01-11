@@ -2,13 +2,8 @@
   display: none;
 }
 
-header {
-  position: absolute;
-}
-
 main {
-  padding: 0 44px 44px;
-  background-color: #fff;
+  padding-bottom: 44px;
 }
 
 .exercise-banner {
@@ -31,6 +26,7 @@ main {
 
 .question-container {
   margin: 27px 0 44px;
+  padding: 0px 44px;
 }
 
 .question {
@@ -39,6 +35,10 @@ main {
 
 .question-order {
   width: 2 rem;
+}
+
+.actions {
+  padding: 0 44px;
 }
 
 .result {
@@ -105,4 +105,9 @@ main {
 }
 .filters .filter label {
   transform: scale(0.8);
+}
+
+.question-container {
+  height: calc(100vh - 333px);
+  overflow-y: auto;
 }/*# sourceMappingURL=record.css.map */

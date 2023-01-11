@@ -3,13 +3,22 @@
     left: auto;
     margin-left: -245px;
 }
+
+
+main{
+    overflow: visible;
+}
+
+$subject-card-halfGap:7px;
+
 .subject-filters{
-    position: fixed;
+    // position: fixed;
+    // top: 100px; 
+
     width: 100%;
     // min-width: 320px;
     max-width: 444px;
 
-    top: 100px; 
 }
 
 .subject-search{
@@ -59,10 +68,9 @@
 }
 
 .subjects{
-    margin-top: 135px;
+    // margin-top: 135px;
     margin-bottom: 0;
-    padding-left: 34px;
-    padding-right: 34px;
+    padding: 0 34px $subject-card-halfGap;
 
     max-height: calc(100vh - 238px);
     overflow-y: auto;
@@ -73,8 +81,8 @@
     justify-content: space-between;
     align-items: center;
 
-    padding-top: 7px;
-    padding-bottom: 7px;
+    padding-top: $subject-card-halfGap;
+    padding-bottom: $subject-card-halfGap;
 }
 .subject-card-header{
     // cursor: pointer;

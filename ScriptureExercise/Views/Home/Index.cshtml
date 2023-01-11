@@ -18,15 +18,15 @@
         .FirstOrDefault(c=> c.Type== Common.Helpers.Define.CLAIMTYPE_SHOWNAME)
         ?.Value;
 
-	<a href="/Account/Logout" class="nav-login">
-		<p>歡迎回來，<b>@showName</b></p>
+	<a href="/Account/Logout" class="nav-login without-hyperLink-style">
+		<p class="mb-0">歡迎回來，<b>@showName</b></p>
 		登出 LOGOUT
 		<div class="login-image-btn"></div>
 	</a>	
 }
 else
 {
-	<a href="/Account/Login" class="nav-login">
+	<a href="/Account/Login" class="nav-login without-hyperLink-style">
 		登入 LOGIN 
 		<div class="login-image-btn"></div>
 	</a>	

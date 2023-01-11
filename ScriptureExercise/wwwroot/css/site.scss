@@ -2,8 +2,10 @@
     //顏色 尺寸
     --theme-color-dark:#313B5D;
     // font-size: 15px;
+    // font-family
 }
 
+$header-height:100px;
 //
 .without-button-style{
     border: none;
@@ -29,50 +31,75 @@
 .view-container {
     margin: auto;
     overflow: hidden;
+    // overflow-x: hidden;
+    // overflow-y: auto;
 
     width: 100%;
     min-width: 320px;
     max-width: 450px;
 
     //手機 19:9
-    min-height: 100vh; 
-    // height: 100vh;
+    // min-height: 100vh; 
+    height: 100vh;
     // max-height: 2.5vw;
 
-    padding-top: 100px;
-
-    position: relative;
-
+    
+    // padding-top: 100px;
+    
     background-color: #fff;
-    // outline: 1px red solid;
+    position: relative; //讓選單可以根據 整個視容器 定位
+    // z-index: 1;
+    // &::after{
+    //     content: '';
+    //     position: absolute;
+    //     top: 0;
+    //     left: 0;
+    //     width: 100%;
+    //     height: 100%;
+    //     background-color: #00000088;
 
-    z-index: 1;
-    &::after{
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #00000088;
-
-        display: none;
-    }
+    //     display: none;
+    // }
 }
 
-header {
+.white-sun {
+    width: 148.533333%;
+    max-width: 557px;
+    aspect-ratio: 1/1;
+
+    position: absolute; //定位在 視容器上
+    z-index: 1;
+
+    left: -245px; 
+    // left: -43.985637%; //定位父層寬
+    top: -230px;
+    // top: -41.292639%; //定位父層高
+}   
+.halo {
     width: 100%;
+    height: 100%;
+    // width: 557px;
+    // height: 557px;
+    margin: auto;
+
+    background: radial-gradient(50% 50% at 50% 50%, #F2FFA5 0%, rgba(250, 255, 218, 0) 100%);
+    //原本67.41%
+}
+
+
+header {
+    // position: fixed;
+    // top: 0;
     // min-width: 320px;
-    max-width: 444px;
-    
-    position: fixed;
-    top: 0;
+    // max-width: 450px;
+    position: relative;
+    z-index: 3;
+
+    width: 100%;
     
     padding: 35px 21px;//2rem
     font-size: 21px;
 }
-
-
 
 .hamburger {
     width: 22px;
@@ -113,14 +140,15 @@ header {
     margin: 0;
 }
 
+
 #menu_bg{
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background-color: #00000055;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    z-index: 31;
+    z-index: 1061;
 
     display: none;
     &.active{
@@ -132,10 +160,10 @@ header {
     background-color: #fff;
     width: 296px;
     max-width: calc(100vw - 30px);
-    max-height: 100vh;
+    // max-height: 100vh;
 
     position: absolute;
-    z-index: 32;
+    z-index: 1062;
     top: 0;
     left: -100%;
 
@@ -219,31 +247,12 @@ header {
 }
 
 
+main{
+    height: calc( 100% - $header-height);
+    overflow-y: auto;
 
-.white-sun {
-    height: 557px;
-    aspect-ratio: 1/1;
-
-    // position: absolute;
-    position: fixed;
-    z-index: -1;
-
-    // left: -245px;
-    // left: auto;
-    margin-left: -245px;
-    top: -230px;
-}   
-
-
-.halo {
-    width: 100%;
-    height: 100%;
-    // width: 557px;
-    // height: 557px;
-    margin: auto;
-
-    background: radial-gradient(50% 50% at 50% 50%, #F2FFA5 0%, rgba(250, 255, 218, 0) 100%);
-    //原本67.41%
+    position: relative;
+    z-index: 2;
 }
 
 
