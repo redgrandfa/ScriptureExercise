@@ -17,7 +17,7 @@ namespace ScriptureExercise.Controllers.WebAPI
         {
             var result = new ApiResponseBody()
             {
-                Status = ApiOperationStatus.Success,
+                //Status = ApiOperationStatus.Success,
                 Message = "qwe",
                 Payload = new { prop1 }
             };
