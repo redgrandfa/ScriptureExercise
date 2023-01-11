@@ -28,8 +28,8 @@ namespace ScriptureExercise.Models.MemberVM
         //public string Password { get; set; }
 
 
-        //偏好= 經典的隱藏、排序
-        public List<int> ScriptureShowList { get; set; }
+        //經典的隱藏、排序   整包從前端傳來
+        //public List<int> ScriptureShowList { get; set; }
     }
 
     public class ToggleSubjectCollectRequest 

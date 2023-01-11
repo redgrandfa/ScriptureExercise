@@ -47,7 +47,7 @@ namespace ScriptureExercise.Controllers
                     Name = memberValue.Name,
                     Account = memberValue.AccountPK_List[0].AccountId_FromProvider,
 
-                    ScriptureShowList = memberValue.ScriptureShowList,
+                    //ScriptureShowList = memberValue.ScriptureShowList,
                 }
             };
 
