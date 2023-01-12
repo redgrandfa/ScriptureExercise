@@ -1,8 +1,11 @@
 let vue_record = new Vue({
     el: '#vue_record',
     data: {
+        //從DB寫死直接傳來
         percentScore:1,
         score:1,
+        //從DB寫死直接傳來
+
         filters:{
             onlyWrong_Checked:false,
             onlyDone_Checked:false,
@@ -31,7 +34,7 @@ let vue_record = new Vue({
                     "stem": "選錯",
                     "choices": ['q','w'],
                     "answer": 0,
-                    chooesd: 1,
+                    choosed: 1,
                 },
                 {
                     "id":3,
@@ -40,7 +43,7 @@ let vue_record = new Vue({
                     "stem": "答對",
                     "choices": ['q','w'],
                     "answer": 1,
-                    chooesd: 1,
+                    choosed: 1,
                 },
                 {
                     "id": 4,
@@ -115,7 +118,12 @@ let vue_record = new Vue({
                         //找到此回答對應的題目 //如果未來有刪題目機制 使用軟刪除
                         let q = paper.questions.find(q => q.id == r.id) 
                         if(q.type == 1){
-                            q.chooesd = r.chooesd
+                            // 新舊版適配
+                            if(r.choosed==undefined){ //舊>>錯字
+                                q.choosed = r.chooesd
+                            }else{
+                                q.choosed = r.choosed
+                            }
                         }
                         else if(q.type == 2){
                             q.reply = r.reply 
@@ -133,14 +141,14 @@ let vue_record = new Vue({
             let result = this.paper.questions
             if(this.filters.onlyWrong_Checked){
                 result = result.filter(q => 
-                    (q.type==1 && q.answer!= q.chooesd)
+                    (q.type==1 && q.answer!= q.choosed)
                     ||(q.type==2 && q.answer!= q.reply)
                 )
             }
 
             if(this.filters.onlyDone_Checked){
                 result = result.filter(q => 
-                    (q.type==1 && typeof q.chooesd == 'number' )
+                    (q.type==1 && typeof q.choosed == 'number' )
                     ||(q.type==2 && typeof q.reply == 'string' && q.reply.length>0)
                     // ||(q.type==3 )
                 )

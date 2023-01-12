@@ -79,3 +79,20 @@
     height: calc(100vh - 333px);
     overflow-y: auto;
 }
+
+.choices-question-input{}
+.choices-question-answer{
+    display: inline-block;
+    width: 16px;
+}
+.essay-question-answer{
+    font-size: 11px;
+}
+.choices-question-answer_matched,
+.essay-question-answer_matched{
+    color: #0c0;
+}
+.choices-question-answer_different,
+.essay-question-answer_different{
+    color: #e00;
+}

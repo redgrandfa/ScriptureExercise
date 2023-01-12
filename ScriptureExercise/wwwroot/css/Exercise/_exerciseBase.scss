@@ -35,9 +35,21 @@
     margin-top: 27px;
 }
 
-//old
 .question-order{
     width: 2 rem;
+}
+
+// .essay-question-hint,
+.essay-question-input::placeholder{
+    font-size: 11px;
+    color: #8A8A9D;
+}
+
+.essay-question-input{
+    width: 100%;
+    border-top: none;
+    // border-left: none;
+    border-right: none;
 }
 
 .actions{

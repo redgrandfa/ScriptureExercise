@@ -12,7 +12,7 @@ let vue_paper = new Vue({
                     "stem": "",
                     "choices": [],
                     "answer": 0,
-                    chooesd: null,
+                    choosed: null,
                 },
                 {
                     "id": 2,
@@ -51,46 +51,64 @@ let vue_paper = new Vue({
             let dom = e.target
             processingAPI(dom)
 
-            let type1_Correct = 0,
-                type2_Correct = 0,
-                type3_Correct = 0,
-                replies = []
+            let questionTypes_Counter = {
+                type1:{ correct:0 , done:0 ,weight:1},
+                type2:{ correct:0 , done:0 ,weight:10},
+                type3:{ correct:0 , done:0 ,weight:1},
+            }
+            let replies = []
 
             this.paper.questions.forEach( (q,i) => {
+                //選擇
                 if (q.type == 1) {
                     replies.push({
                         id: q.id,
-                        chooesd: q.chooesd,
+                        choosed: q.choosed,
                     });
-                    if(q.answer == q.chooesd){
-                        type1_Correct++;
+                    questionTypes_Counter.type1.done++;
+                    if(q.answer == q.choosed){
+                        questionTypes_Counter.type1.correct++;
                     }
                 }
+                //簡答
                 else if (q.type == 2){ //&& q.reply
                     replies.push({
                         id: q.id,
                         reply: q.reply,
                     });
+                    questionTypes_Counter.type2.done++;
                     if(q.answer == q.reply){
-                        type2_Correct++;
+                        questionTypes_Counter.type2.correct++;
                     }
                 }
+                //填充
                 else if (q.type == 3) {
                     replies.push({
                         id: q.id,
                         replies: q.replies,
                     });
                     q.answers.forEach( (answer,i) =>{
+                        questionTypes_Counter.type3.done++;
                         if(answer == q.replies[i]){
-                            type3_Correct++;
+                            questionTypes_Counter.type3.correct++;
                         }
                     })
                 }
             });
 
             //批改 打分 
-            this.paper.score = type1_Correct+ type3_Correct+ type2_Correct*10
-            this.paper.percentScore = Math.round(this.paper.score*100/this.paper.questions.length)
+            let denominator = 0
+            let score = 0
+            let percentScore = 0
+            for(let key in questionTypes_Counter){
+                let type = questionTypes_Counter[key]
+                denominator += type.done* type.weight
+                // this.paper.score += type.correct* type.weight
+                score += type.correct* type.weight
+            }
+    
+            percentScore = Math.round(score*100/denominator)
+
 
 
             //呼叫API 儲存 答題記錄 更新會員成就統計
@@ -99,16 +117,16 @@ let vue_paper = new Vue({
                     exerciseJsonFileName: jsonFileName,
                     //paperName: this.paper.title,
                     ReplyJSON: JSON.stringify(replies),
-                    score: this.paper.score,
-                    percentScore: this.paper.percentScore,
+                    score: score,
+                    percentScore: percentScore,
                 },
                 memberUpdate: {
-                    choicesQuestion_Correct: type1_Correct,
-                    essayQuestion_Correct: type2_Correct,
-                    blankFillQuestion_Correct: type3_Correct,
-                    choicesQuestion_Done: this.paper.questions.filter(q=>q.type==1).length,
-                    essayQuestion_Done: this.paper.questions.filter(q=>q.type==2).length,
-                    blankFillQuestion_Done: this.paper.questions.filter(q=>q.type==3).length,
+                    choicesQuestion_Correct: questionTypes_Counter.type1.correct,
+                    essayQuestion_Correct: questionTypes_Counter.type2.correct,
+                    blankFillQuestion_Correct: questionTypes_Counter.type3.correct,
+                    choicesQuestion_Done:  questionTypes_Counter.type1.done,
+                    essayQuestion_Done:  questionTypes_Counter.type2.done,
+                    blankFillQuestion_Done:  questionTypes_Counter.type3.done,
                 },
             }).afterAPI(
                 (result)=> {

@@ -42,38 +42,64 @@
     </div>
 
     <div class="question-container">            
-@* 希望長一樣，差異只有：showQuestions 、加 disabled、顯示正解 *@
+@* 希望長一樣，差異只有：篩選showQuestions 、加 disabled、顯示正解 *@ 
         <ol>
             <li v-for="(q,i) in showQuestions"
                 class="question d-flex"
             >
                 <div class="question-order">{{q.order}}.</div>
                 <div v-if="q.type==1">
-                    <p>{{q.stem}}</p>
-                    <div class="pl-3">
-                        <div v-for="(choice,j) in q.choices">
-                            <label>
-                                <input type="radio" 
-                                disabled
-                                :name="i" 
-                                :value="j" 
-                                v-model="q.chooesd"
-                                >
-                                {{choice}}
+                    <p class="stem choices-question-stem">{{q.stem}}</p>
+                    <div v-for="(choice,j) in q.choices">
+                        @* 回答 三情境 *@
+                        @* 答對 *@
+                        @* 答錯 *@
+                        @* 無提交 *@
+
+                        @* 選項 四情境 *@
+                        @* 回答  '是答案' => 綠勾 *@
+                        @* 非回答 '是答案' => 紅勾 *@
+                        @* 回答  非答案 => 紅叉*@
+                        @* 非回答 非答案 => 卡位 *@
+                        <span class="choices-question-answer">
+                            <span :class="q.choosed==q.answer?'choices-question-answer_matched':'choices-question-answer_different'">
                                 <span v-if="j==q.answer"><i class="fa-solid fa-check"></i></span>
-                            </label>
-                        </div>
+                                <span v-else-if="j==q.choosed"><i class="fa-solid fa-xmark"></i></span>
+                            </span>
+                        </span>
+                        
+                        <label>
+                            <input type="radio" class="choices-question-input"
+                            disabled
+                            :name="i" 
+                            :value="j" 
+                            v-model="q.choosed"
+                            >
+                            {{choice}}
+                        </label>
+                        @* <span v-if="j==q.answer" class="choices-question-answer">
+                        <i class="fa-solid fa-check"></i></span> *@
                     </div>
                 </div>
 
                 <div v-else-if="q.type==2" >
-                    <p>{{q.stem}}</p>
-                    <div class="pl-3">
-                        <input 
-                        disabled
-                        type="text" 
-                        v-model="q.reply">
-                        <div>正確答案：<span>{{q.answer}}</span>
+                    <p class="stem essay-question-stem">{{q.stem}}</p>
+                    @* 回答、(答案) *@
+                    <div class="">
+                        <input type="text" class="essay-question-input"
+                            v-model="q.reply"
+                            disabled>
+
+                        @* 核對錯誤->紅，核對正確/得分-> 綠/【根本不顯示】?   *@
+                        <div class="essay-question-answer">
+                            <span :class="q.reply==q.answer?'essay-question-answer_matched':'essay-question-answer_different'">
+                                {{q.answer}}</span>
+                            @* <span v-if="q.reply==q.answer" 
+                                class="essay-question-answer_matched">
+                                {{q.answer}}</span>
+                            <span v-else 
+                                class="essay-question-answer_different">
+                                {{q.answer}}</span> *@
                         </div>
                     </div>
                 </div>
