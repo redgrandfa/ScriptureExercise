@@ -74,6 +74,8 @@ let vue_recordList = new Vue({
             //     percentScore: 22,
             // },
         ],
+        sortBy:"createTimeId",
+        sortDesc:true,
     },
     mounted() { 
         fetch('/ApiExercise/GetRecordList')

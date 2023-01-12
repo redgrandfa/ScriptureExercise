@@ -10,9 +10,11 @@
     <div class="records-container">
         <div id="vue_recordList">
             <b-table 
+                :busy="tableBusy"
                 :fields="fields" 
                 :items="records" 
-                :busy="tableBusy"
+                :sort-by.sync="sortBy"
+                :sort-desc.sync="sortDesc"
                 thead-tr-class="thead-tr-class"
             >
             <!-- sticky-header  當部分欄位能排序，部分欄位不能排序時 會壞掉... --> 
