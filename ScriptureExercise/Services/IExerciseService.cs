@@ -1,5 +1,5 @@
 ﻿using Common.DBModels;
-using Common.DTOModels.ExcerciseDTOs;
+using Common.DTOModels.ExerciseDTOs;
 using Common.Repositories;
 using Microsoft.AspNetCore.Http;
 using System;

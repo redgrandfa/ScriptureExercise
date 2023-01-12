@@ -6,20 +6,20 @@
 
   <ItemGroup>
     <Compile Remove="Views\Shared\Library\**" />
-    <Compile Remove="wwwroot\css\Excercise\**" />
-    <Compile Remove="wwwroot\js\Excercise\A生晨\**" />
+    <Compile Remove="wwwroot\css\Exercise\**" />
+    <Compile Remove="wwwroot\js\Exercise\A生晨\**" />
     <Compile Remove="wwwroot\VHtmls\**" />
     <Content Remove="Views\Shared\Library\**" />
-    <Content Remove="wwwroot\css\Excercise\**" />
-    <Content Remove="wwwroot\js\Excercise\A生晨\**" />
+    <Content Remove="wwwroot\css\Exercise\**" />
+    <Content Remove="wwwroot\js\Exercise\A生晨\**" />
     <Content Remove="wwwroot\VHtmls\**" />
     <EmbeddedResource Remove="Views\Shared\Library\**" />
-    <EmbeddedResource Remove="wwwroot\css\Excercise\**" />
-    <EmbeddedResource Remove="wwwroot\js\Excercise\A生晨\**" />
+    <EmbeddedResource Remove="wwwroot\css\Exercise\**" />
+    <EmbeddedResource Remove="wwwroot\js\Exercise\A生晨\**" />
     <EmbeddedResource Remove="wwwroot\VHtmls\**" />
     <None Remove="Views\Shared\Library\**" />
-    <None Remove="wwwroot\css\Excercise\**" />
-    <None Remove="wwwroot\js\Excercise\A生晨\**" />
+    <None Remove="wwwroot\css\Exercise\**" />
+    <None Remove="wwwroot\js\Exercise\A生晨\**" />
     <None Remove="wwwroot\VHtmls\**" />
   </ItemGroup>
 

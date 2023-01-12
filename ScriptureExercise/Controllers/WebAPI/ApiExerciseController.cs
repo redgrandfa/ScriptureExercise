@@ -1,11 +1,11 @@
 ﻿using Common.DBModels;
-using Common.DTOModels.ExcerciseDTOs;
+using Common.DTOModels.ExerciseDTOs;
 using Common.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ScriptureExercise.Models;
-using ScriptureExercise.Models.ExcerciseVM;
+using ScriptureExercise.Models.ExerciseVM;
 using ScriptureExercise.Services;
 using System;
 

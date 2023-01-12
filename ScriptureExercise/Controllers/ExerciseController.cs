@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ScriptureExercise.Models.ExcerciseVM;
+using ScriptureExercise.Models.ExerciseVM;
 using ScriptureExercise.Services;
 using System;
 using System.Collections.Generic;
@@ -56,7 +56,7 @@ namespace ScriptureExercise.Controllers
         [HttpGet("{scripture}.{subjectId?}/卷{PaperId}")]
         public IActionResult Paper(string scripture,  int PaperId , int subjectId = 1)
         {
-            var vm = new ExcerciseListVM();
+            var vm = new ExerciseListVM();
 
             //try
             //{

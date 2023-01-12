@@ -1,13 +1,13 @@
 ﻿using Common.DBModels;
-using Common.DTOModels.ExcerciseDTOs;
+using Common.DTOModels.ExerciseDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ScriptureExercise.Models.ExcerciseVM
+namespace ScriptureExercise.Models.ExerciseVM
 {
-    public class ExcerciseListVM
+    public class ExerciseListVM
     {
         public string ScriptureName { get; set; }
         public int SubjectId { get; set; }

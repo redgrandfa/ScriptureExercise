@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.DTOModels.ExcerciseDTOs
+namespace Common.DTOModels.ExerciseDTOs
 {
     public class GetRecordListOutput: BaseOutput_withPayload< List<RecordRow> >
     {

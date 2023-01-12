@@ -142,6 +142,7 @@ let vue_record = new Vue({
                 result = result.filter(q => 
                     (q.type==1 && typeof q.chooesd == 'number' )
                     ||(q.type==2 && typeof q.reply == 'string' && q.reply.length>0)
+                    // ||(q.type==3 )
                 )
             }
 
@@ -168,8 +169,6 @@ let vue_record = new Vue({
 
             return url
         },
-
-
     },
     components: {},
 })

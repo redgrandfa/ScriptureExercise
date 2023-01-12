@@ -1,0 +1,123 @@
+研究Gorse
+研究Promotion影響範圍
+    1. DB：string Parameters (JsonString存所有參數，高彈性)
+        後台前端設定 > 後端適配到C#強型別/(匿名類型可能不行) > 轉JsonString存所有參數
+            選強型別：Promotion類型內，巢狀開一個Parameters類別
+
+    2. 
+
+----
+心得
+    至少一個分支(main)一定要跟production一樣， 不然臨時想hotfix會哭
+    部分引入 ： scripture.js 混到了 papers或稱chapters，導致後悔
+
+    字串輸入API 太有彈性 => 利用Enum限制輸入
+
+
+
+- 新增 加入書單 / 自書單移除 功能 
+    考科頁 
+    [
+        A:[1,]    Arraylength0/ null
+        F:[1,3]
+    ]
+
+    寫入時，OrderBy string => 自動
+    A => 自動取A1?，好像沒必要，這不關係名稱顯示
+    A1
+    F1
+    F2
+
+- 取消 經典顯示功能
+    DB屬性刪除即可?
+        寫Member： 會員中心編輯過 自動覆蓋
+        讀Member： 資料 自然 無法進到C#強型別?
+
+- 圖層檢查
+    主區 上方想固著的 => 不要fixed
+    主區 => 限制最大高 + overflow-y :auto
+
+    選單 >> 放到RenderBody之後? absolute? 拉淺，不可比
+
+    最後搞 太陽 不要fixed >> absolute
+
+    左右兩片 考慮relative 拉淺
+    swal訊息要最淺??
+
+- 練習紀錄 DB資料補刪 或丟著 之後會變多?
+----v2部署
+只顯示錯題
+
+習題樣式、記錄樣式
+
+- 書單頁 
+- 會員中心頁
+收集 作者、介紹、圖檔
+---
+國際時間 問題?
+
+
+DB 移到執行檔相對路徑，避免暴露
+經典DB 重整?： 省記憶體，但邏輯變複雜
+    經典 、 ，  isOnly屬性 = true
+        考科檔 、 id=1 時要 進一步檢查 經典的isOnly屬性
+
+    各卷檔：連結
+        FK：考科編號 = 經典code + 考科Id
+
+
+
+
+-------------
+=> 在回傳值不可有變，先適應
+
+最後 擴充屬性讓 購物車可以...
+
+檢查訂單的寫法?
+    發票明細?
+
+---
+api/Cart/GetCurrentCart > GetCartResult => 8處API呼叫
+    DiscountHistories 沒使用、沒傳到前端
+    CartItems 接收 > item.NormalDiscountPrice寫入( > 傳到前端
+
+
+api/Cart/GetCartItems > GetCartResult  => 6處API呼叫
+    DiscountHistories 沒使用、沒傳到前端
+    CartItems 接收 > 直接 傳到前端
+
+
+api/Cart/GetCheckoutItems >  1處API呼叫
+    GetCheckoutSummary > GetCartResult
+    result.Body = new CartModels.GetCheckoutItemsResult
+    {
+        CartItems = summary.CartItems,
+        DiscountHistories = summary.DiscountHistories,
+
+    ...
+    return result
+
+
+
+api/Order/CreateOrderCompleteProcessAsync 1處API呼叫 checkout.js
+    CreateOrderAsync 【API!!?】
+
+
+api/Order/CreateOrderAsync  0處API呼叫
+    CalculateOrder
+        GetCheckoutSummary
+
+    【訂單折扣紀錄//寫入DB 】
+    if (calculateResult.DiscountHistories.Any())
+    {
+        await _context.OrderDiscountHistory.AddRangeAsync(calculateResult.DiscountHistories.Select(x => new OrderDiscountHistory
+        {
+            OrderDiscountHistoryId = Guid.NewGuid(),
+            OrderId = orderId,
+            TargetId = x.TargetId,                          GoodsDetailId
+            ApplyDiscountId = x.ApplyDiscountId,            promotion.PromotionId
+            OrderDiscountType = x.OrderDiscountType,        (int)Common.OrderDiscountType.Promotion
+            DiscountAmount = x.DiscountAmount               折掉的錢 (品項總額，受數量倍增 )
+        }).ToList());
+    }
+
