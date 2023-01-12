@@ -44,17 +44,16 @@
                 <div class="question-order">{{q.order}}.</div>
                 <div v-if="q.type==1">
                     <p class="stem choices-question-stem">{{q.stem}}</p>
-
-                    <div class="pl-2">
-                        <div v-for="(choice,j) in q.choices">
-                            <label>
+                    <div v-for="(choice,j) in q.choices">
+                        <label class="d-flex">
+                            <span class="choices-question-answer">
                                 <input type="radio" class="choices-question-input"
                                 :name="i" 
                                 :value="j" 
                                 v-model="q.choosed">
-                                {{choice}}
-                            </label>
-                        </div>
+                            </span>
+                            <span>{{choice}}</span>
+                        </label>
                     </div>
                 </div>
 

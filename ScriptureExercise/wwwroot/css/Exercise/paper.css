@@ -37,6 +37,10 @@
   width: 2 rem;
 }
 
+.choices-question-answer {
+  width: 18px;
+}
+
 .essay-question-input::-moz-placeholder {
   font-size: 11px;
   color: #8A8A9D;

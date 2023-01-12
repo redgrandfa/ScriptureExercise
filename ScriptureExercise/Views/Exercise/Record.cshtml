@@ -61,24 +61,21 @@
                         @* 非回答 '是答案' => 紅勾 *@
                         @* 回答  非答案 => 紅叉*@
                         @* 非回答 非答案 => 卡位 *@
-                        <span class="choices-question-answer">
-                            <span :class="q.choosed==q.answer?'choices-question-answer_matched':'choices-question-answer_different'">
-                                <span v-if="j==q.answer"><i class="fa-solid fa-check"></i></span>
-                                <span v-else-if="j==q.choosed"><i class="fa-solid fa-xmark"></i></span>
-                            </span>
-                        </span>
+
                         
-                        <label>
-                            <input type="radio" class="choices-question-input"
-                            disabled
-                            :name="i" 
-                            :value="j" 
-                            v-model="q.choosed"
-                            >
-                            {{choice}}
+                        <label class="d-flex">
+                            <span class="choices-question-answer">
+                                <span :class="q.choosed==q.answer?'choices-question-answer_matched':'choices-question-answer_different'">
+                                    <span v-if="j==q.answer"><i class="fa-solid fa-check"></i></span>
+                                    <span v-else-if="j==q.choosed"><i class="fa-solid fa-xmark"></i></span>
+                                    <span v-else>
+                                        <input type="radio" class="choices-question-input"
+                                        disabled >
+                                    </span>
+                                </span>
+                            </span>
+                            <span>{{choice}}</span>
                         </label>
-                        @* <span v-if="j==q.answer" class="choices-question-answer">
-                        <i class="fa-solid fa-check"></i></span> *@
                     </div>
                 </div>
 
