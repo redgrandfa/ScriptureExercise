@@ -7,13 +7,6 @@ using System.Threading.Tasks;
 
 namespace ScriptureExercise.Models.ExerciseVM
 {
-    public class ExerciseListVM
-    {
-        public string ScriptureName { get; set; }
-        public int SubjectId { get; set; }
-        public int PageId { get; set; }
-    }
-
     public class PostPaperRequestModel
     {
         public Member MemberUpdate { get; set; }

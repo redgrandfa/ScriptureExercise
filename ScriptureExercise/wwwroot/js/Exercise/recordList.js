@@ -35,19 +35,15 @@ let vue_recordList = new Vue({
                     let subject =  scripture.subjects.find( subject => subject.id == subjectId)
                     let paper = subject.papers.find( paper => paper.id == paperId)
 
-                    
-                    //
-                    let subjectChinesePostfix = ''
-                    if( scripture.subjects.length > 1 ){
-                        subjectChinesePostfix = `(${number_To_Chinese(subjectId)})`
-                    }
+
+                    let subjectTitle = getSubjectTitle_fromDB(scripture , subjectId)
                     let range_remark = paper.range_remark
 
-                    return [scripture_Code_To_Chinese(scriptureCode), 
-                        subjectChinesePostfix, 
+                    return {
+                        subjectTitle,
                         paperId ,
                         range_remark
-                    ]
+                    }
                 }
                 ,tdClass:'td-createTime' //沿用
             },
@@ -90,9 +86,8 @@ let vue_recordList = new Vue({
                         percentScore: r.percentScore ,
                     }
 
-                    let scripture = r.exerciseJsonFileName[0]
-                    result.paperCode = r.exerciseJsonFileName // F/F2_1
-                        .substring(2) // F2_1
+                    // let scripture = r.exerciseJsonFileName[0]
+                    result.paperCode = paperJsonFilePath_To_paperCode(r.exerciseJsonFileName)// F/F2_1
 
                     return result
                 })
@@ -108,9 +103,8 @@ let vue_recordList = new Vue({
             fetchPost(`/ApiExercise/DeleteRecord/${createTimeId}`,{})
             .afterAPI(
                 (result)=> {
-                    dom.dispatchEvent(apiDoneEvent)
                     let idx = this.records.findIndex(r=>r.createTimeId==createTimeId)
-                    console.log(idx)
+                    dom.dispatchEvent(apiDoneEvent)
                     this.records.splice(idx, 1)
             },
                 (result)=> {

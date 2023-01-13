@@ -1,21 +1,18 @@
-﻿@using ScriptureExercise.Models.ExerciseVM
-@using Common.Helpers
-@model ExerciseListVM
+﻿@model (string ScriptureCode, string ScriptureTitle, int SubjectId, int PaperId) 
 
 @{
     ViewData["Title"] = "習題卷";
 
-    var ScriptureCode = ScriptureHelper.scriptureTrans[Model.ScriptureName];
-    var dataSource = $"/lib/DB/{ScriptureCode}/{ScriptureCode}{Model.SubjectId}_{Model.PageId}.js";
+    var ScriptureCode = Model.ScriptureCode;
+    var dataSource = $"/lib/DB/{ScriptureCode}/{ScriptureCode}{Model.SubjectId}_{Model.PaperId}.js";
 }
-
 @section TopCSS{
     <link rel="stylesheet" href="~/css/Exercise/paper.css">
 }
 
 @section Scripts{
     <script>
-        let jsonFileName = '@($"{ScriptureCode}/{ScriptureCode}{Model.SubjectId}_{Model.PageId}")'
+        const jsonFilePath = '@($"{ScriptureCode}/{ScriptureCode}{Model.SubjectId}_{Model.PaperId}")'
     </script>
     <script src = "~/js/Exercise/paper.js"></script>
 } 
@@ -23,10 +20,9 @@
 
 <div id="vue_paper">
     <div class="exercise-banner">
-        @* <h2 class="h">論語(一)</h2>
-        <h3 class="h">卷6-述而</h3> *@
-        <h2 class="h">@Model.ScriptureName  @Model.SubjectId</h2>
-        <h3 class="h">卷 @Model.PageId-{{paper.range_remark}}</h3>
+        <h2>{{paper.info.subjectTitle}} </h2>
+        <h3>卷{{paper.info.paperId}} - {{paper.info.range_remark}} </h3>
+        
         @* <p>總題數<span class="numberOfQuestions">{{paper.questions.length}}</span></p> *@
     </div>
 

@@ -2,8 +2,13 @@ let vue_paper = new Vue({
     el:'#vue_paper',
     data: {
         paper: {
-            "title": "",
-            "range_remark": "",
+            info:{
+                // scriptureTitle:'論語',
+                // subjectId:0,
+                subjectTitle:'論語(一)',
+                paperId:0,
+                "range_remark": "(1-3)",
+            },
             "questions": [
                 {
                     "id":1,
@@ -35,13 +40,15 @@ let vue_paper = new Vue({
         },
     },
     mounted() {
-        fetch( paperJsonFileName_To_DataSource(jsonFileName) )
+        fetch( paperJsonFilePath_To_dataSource(jsonFilePath) )
         .afterFetch(resp => {
             resp.json()
-            .then(JSobj => {
-                this.paper = JSobj
-                //this.paper.questions.map(x=> x.choosed = null)
-                // reply replies... replies需要先有陣列 才能叫索引
+            .then(paper => {
+                let info = paperJsonFilePath_To_paperInfo(jsonFilePath)
+                info.range_remark = paper.range_remark
+
+                this.paper.info = info
+                this.paper.questions = paper.questions
             })
         })
     },
@@ -114,7 +121,7 @@ let vue_paper = new Vue({
             //呼叫API 儲存 答題記錄 更新會員成就統計
             fetchPost('/ApiExercise/PostPaper',{
                 recordCreate: {
-                    exerciseJsonFileName: jsonFileName,
+                    exerciseJsonFileName: jsonFilePath,
                     //paperName: this.paper.title,
                     ReplyJSON: JSON.stringify(replies),
                     score: score,
@@ -130,8 +137,8 @@ let vue_paper = new Vue({
                 },
             }).afterAPI(
                 (result)=> {
+                    dom.dispatchEvent(apiDoneEvent)
                     window.location.href = `/Exercise/Record/${result.payload}`;
-                    // dom.dispatchEvent(apiDoneEvent)
                 },
                 (result)=> {
                     dom.dispatchEvent(apiDoneEvent)

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Common.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ScriptureExercise.Models.ExerciseVM;
 using ScriptureExercise.Services;
@@ -36,56 +37,38 @@ namespace ScriptureExercise.Controllers
         [AllowAnonymous]
         public IActionResult Chapters(string scriptureTitle, int subjectId = 1)
         {
-            ViewData["ScriptureTitle"] = scriptureTitle;
-            ViewData["SubjectId"] = subjectId;
-            return View();
+            (string ScriptureCode, string ScriptureTitle, int SubjectId) vm = (
+                ScriptureCode: ScriptureHelper.scriptureTrans[scriptureTitle], ///不存在會報錯
+                ScriptureTitle: scriptureTitle,
+                SubjectId: subjectId
+            );
 
-            //    string scripture = "";
-            //    int subjectId = 1;
-            //    if (subject.Contains("("))
-            //    {
-            //        var temp = subject.Split("(") ;
-
-            //        scripture = temp[0];
-            //        subjectIdChinese = temp[1][0].ToInt();
-            //    }
-
-            //    return View(model:subject);
-        }
-
-        [HttpGet("{scripture}.{subjectId?}/卷{PaperId}")]
-        public IActionResult Paper(string scripture,  int PaperId , int subjectId = 1)
-        {
-            var vm = new ExerciseListVM();
-
-            //try
-            //{
-            //}
-            //catch(Exception ex)
-            //{
-            //    return Content("錯誤的經典名稱。"+ ex.Message );
-            //};
-            vm.ScriptureName = scripture;
-            vm.SubjectId = subjectId;
-            vm.PageId = PaperId;
-
-
-            //在前端檢查 考卷是否真的存在? 只是要防止 亂打網址?
-            //前端用JS語法引入JS 引不了可報錯?
-            //這裡用列舉?? 百位 十位 個位數 ...10+26 = 36進位?? xy_zz 時間? 0~60
             return View(vm);
         }
-        
+
+        [HttpGet("{scriptureTitle}.{subjectId?}/卷{PaperId}")]
+        public IActionResult Paper(string scriptureTitle,  int PaperId , int subjectId = 1)
+        {
+            (string ScriptureCode, string ScriptureTitle, int SubjectId, int PaperId) 
+                vm = (
+                ScriptureCode: ScriptureHelper.scriptureTrans[scriptureTitle], ///不存在會報錯
+                ScriptureTitle: scriptureTitle,
+                SubjectId : subjectId,
+                PaperId: PaperId
+            );
+
+            return View(vm);
+        }
+        [HttpGet("Record/{CreateTimeId}")]
+        public IActionResult Record(string CreateTimeId)
+        {
+            return View(model: CreateTimeId);
+        }
+
         [HttpGet("RecordList")]
         public IActionResult RecordList()
         {
             return View();
-        }
-
-        [HttpGet("Record/{CreateTimeId}")]
-        public IActionResult Record( string CreateTimeId )
-        {
-            return View(model:CreateTimeId);
         }
     }
 }

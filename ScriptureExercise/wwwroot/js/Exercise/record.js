@@ -2,8 +2,8 @@ let vue_record = new Vue({
     el: '#vue_record',
     data: {
         //從DB寫死直接傳來
-        percentScore:1,
-        score:1,
+        percentScore:0,
+        score:0,
         //從DB寫死直接傳來
 
         filters:{
@@ -12,12 +12,13 @@ let vue_record = new Vue({
         },
         showQuestions: [],
         paper:{
-            paperScheme:{
-                scriptureTitle:'論語',
-                subjectId:2,
-                paperId:1,
+            info:{
+                // scriptureTitle:'論語',
+                // subjectId:0,
+                subjectTitle:'論語(一)',
+                paperId:0,
+                "range_remark": "(1-3)",
             },
-            "range_remark": "(1-3)",
             "questions": [
                 {
                     "id":1,
@@ -79,6 +80,8 @@ let vue_record = new Vue({
                 // },
             ],
         },
+        link_exerciseAgain:'',
+        link_chapters:'',
     },
     mounted() { 
         fetch(`/ApiExercise/GetRecord/${createTimeId}`)
@@ -91,26 +94,32 @@ let vue_record = new Vue({
                         }) 
                         return 
                     }
+                    else{
+                        let record = result.payload
+                        this.score = record.score
+                        this.percentScore = record.percentScore
+
+
+                        let info = paperJsonFilePath_To_paperInfo(record.fK_JsonFileName)
+                        this.paper.info = info
+                        
+                        this.link_chapters = `/Exercise/${info.scriptureTitle}.${info.subjectId}`
+                        this.link_exerciseAgain =  this.link_chapters + `/卷${info.paperId}`
     
-                    //題庫
-                    let record = result.payload
-                    this.getPapaerDetailByRecord(record)
+                        //題庫
+                        this.getPaperDetailByRecord(record)
+                    }
                 })
             })
     },
     methods: {
-        getPapaerDetailByRecord(record){
-            fetch(paperJsonFileName_To_DataSource(record.fK_JsonFileName) )
+        getPaperDetailByRecord(record){
+            fetch(paperJsonFilePath_To_dataSource(record.fK_JsonFileName) )
             .afterFetch( resp => {
                 resp.json()
                 .then(paper => {
-                    this.score = record.score
-                    this.percentScore = record.percentScore
-
-                    this.paper.paperScheme= paperJsonFileName_To_paperScheme(record.fK_JsonFileName)
-                    this.paper.range_remark = paper.range_remark
+                    this.paper.info.range_remark = paper.range_remark
                     this.paper.questions = []
-                    
                     let replies = JSON.parse(record.replyJSON)
                     //[ {id:1 , choosed:1}]//長這樣 
 
@@ -119,8 +128,8 @@ let vue_record = new Vue({
                         let q = paper.questions.find(q => q.id == r.id) 
                         if(q.type == 1){
                             // 新舊版適配
-                            if(r.choosed==undefined){ //舊>>錯字
-                                q.choosed = r.chooesd
+                            if(r.choosed==undefined){ 
+                                q.choosed = r.chooesd //舊>>錯字esd
                             }else{
                                 q.choosed = r.choosed
                             }
@@ -166,17 +175,6 @@ let vue_record = new Vue({
             },
         }
     },
-    computed: {
-        Link_exerciseAgain(){
-            let url = `/Exercise/${this.paper.paperScheme.scriptureTitle}.${this.paper.paperScheme.subjectId}/卷${this.paper.paperScheme.paperId}`
-
-            return url
-        },
-        Link_Chapters(){
-            let url = `/Exercise/${this.paper.paperScheme.scriptureTitle}.${this.paper.paperScheme.subjectId}`
-
-            return url
-        },
-    },
+    computed: {},
     components: {},
 })

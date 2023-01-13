@@ -6,7 +6,6 @@ function showMenu(){
     menu.classList.add('active')
     menu_bg.classList.add('active')
 }
-
 function number_To_Chinese(num) {
     let trans = [
         '零', '一', '二', '三', '四', '五',
@@ -16,83 +15,115 @@ function number_To_Chinese(num) {
     return trans[num]
 }
 
+
+
 // scriptureCode <--> scriptureTitle  //scriptures_inDB 或另外做字典
 function scriptureTrans(){
     return [
         {
             code:"A" ,
-            chinese:"生晨",
+            title:"生晨",
         },
         {
             code:"B" ,
-            chinese:"佛規諭錄",
+            title:"佛規諭錄",
         },
         {
             code:"C" ,
-            chinese:"性理題釋",
+            title:"性理題釋",
         },
         {
             code:"D" ,
-            chinese:"皇母訓子十誡",
+            title:"皇母訓子十誡",
         },
         {
             code:"E" ,
-            chinese:"學庸",
+            title:"學庸",
         },
         {
             code:"F",
-            chinese:"論語",
+            title:"論語",
+            isMulti:true,
         },
         {
             code:"G" ,
-            chinese:"孟子",
+            title:"孟子",
+            isMulti:true,
         },
         {
             code:"H" ,
-            chinese:"道清",
+            title:"道清",
         },
         {
             code:"I" ,
-            chinese:"金心",
+            title:"金心",
         },
         {
             code:"J" ,
-            chinese:"六祖壇經",
+            title:"六祖壇經",
+            isMulti:true,
         },
     ]
 }
-function scripture_Code_To_Chinese(code) {
+function scripture_Code_To_Title(code) {
     let t = scriptureTrans().find(scripture => scripture.code == code)
-    return t.chinese
+    return t.title
 }
-
-function scripture_Chinese_To_Code(chinese) {
-    let t = scriptureTrans().find(scripture => scripture.chinese == chinese)
+function scripture_Title_To_Code(title) {
+    let t = scriptureTrans().find(scripture => scripture.title == title)
     return t.code
 }
+// =====subject
+// scheme={
+//     scriptureCode?
+//     scriptureTitle:'六祖壇經',
+//     subjectId?
+//     subjectChinesePostfix:'(二)', subjectId?
+// }
 
-// subjectId <--> subjectChinesePostFix //用number_To_Chinese 不須另外寫?
+function getSubjectScheme( scriptureCode , subjectId ) {
+    // 找到對應 資料
+    let scripture = scriptureTrans().find(scripture => scripture.code == scriptureCode)
 
-// function getSubjectChinesePostFix( scripture , subjectId ){} //仍需要判斷長度、當前id
-function getSubjectTitle( scripture , subjectId){
-    let subjectChinesePostFix = ''
-    if (scripture.subjects.length > 1){
-        subjectChinesePostFix = `(${number_To_Chinese(subjectId)})`
+    let subjectChinesePostfix = ''
+    if (scripture.isMulti){ //.length
+        subjectChinesePostfix = `(${number_To_Chinese(subjectId)})`
     }
 
-    return `${scripture.title}${subjectChinesePostFix}`
-}
-
-//paper頁 網址參數 > JsonFileName > DB FilePath
-function paperJsonFileName_To_DataSource(jsonFileName) {
-    return `/lib/DB/${jsonFileName}.json`
-}
-
-function paperJsonFileName_To_paperScheme(jsonFileName) {
-    // jsonFileName = 'F/F2_1'
     return {
-        scriptureTitle:scripture_Code_To_Chinese(jsonFileName[2]),
-        subjectId:jsonFileName[3],
-        paperId:jsonFileName[5],
-    }
+        scriptureTitle: scripture.title,
+        subjectId: subjectId,
+        subjectChinesePostfix: subjectChinesePostfix,
+    };
+}
+function getSubjectTitle( scriptureCode , subjectId ){
+    let scheme = getSubjectScheme(scriptureCode , subjectId)
+    return `${scheme.scriptureTitle}${scheme.subjectChinesePostfix}`
+}
+
+// =====paper = Info + Questions
+function paperJsonFilePath_To_paperInfo(paperJsonFilePath){
+    let paperCode = paperJsonFilePath_To_paperCode(paperJsonFilePath)
+    let subjectId = paperCode[1]
+
+    let paperInfo = getSubjectScheme( paperCode[0] , subjectId)
+    paperInfo.subjectTitle = 
+        paperInfo.scriptureTitle + 
+        paperInfo.subjectChinesePostfix
+
+    paperInfo.paperId = paperCode[3]
+
+    return paperInfo // range_remark undefined
+}
+
+//==== Json Questions
+function paperJsonFilePath_To_paperCode(paperJsonFilePath){
+    return paperJsonFilePath.substring(2)
+}
+function paperCode_To_paperJsonFilePath(paperCode) {
+    return paperCode[0] + "/" + paperCode;
+}
+
+function paperJsonFilePath_To_dataSource(paperJsonFilePath) {
+    return `/lib/DB/${paperJsonFilePath}.json`;
 }

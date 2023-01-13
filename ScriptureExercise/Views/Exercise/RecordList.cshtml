@@ -1,6 +1,14 @@
 ﻿@{
     ViewData["Title"] = "練習記錄列表";
 }
+@section TopCSS{
+    <link rel="stylesheet" href="~/css/Exercise/recordList.css">
+}
+
+@section Scripts{
+    <script src="~/lib/DB/scriptures.js"></script>
+    <script src="~/js/Exercise/recordList.js"></script>
+}
 
 <div id="vue_recordList">
     <div class="text-center">
@@ -31,8 +39,8 @@
                 </template>
 
                 <template #cell(paperCode)="row">
-                    <span>{{row.value[0]}}{{row.value[1]}}</span>
-                    <span>卷{{row.value[2]}}-{{row.value[3]}}</span>
+                    <span>{{row.value.subjectTitle}}</span>
+                    <span>卷{{row.value.paperId}}-{{row.value.range_remark}}</span>
                 </template>
 
                 <template #cell(percentScore)="row">
@@ -62,12 +70,3 @@
         GO PRACTICE 練習其他經典
     </button> -->
 </div>
-
-@section TopCSS{
-    <link rel="stylesheet" href="~/css/Exercise/recordList.css">
-}
-
-@section Scripts{
-    <script src="~/lib/DB/scriptures.js"></script>
-    <script src="~/js/Exercise/recordList.js"></script>
-}

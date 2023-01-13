@@ -1,8 +1,15 @@
-﻿@*@model List<int>*@
-
-@{
+﻿@{
     ViewData["Title"] = "選考科";
 }
+
+@section TopCSS{
+    <link rel="stylesheet" href="~/css/Exercise/subjects.css">
+}
+@section Scripts{
+    <script src="~/lib/DB/scriptures.js"></script>
+
+    <script src="~/js/Exercise/subjects.js"></script>
+} 
 
 <div id="vue_subjects">
     <section class="subject-filters">
@@ -57,14 +64,3 @@
         </ul>
     </section>
 </div>
-
-@section TopCSS{
-    <link rel="stylesheet" href="~/css/Exercise/subjects.css">
-}
-@section Scripts{
-    <script src="~/lib/DB/scriptures.js"></script>
-@*    <script>
-        let ScriptueShowList = @Html.Raw(JsonSerializer.Serialize( Model) );
-    </script>
-*@    <script src="~/js/Exercise/subjects.js"></script>
-} 

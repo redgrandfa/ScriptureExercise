@@ -3,11 +3,20 @@
 @{
     ViewData["Title"] = "練習紀錄";
 }
+@section TopCSS{
+    <link rel="stylesheet" href="~/css/Exercise/Record.css">
+}
 
+@section Scripts{
+    <script>
+        const createTimeId = '@Model'
+    </script>
+    <script src = "~/js/Exercise/Record.js"></script>
+} 
 <div id="vue_record">
     <div class="exercise-banner">
-        <h2>{{paper.paperScheme.scriptureTitle}} {{paper.paperScheme.subjectId}} </h2>
-        <h3>卷{{paper.paperScheme.paperId}} -{{paper.range_remark}} </h3>
+        <h2>{{paper.info.subjectTitle}} </h2>
+        <h3>卷{{paper.info.paperId}} - {{paper.info.range_remark}} </h3>
     </div>
 
     <div class="result">
@@ -111,28 +120,15 @@
         </ol>
     </div>
     <div class="actions">
-        <a :href="Link_exerciseAgain" class="without-hyperLink-style d-block">
+        <a :href="link_exerciseAgain" class="without-hyperLink-style d-block">
             <div class="custom-btn green-btn">
                 TRY AGAIN 再練習一次
             </div>
         </a>
-        <a :href="Link_Chapters" class="without-hyperLink-style d-block mt-2">
+        <a :href="link_chapters" class="without-hyperLink-style d-block mt-2">
             <div class="custom-btn gray-btn">
                 BACK TO CHAPTER 回到練習章節
             </div>
         </a>
     </div>
 </div>
-
-@section TopCSS{
-    <link rel="stylesheet" href="~/css/Exercise/Record.css">
-}
-
-@section Scripts{
-    <script>
-        let createTimeId = '@Model'
-    </script>
-    <script src = "~/js/Exercise/Record.js"></script>
-} 
-
-

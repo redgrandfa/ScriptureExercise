@@ -1,9 +1,20 @@
-﻿@* @model List<int> *@
+﻿@model (string ScriptureCode, string ScriptureTitle, int SubjectId)
 
 @{
     ViewData["Title"] = "選練習章節";
 }
-
+@section TopCSS{
+    <link rel="stylesheet" href="~/css/Exercise/chapters.css">
+}
+@section Scripts{
+    <script src="~/lib/DB/scriptures.js"></script>
+    <script>
+        const scriptureCode = '@Html.Raw(Model.ScriptureCode)'
+        const scriptureTitle = '@Html.Raw(Model.ScriptureTitle)'
+        const subjectId = @Model.SubjectId
+    </script>
+    <script src="~/js/Exercise/chapters.js"></script>
+}
 <div id="vue_chapters">
     <div class="chapters-container">
         <div class="chapter-show">
@@ -40,14 +51,4 @@
     </a>
 </div>
 
-@section TopCSS{
-    <link rel="stylesheet" href="~/css/Exercise/chapters.css">
-}
-@section Scripts{
-    <script src="~/lib/DB/scriptures.js"></script>
-    <script>
-        let scriptureTitle = '@Html.Raw(ViewData["ScriptureTitle"])'
-        let subjectId = @ViewData["SubjectId"]
-    </script>
-    <script src="~/js/Exercise/chapters.js"></script>
-}
+

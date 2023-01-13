@@ -1,7 +1,6 @@
 let vue_subjects = new Vue({
     el: "#vue_subjects",
     data: {
-        isAuthenticated: isAuthenticated,
         searchFor:'',
         categoryChecked: {
             'Bai':false,
@@ -13,27 +12,19 @@ let vue_subjects = new Vue({
         subjectsShow:[],
     },
     beforeMount(){
-        //先載入 所有經典資料(已有) 要把科目攤平?深拷貝?
+        //載入 所有經典資料  攤平成科目
         scriptures_inDB.forEach( scripture => {
-            let getSubjectChinesePostFix = ()=>''
-            if (scripture.subjects.length > 1){
-                getSubjectChinesePostFix = (num)=>`(${number_To_Chinese(num)})`
-            }
             scripture.subjects.forEach(subject=>{
                 let subjectToAdd = {
                     scripture: scripture.code, 
-                    //網址要中文嗎
                     scriptureTitle: scripture.title,
-                    id:subject.id,
-                    //網址要中文嗎
-                    // subjectChinesePostFix: getSubjectChinesePostFix(subject.id),
-                    
-                    title:`${scripture.title}${getSubjectChinesePostFix(subject.id)}`,
                     author: scripture.author,
                     belongTo: scripture.belongTo,
+
+                    id:subject.id,
+                    title: getSubjectTitle(scripture.code , subject.id),
                     isCollected: false 
                 }
-                // subjectToAdd.title=subjectToAdd.scripture + subjectToAdd.subjectChinesePostFix
 
                 this.subjects.push(subjectToAdd)
             })
@@ -41,7 +32,7 @@ let vue_subjects = new Vue({
         this.subjectsShow = this.subjects
 
         //有登入 -> 取書單狀況
-        if(this.isAuthenticated){
+        if(isAuthenticated){
             fetch('/ApiMember/GetSubjectCollectList')
             .afterFetch( (resp)=>{
                 resp.json()
