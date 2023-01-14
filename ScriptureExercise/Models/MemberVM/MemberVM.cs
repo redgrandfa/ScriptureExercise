@@ -26,10 +26,6 @@ namespace ScriptureExercise.Models.MemberVM
         public string Name { get; set; }
         public string Account { get; set; }
         //public string Password { get; set; }
-
-
-        //經典的隱藏、排序   整包從前端傳來
-        //public List<int> ScriptureShowList { get; set; }
     }
 
     public class ToggleSubjectCollectRequest 

@@ -84,27 +84,26 @@ namespace ScriptureExercise.Services
                 {
                     MemberId = counter.MemberCount + 1,
                 },
-            };
-
-            member.Value = new Member.Value_T
-            {
-                CreateTime = DateTime.UtcNow,
-                UpdateTime = DateTime.UtcNow,
-                //CreateMemberId = memberId,
-                //UpdateMemberId = memberId,
-
-                Password = input.Password,
-
-                AccountPK_List = new List<Account.PK_T>
+                Value = new Member.Value_T
                 {
-                    account.PK,
-                },
-                //ScriptureShowList = new List<int> { 1,2,3,4, }, //至少要一個
-                SubjectCollectedList = new List<string> {},
-                ExerciseRecordCreateTimeId_List = new List<string>(),
+                    CreateTime = DateTime.UtcNow,
+                    UpdateTime = DateTime.UtcNow,
+                    //CreateMemberId = memberId,
+                    //UpdateMemberId = memberId,
 
-                //從第三方取得的資料預填
-                //Name = name,
+                    Password = input.Password,
+
+                    AccountPK_List = new List<Account.PK_T>
+                    {
+                        account.PK,
+                    },
+
+                    SubjectCollectedList = new List<string> { },
+                    ExerciseRecordCreateTimeId_List = new List<string>(),
+
+                    //從第三方取得的資料預填
+                    //Name = name,
+                }
             };
             _cacheRepo.Set(member.GetRedisKeyString(), member.Value);
 
@@ -183,9 +182,9 @@ namespace ScriptureExercise.Services
                 member.Value.AccountPK_List[0] = newEntity.PK;
                 _cacheRepo.Set(member.GetRedisKeyString(), member.Value);
             }
-            catch (Exception ex)
+            catch //(Exception ex)
             {
-                result.FailMessage = "更新會員資料失敗：" + ex.Message;
+                result.FailMessage = "更新會員資料失敗(發生意外狀況，如方便，請回報)";
             }
             return result;
         }

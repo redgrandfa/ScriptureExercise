@@ -17,15 +17,15 @@ namespace ScriptureExercise.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly IAccountService accountService;
-        private readonly IMemberService memberService;
+        //private readonly IAccountService accountService;
+        //private readonly IMemberService memberService;
         public AccountController(
-            IAccountService accountService            
-            ,IMemberService memberService
+            //IAccountService accountService            
+            //,IMemberService memberService
         )
         {
-            this.accountService = accountService;
-            this.memberService = memberService;
+            //this.accountService = accountService;
+            //this.memberService = memberService;
         }
 
         /// <summary>

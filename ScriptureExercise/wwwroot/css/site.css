@@ -2,6 +2,10 @@
   --theme-color-dark:#313B5D;
 }
 
+.spinner-border-sm {
+  border-width: 0.2rem;
+}
+
 .without-button-style {
   border: none;
   background-color: rgba(0, 0, 0, 0);

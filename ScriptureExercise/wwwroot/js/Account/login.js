@@ -49,6 +49,7 @@ let vue_login = new Vue({
                 (result)=>{
                     setTimeout(
                         ()=>{
+                            dom.dispatchEvent(apiDoneEvent)
                             if(returnUrl == ''
                             ){
                                 location.href='/'
@@ -58,7 +59,6 @@ let vue_login = new Vue({
                             }
                         }
                     ,3000)
-                    // dom.dispatchEvent(apiDoneEvent)
                 },
                 (result)=>{
                     dom.dispatchEvent(apiDoneEvent)
@@ -75,6 +75,7 @@ let vue_login = new Vue({
             })
             .afterAPI(
                 ()=>{
+                     dom.dispatchEvent(apiDoneEvent)
                     if(returnUrl == ''
                     ){
                         location.href='/'
@@ -82,7 +83,6 @@ let vue_login = new Vue({
                     else{
                         location.href=returnUrl
                     }
-                    //dom.dispatchEvent(apiDoneEvent)
                 },
                 ()=>{
                     dom.dispatchEvent(apiDoneEvent)

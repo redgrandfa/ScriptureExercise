@@ -1,6 +1,27 @@
 let vue_member_settings = new Vue({
     el:'#vue_member_settings',
-    data: data,
+    data: {
+        fields: {
+            name: {
+                text: '改名稱',
+                value: initData.Name,
+            },
+            account: {
+                text: '改帳號',
+                value: initData.Account,
+            },
+            password: {
+                text: '改密碼',
+                value: "",
+                visible: false,
+            },
+        },
+        errMsgs: {
+            name: '',
+            account: '',
+            password: '',
+        },
+    },
     mounted() {},
     methods:{
         changeVisible(fieldkey){
@@ -20,45 +41,33 @@ let vue_member_settings = new Vue({
                 this.errMsgs[fieldkey] = "";
             }
         },
-        post(url , dataObj ){
-            fetch(url,{
-                method:'post',
-                headers:{
-                    'content-type':'application/json;charset=utf-8',
+        post(e , url , dataObj ){
+            let dom = e.target
+            processingAPI(dom)
+
+            fetchPost(url, dataObj)
+            .afterAPI(
+                (result)=> {
+                    dom.dispatchEvent(apiDoneEvent)
                 },
-                body:JSON.stringify( dataObj )
-            })
-            .then(resp=>{
-                Promise.resolve(resp.text())
-                .then( text => {
-                    if(resp.Ok){
-                        swal.fire('修改成功' +text)
-                    }else{
-                        swal.fire(text)
-                    }
-                })
-            })
+                (result)=> {
+                    dom.dispatchEvent(apiDoneEvent)
+                },
+            )
         },
-        postName(){
-            this.post('/ApiMember/UpdateName',{
+        postName(e){
+            this.post(e, '/ApiMember/UpdateName',{
                 name: this.fields.name.value,
             })
         },
-        postAccount(){
-            this.post('/ApiMember/UpdateAccount',{
+        postAccount(e){
+            this.post(e, '/ApiMember/UpdateAccount',{
                 account: this.fields.account.value,
             })
         },
-        postPassword(){
-            this.post('/ApiMember/UpdatePassword',{
+        postPassword(e){
+            this.post(e, '/ApiMember/UpdatePassword',{
                 password: this.fields.password.value,
-            })
-        },
-        postScripturesShow(){
-            this.post('/ApiMember/UpdateScripture',{
-                ScriptureShowList: this.fields.scripturesShow.value
-                    .filter(s=>s.show)
-                    .map(s=>s.id),
             })
         },
     },
@@ -85,19 +94,6 @@ let vue_member_settings = new Vue({
             immediate:true,
             handler:function(){
                 this.check('password')
-            }
-        },
-        'fields.scripturesShow.value':{
-            immediate:true,
-            deep:true,
-            handler:function(){
-                let t = this.fields.scripturesShow.value;
-                if( t.some(s=> s.show ) ){
-                    this.errMsgs.scripturesShow = "";
-                }
-                else{
-                    this.errMsgs.scripturesShow = "須至少勾選一部經典";
-                }
             }
         },
     },

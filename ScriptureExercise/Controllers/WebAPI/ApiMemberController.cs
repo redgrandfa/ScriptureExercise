@@ -48,12 +48,18 @@ namespace ScriptureExercise.Controllers.WebAPI
         [HttpPost]
         public IActionResult UpdateAccount(CreateMemberPostModel request)
         {
+            var result = new ApiResponseBody();
+
             var output = memberService.UpdateAccount(request.Account);
             if (output.IsFail)
             {
-                return Ok(output.FailMessage);
+                result.Status = ApiOperationStatus.DataRequireUnique;
+                result.Message = output.FailMessage;
+                return Ok(result);
             }
-            return Ok("修改帳號成功");
+
+            result.Message = "修改帳號成功";
+            return Ok(result);
         }
         [HttpPost]
         public IActionResult UpdatePassword(CreateMemberPostModel request)
@@ -108,18 +114,6 @@ namespace ScriptureExercise.Controllers.WebAPI
 
             return UpdateByCondition(action, successMsg);
         }
-
-
-        //[HttpPost]
-        //[Obsolete("原本是收藏經典，且以int表示")]
-        //public IActionResult UpdateScripture(MemberEditVM request)
-        //{
-        //    Action<Member> action = (member) =>
-        //    {
-        //        member.Value.ScriptureShowList = request.ScriptureShowList;
-        //    };
-        //    return UpdateByCondition(action, "修改經典顯示成功");
-        //}
 
         [NonAction]
         public IActionResult UpdateByCondition(Action<Member>  action,  string successMsg)

@@ -27,7 +27,7 @@ namespace ScriptureExercise.Controllers
             Member.Value_T memberValue = memberService.GetMember_ById(memberId).Value;
             if(memberValue == null)
             {
-                return BadRequest("查無此會員");
+                return Content("查無當前當入的會員身分，請重新登入");
             }
 
             var vm = new MemberCenterVM
@@ -46,8 +46,6 @@ namespace ScriptureExercise.Controllers
                 {
                     Name = memberValue.Name,
                     Account = memberValue.AccountPK_List[0].AccountId_FromProvider,
-
-                    //ScriptureShowList = memberValue.ScriptureShowList,
                 }
             };
 

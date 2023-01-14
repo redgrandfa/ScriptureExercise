@@ -16,7 +16,15 @@
 @{
     ViewData["Title"] = "登入入口";
 }
-
+@section TopCSS{
+    <link rel="stylesheet" href="~/css/Account/login.css">
+}
+@section Scripts{
+    <script>
+        const returnUrl = '@Model'
+    </script>
+    <script src="~/js/Account/login.js"></script>
+}
 
 <div id="vue_login">
     <div class="banner">
@@ -28,7 +36,7 @@
         <b-form-group
             :label="fields.account.text" 
             label-for="fields-account"
-            valid-feedback="OK"
+            valid-feedback="合乎要求"
             :invalid-feedback="errMsgs.account"
         >
             <b-form-input 
@@ -41,7 +49,7 @@
         <!-- :label="fields.password.text"  -->
         <b-form-group
             label-for="fields-password"
-            valid-feedback="OK"
+            valid-feedback="合乎要求"
             :invalid-feedback="errMsgs.password" 
         >
             <template #label>
@@ -90,14 +98,3 @@
         }
     </div> *@
 </div>
-
-
-@section TopCSS{
-    <link rel="stylesheet" href="~/css/Account/login.css">
-}
-@section Scripts{
-    <script>
-        let returnUrl = '@Model'
-    </script>
-    <script src="~/js/Account/login.js"></script>
-}

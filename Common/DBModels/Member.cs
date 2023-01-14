@@ -29,8 +29,6 @@ namespace Common.DBModels
             public int EssayQuestion_Done { get; set; }
             public int BlankFillQuestion_Done { get; set; }
 
-            //public List<int> ScriptureShowList { get; set; }
-
             /// <summary>
             /// 每個成員是 SubjectCode ex. A1 、F2
             /// </summary>
