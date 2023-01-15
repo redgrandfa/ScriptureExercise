@@ -1,5 +1,7 @@
 :root {
   --theme-color-dark:#313B5D;
+  font-size: 14px;
+  --header-height:$header-height;
 }
 
 .spinner-border-sm {
@@ -20,8 +22,8 @@
   margin: auto;
   overflow: hidden;
   width: 100%;
-  min-width: 320px;
-  max-width: 450px;
+  min-width: 300px;
+  max-width: 500px;
   height: 100vh;
   background-color: #fff;
   position: relative;
@@ -99,14 +101,14 @@ header {
   background-color: #fff;
   width: 296px;
   max-width: calc(100vw - 30px);
-  position: absolute;
+  position: fixed;
   z-index: 1062;
   top: 0;
   left: -100%;
   transition: all 0.6s;
 }
 #menu.active {
-  left: 0;
+  left: auto;
 }
 #menu .menu-header {
   background-color: var(--theme-color-dark);

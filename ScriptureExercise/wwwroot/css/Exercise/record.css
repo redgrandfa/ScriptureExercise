@@ -123,20 +123,15 @@
   padding: 7px 0;
 }
 .filters .filter {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: 44px;
   font-family: "GenSekiGothic JP";
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 1rem;
 }
-.filters .filter label {
-  transform: scale(0.8);
-}
-
-.question-container {
-  height: calc(100vh - 333px);
-  overflow-y: auto;
-}
-
 .essay-question-answer {
   font-size: 11px;
 }
