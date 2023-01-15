@@ -3,7 +3,7 @@ let vue_recordList = new Vue({
     data: {
         tableBusy:true,
         fields: [
-            { key: 'createTimeId', label: '時間', sortable: true 
+            { key: 'createTimeId', label: '時間/連結', sortable: true 
                 ,formatter:(value, key, item)=>{
                     // console.log(value) // key有對到資料才有值 / null
                     // console.log(key) //同key
@@ -51,9 +51,9 @@ let vue_recordList = new Vue({
                 ,tdClass:'td-percentScore' 
             },
             //CreateID  => User動作
-            { key: 'link', label: '連結', sortable: false
-                ,tdClass:'td-action'
-            }, 
+            // { key: 'link', label: '連結', sortable: false
+            //     ,tdClass:'td-action'
+            // }, 
             { key: 'Delete', label: '刪除', sortable: false 
                 ,tdClass:'td-action'
             },

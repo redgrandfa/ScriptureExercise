@@ -34,8 +34,11 @@
                 </template>
 
                 <template #cell(createTimeId)="row">
-                    <span>{{row.value[0]}}</span>
-                    <span>{{row.value[1]}}</span>
+                    <a :href="`/Exercise/Record/${row.item.createTimeId}`">
+                        <span>{{row.value[0]}}</span>
+                        <span>{{row.value[1]}}</span>
+                    </a>
+
                 </template>
 
                 <template #cell(paperCode)="row">
@@ -47,10 +50,10 @@
                     <span>{{row.value}} </span>
                 </template>
 
-                <template #cell(link)="row">
+                @* <template #cell(link)="row">
                     <a :href="`/Exercise/Record/${row.item.createTimeId}`" 
                         style="font-size: 11px;">查看</a>
-                </template>
+                </template> *@
 
                 <template #cell(Delete)="row">
                     <b-button 
