@@ -17,13 +17,18 @@
   top: calc(50% - 25px);
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
 .slogan-title {
   font-family: "Helvetica";
   font-weight: 700;
   font-size: 56px;
   line-height: 64px;
   margin-left: 28px;
-  margin-top: 318px;
   margin-bottom: 19px;
 }
 

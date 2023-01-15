@@ -1,7 +1,6 @@
 :root {
   --theme-color-dark:#313B5D;
   font-size: 14px;
-  --header-height:$header-height;
 }
 
 .spinner-border-sm {
@@ -16,15 +15,16 @@
 .without-hyperLink-style:focus, .without-hyperLink-style:hover, .without-hyperLink-style:active, .without-hyperLink-style {
   color: #000;
   text-decoration: none;
+  display: block;
 }
 
 .view-container {
   margin: auto;
-  overflow: hidden;
   width: 100%;
-  min-width: 300px;
+  min-width: 320px;
   max-width: 500px;
   height: 100vh;
+  overflow: hidden;
   background-color: #fff;
   position: relative;
 }
@@ -165,6 +165,7 @@ main {
   overflow-y: auto;
   position: relative;
   z-index: 2;
+  padding-bottom: 15px;
 }
 
 #main-bottom {

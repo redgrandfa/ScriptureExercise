@@ -26,9 +26,10 @@
     display: flex;
     font-size: 18px;
     label{
-        width: 72px;
         line-height: 44px;
         font-weight: 900;
+        width: 72px;
+        flex-shrink: 0;
     }
     label+div{
         flex-grow: 1;

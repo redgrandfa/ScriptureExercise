@@ -5,7 +5,6 @@ $header-height:100px;
     --theme-color-dark:#313B5D;
     font-size: 14px;
     // font-family
-    --header-height:$header-height;
 }
 
 .spinner-border-sm{
@@ -21,6 +20,7 @@ $header-height:100px;
 %without-hyperLink-style {
     color: #000;
     text-decoration: none;
+    display: block;
 }
 .without-hyperLink-style 
 {
@@ -41,31 +41,16 @@ $header-height:100px;
     // overflow-y: auto;
 
     width: 100%;
-    min-width: 300px;
+    min-width: 320px;
     max-width: 500px;
-
     //手機 19:9
-    // min-height: 100vh; 
+    // min-height: 100vh;  => 子層的%計算出問題
     height: 100vh;
-    // max-height: 2.5vw;
-
-    
     // padding-top: 100px;
-    
-    background-color: #fff;
-    position: relative; //讓選單可以根據 整個視容器 定位
-    // z-index: 1;
-    // &::after{
-    //     content: '';
-    //     position: absolute;
-    //     top: 0;
-    //     left: 0;
-    //     width: 100%;
-    //     height: 100%;
-    //     background-color: #00000088;
 
-    //     display: none;
-    // }
+    background-color: #fff;
+    position: relative;
+    // z-index: 1;
 }
 
 .white-sun {
@@ -254,8 +239,9 @@ header {
 
 
 main{
-    height: calc( 100% - $header-height);
+    height: calc( 100% - $header-height );
     overflow-y: auto;
+    padding-bottom: 15px;
 
     position: relative;
     z-index: 2;

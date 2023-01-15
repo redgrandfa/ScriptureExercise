@@ -24,9 +24,10 @@
   font-size: 18px;
 }
 .form-group label {
-  width: 72px;
   line-height: 44px;
   font-weight: 900;
+  width: 72px;
+  flex-shrink: 0;
 }
 .form-group label + div {
   flex-grow: 1;

@@ -21,6 +21,11 @@
 }
 
 
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
 
 .slogan-title {
     font-family: 'Helvetica';
@@ -30,8 +35,6 @@
     line-height: 64px;
 
     margin-left: 28px;
-    // margin-top: 388px;
-    margin-top: 318px;
     margin-bottom: 19px;
 }
 
