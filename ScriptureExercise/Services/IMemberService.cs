@@ -249,6 +249,10 @@ namespace ScriptureExercise.Services
 
             member.Value = _cacheRepo.Get<Member.Value_T>(member.GetRedisKeyString());
             
+            if(member.Value.SubjectCollectedList == null)
+            {
+                member.Value.SubjectCollectedList = new List<string> ();
+            }
             return member; //Value可能會null
         }
     }
