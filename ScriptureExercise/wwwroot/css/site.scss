@@ -95,7 +95,7 @@ header {
 .hamburger {
     width: 22px;
     height: 16px;
-
+    cursor: pointer;
     >span {
         background-color: var(--theme-color-dark);
         display: block;

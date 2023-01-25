@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "我的書單";
+}
+
+@section TopCSS{
+    <link rel="stylesheet" href="~/css/Exercise/collectList.css">
+}
+@section Scripts{
+    <script src="~/lib/DB/scriptures.js"></script>
+    <script src="~/js/Exercise/collectList.js"></script>
+} 
+
+<div id="vue_collectList">
+    <section class="subjects-container">
+        <ul class="subjects">
+            @* v-if="subject.isCollected" *@
+            <li v-for="(subject) in subjects"  class="subject-card">
+            @* <li v-for="(subject) in subjects.filter(s=>s.isCollected)" class="subject-card"> *@
+                <div class="subject-card-header" >
+                    <a :href="'/Exercise/' + subject.scriptureTitle + '.' + subject.id">
+                    <div class="cover"></div>
+                    </a>
+                </div>
+                <div class="subject-card-body">
+                    <h3 class="title">{{subject.title}}</h3>
+                    <div class="author">{{subject.author}}</div>
+                </div>
+                <div class="subject-card-footer">
+                    <button class="without-button-style collect" v-on:click="toggleCollect(subject)">
+                        <i class="fa-solid fa-heart"></i>
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </section>
+</div>

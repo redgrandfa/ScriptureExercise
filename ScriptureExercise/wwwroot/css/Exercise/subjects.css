@@ -7,6 +7,51 @@ main {
   overflow: visible;
 }
 
+.subjects {
+  margin-bottom: 0;
+  padding: 0 34px 7px;
+  max-height: calc(100vh - 238px);
+  overflow-y: auto;
+}
+
+.subject-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.subject-card-header .cover {
+  width: 80.5px;
+  height: 80.5px;
+  border-radius: 20px;
+  background-color: #DDD;
+}
+
+.subject-card-body {
+  flex-grow: 1;
+  margin: 0 30px;
+}
+.subject-card-body .title {
+  font-family: "GenSekiGothic JP";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+}
+.subject-card-body .author {
+  font-family: "GenSekiGothic JP";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.subject-card-footer .collect {
+  color: #8A8A9D;
+}
+
 .subject-filters {
   width: 100%;
   max-width: 444px;
@@ -58,49 +103,4 @@ main {
 }
 .subject-categories input:not(:checked) + label {
   color: #E5E5E5;
-}
-
-.subjects {
-  margin-bottom: 0;
-  padding: 0 34px 7px;
-  max-height: calc(100vh - 238px);
-  overflow-y: auto;
-}
-
-.subject-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 7px;
-  padding-bottom: 7px;
-}
-
-.subject-card-header .cover {
-  width: 80.5px;
-  height: 80.5px;
-  border-radius: 20px;
-  background-color: #DDD;
-}
-
-.subject-card-body {
-  flex-grow: 1;
-  margin: 0 30px;
-}
-.subject-card-body .title {
-  font-family: "GenSekiGothic JP";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 18px;
-}
-.subject-card-body .author {
-  font-family: "GenSekiGothic JP";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 14px;
-}
-
-.subject-card-footer .collect {
-  color: #8A8A9D;
 }/*# sourceMappingURL=subjects.css.map */

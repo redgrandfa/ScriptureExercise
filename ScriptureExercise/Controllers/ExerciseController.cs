@@ -31,6 +31,13 @@ namespace ScriptureExercise.Controllers
             return View();
         }
 
+
+        [HttpGet("CollectList")]
+        public IActionResult CollectList()
+        {
+            return View();
+        }
+
         //[HttpGet("{subject}")] //考慮： 論語(二)
         //public IActionResult Chapters(string subject)
         [HttpGet("{scriptureTitle}.{subjectId?}")] //此考科的 卷別們

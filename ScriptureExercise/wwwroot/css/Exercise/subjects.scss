@@ -1,15 +1,4 @@
-.white-sun{
-    // display: none;
-    left: auto;
-    margin-left: -245px;
-}
-
-
-main{
-    overflow: visible;
-}
-
-$subject-card-halfGap:7px;
+@import "../Exercise/subjectBase";
 
 .subject-filters{
     // position: fixed;
@@ -64,59 +53,5 @@ $subject-card-halfGap:7px;
     }
     input:not(:checked)+label{
         color: #E5E5E5;
-    }
-}
-
-.subjects{
-    // margin-top: 135px;
-    margin-bottom: 0;
-    padding: 0 34px $subject-card-halfGap;
-
-    max-height: calc(100vh - 238px);
-    overflow-y: auto;
-}
-
-.subject-card{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding-top: $subject-card-halfGap;
-    padding-bottom: $subject-card-halfGap;
-}
-.subject-card-header{
-    // cursor: pointer;
-    .cover{
-        width: 80.5px;
-        height: 80.5px;
-
-        border-radius: 20px;
-        background-color: #DDD;
-    }
-}
-.subject-card-body{
-    flex-grow: 1;
-    margin: 0 30px;
-    .title{
-        font-family: 'GenSekiGothic JP';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 18px;
-        line-height: 18px;
-    }
-    .author{
-        font-family: 'GenSekiGothic JP';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 14px;
-    }
-}
-.subject-card-footer{
-    .collect{
-        color: #8A8A9D;
-        // &:disabled{
-        //     cursor: default;
-        // }
     }
 }

@@ -104,8 +104,8 @@ main {
   font-size: 14px;
   line-height: 22px;
   height: 44px;
-  flex-grow: 1;
   overflow: hidden;
+  flex-grow: 1;
 }
 .chapter-intro .more {
   color: #3A63E0;

@@ -57,9 +57,14 @@
 					<span></span>
 					<span></span>
 				</div>
-				<h1 class="app-title">CLASSICS</h1>
+				<a href="/Home/Index" class="without-hyperLink-style ">
+					<h1 class="app-title">CLASSICS</h1>
+				</a>
+
 				<div class="book-btn">
-					<i class="fa-solid fa-book"></i>
+					<a href="/Exercise/CollectList" class="without-hyperLink-style ">
+						<i class="fa-solid fa-book"></i>
+					</a>
 				</div>
 			</div>
 		</header>
@@ -76,7 +81,7 @@
 			<ul>
 				<li><a href="/Home/Index">首頁</a></li>
 				<li><a href="/Exercise/Subjects">選擇考科</a></li>
-				@*<li><a href="/Exercise/xx">我的書單</a></li>*@
+				<li><a href="/Exercise/CollectList">我的書單</a></li>
 				<li><a href="/Exercise/RecordList">練習紀錄</a></li>
 				<li><a href="/Member/Settings">會員中心</a></li>
 				<li><a href="/Home/About">聯繫站方</a></li> 
@@ -101,9 +106,9 @@
     <script src="~/js/site.js"></script>
     <script>
 		const isAuthenticated = @(User.Identity.IsAuthenticated ? "true" : "false")
-        const vue_nav = new Vue({
-            el:'#vue_nav',
-        })
+        //const vue_nav = new Vue({
+        //    el:'#vue_nav',
+        //})
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
