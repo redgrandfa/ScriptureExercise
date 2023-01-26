@@ -144,16 +144,11 @@ main{
     }
 }
 
-// .custom-btn.xl-green-btn{
-    // margin-top: 58px;
-// }
-.link-paper{
-    height: 156px;
-    flex-shrink: 1;
+.chapters-container+div{
+    min-height: 0px;
+    height: 36px;
+}
 
-    padding-top: 22px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
+.without-hyperLink-style.link-paper{
+    margin-top: 22px;
 }

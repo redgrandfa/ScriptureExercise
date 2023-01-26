@@ -133,11 +133,11 @@ main {
   line-height: 22px;
 }
 
-.link-paper {
-  height: 156px;
-  flex-shrink: 1;
-  padding-top: 22px;
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
+.chapters-container + div {
+  min-height: 0px;
+  height: 36px;
+}
+
+.without-hyperLink-style.link-paper {
+  margin-top: 22px;
 }/*# sourceMappingURL=chapters.css.map */
