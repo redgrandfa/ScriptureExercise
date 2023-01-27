@@ -15,6 +15,8 @@ namespace ScriptureExercise.Models.MemberVM
         public int EssayQuestion_Done { get; set; }
         public int BlankFillQuestion_Done { get; set; }
 
+        public DateTime ExamDate { get; set; }
+
         /// <summary>
         /// 可自行更改的
         /// </summary>

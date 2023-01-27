@@ -1,1 +1,73 @@
-/*# sourceMappingURL=settings.css.map */
+.form-group {
+  margin: 35px 50px 0px;
+  display: flex;
+  font-size: 18px;
+}
+.form-group label {
+  line-height: 44px;
+  font-weight: 900;
+  width: 72px;
+  flex-shrink: 0;
+}
+.form-group label + div {
+  flex-grow: 1;
+}
+.form-group input {
+  font-size: 18px;
+  font-weight: 700;
+  display: inline-block;
+  width: calc(100% - 55px);
+}
+
+.countDown {
+  margin: 44px 22px;
+  padding: 34px 0 38px;
+  background: #FFFEE7;
+  border: 1px solid #FCE61F;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+}
+
+.countDown__text {
+  font-size: 16px;
+  text-align: center;
+}
+
+.countDown__number {
+  font-size: 60px;
+  line-height: 1;
+}
+
+.countDown__unit {
+  font-size: 16px;
+  margin-top: 35px;
+}
+
+.achievements {
+  margin-top: 62px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.achievement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.achievement__title {
+  font-size: 16px;
+}
+
+.achievement__correct-rate {
+  font-size: 48px;
+}
+
+.achievement__unit {
+  font-size: 24px;
+}
+
+.achievement__counters {
+  font-size: 16px;
+}/*# sourceMappingURL=settings.css.map */

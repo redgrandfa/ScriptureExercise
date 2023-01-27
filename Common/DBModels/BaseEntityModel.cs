@@ -30,7 +30,9 @@ namespace Common.DBModels
     public class EntityCounter
     {
         public int MemberCount { get; set; }
-
+        public int ExamDate_Y { get; set; }
+        public int ExamDate_M { get; set; }
+        public int ExamDate_D { get; set; }
     }
 
     //實驗 子類別裡的類別 繼承或覆蓋 父類別裡的類別

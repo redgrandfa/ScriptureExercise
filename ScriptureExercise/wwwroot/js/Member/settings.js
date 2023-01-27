@@ -3,15 +3,15 @@ let vue_member_settings = new Vue({
     data: {
         fields: {
             name: {
-                text: '改名稱',
+                text: '名稱',
                 value: initData.Name,
             },
             account: {
-                text: '改帳號',
+                text: '帳號',
                 value: initData.Account,
             },
             password: {
-                text: '改密碼',
+                text: '密碼',
                 value: "",
                 visible: false,
             },

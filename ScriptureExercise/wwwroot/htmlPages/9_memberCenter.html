@@ -15,8 +15,7 @@
 
 
 	<link rel="stylesheet" href="../css/site.css">
-	<link rel="stylesheet" href="../css/Home/index.css">
-
+	<link rel="stylesheet" href="../css/Member/settings.css">
 
 	<!-- Load polyfills to support older browsers -->
 	<!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script> -->
@@ -32,28 +31,70 @@
 </head>
 
 <body class="bg-secondary">
-	<div></div>
 	<div class="view-container">
-		<main id="vue_">
+		<main>
+			<div id="vue_member_settings">
+				<div class="editable-name">
+					Hello,
+					<span>
+						input 
+						icon
+					</span>
+				</div>
 
+				<div class="countDown">
+					<div class="countDown__text">
+						<div>2023/05/22</div>
+						<div>距離下次筆試還有</div>
+					</div>
+					<span class="countDown__number">333</span>
+					<span class="countDown__unit">天</span>
+				</div>
+				<div class="editable-account">
+
+				</div>
+				<div class="editable-password">
+
+				</div>
+
+				<!-- <h4>成就</h4> -->
+				<div class="achievements">
+					<div class="achievement">
+						<h5 class="achievement__title">[ 選擇題 ]</h5>
+						<div>
+							<span class="achievement__correct-rate">100</span>
+							<span class="achievement__unit">%</span>
+						</div>
+						<div class="achievement__counters">
+							<div>總答題數：
+								<span class="achievement__">111</span>
+							</div>
+							<div>答對題數：
+								<span class="achievement__">1</span>
+							</div>
+						</div>
+					</div>
+			
+					<div class="achievement">
+						<h5 class="achievement__title">[ 默寫題 ]</h5>
+						<div>
+							<span class="achievement__correct-rate">9</span>
+							<span class="achievement__unit">%</span>
+						</div>
+						<div class="achievement__counters">
+							<div>總答題數：
+								<span class="achievement__">99</span>
+							</div>
+							<div>答對題數：
+								<span class="achievement__">1</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</main>
-        <footer></footer>
 	</div>
-
-	<!-- <script src="../../x.js"></script> -->
-	<script>
-		let vue_ = new Vue({
-			el: "#vue_",
-			data: {
-				a: "qwe",
-			},
-			mounted() { },
-			methods: {},
-			watch: {},
-			computed: {},
-			components: {},
-		});
-	</script>
+	<script src="../js/Member/settings2.js"></script>
 </body>
 
 </html>

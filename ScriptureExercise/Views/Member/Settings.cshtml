@@ -3,6 +3,9 @@
 
 @{
     ViewData["Title"] = "會員中心";
+
+    var examDate = Model.ExamDate;
+    var diff = (examDate - DateTime.Now).Days;
 }
 @section TopCSS{
     <link rel="stylesheet" href="~/css/Member/settings.css">
@@ -13,104 +16,142 @@
     </script>
     <script src="~/js/Member/settings.js"></script>
 }
-
-<h1 class="text-center mb-3">會員中心</h1>
-<div id="vue_member_settings" class="container">
-    @* <b-input-group size="lg" class="mb-3"
-        prepend="名稱"
-    >
-        <b-form-input
-            id="fields_name" 
-            v-model="fields.name.value" 
-            :state="errMsgs.name==''"
+<div id="vue_member_settings">
+    <div class="editable-name">
+        <b-form-group 
+            :label="fields.name.text"
+            label-for="fields-name"
+            valid-feedback="合乎要求"
+            :invalid-feedback="errMsgs.name"
         >
-        </b-form-input>
-        <b-input-group-append>
-            <b-button :disabled="disabled" v-on:click="postName()" variant="success">儲存</b-button>
-        </b-input-group-append>
-    </b-input-group> *@
-    <b-form-group
-        :label="fields.name.text"
-        label-for="fields-name"
-        valid-feedback="合乎要求"
-        :invalid-feedback="errMsgs.name"
-        @* :state="errMsgs.name==''" *@
-    >
-        <b-form-input 
-            id="fields-name" 
-            v-model="fields.name.value" 
-            :state="errMsgs.name==''"
-        >
-        </b-form-input>
-    </b-form-group> 
-    <b-button :disabled="errMsgs.name!=''" v-on:click="postName" variant="info">儲存</b-button>
-    <hr />
-
-    <b-form-group
-        :label="fields.account.text"
-        label-for="fields-account"
-        valid-feedback="合乎要求"
-        :invalid-feedback="errMsgs.account"
-        @* :state="errMsgs.account==''" *@
-    >
-        <b-form-input 
-            id="fields-account" 
-            v-model="fields.account.value" 
-            :state="errMsgs.account==''"
-        >
-        </b-form-input>
-    </b-form-group> 
-    <b-button :disabled="errMsgs.account!=''" v-on:click="postAccount" variant="info">儲存</b-button>
-    <hr />
-
-    <b-form-group
-        :label="fields.password.text"
-        label-for="fields-password"
-        valid-feedback="合乎要求"
-        :invalid-feedback="errMsgs.password"
-        @* :state="errMsgs.password==''" *@
-    >
-        <b-icon
-            :icon="fields.password.visible?'eye':'eye-slash'"
-            v-on:click="changeVisible('password')"
-        ></b-icon>
-        <b-form-input 
-            id="fields-password" 
-            v-model="fields.password.value" 
-            :type="fields.password.visible?'text':'password'"
-            :state="errMsgs.password==''"
-        >
-        </b-form-input>
-    </b-form-group> 
-    <b-button :disabled="errMsgs.password!=''" v-on:click="postPassword" variant="info">儲存</b-button>
-
-@*    <hr />
-    {{fields.scripturesShow.text}}
-    <!-- / 考慮能排序考科 JS sort --> 
-    <b-form-checkbox switch v-for="(s,i) in fields.scripturesShow.value"
-        v-model="s.show">
-        {{s.title}}
-    </b-form-checkbox>
-    <p v-if="errMsgs.scripturesShow==''" class="text-success" style="font-size: 80%;">合乎要求</p>
-    <p v-else class="text-danger" style="font-size: 80%;">{{errMsgs.scripturesShow}}</p>
-    <b-button :disabled="errMsgs.scripturesShow!=''" v-on:click="postScripturesShow()" variant="info">儲存</b-button>
-*@
-
-    <hr />
-    <h4>其他資訊</h4>
-    <div class="pl-3" style="font-size: 1rem;">
-        @* <p>目前登入管道：<i class="@Model.LoginThroughIcon"></i></p> *@
-        
-        <h5>選擇題</h5>
-        <p>總答題數：@Model.ChoicesQuestion_Done</p>
-        <p>答對題數：@Model.ChoicesQuestion_Correct</p>
-
-        <h5>默寫題</h5>
-        <p>總答題數：@Model.EssayQuestion_Done</p>
-        <p>答對題數：@Model.EssayQuestion_Correct</p>
-        
-        <h5>填充題</h5>
-        <p>總答格數：@Model.BlankFillQuestion_Done</p>
-        <p>答對格數：@Model.BlankFillQuestion_Correct</p>
+            <b-form-input 
+                id="fields-name"
+                v-model="fields.name.value"
+                :state="errMsgs.name==''">
+            </b-form-input>
+            <button class="without-button-style"
+                :disabled="errMsgs.name!=''" 
+                v-on:click="postName" 
+            >
+                <i class="fa-solid fa-floppy-disk"></i>
+            </button>
+        </b-form-group>
     </div>
+    <div class="countDown">
+        <div class="countDown__text">
+            <div>@(examDate.ToString("yyyy/MM/dd") )</div>
+            <div>距離下次筆試還有</div>
+        </div>
+        <span class="countDown__number"> @diff </span>
+        <span class="countDown__unit">天</span>
+    </div>
+
+    <div class="editable-account">
+        <b-form-group
+            :label="fields.account.text" 
+            label-for="fields-account"
+            valid-feedback="合乎要求"
+            :invalid-feedback="errMsgs.account"
+        >
+            <b-form-input 
+                id="fields-account" 
+                v-model="fields.account.value" 
+                :state="errMsgs.account==''" 
+            ></b-form-input>
+
+            <button class="without-button-style"
+                :disabled="errMsgs.account!=''" 
+                v-on:click="postAccount" 
+            >
+                <i class="fa-solid fa-floppy-disk"></i>
+            </button>
+        </b-form-group>
+    </div>
+
+    <div class="editable-password">
+        <b-form-group
+            label-for="fields-password"
+            valid-feedback="合乎要求"
+            :invalid-feedback="errMsgs.password" 
+        >
+            <template #label>
+                {{fields.password.text}}
+                <b-icon
+                :icon="fields.password.visible?'eye':'eye-slash'"
+                v-on:click="changeVisible('password')"
+                ></b-icon>
+            </template>
+
+            <b-form-input 
+                id="fields-password" 
+                v-model="fields.password.value" 
+                :state="errMsgs.password==''" 
+                :type="fields.password.visible?'text':'password'"
+            ></b-form-input>
+                @*:type="fieldPasswordType"*@
+
+            <button class="without-button-style"
+                :disabled="errMsgs.password!=''" 
+                v-on:click="postPassword" 
+            >
+                <i class="fa-solid fa-floppy-disk"></i>
+            </button>
+        </b-form-group>
+    </div>
+
+    <!-- <h4>成就</h4> -->
+    <div class="achievements">
+        <div class="achievement">
+            <h5 class="achievement__title">[ 選擇題 ]</h5>
+            <div>
+                <span class="achievement__correct-rate">
+                    @Math.Round( Model.ChoicesQuestion_Correct*100d/Model.ChoicesQuestion_Done ,1) 
+                </span>
+                <span class="achievement__unit">%</span>
+            </div>
+            <div class="achievement__counters">
+                <div>
+                    總答題數：
+                    <span class="achievement__">
+                        @Model.ChoicesQuestion_Done
+                    </span>
+                </div>
+                <div>
+                    答對題數：
+                    <span class="achievement__">
+                        @Model.ChoicesQuestion_Correct
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="achievement">
+            <h5 class="achievement__title">[ 默寫題 ]</h5>
+            <div>
+                <span class="achievement__correct-rate">
+                    @Math.Round( Model.EssayQuestion_Correct*100d/Model.EssayQuestion_Done ,1) 
+                </span>
+                <span class="achievement__unit">%</span>
+            </div>
+            <div class="achievement__counters">
+                <div>
+                    總答題數：
+                    <span class="achievement__">
+                        @Model.EssayQuestion_Done
+                    </span>
+                </div>
+                <div>
+                    答對題數：
+                    <span class="achievement__">
+                        @Model.EssayQuestion_Correct
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* <p>目前登入管道：<i class="@Model.LoginThroughIcon"></i></p> *@
+    @* <h5>填充題</h5>
+    <p>總答格數：@Model.BlankFillQuestion_Done</p>
+    <p>答對格數：@Model.BlankFillQuestion_Correct</p> *@
 </div>

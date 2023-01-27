@@ -13,6 +13,7 @@ namespace ScriptureExercise.Services
 {
     public interface IMemberService
     {
+        EntityCounter GetEntityCounter();
         CreateMember_Output CreateMember(CreateMember_Input input);
         UpdateMember_Output UpdateMember(Action<Member> action);
         //DeleteMember_Output DeleteMember(Member.PK_T memberPK);
@@ -32,6 +33,11 @@ namespace ScriptureExercise.Services
             IMemoryCacheRepository cacheRepo
         ): base(httpContextAccessor, cacheRepo)
         {}
+
+        public EntityCounter GetEntityCounter()
+        {
+            return _cacheRepo.Get<EntityCounter>(nameof(EntityCounter));
+        }
 
         public CreateMember_Output CreateMember(CreateMember_Input input)
         {
@@ -62,7 +68,7 @@ namespace ScriptureExercise.Services
             //    }
             //}
                     
-            var counter = _cacheRepo.Get<EntityCounter>(nameof(EntityCounter));
+            var counter = GetEntityCounter();
 
             var account = new Account
             {
