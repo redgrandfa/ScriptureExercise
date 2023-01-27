@@ -87,6 +87,7 @@ main{
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    align-items: start;
     .title{
         color: #313B5D;
         font-family: 'GenSekiGothic JP';
@@ -113,6 +114,7 @@ main{
         flex-grow: 1;
     }
     .more{
+        margin-top: 10px;
         color: #3A63E0;
         font-size: 13px;
         cursor: pointer;
@@ -120,7 +122,6 @@ main{
         background-color: transparent;
         border: none;
     }
-    // 查看更多 
 }
 //彈出小視窗
 .popover{
