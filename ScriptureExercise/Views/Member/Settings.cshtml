@@ -5,7 +5,7 @@
     ViewData["Title"] = "會員中心";
 
     var examDate = Model.ExamDate;
-    var diff = (examDate - DateTime.Now).Days;
+    var diff = (examDate - DateTime.Now).Days; //若沒及時更新會變負數
 }
 @section TopCSS{
     <link rel="stylesheet" href="~/css/Member/settings.css">

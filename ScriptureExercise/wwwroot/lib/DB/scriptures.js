@@ -5,8 +5,8 @@ let scriptures_inDB = [
         code: "A",
         title: "生晨",
         coverImgPath: "",
-        author: "著",
-        introHtml: "q",
+        author: "...待補",
+        introHtml: "...待補",
         belongTo: "Bai",
         subjects: [
             {
@@ -32,8 +32,8 @@ let scriptures_inDB = [
         code: "B",
         title: "佛規諭錄",
         coverImgPath: "",
-        author: "...著",
-        introHtml: "",
+        author: "...待補",
+        introHtml: "...待補",
         belongTo: "Bai",
         subjects: [
             {

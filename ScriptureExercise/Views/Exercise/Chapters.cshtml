@@ -1,7 +1,7 @@
 ﻿@model (string ScriptureCode, string ScriptureTitle, int SubjectId)
 
 @{
-    ViewData["Title"] = "選練習章節";
+    ViewData["Title"] = "選習題卷";
 }
 @section TopCSS{
     <link rel="stylesheet" href="~/css/Exercise/chapters.css">
@@ -31,13 +31,13 @@
             </li>
         </ul>
 
-        <p class="chapters-count pb-3">共分為{{chapters.length}}個練習章節</p>
+        <p class="chapters-count pb-3">共有{{chapters.length}}份習題卷</p>
 
         <div class="chapter-intro">
             <div class="title">簡介</div>
             <div class="text" v-html="sciptureIntro"></div>
-            <span class="more" id="popover-intro">查看全部</span>
-            <b-popover target="popover-intro" triggers="click" placement="topright">
+            <button class="without-button-style more" id="popover-intro">查看全部</button>
+            <b-popover target="popover-intro" triggers="hover focus" placement="topright">
                 <h6>簡介</h6>
                 <p class="text" v-html="sciptureIntro"></p>
             </b-popover>
@@ -46,9 +46,7 @@
     <div></div>
     <a :href="link" class="without-hyperLink-style link-paper">
         <button class="custom-btn xl-green-btn">
-            TEST 開始測驗 <i class="fa-solid fa-arrow-right-long"></i>
+            GOGO 開始練習 <i class="fa-solid fa-arrow-right-long"></i>
         </button>
     </a>
 </div>
-
-
