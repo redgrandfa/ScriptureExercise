@@ -31,7 +31,7 @@ namespace File_ChangeName
             //       in this code example.
             if (Directory.Exists(SourcePath))
             {
-                DirectoryInfo di = new DirectoryInfo(SourcePath);
+                var di = new DirectoryInfo(SourcePath);
                 FileInfo[] fileInfos = di.GetFiles("*.*");
                 Array.Sort(fileInfos, delegate (FileInfo x, FileInfo y) { return x.CreationTime.CompareTo(y.CreationTime); });
 

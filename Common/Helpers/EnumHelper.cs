@@ -18,9 +18,8 @@ namespace Common.Helpers
             var field = value.GetType().GetField(value.ToString());
             if (field != null)
             {
-                var attr = field.GetCustomAttributes(typeof(EnumMessageAttribute), true)
-                    .SingleOrDefault() as EnumMessageAttribute;
-                if (attr != null)
+                if (field.GetCustomAttributes(typeof(EnumMessageAttribute), true)
+                    .SingleOrDefault() is EnumMessageAttribute attr)
                 {
                     return attr.Value;
                 }

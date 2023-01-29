@@ -15,25 +15,29 @@ namespace Common.Helpers
 
             // 設定兩大區塊 服務 郵件，順序無所謂
             #region 服務
-            SmtpClient client = new SmtpClient();
-            client.Host = "smtp.gmail.com";
-            client.Port = 587; //通訊埠
-            // smtp通常是587 ，
-            // sqlserver 通常是1433 (通常不會亂改)
-            // 80: 通常http
-            // 443: https
+            var client = new SmtpClient() { 
+                Host = "smtp.gmail.com",
+                Port = 587, //通訊埠
+                // smtp通常是587 ，
+                // sqlserver 通常是1433 (通常不會亂改)
+                // 80: 通常http
+                // 443: https
 
-            // 也可以利用建構式多載 
-            //SmtpClient client2 = new SmtpClient("smtp.gmail.com", 587);
+                // 也可以利用建構式多載 
+                //SmtpClient client2 = new SmtpClient("smtp.gmail.com", 587);
 
-            //憑證
-            client.Credentials = new NetworkCredential(SenderAccount, Password);
-            client.EnableSsl = true;
+                //憑證
+                Credentials = new NetworkCredential(SenderAccount, Password),
+                EnableSsl = true,
+            };
+
             #endregion
 
             #region 郵件
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress(SenderAccount, "筆試習題服務");  //寄件人
+            var mail = new MailMessage()
+            {
+                From = new MailAddress(SenderAccount, "筆試習題服務"),  //寄件人
+            };
             recipientList.ForEach(addr => mail.To.Add(addr));  //收件人
 
             //mail.Priority = MailPriority.High;
