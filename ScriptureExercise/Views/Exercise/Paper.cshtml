@@ -36,36 +36,37 @@
                 class="question d-flex"
             >
                 <div class="question-order">{{q.order}}.</div>
-                <div v-if="q.type==1">
-                    <p class="stem choices-question-stem">{{q.stem}}</p>
-                    <div v-for="(choice,j) in q.choices">
-                        <label class="d-flex">
-                            <span class="choices-question-answer">
-                                <input type="radio" class="choices-question-input"
-                                :name="i" 
-                                :value="j" 
-                                v-model="q.choosed">
-                            </span>
-                            <span>{{choice}}</span>
-                        </label>
+                <div class="question-body">
+                    <div v-if="q.type==1">
+                        <p class="stem choices-question-stem">{{q.stem}}</p>
+                        <div v-for="(choice,j) in q.choices">
+                            <label class="d-flex">
+                                <span class="choices-question-answer">
+                                    <input type="radio" class="choices-question-input"
+                                    :name="i"
+                                    :value="j"
+                                    v-model="q.choosed">
+                                </span>
+                                <span>{{choice}}</span>
+                            </label>
+                        </div>
                     </div>
-                </div>
-
-                <div v-else-if="q.type==2" >
-                    <p class="stem essay-question-stem">{{q.stem}}</p>
-                    @* 回答、(答案) *@
-                    <div class="">
-                        <input type="text" class="essay-question-input"  
-                            v-model="q.reply"
-                            placeholder="輸入回答：（請完全不含標點符號與空白，程式才能核對）" >
+                    <div v-else-if="q.type==2" >
+                        <p class="stem essay-question-stem">{{q.stem}}</p>
+                        @* 回答、(答案) *@
+                        <div class="">
+                            <input type="text" class="essay-question-input"
+                                v-model="q.reply"
+                                placeholder="輸入回答：（請完全不含標點符號與空白，程式才能核對）" >
+                        </div>
                     </div>
-                </div>
-                <div v-else-if="q.type==3">
-                    <span style="color:red;">【如方便，請通報此題的 考科、卷別、題號】</span>   
-                    <span v-for="(fraction , index) in q.stems">
-                        {{fraction}}<input disabled v-model="q.replies[index]" >
-                          @* 結尾永遠有多一個 input。 利用開頭或收尾 空字串，確保控制不多出 *@
-                    </span>
+                    <div v-else-if="q.type==3">
+                        <span style="color:red;">【如方便，請通報此題的 考科、卷別、題號】</span>
+                        <span v-for="(fraction , index) in q.stems">
+                            {{fraction}}<input disabled v-model="q.replies[index]" >
+                              @* 結尾永遠有多一個 input。 利用開頭或收尾 空字串，確保控制不多出 *@
+                        </span>
+                    </div>
                 </div>
             </li>
         </ol>

@@ -57,65 +57,62 @@
                 class="question d-flex"
             >
                 <div class="question-order">{{q.order}}.</div>
-                <div v-if="q.type==1">
-                    <p class="stem choices-question-stem">{{q.stem}}</p>
-                    <div v-for="(choice,j) in q.choices">
-                        @* 回答 三情境 *@
-                        @* 答對 *@
-                        @* 答錯 *@
-                        @* 無提交 *@
-
-                        @* 選項 四情境 *@
-                        @* 回答  '是答案' => 綠勾 *@
-                        @* 非回答 '是答案' => 紅勾 *@
-                        @* 回答  非答案 => 紅叉*@
-                        @* 非回答 非答案 => 卡位 *@
-
-                        
-                        <label class="d-flex">
-                            <span class="choices-question-answer">
-                                <span :class="q.choosed==q.answer?'choices-question-answer_matched':'choices-question-answer_different'">
-                                    <span v-if="j==q.answer"><i class="fa-solid fa-check"></i></span>
-                                    <span v-else-if="j==q.choosed"><i class="fa-solid fa-xmark"></i></span>
-                                    <span v-else>
-                                        <input type="radio" class="choices-question-input"
-                                        disabled >
+                <div class="question-body">
+                    <div v-if="q.type==1">
+                        <p class="stem choices-question-stem">{{q.stem}}</p>
+                        <div v-for="(choice,j) in q.choices">
+                            @* 回答 三情境 *@
+                            @* 答對 *@
+                            @* 答錯 *@
+                            @* 無提交 *@
+                            @* 選項 四情境 *@
+                            @* 回答  '是答案' => 綠勾 *@
+                            @* 非回答 '是答案' => 紅勾 *@
+                            @* 回答  非答案 => 紅叉*@
+                            @* 非回答 非答案 => 卡位 *@
+                    
+                            <label class="d-flex">
+                                <span class="choices-question-answer">
+                                    <span :class="q.choosed==q.answer?'choices-question-answer_matched':'choices-question-answer_different'">
+                                        <span v-if="j==q.answer"><i class="fa-solid fa-check"></i></span>
+                                        <span v-else-if="j==q.choosed"><i class="fa-solid fa-xmark"></i></span>
+                                        <span v-else>
+                                            <input type="radio" class="choices-question-input"
+                                            disabled >
+                                        </span>
                                     </span>
                                 </span>
-                            </span>
-                            <span>{{choice}}</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div v-else-if="q.type==2" >
-                    <p class="stem essay-question-stem">{{q.stem}}</p>
-                    @* 回答、(答案) *@
-                    <div class="">
-                        <input type="text" class="essay-question-input"
-                            v-model="q.reply"
-                            disabled>
-
-                        @* 核對錯誤->紅，核對正確/得分-> 綠/【根本不顯示】?   *@
-                        <div class="essay-question-answer">
-                            <span :class="q.reply==q.answer?'essay-question-answer_matched':'essay-question-answer_different'">
-                                {{q.answer}}</span>
-                            @* <span v-if="q.reply==q.answer" 
-                                class="essay-question-answer_matched">
-                                {{q.answer}}</span>
-                            <span v-else 
-                                class="essay-question-answer_different">
-                                {{q.answer}}</span> *@
+                                <span>{{choice}}</span>
+                            </label>
                         </div>
                     </div>
+                    <div v-else-if="q.type==2" >
+                        <p class="stem essay-question-stem">{{q.stem}}</p>
+                        @* 回答、(答案) *@
+                        <div class="">
+                            <input type="text" class="essay-question-input"
+                                v-model="q.reply"
+                                disabled>
+                            @* 核對錯誤->紅，核對正確/得分-> 綠/【根本不顯示】?   *@
+                            <div class="essay-question-answer">
+                                <span :class="q.reply==q.answer?'essay-question-answer_matched':'essay-question-answer_different'">
+                                    {{q.answer}}</span>
+                                @* <span v-if="q.reply==q.answer"
+                                    class="essay-question-answer_matched">
+                                    {{q.answer}}</span>
+                                <span v-else
+                                    class="essay-question-answer_different">
+                                    {{q.answer}}</span> *@
+                            </div>
+                        </div>
+                    </div>
+                    @* <div v-else-if="q.type==3">
+                        <span v-for="(fraction , index) in q.stems">
+                            {{fraction}}<input disabled v-model="q.replies[index]" >
+                            如果有答案
+                        </span>
+                    </div> *@
                 </div>
-        
-                @* <div v-else-if="q.type==3">
-                    <span v-for="(fraction , index) in q.stems">
-                        {{fraction}}<input disabled v-model="q.replies[index]" >
-                        如果有答案 
-                    </span>
-                </div> *@
             </li>
         </ol>
     </div>

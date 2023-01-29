@@ -37,6 +37,10 @@
   width: 2 rem;
 }
 
+.question-body {
+  flex-grow: 1;
+}
+
 .choices-question-answer {
   width: 18px;
 }
