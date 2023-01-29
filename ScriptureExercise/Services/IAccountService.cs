@@ -163,7 +163,7 @@ namespace ScriptureExercise.Services
             {
                 //舉幾個例，可參考官方文件AuthenticationProperties類別
                 //AllowRefresh = true,
-                ExpiresUtc = DateTimeOffset.UtcNow.AddDays(44), //有設才不會關掉網頁就自動消失?
+                ExpiresUtc = DateTimeOffset.UtcNow.AddDays(130), //有設才不會關掉網頁就自動消失?
                 IsPersistent = true,
             };
 

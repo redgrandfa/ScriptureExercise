@@ -47,7 +47,7 @@ let vue_recordList = new Vue({
                 }
                 ,tdClass:'td-createTime' //沿用
             },
-            { key: 'percentScore', label: '得分比', sortable: true 
+            { key: 'percentScore', label: '得分率', sortable: true 
                 ,tdClass:'td-percentScore' 
             },
             //CreateID  => User動作
