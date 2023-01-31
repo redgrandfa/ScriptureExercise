@@ -13,24 +13,26 @@
 	留下文字讓我們盡情探索
 </p>
 
+<div class="sign-area">
 @if (User.Identity.IsAuthenticated)
 {    var showName = User.Claims
         .FirstOrDefault(c=> c.Type== Common.Helpers.Define.CLAIMTYPE_SHOWNAME)
         ?.Value;
 
-	<a href="/Account/Logout" class="nav-login without-hyperLink-style">
-		<p class="mb-0">歡迎回來，<b>@showName</b></p>
+	<div>歡迎回來，<b>@showName</b></div>
+	<a href="/Account/Logout" class="without-hyperLink-style nav-login">
 		登出 LOGOUT
 		<div class="login-image-btn"></div>
 	</a>	
 }
 else
 {
-	<a href="/Account/Login" class="nav-login without-hyperLink-style">
+	<a href="/Account/Login" class="without-hyperLink-style nav-login">
 		登入 LOGIN 
 		<div class="login-image-btn"></div>
 	</a>	
 }
+</div>
 
 @section TopCSS{
     <link rel="stylesheet" href="~/css/Home/index.css">

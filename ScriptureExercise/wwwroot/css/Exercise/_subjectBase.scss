@@ -42,16 +42,11 @@ $subject-card-halfGap:7px;
     flex-grow: 1;
     margin: 0 30px;
     .title{
-        font-family: 'GenSekiGothic JP';
-        font-style: normal;
         font-weight: 700;
         font-size: 18px;
         line-height: 18px;
     }
     .author{
-        font-family: 'GenSekiGothic JP';
-        font-style: normal;
-        font-weight: 400;
         font-size: 14px;
         line-height: 14px;
     }
@@ -59,6 +54,7 @@ $subject-card-halfGap:7px;
 .subject-card-footer{
     .collect{
         color: #8A8A9D;
+        font-size: 20px;
         // &:disabled{
         //     cursor: default;
         // }

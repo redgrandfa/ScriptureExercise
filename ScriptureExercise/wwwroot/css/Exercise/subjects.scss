@@ -14,9 +14,8 @@
     position: relative;
     padding: 0 20px;
     i{
-        color: #aaa;
+        color: #c3c3c3;
         font-size: 22px;
-        font-weight: 600;
 
         height: 22px;
         position: absolute;
@@ -36,8 +35,8 @@
         padding-left:3em;
 
         &::placeholder {
-            color: #999;
-            font-weight:500;
+            color: #888;
+            font-weight: 500;
         }
     }
 }
@@ -47,7 +46,7 @@
 
     label{
         font-size: 20px;
-        font-weight: 900;
+        font-weight: 700;
         cursor: pointer;
         padding: 10px;
     }

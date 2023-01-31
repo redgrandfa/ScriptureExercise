@@ -29,15 +29,11 @@ main {
 }
 .show-container .parent {
   color: #C2C2C2;
-  font-family: "GenSekiGothic JP";
-  font-style: normal;
   font-weight: 500;
   font-size: 24px;
 }
 .show-container .title {
-  font-family: "GenSekiGothic JP";
-  font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 40px;
 }
 
@@ -87,21 +83,17 @@ main {
 }
 .chapter-intro .title {
   color: #313B5D;
-  font-family: "GenSekiGothic JP";
-  font-style: normal;
   font-weight: 700;
   font-size: 15px;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   border-bottom: #3A63E0 3px solid;
+  padding-bottom: 5px;
   margin-bottom: 19px;
 }
 .chapter-intro .text {
   color: #8A8A9D;
-  font-family: "Open Sans";
-  font-style: normal;
-  font-weight: 400;
   font-size: 14px;
   line-height: 22px;
   height: 44px;
@@ -121,16 +113,11 @@ main {
   padding: 33px 24px 11px;
 }
 .popover-body h6 {
-  font-family: "Open Sans";
-  font-style: normal;
   font-weight: 900;
   font-size: 20px;
 }
 .popover-body p {
   color: #8A8A9D;
-  font-family: "Open Sans";
-  font-style: normal;
-  font-weight: 400;
   font-size: 16px;
   line-height: 22px;
 }

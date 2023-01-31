@@ -28,8 +28,6 @@ main{
 }
 
 .slogan-title {
-    font-family: 'Helvetica';
-    //font-style: normal;
     font-weight: 700;
     font-size: 56px;
     line-height: 64px;
@@ -39,29 +37,26 @@ main{
 }
 
 .slogan-text {
-    font-family: 'GenSekiGothic JP';
-    //font-style: normal;
-    // font-weight: 500;
-    font-weight: 900;
+    font-weight: 500;
     font-size: 18px;
     line-height: 32px;
 
     margin-left: 33px;
 }
 
-.nav-login{
-    display: block;
+
+.sign-area{
     margin-top: 32px;
     margin-left: 33px;
 
-    font-family: 'GenSekiGothic JP';
-    font-style: normal;
     font-weight: 500;
     font-size: 26px;
-
-    // color: #000!important;
-    // text-decoration: none!important;
 }
+
+.nav-login{
+    display: block;
+}
+
 .login-image-btn{
     display: inline-block;
     box-sizing: border-box;

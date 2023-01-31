@@ -1,10 +1,17 @@
 $header-height:100px;
+$theme-color-dark:#313B5D;
 
-:root{
-    //顏色 尺寸
-    --theme-color-dark:#313B5D;
+:root {
+    //基底：尺寸 影響rem
     font-size: 14px;
-    // font-family
+    
+    //全域變數：主題色
+    --theme-color-dark: $theme-color-dark;
+}
+body{
+    //基底：字型
+    font-family: 'GenSekiGothic JP','Open Sans','Noto Sans TC', sans-serif!important;
+    font-weight: 400;
 }
 
 .spinner-border-sm{
@@ -31,6 +38,34 @@ $header-height:100px;
     , &:active{
         @extend %without-hyperLink-style;
     }
+}
+
+.custom-btn{
+    border-radius: 30px;
+    border: none;
+
+    width: 100%;
+    // height: 38px;
+    padding: 9px 0;
+
+    font-weight: 700;
+    font-size: 14px;
+
+    text-align: center;
+}
+.green-btn{    
+    background: #E0FFE5;
+}
+.gray-btn{
+    background: #F3F3F3;
+}
+
+.xl-green-btn{
+    font-size: 28px;
+
+    height: 98px;
+
+    background: linear-gradient(90deg, #E3FFE8 0%, #B4FFC0 100%);
 }
 
 //
@@ -97,7 +132,7 @@ header {
     height: 16px;
     cursor: pointer;
     >span {
-        background-color: var(--theme-color-dark);
+        background-color: $theme-color-dark;//var(--theme-color-dark);
         display: block;
         //min-height: 2px;
         // height: 10%;
@@ -122,11 +157,9 @@ header {
 
 .app-title {
     font-size: 21px;
-    //font-family: 'Open Sans';
-    //font-style: normal;
     font-weight: 700;
 
-    color: var(--theme-color-dark);
+    color: $theme-color-dark;//var(--theme-color-dark);
 
     margin: 0;
 }
@@ -165,7 +198,7 @@ header {
     }
 
     .menu-header{
-        background-color: var(--theme-color-dark);
+        background-color: $theme-color-dark;//var(--theme-color-dark);
         height: 205px;
         box-sizing: border-box;
         padding-top: 73px;
@@ -177,30 +210,17 @@ header {
                 display: block;
             }
             span:nth-of-type(1) {
-                //font-family: 'Open Sans';
-                // font-style: normal;
                 font-weight: 700;
                 font-size: 28px;
-                // line-height: 28px;
                 margin-bottom: -13px;
-
             }
     
             span:nth-of-type(2) {
                 display: inline-block;
                 width: fit-content;
-                // font-family: 'GenSekiGothic JP';
-                // font-style: normal;
-                font-weight: 900;
+                font-weight: 500;
                 font-size: 16px;
-                
-                // border-bottom: 2px var(--theme-color-dark) solid;
             }
-            // span:nth-of-type(3) {
-            //     background-color: ;
-            //     width: 88px;
-            //     height: 2px;
-            // }
         }
     }
 
@@ -222,9 +242,6 @@ header {
         // max-height: 78px;
         // padding: 26px 0;
         a{
-            font-family: 'GenSekiGothic JP';
-            font-style: normal;
-            font-weight: 900;
             font-size: 26px;
             line-height: 26px;
             color: #000;
@@ -232,7 +249,7 @@ header {
     }
 
     .menu-footer{
-        background-color: var(--theme-color-dark);
+        background-color: $theme-color-dark;//var(--theme-color-dark);
         height: 40px;
     }
 }
@@ -246,40 +263,8 @@ main{
     position: relative;
     z-index: 2;
 }
-#main-bottom{
-    height: 15px;
-}
 
 
-.custom-btn{
-    border-radius: 30px;
-    border: none;
-
-    width: 100%;
-    // height: 38px;
-    padding: 9px 0;
-
-    font-family: 'Helvetica';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-
-    text-align: center;
-}
-.green-btn{    
-    background: #E0FFE5;
-}
-.gray-btn{
-    background: #F3F3F3;
-}
-
-.xl-green-btn{
-    font-size: 28px;
-
-    height: 98px;
-
-    background: linear-gradient(90deg, #E3FFE8 0%, #B4FFC0 100%);
-}
 
 
 // /* md */

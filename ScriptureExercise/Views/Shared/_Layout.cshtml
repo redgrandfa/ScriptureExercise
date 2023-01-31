@@ -1,25 +1,20 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Tag Manager -->
-@*    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-T48VQF7');</script>
-*@    <!-- End Google Tag Manager -->
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - 經典Exercise</title>
 
-    <link rel="stylesheet" href="~/lib/cssReset.css" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	
+	<link rel="stylesheet" href="~/lib/cssReset.css" />
     <!-- Load required Bootstrap and BootstrapVue CSS -->
     <link rel="stylesheet" href="~/lib/bs-vue2_22_0/bootstrap4_6_1.min.css"/>
     <link rel="stylesheet" href="~/lib/bs-vue2_22_0/bootstrap-vue2_22_0.min.css"/>
     
-@*    <link href="~/lib/toastr2.1.3.min.css" rel="stylesheet"/>
-*@
     <link rel="stylesheet" href="~/css/site.css" />
     @await RenderSectionAsync("TopCSS", required: false)
 
@@ -41,10 +36,6 @@
     @await RenderSectionAsync("TopJS", required: false)
 </head>
 <body class="bg-secondary">
-    <!-- Google Tag Manager (noscript) -->
-@*    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T48VQF7"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-*@    <!-- End Google Tag Manager (noscript) -->
     <div class="view-container">
 		<div class="white-sun"> @* 與 header夾著主內容 *@
 			<div class="halo"></div>

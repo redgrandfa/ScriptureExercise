@@ -34,22 +34,18 @@ main {
   margin: 0 30px;
 }
 .subject-card-body .title {
-  font-family: "GenSekiGothic JP";
-  font-style: normal;
   font-weight: 700;
   font-size: 18px;
   line-height: 18px;
 }
 .subject-card-body .author {
-  font-family: "GenSekiGothic JP";
-  font-style: normal;
-  font-weight: 400;
   font-size: 14px;
   line-height: 14px;
 }
 
 .subject-card-footer .collect {
   color: #8A8A9D;
+  font-size: 20px;
 }
 
 .subject-filters {
@@ -61,9 +57,8 @@ main {
   padding: 0 20px;
 }
 .subject-search i {
-  color: #aaa;
+  color: #c3c3c3;
   font-size: 22px;
-  font-weight: 600;
   height: 22px;
   position: absolute;
   top: 0;
@@ -79,15 +74,15 @@ main {
   padding-left: 3em;
 }
 .subject-search input::-moz-placeholder {
-  color: #999;
+  color: #888;
   font-weight: 500;
 }
 .subject-search input:-ms-input-placeholder {
-  color: #999;
+  color: #888;
   font-weight: 500;
 }
 .subject-search input::placeholder {
-  color: #999;
+  color: #888;
   font-weight: 500;
 }
 
@@ -96,7 +91,7 @@ main {
 }
 .subject-categories label {
   font-size: 20px;
-  font-weight: 900;
+  font-weight: 700;
   cursor: pointer;
   padding: 10px;
 }

@@ -1,15 +1,14 @@
-main{}
+main{
+    font-weight: 500;
+}
+
+
+
 .title{
-    font-family: 'GenSekiGothic JP';
-    font-style: normal;
-    font-weight: 900;
     font-size: 24px;
 }
 
 .hint{
-    font-family: 'GenSekiGothic JP';
-    font-style: normal;
-    font-weight: 900;
     font-size: 12px;
     
     color: #787878;
@@ -28,9 +27,6 @@ main{}
     text-align: center;
     
     th>div{
-        font-family: 'GenSekiGothic JP';
-        font-style: normal;
-        font-weight: 900;
         font-size: 14px;
         // line-height: 30px;
         
@@ -47,9 +43,6 @@ main{}
 }
 
 .td-createTime{
-    font-family: 'GenSekiGothic JP';
-    font-style: normal;
-    font-weight: 500;
     font-size: 11px;
     line-height: 15px;
     color: #787878;
@@ -60,9 +53,6 @@ main{}
 }
 
 .td-percentScore{
-    font-family: 'GenSekiGothic JP';
-    font-style: normal;
-    font-weight: 500;
     font-size: 30px;
 
     color: #787878;

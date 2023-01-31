@@ -2,9 +2,6 @@
 
 
 .result{
-    font-family: 'GenSekiGothic JP';
-    font-style: normal;
-
     margin: auto;
     width: 236px;
     text-align: center;
@@ -22,23 +19,41 @@
         width: fit-content;
         padding: 17px;
 
-        font-weight: 900;
         color: #000;
 
         position: absolute;
         top: -13px;
         right: -24px;
+        &::before{
+            content: '';
+            // display: block;
+            position: absolute;
+            left: -1px;
+            bottom: -11px;
+
+            border-style: solid;
+            border-width: 22px 22px 0 0;
+            border-right-color: transparent;
+
+            transform: rotate(22deg);
+        }
     }
     &.green{
         background: #E1FFDC;
         .comment{
             background: #24FF00;
         }
+        .comment::before{
+            border-top-color: #24FF00;
+        }
     }
     &.red{
         background: #FFDEDC;
         .comment{
             background: #FF0F00;
+        }
+        .comment::before{
+            border-top-color: #FF0F00;
         }
     }
     
@@ -47,15 +62,14 @@
     }
 
     .main-text{
+        font-weight: 600;
         font-size: 50px;
         line-height: 50px;
-        font-weight: 700;
     }
     .sm-text-container{
         padding: 18px 0 19px;
         font-size: 11px;
         line-height: 16px;
-        font-weight: 700;
     }
     // .sm-text{}
 }
@@ -66,9 +80,6 @@
     .filter{
         width: fit-content;
         margin-left: 44px;
-        font-family: 'GenSekiGothic JP';
-        font-style: normal;
-        font-weight: 500;
         font-size: 1rem; //影響toggle button
 
         label{
@@ -92,4 +103,8 @@
 .choices-question-answer_different,
 .essay-question-answer_different{
     color: #e00;
+}
+
+.custom-btn{
+    font-weight: 500;
 }

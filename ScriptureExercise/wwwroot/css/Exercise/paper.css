@@ -2,8 +2,8 @@
   display: none;
 }
 
-#main-bottom {
-  height: 44px;
+main {
+  font-weight: 500;
 }
 
 .exercise-banner {
@@ -11,8 +11,6 @@
   margin-bottom: 18px;
 }
 .exercise-banner > .h {
-  font-family: "GenSekiGothic JP";
-  font-style: normal;
   font-weight: 900;
   line-height: 30px;
   margin: 0;

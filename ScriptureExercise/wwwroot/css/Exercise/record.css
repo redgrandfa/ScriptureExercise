@@ -2,8 +2,8 @@
   display: none;
 }
 
-#main-bottom {
-  height: 44px;
+main {
+  font-weight: 500;
 }
 
 .exercise-banner {
@@ -11,8 +11,6 @@
   margin-bottom: 18px;
 }
 .exercise-banner > .h {
-  font-family: "GenSekiGothic JP";
-  font-style: normal;
   font-weight: 900;
   line-height: 30px;
   margin: 0;
@@ -71,8 +69,6 @@
 }
 
 .result {
-  font-family: "GenSekiGothic JP";
-  font-style: normal;
   margin: auto;
   width: 236px;
   text-align: center;
@@ -89,11 +85,20 @@
   width: -moz-fit-content;
   width: fit-content;
   padding: 17px;
-  font-weight: 900;
   color: #000;
   position: absolute;
   top: -13px;
   right: -24px;
+}
+.score .comment::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  bottom: -11px;
+  border-style: solid;
+  border-width: 22px 22px 0 0;
+  border-right-color: transparent;
+  transform: rotate(22deg);
 }
 .score.green {
   background: #E1FFDC;
@@ -101,25 +106,30 @@
 .score.green .comment {
   background: #24FF00;
 }
+.score.green .comment::before {
+  border-top-color: #24FF00;
+}
 .score.red {
   background: #FFDEDC;
 }
 .score.red .comment {
   background: #FF0F00;
 }
+.score.red .comment::before {
+  border-top-color: #FF0F00;
+}
 .score span {
   display: block;
 }
 .score .main-text {
+  font-weight: 600;
   font-size: 50px;
   line-height: 50px;
-  font-weight: 700;
 }
 .score .sm-text-container {
   padding: 18px 0 19px;
   font-size: 11px;
   line-height: 16px;
-  font-weight: 700;
 }
 
 .filters {
@@ -131,9 +141,6 @@
   width: -moz-fit-content;
   width: fit-content;
   margin-left: 44px;
-  font-family: "GenSekiGothic JP";
-  font-style: normal;
-  font-weight: 500;
   font-size: 1rem;
 }
 .essay-question-answer {
@@ -148,4 +155,8 @@
 .choices-question-answer_different,
 .essay-question-answer_different {
   color: #e00;
+}
+
+.custom-btn {
+  font-weight: 500;
 }/*# sourceMappingURL=record.css.map */

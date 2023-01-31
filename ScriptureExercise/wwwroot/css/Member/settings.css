@@ -1,11 +1,10 @@
 .form-group {
   margin: 35px 50px 0px;
   display: flex;
-  font-size: 18px;
+  font-size: 20px;
 }
 .form-group label {
   line-height: 44px;
-  font-weight: 900;
   width: 72px;
   flex-shrink: 0;
 }
@@ -13,8 +12,7 @@
   flex-grow: 1;
 }
 .form-group input {
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 20px;
   display: inline-block;
   width: calc(100% - 55px);
 }
@@ -33,8 +31,12 @@
   font-size: 16px;
   text-align: center;
 }
+.countDown__text div:first-child {
+  font-weight: 500;
+}
 
 .countDown__number {
+  font-weight: 500;
   font-size: 60px;
   line-height: 1;
 }
