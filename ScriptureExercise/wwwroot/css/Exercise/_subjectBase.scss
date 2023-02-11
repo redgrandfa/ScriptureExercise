@@ -35,7 +35,14 @@ $subject-card-halfGap:7px;
         height: 80.5px;
 
         border-radius: 20px;
-        background-color: #DDD;
+        box-sizing: border-box;
+        // border: 1px solid #DDD;
+        // background-color: #DDD;
+
+        // background-image: url("../../images/A_cover.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
     }
 }
 .subject-card-body{

@@ -18,7 +18,7 @@
             @* <li v-for="(subject) in subjects.filter(s=>s.isCollected)" class="subject-card"> *@
                 <div class="subject-card-header" >
                     <a :href="'/Exercise/' + subject.scriptureTitle + '.' + subject.id">
-                    <div class="cover"></div>
+                        <div class="cover" :style="coverStyle(subject.coverImgFile)"></div>
                     </a>
                 </div>
                 <div class="subject-card-body">

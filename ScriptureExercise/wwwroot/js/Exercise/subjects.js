@@ -18,6 +18,7 @@ let vue_subjects = new Vue({
                 let subjectToAdd = {
                     scripture: scripture.code, 
                     scriptureTitle: scripture.title,
+                    coverImgFile:scripture.coverImgFile,
                     author: scripture.author,
                     belongTo: scripture.belongTo,
 
@@ -84,6 +85,10 @@ let vue_subjects = new Vue({
                     // dom.dispatchEvent(apiDoneEvent)
                 },
             )
+        },
+        coverStyle(coverImgFile){
+            coverImgPath = '../../images/'+coverImgFile
+            return `background-image:url('${coverImgPath}')`
         }
     },
     watch: {

@@ -19,6 +19,7 @@ let vue_collectList = new Vue({
                             let subjectToAdd = {
                                 scripture: scripture.code,
                                 scriptureTitle: scripture.title,
+                                coverImgFile:scripture.coverImgFile,
                                 author: scripture.author,
                                 belongTo: scripture.belongTo,
             
@@ -48,6 +49,10 @@ let vue_collectList = new Vue({
                 }
             );
         },
+        coverStyle(coverImgFile){
+            coverImgPath = '../../images/'+coverImgFile
+            return `background-image:url('${coverImgPath}')`
+        }
     },
     watch: {},
     computed: {},

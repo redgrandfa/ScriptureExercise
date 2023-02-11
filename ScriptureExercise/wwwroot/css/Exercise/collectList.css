@@ -26,7 +26,10 @@ main {
   width: 80.5px;
   height: 80.5px;
   border-radius: 20px;
-  background-color: #DDD;
+  box-sizing: border-box;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .subject-card-body {
