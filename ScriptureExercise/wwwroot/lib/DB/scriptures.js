@@ -4,7 +4,7 @@ let scriptures_inDB = [
     {
         code: "A",
         title: "生晨",
-        coverImgFile: "A_cover.jpg",
+        coverImgFile: "cover_A.jpg",
         author: "活佛師尊",
         introHtml: "一貫道白陽道場的道學字典，包括常用道學索引、聖訓選讀、道學辭彙，是現今修士人才必備的一本工具書。",
         belongTo: "Bai",
@@ -31,7 +31,7 @@ let scriptures_inDB = [
     {
         code: "B",
         title: "佛規諭錄",
-        coverImgFile: "B_cover.webp",
+        coverImgFile: "cover_B.png",
         author: "活佛師尊",
         introHtml: "為使修道人有修行的依據準則、規矩方圓，故定下此佛規十五條，由師尊老大人籌策成書，只要能依循實踐，自然不用擔心三期浩劫。",
         belongTo: "Bai",
@@ -60,7 +60,7 @@ let scriptures_inDB = [
     {
         code: "C",
         title: "性理題釋",
-        coverImgFile: "B_cover.webp",
+        coverImgFile: "cover_C.jpg",
         author: "師尊老大人",
         introHtml: "《性理題釋》一書，原係由濟公活佛恩師慈悲解答道親修辦道的疑問，故有「疑問解答」之作。以問答方式，於每題解答時，釋義內容則力求簡明，言詞則力求淺近。共有數十題之多，然內容含蓋廣泛，若能細究參研，自能疑釋理明。故《性理題釋》一書，實可作為渡人成全人之門徑；若能照言實踐力行，更是修道入門之指南。當人手一冊，以達成濟公活佛恩師之期望，正己成人、徹悟真理、脫出苦海、共登覺路。",
         belongTo: "Bai",
@@ -87,7 +87,7 @@ let scriptures_inDB = [
     {
         code: "D",
         title: "皇母訓子十誡",
-        coverImgFile: "B_cover.webp",
+        coverImgFile: "cover_D.jpg",
         author: "明明上帝",
         introHtml: "《皇母訓子十誡》一書,成書於民國三十年,是一貫道道義之最基礎理念,從原靈下凡之因緣,到大道普傳、三曹普渡之末後收圓大事,以及上帝老母對原胎佛子之期許與告誡, 全濃縮在這十段慈訓中。<br><br>皇母憂心修道子龍蛇混雜,認不清大道宗旨,故特別臨壇慈示天地成住壞空及降道降劫之因由,以及如何修道以達歸根認母的要訣。<br><br>皇母更交代道中壇主、領袖等之責任使命,應以身作則、發強剛毅,聞過喜、聞善改,遵前提後與三省四勿,做好領導者的風範。尤應悟透三教一理之妙、道貫三極之真,方能修出水火不溺的真法身,不被外相考倒,以符皇母賜名「一貫」之本意。",
         belongTo: "Bai",
@@ -115,7 +115,7 @@ let scriptures_inDB = [
     {
         code: "E",
         title: "學庸",
-        coverImgFile: "B_cover.webp",
+        coverImgFile: "cover_E.jpg",
         author: "曾子/子思/朱熹",
         introHtml: "《大學》、《中庸》出自《禮記》中的兩個篇章。<br><br>《大學》以人的修身為核心，強調人的修身養性不只是內省的過程，更是同外物相接觸，窮究物理而獲得知識，培養道德品性、完善人格的過程。格物、致知、誠意、正心是修身的方法，為「內修」。齊家、治國、平天下則是修身的目的，為「外治」。<br><br>《中庸》的中心思想是儒學的中庸之道，它的主要內容並非現代人所普遍理解的中立、平庸之意，其主旨在於修養人性。其中包括學習的方式：博學之、審問之、慎思之、明辨之、篤行之，也包括儒家做人的規範如君臣、父子、夫婦、兄弟以及朋友之間的相處交往規則和智、仁、勇三種重要的德行等。",
         belongTo: "Ru",
@@ -144,7 +144,7 @@ let scriptures_inDB = [
     {
         code: "F",
         title: "論語",
-        coverImgFile: "B_cover.webp",
+        coverImgFile: "cover_FG.jpg",
         author: "孔子聖人及其弟子",
         introHtml:
             "《論語》是以春秋時期思想家孔子言行為主的言論彙編，為儒家重要經典之一，在四庫全書中列為「經」部。<br><br>其內容涉及多方面討論，當中包括儒家治國理念、人倫關係、個人道德規範、先秦時期的社會面貌，乃至孔子及其弟子的經歷等。",
@@ -217,7 +217,7 @@ let scriptures_inDB = [
     {
         code: "G",
         title: "孟子",
-        coverImgFile: "B_cover.webp",
+        coverImgFile: "cover_FG.jpg",
         author: "孟子弟子與再傳弟子",
         introHtml:
             "《孟子》是一本記述孟子思想與言行的儒家經書，完成於戰國時代中後期，屬於《十三經》之一。該書詳實地記載了孟子的思想、言論和事跡。注本主要有東漢趙岐《孟子章句》、南宋朱熹《孟子集注》、清焦循《孟子正義》等。在四庫全書中為經部",
@@ -327,7 +327,7 @@ let scriptures_inDB = [
     {
         code: "I",
         title: "金心",
-        coverImgFile: "B_cover.webp",
+        coverImgFile: "cover_I.jpg",
         author: "釋迦牟尼",
         introHtml: "《金剛經》以禪宗之大力弘揚，加上士大夫大多尊崇此經，認為讀通之後可以放下執著並成就佛果，民間則認為本經典有不可思議感應，單純誦經時也能感召金剛不動佛、金剛般若菩薩、金剛藏王菩薩、四金剛菩薩（金剛眷、金剛索、金剛愛、金剛語）、八大金剛來護法。明朝末年的祕密宗教大力推崇《金剛經》，將「空」等同於「道」，視之為能源出萬物的「真空家鄉」。<br><br>心經是《大品般若經》的別生經，取自〈習應品〉和〈勸持品〉，乃《大般若經》的精要，無序分與流通分。與《金剛經》並為通行最廣的般若經，地位重要，曾被稱作《經王》。",
         belongTo: "Si",
@@ -355,7 +355,7 @@ let scriptures_inDB = [
     {
         code: "J",
         title: "六祖壇經",
-        coverImgFile: "B_cover.webp",
+        coverImgFile: "cover_J.jpg",
         author: "六祖惠能說，弟子法海集錄",
         introHtml: "《六祖壇經》記載惠能一生得法傳法的事跡及啟導門徒的言教，內容豐富，文字通俗，是研究禪宗思想淵源的重要依據。<br>最早六祖惠能大師應邀至大梵寺開示摩訶般若波羅蜜法，法海將此事記錄題為《摩訶般若波羅蜜經六祖惠能大師於韶州大梵寺施法一卷》。<br>《六祖壇經》可分三部份，第一部份即是在大梵寺開示「摩訶般若波羅蜜法」。<br>第二部分，回曹溪山後，傳授「無相戒」，故法海於書名補上「兼授無相戒」。這時《壇經》開始外傳。<br>第三部分，是六祖與弟子之間的問答。",
         belongTo: "Si",
@@ -418,7 +418,7 @@ let scriptures_inDB = [
     {
         code: "H",
         title: "道清",
-        coverImgFile: "B_cover.webp",
+        coverImgFile: "cover_H.jpg",
         author: "老子",
         introHtml:
             "《道德經》以哲學意義之「道」與「德」為綱，論述修身、治國、用兵、養生之理，而多以政治為旨歸，對傳統思想、科學、政治、文學、藝術等領域產生了深刻影響。<br><br>《清靜經》分上下兩章，上章言好清靜則得道，下章說勿貪求而沉苦海。",
