@@ -1,3 +1,4 @@
+//part 1
 let json = {
     title: document.querySelector('[data-automation-id="formMainTitle"] span').innerHTML,
 };
@@ -14,7 +15,7 @@ let questionDoms = document.querySelectorAll('[data-automation-id="questionConte
 let questionDomArray = Array.from(questionDoms)
 questionDomArray.length -=4 //倒數四個要去掉
 
-
+//part 2
 json.questions = questionDomArray.map( (qDom , idx)=>{
     let result = {
         id:idx+1,
@@ -56,7 +57,7 @@ json.questions = questionDomArray.map( (qDom , idx)=>{
     return result
 })
 
-
+//part 3
 let anchor = document.createElement('a')
 let blob = new Blob([ JSON.stringify(json) ],{'type':'application/json'})
 anchor.href=window.URL.createObjectURL(blob)

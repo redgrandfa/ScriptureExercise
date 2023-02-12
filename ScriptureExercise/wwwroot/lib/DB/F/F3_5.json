@@ -111,7 +111,7 @@
             "order": 9,
             "type": 1,
             "stem": "耰而不輟。耰是",
-            "answer": 9,
+            "answer": 0,
             "choices": [
                 "(1)停止",
                 "(2)反覆",
@@ -436,7 +436,7 @@
             "order": 34,
             "type": 1,
             "stem": "孔子幾歲時在魯國任大司寇",
-            "answer": 9,
+            "answer": 1,
             "choices": [
                 "(1)57",
                 "(2)58",
