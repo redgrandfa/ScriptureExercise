@@ -27,16 +27,18 @@
             <div class="comment">再加把勁</div>
             <span class="main-text">{{percentScore}}%</span>
             <div class="sm-text-container">
-                <span class="sm-text">得分數：{{score}}</span>
-                <span class="sm-text">總題數：{{paper.questions.length}}</span>
+                <span class="sm-text">得分：{{score}}</span>
+                @*<span class="sm-text">總題數：{{paper.questions.length}}</span>*@
+                <span class="sm-text">滿分：{{paper.questions.filter(q=>q.type==1).length + paper.questions.filter(q=>q.type==2).length*9 }} </span>
             </div>
         </div>
         <div v-else class="score green">
             <div class="comment">繼續保持</div>
             <span class="main-text">{{percentScore}}%</span>
             <div class="sm-text-container">
-                <span class="sm-text">得分數：{{score}}</span>
-                <span class="sm-text">總題數：{{paper.questions.length}}</span>
+                <span class="sm-text">得分：{{score}}</span>
+                @*<span class="sm-text">總題數：{{paper.questions.length}}</span>*@
+                <span class="sm-text">滿分：{{paper.questions.filter(q=>q.type==1).length + paper.questions.filter(q=>q.type==2).length}}*9 }} </span>
             </div>
         </div>
 

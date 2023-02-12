@@ -31,8 +31,7 @@ namespace ScriptureExercise.Controllers.WebAPI
         {
             var result = new ApiResponseBody();
 
-            //var now = DateTime.UtcNow;
-            var now = DateTime.Now;
+            var now = DateTime.UtcNow.AddHours(8);
 
             var input = request.RecordCreate;
             input.CreateTime = now;

@@ -2,36 +2,37 @@
     ViewData["Title"] = "首頁";
 }
 
+<div>
+    <h2 class="slogan-title">
+		EXPLORE<br>
+		WISDOM
+	</h2>
 
-<h2 class="slogan-title">
-	EXPLORE<br>
-	WISDOM
-</h2>
+	<p class="slogan-text mb-0">
+		聖人把智慧都放在經典中<br>
+		留下文字讓我們盡情探索
+	</p>
 
-<p class="slogan-text mb-0">
-	聖人把智慧都放在經典中<br>
-	留下文字讓我們盡情探索
-</p>
+	<div class="sign-area">
+	@if (User.Identity.IsAuthenticated)
+	{    var showName = User.Claims
+			.FirstOrDefault(c=> c.Type== Common.Helpers.Define.CLAIMTYPE_SHOWNAME)
+			?.Value;
 
-<div class="sign-area">
-@if (User.Identity.IsAuthenticated)
-{    var showName = User.Claims
-        .FirstOrDefault(c=> c.Type== Common.Helpers.Define.CLAIMTYPE_SHOWNAME)
-        ?.Value;
-
-	<div>歡迎回來，<b>@showName</b></div>
-	<a href="/Account/Logout" class="without-hyperLink-style nav-login">
-		登出 LOGOUT
-		<div class="login-image-btn"></div>
-	</a>	
-}
-else
-{
-	<a href="/Account/Login" class="without-hyperLink-style nav-login">
-		登入 LOGIN 
-		<div class="login-image-btn"></div>
-	</a>	
-}
+		<div>歡迎回來，<b>@showName</b></div>
+		<a href="/Account/Logout" class="without-hyperLink-style nav-login">
+			<span class="login-text">登出 LOGOUT</span>
+			<div class="login-image-btn"></div>
+		</a>	
+	}
+	else
+	{
+		<a href="/Account/Login" class="without-hyperLink-style nav-login">
+			<span class="login-text">登入 LOGIN </span>
+			<div class="login-image-btn"></div>
+		</a>	
+	}
+	</div>
 </div>
 
 @section TopCSS{

@@ -2,7 +2,8 @@
     margin: 0 auto;
     left: -111px;
     right: -111px;
-    top: 32px;
+    top: unset;
+    bottom: 153px;
 }
 
 .sun {
@@ -14,25 +15,26 @@
 
     background: #FFFFFF;
 
-
     position: absolute;
     left: calc(50% - 25px);
     top: calc(50% - 25px);
 }
 
-
 main{
     display: flex;
     flex-direction: column;
     justify-content: end;
+
+    padding-left: 22px;
+    padding-right: 22px;
 }
 
 .slogan-title {
+    font-family: 'Helvetica', 'Open Sans', 'Noto Sans TC', sans-serif!important;;
     font-weight: 700;
     font-size: 56px;
     line-height: 64px;
 
-    margin-left: 28px;
     margin-bottom: 19px;
 }
 
@@ -40,27 +42,24 @@ main{
     font-weight: 500;
     font-size: 18px;
     line-height: 32px;
-
-    margin-left: 33px;
 }
 
 
 .sign-area{
-    margin-top: 32px;
-    margin-left: 33px;
-
     font-weight: 500;
     font-size: 26px;
+
+    margin-top: 32px;
 }
 
 .nav-login{
     display: block;
 }
-
+.login-text{}
 .login-image-btn{
     display: inline-block;
     box-sizing: border-box;
-    width: 133px;
+    width: calc(100% - 200px);
     height: 42px;
 
     margin-bottom: -4px;

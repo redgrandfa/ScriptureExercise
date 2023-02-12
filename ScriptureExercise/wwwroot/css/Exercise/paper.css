@@ -70,13 +70,14 @@ main {
 
 .hint {
   margin: auto;
-  width: 236px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   background: #EFEFEF;
-  padding: 9px 0;
+  padding: 9px 28px;
 }
 .hint p {
   margin: 0;
-  text-align: center;
   font-size: 11px;
   line-height: 16px;
   color: #787878;

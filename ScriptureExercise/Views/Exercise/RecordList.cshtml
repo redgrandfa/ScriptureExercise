@@ -65,7 +65,7 @@
                 </template>
             </b-table>
         
-            <p v-if="records.length==0" class="text-center">您目前無任何練習紀錄</p>
+            <p v-if="!tableBusy && records.length==0" class="text-center">您目前無任何練習紀錄</p>
         </div>
     </div>
     
