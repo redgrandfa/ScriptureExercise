@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Attributes\" />
     <Folder Include="DTOModels\HomeDTOs\" />
     <Folder Include="Exceptions\" />
     <Folder Include="Extensions\" />

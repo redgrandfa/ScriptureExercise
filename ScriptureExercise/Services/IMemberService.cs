@@ -55,6 +55,13 @@ namespace ScriptureExercise.Services
 
 
             //創建會員
+
+            //(趕快先搶占，就算註冊失敗也算了吧，避免出現重疊帳號的bug)
+            var counter = GetEntityCounter();
+            var tempMemberCount = counter.MemberCount;
+            counter.MemberCount++;
+            _cacheRepo.Set(nameof(EntityCounter), counter);
+
             //名字 可能從第三方取現成的
             //string name = "";
             //if (_httpContextAccessor.HttpContext.User.Claims
@@ -67,8 +74,7 @@ namespace ScriptureExercise.Services
             //        name = "";
             //    }
             //}
-                    
-            var counter = GetEntityCounter();
+
 
             var account = new Account
             {
@@ -88,7 +94,7 @@ namespace ScriptureExercise.Services
             {
                 PK = new Member.PK_T
                 {
-                    MemberId = counter.MemberCount + 1,
+                    MemberId = tempMemberCount + 1,
                 },
                 Value = new Member.Value_T
                 {
@@ -113,12 +119,8 @@ namespace ScriptureExercise.Services
             };
             _cacheRepo.Set(member.GetRedisKeyString(), member.Value);
 
-            counter.MemberCount++;
-            _cacheRepo.Set(nameof(EntityCounter), counter);
-
             account.Value.FK_Member = member.PK;
             _cacheRepo.Set(account.GetRedisKeyString(), account.Value);
-
 
             result.Payload = new AccountAndMember
             {
