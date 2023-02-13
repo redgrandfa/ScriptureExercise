@@ -12,10 +12,9 @@
 
 <div id="vue_collectList">
     <section class="subjects-container">
-        <ul class="subjects">
-            @* v-if="subject.isCollected" *@
+        <div v-if="subjects.length==0" class="text-center"> 書單目前為空 </div>
+        <ul v-else class="subjects">
             <li v-for="(subject) in subjects"  class="subject-card">
-            @* <li v-for="(subject) in subjects.filter(s=>s.isCollected)" class="subject-card"> *@
                 <div class="subject-card-header" >
                     <a :href="'/Exercise/' + subject.scriptureTitle + '.' + subject.id">
                         <div class="cover" :style="coverStyle(subject.coverImgFile)"></div>
