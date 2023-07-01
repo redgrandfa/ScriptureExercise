@@ -2,12 +2,12 @@ let vue_paper = new Vue({
     el:'#vue_paper',
     data: {
         paper: {
-            info:{
-                // scriptureTitle:'論語',
-                // subjectId:0,
-                subjectTitle:'論語(一)',
-                paperId:0,
-                "range_remark": "(1-3)",
+            info: {
+                scriptureTitle:'',//'論語',
+                subjectId:0, // 1
+                subjectTitle: '',//'論語(一)',
+                paperId: 0, // 10
+                range_remark: '',//"(1-3)",
             },
             "questions": [
                 {

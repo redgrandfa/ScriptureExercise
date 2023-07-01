@@ -111,7 +111,7 @@ function paperJsonFilePath_To_paperInfo(paperJsonFilePath){
         paperInfo.scriptureTitle + 
         paperInfo.subjectChinesePostfix
 
-    paperInfo.paperId = paperCode[3]
+    paperInfo.paperId = paperCode.substring(3)
 
     return paperInfo // range_remark undefined
 }
