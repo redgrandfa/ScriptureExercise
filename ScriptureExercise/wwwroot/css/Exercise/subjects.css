@@ -14,7 +14,10 @@ main {
   overflow-y: auto;
 }
 
-.subject-card {
+.subject-card a {
+  width: -moz-fit-content;
+  width: fit-content;
+  color: #000;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -77,10 +80,6 @@ main {
   padding-left: 3em;
 }
 .subject-search input::-moz-placeholder {
-  color: #888;
-  font-weight: 500;
-}
-.subject-search input:-ms-input-placeholder {
   color: #888;
   font-weight: 500;
 }

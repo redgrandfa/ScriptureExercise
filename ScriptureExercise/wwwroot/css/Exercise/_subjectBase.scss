@@ -20,7 +20,10 @@ $subject-card-halfGap:7px;
     overflow-y: auto;
 }
 
-.subject-card{
+.subject-card a{
+    width: fit-content;
+    color: #000;
+    
     display: flex;
     justify-content: space-between;
     align-items: center;

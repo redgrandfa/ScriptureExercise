@@ -46,20 +46,20 @@
     <section class="subjects-container">
         <ul class="subjects">
             <li v-for="(subject) in subjectsShow" class="subject-card">
-                <div class="subject-card-header" >
-                    <a :href="'/Exercise/' + subject.scriptureTitle + '.' + subject.id">
+                <a :href="'/Exercise/' + subject.scriptureTitle + '.' + subject.id">
+                    <div class="subject-card-header" >
                         <div class="cover" :style="coverStyle(subject.coverImgFile)"></div>
-                    </a>
-                </div>
-                <div class="subject-card-body">
-                    <h3 class="title">{{subject.title}}</h3>
-                    <div class="author">{{subject.author}}</div>
-                </div>
-                <div class="subject-card-footer">
-                    <button v-if="isAuthenticated" class="without-button-style collect" v-on:click="toggleCollect(subject)">
-                        <i :class="subject.isCollected ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
-                    </button>
-                </div>
+                    </div>
+                    <div class="subject-card-body">
+                        <h3 class="title">{{subject.title}}</h3>
+                        <div class="author">{{subject.author}}</div>
+                    </div>
+                    <div class="subject-card-footer">
+                        <button v-if="isAuthenticated" class="without-button-style collect" v-on:click="toggleCollect(subject)">
+                            <i :class="subject.isCollected ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
+                        </button>
+                    </div>
+                </a>
             </li>
         </ul>
     </section>
