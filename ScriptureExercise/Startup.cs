@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
+ï»¿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Common.Repositories;
 using ScriptureExercise.Services;
+using System.IO;
 
 namespace ScriptureExercise
 {
@@ -27,68 +28,68 @@ namespace ScriptureExercise
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-			services.AddControllersWithViews();
-			services.AddHttpContextAccessor();
-			//swagger ¦Û¤v¦n¹³¤£»Ý­n...
-			services.AddStackExchangeRedisCache(options =>
-				options.Configuration = Configuration["RedisConfig:reid11"]
-			);
+            services.AddControllersWithViews();
+            services.AddHttpContextAccessor();
+            //swagger è‡ªå·±å¥½åƒä¸éœ€è¦...
+            services.AddStackExchangeRedisCache(options =>
+                options.Configuration = Configuration["RedisConfig:reid11"]
+            );
 
-			services.AddTransient<IMemoryCacheRepository, MemoryCacheRepository>();
+            services.AddTransient<IMemoryCacheRepository, MemoryCacheRepository>();
 
-			services.AddTransient<IAccountService, AccountService>();
-			services.AddTransient<IMemberService, MemberService>();
-			services.AddTransient<IExerciseService, ExerciseService>();
+            services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IMemberService, MemberService>();
+            services.AddTransient<IExerciseService, ExerciseService>();
 
-			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-			.AddCookie(options =>
-			{
-				////³]©wµn¤JActionªº¸ô®|¡G 
-				//options.LoginPath = new PathString("/Account/Login");
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                ////è¨­å®šç™»å…¥Actionçš„è·¯å¾‘ï¼š 
+                //options.LoginPath = new PathString("/Account/Login");
 
-				////³]©w ¾É¦^ºô§} ªºQueryString°Ñ¼Æ¦WºÙ¡G
-				//options.ReturnUrlParameter = "ReturnUrl";
+                ////è¨­å®š å°Žå›žç¶²å€ çš„QueryStringåƒæ•¸åç¨±ï¼š
+                //options.ReturnUrlParameter = "ReturnUrl";
 
-				////³]©wµn¥XActionªº¸ô®|¡G 
-				//options.LogoutPath = new PathString("/Account/Logout");
+                ////è¨­å®šç™»å‡ºActionçš„è·¯å¾‘ï¼š 
+                //options.LogoutPath = new PathString("/Account/Logout");
 
-				////­YÅv­­¤£¨¬¡A·|¾É¦VªºActionªº¸ô®|
-				//options.AccessDeniedPath = new PathString("/Account/AccessDenied");
-			})
-			//¥[¦U®aOAuth
-			//.AddGoogle(options =>
-			//{
-			//	var provider = "Google";
-			//	options.ClientId = Configuration[$"Authentication:{provider}:ClientId"];
-			//	options.ClientSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
-			//	//options.CallbackPath = "/signin-google";
-			//})
-			//.AddFacebook(options =>
-			//{
-			//	var provider = "Facebook";
-			//	options.AppId = Configuration[$"Authentication:{provider}:ClientId"];
-			//	options.AppSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
-			//	//options.CallbackPath = "/signin-facebook";
-			//})
-			//.AddInstagram(options =>
-			//{
-			//	var provider = "Instagram";
-			//	options.ClientId = Configuration[$"Authentication:{provider}:ClientId"];
-			//	options.ClientSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
-			//	//options.CallbackPath = "/signin-github";
-			//})
-			//.AddLine(options =>
-			//{
-			//	var provider = "Line";
-			//	options.ClientId = Configuration[$"Authentication:{provider}:ClientId"];
-			//	options.ClientSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
-			//	//options.CallbackPath = "/signin-line";
-			//})
-			;
-		}
+                ////è‹¥æ¬Šé™ä¸è¶³ï¼Œæœƒå°Žå‘çš„Actionçš„è·¯å¾‘
+                //options.AccessDeniedPath = new PathString("/Account/AccessDenied");
+            })
+            //åŠ å„å®¶OAuth
+            //.AddGoogle(options =>
+            //{
+            //	var provider = "Google";
+            //	options.ClientId = Configuration[$"Authentication:{provider}:ClientId"];
+            //	options.ClientSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
+            //	//options.CallbackPath = "/signin-google";
+            //})
+            //.AddFacebook(options =>
+            //{
+            //	var provider = "Facebook";
+            //	options.AppId = Configuration[$"Authentication:{provider}:ClientId"];
+            //	options.AppSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
+            //	//options.CallbackPath = "/signin-facebook";
+            //})
+            //.AddInstagram(options =>
+            //{
+            //	var provider = "Instagram";
+            //	options.ClientId = Configuration[$"Authentication:{provider}:ClientId"];
+            //	options.ClientSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
+            //	//options.CallbackPath = "/signin-github";
+            //})
+            //.AddLine(options =>
+            //{
+            //	var provider = "Line";
+            //	options.ClientId = Configuration[$"Authentication:{provider}:ClientId"];
+            //	options.ClientSecret = Configuration[$"Authentication:{provider}:ClientSecret"];
+            //	//options.CallbackPath = "/signin-line";
+            //})
+            ;
+        }
 
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -100,13 +101,38 @@ namespace ScriptureExercise
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                OnPrepareResponse = (ctx) =>
+                {
+                    var path = ctx.Context.Request.Path.Value;
+
+                    if (path.StartsWith("/lib/DB"))   //è€ƒé¡Œç›¸é—œ ä¸€å¤©
+                    {
+                        ctx.Context.Response.Headers["Cache-Control"] = "public, max-age=86400";
+                    }
+                    else if (path.StartsWith("/lib"))  //ç¬¬ä¸‰æ–¹åº« ä¸€å¹´
+                    {
+                        ctx.Context.Response.Headers["Cache-Control"] = "public, max-age=31536000";
+                    }
+                    else if (path.StartsWith("/images"))  //åœ– åå¹´
+                    {
+                        ctx.Context.Response.Headers["Cache-Control"] = "public, max-age=315360000, immutable";
+                    }
+                    else
+                    {
+                        //// å…¶ä»–æª”æ¡ˆä¸å¿«å–
+                        //ctx.Context.Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
+                    }
+                }
+            });
 
             app.UseRouting();
 
-			app.UseAuthentication();
-			app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
