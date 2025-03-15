@@ -1,21 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using ScriptureExercise.Services;
-using ScriptureExercise.Models.MemberVM;
-using Common.DBModels;
-using Common.DTOModels.AccountDTOs;
-using Common.DTOModels.MemberDTOs;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using ScriptureExercise.Models.AccountVM;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Common.Repositories;
-using System;
-using ScriptureExercise.Models;
+﻿using Common.DBModels;
 using Common.Enums;
+using Common.Helpers;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using ScriptureExercise.Models;
+using ScriptureExercise.Models.AccountVM;
+using ScriptureExercise.Models.MemberVM;
+using ScriptureExercise.Services;
+using System;
 
 namespace ScriptureExercise.Controllers.WebAPI
 {
@@ -66,7 +58,7 @@ namespace ScriptureExercise.Controllers.WebAPI
         {
             Action<Member> action = member =>
             {
-                member.Value.Password = request.Password;
+                member.Value.Password = Encryption.SHA256(request.Password);
             };
             return UpdateByCondition(action, "修改密碼成功");
         }

@@ -226,7 +226,7 @@ namespace ScriptureExercise.Services
 
             member.Value = _cacheRepo.Get<Member.Value_T>(member.GetRedisKeyString());
 
-            if (member.Value.Password != input.Password)
+            if (member.Value.Password != Encryption.SHA256(input.Password))
             {
                 result.FailMessage = "密碼錯誤";
                 return result;
@@ -243,7 +243,7 @@ namespace ScriptureExercise.Services
 
         public Member GetCurrentMember()
         {
-            return GetMember_ById( GetCurrentMemberId() );
+            return GetMember_ById(GetCurrentMemberId());
         }
         public Member GetMember_ById(int memberId)
         {
@@ -257,9 +257,9 @@ namespace ScriptureExercise.Services
 
             member.Value = _cacheRepo.Get<Member.Value_T>(member.GetRedisKeyString());
             
-            if(member.Value.SubjectCollectedList == null)
+            if (member.Value.SubjectCollectedList == null)
             {
-                member.Value.SubjectCollectedList = new List<string> ();
+                member.Value.SubjectCollectedList = new List<string>();
             }
             return member; //Value可能會null
         }

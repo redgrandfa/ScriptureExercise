@@ -28,7 +28,7 @@ namespace ScriptureExercise.Controllers
             Member.Value_T memberValue = memberService.GetMember_ById(memberId).Value;
             if(memberValue == null)
             {
-                return Content("查無當前當入的會員身分，請重新登入");
+                return Content("查無當前登入的會員身分，請重新登入");
             }
 
             var counter = memberService.GetEntityCounter();

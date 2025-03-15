@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Common.Helpers
 {
-    internal static class Encryption
+    public static class Encryption
     {
         //plaintext     明文 
         //ciphertext    密文
